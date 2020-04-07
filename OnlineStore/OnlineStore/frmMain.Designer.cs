@@ -32,8 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.категорийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbDeps = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,6 +46,11 @@
             this.tbName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.chbUnable = new System.Windows.Forms.CheckBox();
+            this.btUpdate = new System.Windows.Forms.Button();
+            this.btAdd = new System.Windows.Forms.Button();
+            this.btEdit = new System.Windows.Forms.Button();
+            this.btPrint = new System.Windows.Forms.Button();
+            this.btDel = new System.Windows.Forms.Button();
             this.cId_tovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cEan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,11 +59,6 @@
             this.cRcena = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRcenaOnline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRcenaOnlineAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btUpdate = new System.Windows.Forms.Button();
-            this.btAdd = new System.Windows.Forms.Button();
-            this.btEdit = new System.Windows.Forms.Button();
-            this.btPrint = new System.Windows.Forms.Button();
-            this.btDel = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
@@ -82,19 +82,19 @@
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
             // 
-            // выходToolStripMenuItem
-            // 
-            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.выходToolStripMenuItem.Text = "Выход";
-            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
-            // 
             // категорийToolStripMenuItem
             // 
             this.категорийToolStripMenuItem.Name = "категорийToolStripMenuItem";
             this.категорийToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.категорийToolStripMenuItem.Text = "Категорий";
             this.категорийToolStripMenuItem.Click += new System.EventHandler(this.категорийToolStripMenuItem_Click);
+            // 
+            // выходToolStripMenuItem
+            // 
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // cmbDeps
             // 
@@ -170,6 +170,7 @@
             this.cmbParentCategory.Name = "cmbParentCategory";
             this.cmbParentCategory.Size = new System.Drawing.Size(169, 21);
             this.cmbParentCategory.TabIndex = 10;
+            this.cmbParentCategory.SelectionChangeCommitted += new System.EventHandler(this.cmbParentCategory_SelectionChangeCommitted);
             // 
             // dgvData
             // 
@@ -204,6 +205,9 @@
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvData.Size = new System.Drawing.Size(1158, 403);
             this.dgvData.TabIndex = 27;
+            this.dgvData.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvData_RowPostPaint);
+            this.dgvData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvData_RowPrePaint);
+            this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
             this.dgvData.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvData_Paint);
             // 
             // tbName
@@ -212,6 +216,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(156, 20);
             this.tbName.TabIndex = 26;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // panel1
             // 
@@ -233,55 +238,7 @@
             this.chbUnable.TabIndex = 28;
             this.chbUnable.Text = "недействующие";
             this.chbUnable.UseVisualStyleBackColor = true;
-            // 
-            // cId_tovar
-            // 
-            this.cId_tovar.HeaderText = "Артикул товара ";
-            this.cId_tovar.Name = "cId_tovar";
-            this.cId_tovar.ReadOnly = true;
-            // 
-            // cEan
-            // 
-            this.cEan.HeaderText = "EAN";
-            this.cEan.Name = "cEan";
-            this.cEan.ReadOnly = true;
-            // 
-            // cName
-            // 
-            this.cName.DataPropertyName = "cName";
-            this.cName.HeaderText = "Наименование товара";
-            this.cName.Name = "cName";
-            this.cName.ReadOnly = true;
-            // 
-            // cNameCategory
-            // 
-            this.cNameCategory.HeaderText = "Категория товара";
-            this.cNameCategory.Name = "cNameCategory";
-            this.cNameCategory.ReadOnly = true;
-            // 
-            // cCountOnline
-            // 
-            this.cCountOnline.HeaderText = "Он-лайн продажи товара";
-            this.cCountOnline.Name = "cCountOnline";
-            this.cCountOnline.ReadOnly = true;
-            // 
-            // cRcena
-            // 
-            this.cRcena.HeaderText = "Цена продажи";
-            this.cRcena.Name = "cRcena";
-            this.cRcena.ReadOnly = true;
-            // 
-            // cRcenaOnline
-            // 
-            this.cRcenaOnline.HeaderText = "Цена продажи он-лайн";
-            this.cRcenaOnline.Name = "cRcenaOnline";
-            this.cRcenaOnline.ReadOnly = true;
-            // 
-            // cRcenaOnlineAction
-            // 
-            this.cRcenaOnlineAction.HeaderText = "Цена распродажи он-лайн";
-            this.cRcenaOnlineAction.Name = "cRcenaOnlineAction";
-            this.cRcenaOnlineAction.ReadOnly = true;
+            this.chbUnable.CheckedChanged += new System.EventHandler(this.chbUnable_CheckedChanged);
             // 
             // btUpdate
             // 
@@ -292,6 +249,7 @@
             this.btUpdate.Size = new System.Drawing.Size(32, 32);
             this.btUpdate.TabIndex = 34;
             this.btUpdate.UseVisualStyleBackColor = true;
+            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
             // 
             // btAdd
             // 
@@ -313,6 +271,7 @@
             this.btEdit.Size = new System.Drawing.Size(32, 32);
             this.btEdit.TabIndex = 33;
             this.btEdit.UseVisualStyleBackColor = true;
+            this.btEdit.Click += new System.EventHandler(this.btEdit_Click);
             // 
             // btPrint
             // 
@@ -323,6 +282,7 @@
             this.btPrint.Size = new System.Drawing.Size(32, 32);
             this.btPrint.TabIndex = 30;
             this.btPrint.UseVisualStyleBackColor = true;
+            this.btPrint.Click += new System.EventHandler(this.btPrint_Click);
             // 
             // btDel
             // 
@@ -333,6 +293,63 @@
             this.btDel.Size = new System.Drawing.Size(32, 32);
             this.btDel.TabIndex = 31;
             this.btDel.UseVisualStyleBackColor = true;
+            this.btDel.Click += new System.EventHandler(this.btDel_Click);
+            // 
+            // cId_tovar
+            // 
+            this.cId_tovar.DataPropertyName = "id_Tovar";
+            this.cId_tovar.HeaderText = "Артикул товара ";
+            this.cId_tovar.Name = "cId_tovar";
+            this.cId_tovar.ReadOnly = true;
+            // 
+            // cEan
+            // 
+            this.cEan.DataPropertyName = "ean";
+            this.cEan.HeaderText = "EAN";
+            this.cEan.Name = "cEan";
+            this.cEan.ReadOnly = true;
+            // 
+            // cName
+            // 
+            this.cName.DataPropertyName = "ShortName";
+            this.cName.HeaderText = "Наименование товара";
+            this.cName.Name = "cName";
+            this.cName.ReadOnly = true;
+            // 
+            // cNameCategory
+            // 
+            this.cNameCategory.DataPropertyName = "nameCategory";
+            this.cNameCategory.HeaderText = "Категория товара";
+            this.cNameCategory.Name = "cNameCategory";
+            this.cNameCategory.ReadOnly = true;
+            // 
+            // cCountOnline
+            // 
+            this.cCountOnline.DataPropertyName = "countOnlineSell";
+            this.cCountOnline.HeaderText = "Он-лайн продажи товара";
+            this.cCountOnline.Name = "cCountOnline";
+            this.cCountOnline.ReadOnly = true;
+            // 
+            // cRcena
+            // 
+            this.cRcena.DataPropertyName = "rcena";
+            this.cRcena.HeaderText = "Цена продажи";
+            this.cRcena.Name = "cRcena";
+            this.cRcena.ReadOnly = true;
+            // 
+            // cRcenaOnline
+            // 
+            this.cRcenaOnline.DataPropertyName = "rcenaOnline";
+            this.cRcenaOnline.HeaderText = "Цена продажи он-лайн";
+            this.cRcenaOnline.Name = "cRcenaOnline";
+            this.cRcenaOnline.ReadOnly = true;
+            // 
+            // cRcenaOnlineAction
+            // 
+            this.cRcenaOnlineAction.DataPropertyName = "rcenaPromo";
+            this.cRcenaOnlineAction.HeaderText = "Цена распродажи он-лайн";
+            this.cRcenaOnlineAction.Name = "cRcenaOnlineAction";
+            this.cRcenaOnlineAction.ReadOnly = true;
             // 
             // frmMain
             // 
@@ -394,6 +411,7 @@
         private System.Windows.Forms.Button btDel;
         private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.Button btEdit;
+        private System.Windows.Forms.Button btUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn cId_tovar;
         private System.Windows.Forms.DataGridViewTextBoxColumn cEan;
         private System.Windows.Forms.DataGridViewTextBoxColumn cName;
@@ -402,7 +420,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcena;
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcenaOnline;
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcenaOnlineAction;
-        private System.Windows.Forms.Button btUpdate;
     }
 }
 

@@ -13,6 +13,7 @@ namespace OnlineStore.dictonatyTovar
     public partial class frmAddTovar : Form
     {
         public int id { set; private get; }
+        public DataRowView row { set; private get; }
         private bool isEdit = false;
         private DataTable dtTemp;
 
@@ -25,7 +26,21 @@ namespace OnlineStore.dictonatyTovar
 
         private void frmAddTovar_Load(object sender, EventArgs e)
         {
-            
+            if (id != 0)
+            {
+                id_tovar = (int)row["id_Tovar"];
+                id_otdel = (int)row["id_otdel"];
+
+                tbEan.Text = (string)row["ean"];
+                tbShotName.Text = (string)row["ShortName"];
+                tbFullName.Text = (string)row["FullName"];
+                tbRcena.Text = ((decimal)row["rcenaOnline"]).ToString("0.00");
+                tbActionPrice.Text = ((decimal)row["rcenaPromo"]).ToString("0.00");
+                chbActive.Checked = (bool)row["isActive"];
+                init_combobox();
+                cmbParentCategory.SelectedValue = (int)row["id_Category"];
+                tbEan.Enabled = false;
+            }
         }
 
         private void frmAddTovar_FormClosing(object sender, FormClosingEventArgs e)
@@ -60,7 +75,7 @@ namespace OnlineStore.dictonatyTovar
 
         private void tbName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (tbEan.Enabled && e.KeyCode == Keys.Enter)
             {
                 //тут получение данных по товару
                 Task<DataTable> task = Config.hCntMain.getGoods(tbEan.Text.Trim());
@@ -85,6 +100,7 @@ namespace OnlineStore.dictonatyTovar
                     return;
                 }
 
+                tbActionPrice.Clear();
                 id_tovar = (int)task.Result.Rows[0]["id_tovar"];
                 tbShotName.Text = (string)task.Result.Rows[0]["cNameShort"];
                 tbFullName.Text = (string)task.Result.Rows[0]["cNameFull"];
@@ -99,6 +115,8 @@ namespace OnlineStore.dictonatyTovar
             tbEan.Clear();
             tbFullName.Clear();
             tbShotName.Clear();
+            tbActionPrice.Clear();
+            tbRcena.Clear();
             id_tovar = 0;
             id_otdel = -1;
             init_combobox();

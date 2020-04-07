@@ -212,6 +212,22 @@ namespace OnlineStore
             return dtResult;
         }
 
+        public async Task<DataTable> delDicGoods(int id, bool isActive, int result)
+        {
+            ap.Clear();
+            ap.Add(id);
+            ap.Add(isActive);
+            ap.Add(false);
+            ap.Add(result);
+            ap.Add(UserSettings.User.Id);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setDicGoods]",
+                 new string[5] { "@id", "@isActive", "@isAdd", "@result", "@id_user" },
+                 new DbType[5] { DbType.Int32, DbType.Boolean, DbType.Boolean, DbType.Int32, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
         public async Task<DataTable> getInv(int id_deps)
         {
             ap.Clear();
@@ -234,6 +250,18 @@ namespace OnlineStore
             DataTable dtResult = executeProcedure("[OnlineStore].[getDataComboForCategory]",
                  new string[2] { "@isTu", "@id_deps" },
                  new DbType[2] { DbType.Boolean, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> getListGoods(int id_deps)
+        {
+            ap.Clear();
+            ap.Add(id_deps);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getListGoods]",
+                 new string[1] { "@id_deps" },
+                 new DbType[1] { DbType.Int32 }, ap);
 
             return dtResult;
         }

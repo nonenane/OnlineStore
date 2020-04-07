@@ -9,7 +9,7 @@ GO
 -- Create date: 07-04-2020
 -- Description:	Добавление,Редактирование, Удаление товара из справочника
 -- =============================================
-CREATE PROCEDURE [OnlineStore].[setDicGoods]	
+ALTER PROCEDURE [OnlineStore].[setDicGoods]	
 		@id int,
 		@id_tovar int = null,
 		@ShortName varchar(50)=null,
