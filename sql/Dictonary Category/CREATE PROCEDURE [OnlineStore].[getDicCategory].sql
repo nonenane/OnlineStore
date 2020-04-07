@@ -10,7 +10,7 @@ GO
 -- =============================================
 ALTER PROCEDURE [OnlineStore].[getDicCategory]	
 	 @id int = null,
-	 @id_deps int 
+	 @id_deps int = null
 AS
 BEGIN
 	SET NOCOUNT ON;

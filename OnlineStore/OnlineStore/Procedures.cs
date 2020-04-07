@@ -104,10 +104,14 @@ namespace OnlineStore
         {
             ap.Clear();
             ap.Add(true);
+            
+            if (UserSettings.User.StatusCode.ToLower().Equals("ркв"))
+                ap.Add(UserSettings.User.IdDepartment);
+            else ap.Add(0);
 
             DataTable dtResult = executeProcedure("[OnlineStore].[getDataComboForCategory]",
-                 new string[1] { "@isCategory" },
-                 new DbType[1] { DbType.Boolean }, ap);
+                 new string[2] { "@isCategory","@id_deps" },
+                 new DbType[2] { DbType.Boolean,DbType.Int32 }, ap);
 
             return dtResult;
         }
@@ -131,5 +135,111 @@ namespace OnlineStore
         }
 
         #endregion
+
+        #region "Товары"
+
+        public async Task<DataTable> getGoods(string ean)
+        {
+            ap.Clear();
+            ap.Add(ean);
+            if (UserSettings.User.StatusCode.ToLower().Equals("ркв"))
+                ap.Add(UserSettings.User.IdDepartment);
+            else ap.Add(0);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getGoods]",
+                 new string[2] { "@ean", "@id_deps" },
+                 new DbType[2] { DbType.String, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> getDicCategoryWithDep( int id_deps)
+        {
+            ap.Clear();
+            ap.Add(id_deps);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getDicCategory]",
+                 new string[1] { "@id_deps" },
+                 new DbType[1] { DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> validateDicGoods(int id, int id_tovar)
+        {
+            ap.Clear();
+            ap.Add(id);
+            ap.Add(id_tovar);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[validateDicGoods]",
+                 new string[2] { "@id", "@id_tovar" },
+                 new DbType[2] { DbType.Int32, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> validateDicGoods(int id)
+        {
+            ap.Clear();
+            ap.Add(id);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[validateDicGoods]",
+                 new string[1] { "@id" },
+                 new DbType[1] { DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> setDicGoods(int id,int id_tovar,string ShortName,  string FullName, int id_Category, decimal BasicPrice, decimal? StockPrice,bool isActive)
+        {
+            ap.Clear();
+            ap.Add(id);
+            ap.Add(id_tovar);
+            ap.Add(ShortName);
+            ap.Add(FullName);
+            ap.Add(id_Category);
+            ap.Add(BasicPrice);
+            ap.Add(StockPrice);
+            ap.Add(isActive);
+            ap.Add(0);
+            ap.Add(true);
+            ap.Add(UserSettings.User.Id);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setDicGoods]",
+                 new string[11] { "@id","@id_tovar", "@ShortName","@FullName", "@id_Category", "@BasicPrice", "@StockPrice", "@isActive","@isInsert", "@isAdd", "@id_user" },
+                 new DbType[11] { DbType.Int32, DbType.Int32, DbType.String, DbType.String, DbType.Int32,DbType.Decimal,DbType.Decimal, DbType.Boolean,DbType.Int32, DbType.Boolean, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> getInv(int id_deps)
+        {
+            ap.Clear();
+            ap.Add(true);            
+            ap.Add(id_deps);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getDataComboForCategory]",
+                 new string[2] { "@isInv", "@id_deps" },
+                 new DbType[2] { DbType.Boolean, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> getTU(int id_deps)
+        {
+            ap.Clear();
+            ap.Add(true);
+            ap.Add(id_deps);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getDataComboForCategory]",
+                 new string[2] { "@isTu", "@id_deps" },
+                 new DbType[2] { DbType.Boolean, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        #endregion
+
+
     }
 }

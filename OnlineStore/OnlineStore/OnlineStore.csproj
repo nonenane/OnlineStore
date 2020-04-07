@@ -67,6 +67,12 @@
     <Compile Include="dictonaryCategory\frmListCategory.Designer.cs">
       <DependentUpon>frmListCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="dictonatyTovar\frmAddTovar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonatyTovar\frmAddTovar.Designer.cs">
+      <DependentUpon>frmAddTovar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dictonaryCategory\frmListCategory.resx">
       <DependentUpon>frmListCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonatyTovar\frmAddTovar.resx">
+      <DependentUpon>frmAddTovar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -113,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-store-front-100.ico" />
+    <None Include="Resources\reload_8055.png" />
     <None Include="Resources\klpq_2511.png" />
     <None Include="Resources\filetypes_7401.png" />
     <None Include="Resources\filesave_2175.png" />

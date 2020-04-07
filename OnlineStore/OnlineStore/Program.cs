@@ -31,7 +31,9 @@ namespace OnlineStore
 
                     if (new List<string>(new string[] { "ркв", "кд" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode.ToLower()))
                     {
-                        Application.Run(new dictonaryCategory.frmListCategory());
+                        Application.Run(new frmMain());
+                        //Application.Run(new dictonaryCategory.frmListCategory());
+                        //Application.Run(new dictonatyTovar.frmAddTovar());
                     }
                     Logging.StartFirstLevel(2);
                     Logging.Comment("Выход из программы");

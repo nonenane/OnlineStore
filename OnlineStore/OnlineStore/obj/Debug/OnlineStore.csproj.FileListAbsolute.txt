@@ -13,3 +13,4 @@ D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.pdb
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources

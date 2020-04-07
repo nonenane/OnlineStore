@@ -35,7 +35,7 @@ CREATE TABLE [OnlineStore].[s_Goods](
 	[FullName]				varchar(max)	not null,	
 	[id_Category]			int				not null,
 	[BasicPrice]			numeric(16,2)	not null,
-	[StockPrice]			numeric(16,2)	not null,
+	[StockPrice]			numeric(16,2)	null,
 	[isInsert]				int				not null	DEFAULT 0,
 	[isActive]				bit				not null	DEFAULT 1,
 	[id_Creator]			int				not null,

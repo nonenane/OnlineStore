@@ -10,7 +10,10 @@ GO
 -- =============================================
 ALTER PROCEDURE [OnlineStore].[getDataComboForCategory]	
 	@isDep bit = null,
-	@isCategory bit = null
+	@isCategory bit = null,
+	@id_deps int = 0,
+	@isTu bit = null,
+	@isInv bit = null
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -27,7 +30,21 @@ ELSE IF @isCategory is not null
 		union all
 		select id,ltrim(rtrim(NameCategory)) as cName 
 		from OnlineStore.s_Category
-		where id_ParentCategory is null
+		where id_ParentCategory is null and (@id_deps=0 or id_Departments = @id_deps)
+	END
+ELSE IF @isTu is not null
+	BEGIN
+		select 0 as id, '' as cName
+		union all
+		select id,ltrim(rtrim(cname)) as cName from dbo.s_grp1 where id_otdel = @id_deps and ldeystv = 1
+		order by id asc
+	END
+ELSE IF @isInv is not null
+	BEGIN
+		select 0 as id, '' as cName
+		union all
+		select id,ltrim(rtrim(cname)) as cName from dbo.s_grp2 where id_otdel = @id_deps and ldeystv = 1
+		order by id asc
 	END
 
 END
