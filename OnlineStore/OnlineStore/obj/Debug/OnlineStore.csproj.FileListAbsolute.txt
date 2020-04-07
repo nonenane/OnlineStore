@@ -1,0 +1,15 @@
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\OnlineStore.exe.config
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\OnlineStore.exe
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\OnlineStore.pdb
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\EPPlus.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\Framework.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.CoreCompileInputs.cache
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.exe
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.pdb
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
