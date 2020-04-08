@@ -56,6 +56,8 @@
             this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cNameCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cCountOnline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.сMoveNow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cOstNow = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRcena = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRcenaOnline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRcenaOnlineAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +72,7 @@
             this.выходToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1183, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1243, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -196,6 +198,8 @@
             this.cName,
             this.cNameCategory,
             this.cCountOnline,
+            this.сMoveNow,
+            this.cOstNow,
             this.cRcena,
             this.cRcenaOnline,
             this.cRcenaOnlineAction});
@@ -203,7 +207,7 @@
             this.dgvData.Name = "dgvData";
             this.dgvData.RowHeadersVisible = false;
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvData.Size = new System.Drawing.Size(1158, 403);
+            this.dgvData.Size = new System.Drawing.Size(1218, 403);
             this.dgvData.TabIndex = 27;
             this.dgvData.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvData_RowPostPaint);
             this.dgvData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvData_RowPrePaint);
@@ -244,7 +248,7 @@
             // 
             this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btUpdate.Image = global::OnlineStore.Properties.Resources.reload_8055;
-            this.btUpdate.Location = new System.Drawing.Point(1139, 39);
+            this.btUpdate.Location = new System.Drawing.Point(1199, 39);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(32, 32);
             this.btUpdate.TabIndex = 34;
@@ -255,7 +259,7 @@
             // 
             this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btAdd.Image = global::OnlineStore.Properties.Resources.compfile_1551;
-            this.btAdd.Location = new System.Drawing.Point(1063, 521);
+            this.btAdd.Location = new System.Drawing.Point(1123, 521);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(32, 32);
             this.btAdd.TabIndex = 32;
@@ -266,7 +270,7 @@
             // 
             this.btEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btEdit.Image = global::OnlineStore.Properties.Resources.edit_1761;
-            this.btEdit.Location = new System.Drawing.Point(1101, 521);
+            this.btEdit.Location = new System.Drawing.Point(1161, 521);
             this.btEdit.Name = "btEdit";
             this.btEdit.Size = new System.Drawing.Size(32, 32);
             this.btEdit.TabIndex = 33;
@@ -277,7 +281,7 @@
             // 
             this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btPrint.Image = global::OnlineStore.Properties.Resources.klpq_2511;
-            this.btPrint.Location = new System.Drawing.Point(1000, 521);
+            this.btPrint.Location = new System.Drawing.Point(1060, 521);
             this.btPrint.Name = "btPrint";
             this.btPrint.Size = new System.Drawing.Size(32, 32);
             this.btPrint.TabIndex = 30;
@@ -288,7 +292,7 @@
             // 
             this.btDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btDel.Image = global::OnlineStore.Properties.Resources.editdelete_3805;
-            this.btDel.Location = new System.Drawing.Point(1139, 521);
+            this.btDel.Location = new System.Drawing.Point(1199, 521);
             this.btDel.Name = "btDel";
             this.btDel.Size = new System.Drawing.Size(32, 32);
             this.btDel.TabIndex = 31;
@@ -330,6 +334,20 @@
             this.cCountOnline.Name = "cCountOnline";
             this.cCountOnline.ReadOnly = true;
             // 
+            // сMoveNow
+            // 
+            this.сMoveNow.DataPropertyName = "moveNow";
+            this.сMoveNow.HeaderText = "Движение товара за сегодня";
+            this.сMoveNow.Name = "сMoveNow";
+            this.сMoveNow.ReadOnly = true;
+            // 
+            // cOstNow
+            // 
+            this.cOstNow.DataPropertyName = "ostNow";
+            this.cOstNow.HeaderText = "Остаток товара в магазине на К21";
+            this.cOstNow.Name = "cOstNow";
+            this.cOstNow.ReadOnly = true;
+            // 
             // cRcena
             // 
             this.cRcena.DataPropertyName = "rcena";
@@ -355,7 +373,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1183, 559);
+            this.ClientSize = new System.Drawing.Size(1243, 559);
             this.Controls.Add(this.btUpdate);
             this.Controls.Add(this.btAdd);
             this.Controls.Add(this.btEdit);
@@ -417,6 +435,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cNameCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn cCountOnline;
+        private System.Windows.Forms.DataGridViewTextBoxColumn сMoveNow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cOstNow;
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcena;
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcenaOnline;
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcenaOnlineAction;

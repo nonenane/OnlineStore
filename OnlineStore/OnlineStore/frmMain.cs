@@ -1,4 +1,5 @@
-﻿using Nwuram.Framework.Settings.User;
+﻿using Nwuram.Framework.Logging;
+using Nwuram.Framework.Settings.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -148,7 +149,7 @@ namespace OnlineStore
         private void btAdd_Click(object sender, EventArgs e)
         {
             if (new dictonatyTovar.frmAddTovar() { Text = "Добавление товара", id = 0 }.ShowDialog() == DialogResult.OK)
-                return;
+                Task.Run(() => get_data());
         }
 
         private void dgvData_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -324,7 +325,7 @@ namespace OnlineStore
 
                 if (result == -2 && isActive)
                 {
-                    if (DialogResult.Yes == MessageBox.Show(Config.centralText("Выбранная для удаления запись используется в программе.\nСделать запись недействующей?\n"), "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                    if (DialogResult.Yes == MessageBox.Show(Config.centralText("Выбранная для удаления запись\nиспользуется в программе.\nСделать запись недействующей?\n"), "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     {
                         //setLog(id, 1520);
                         task = Config.hCntMain.delDicGoods(id, !isActive, result);
@@ -386,6 +387,80 @@ namespace OnlineStore
         private void btPrint_Click(object sender, EventArgs e)
         {
 
+            Logging.StartFirstLevel(79);
+
+            Logging.Comment("Выгрузка отчёта с главной формы");
+            if (!string.IsNullOrWhiteSpace(tbName.Text))
+                Logging.Comment($"Фильтр по наименованию товара: {tbName.Text}");
+            Logging.StopFirstLevel();
+
+            Nwuram.Framework.ToExcelNew.ExcelUnLoad report = new Nwuram.Framework.ToExcelNew.ExcelUnLoad("list-1");
+
+            int rIndex = 1;
+            int maxMerge = 0;
+            foreach (DataGridViewColumn col in dgvData.Columns)
+                if (col.Visible)
+                    maxMerge++;
+
+            report.Merge(rIndex, 1, rIndex, maxMerge);
+            report.AddSingleValue("Список товаров", rIndex, 1);
+            report.SetCellAlignmentToCenter(rIndex, 1, rIndex, 1);
+            report.SetFontBold(rIndex, 1, rIndex, 1);
+            report.SetFontSize(rIndex, 1, rIndex, 1, 14);
+            rIndex++;
+
+            report.Merge(rIndex, 3, rIndex, 5);
+            report.AddSingleValue("Выгрузил: " + UserSettings.User.FullUsername, rIndex, 3);
+            report.SetCellAlignmentToRight(rIndex, 3, rIndex, 3);
+            rIndex++;
+
+
+            report.Merge(rIndex, 1, rIndex, 2);
+            report.Merge(rIndex, 3, rIndex, 5);
+            report.AddSingleValue("Фильтры: " + tbName.Text, rIndex, 1);
+            report.AddSingleValue("Дата выгрузки: " + DateTime.Now.ToString(), rIndex, 3);
+            report.SetCellAlignmentToRight(rIndex, 3, rIndex, 3);
+            rIndex++;
+            rIndex++;
+
+            int cIndex = 0;
+            foreach (DataGridViewColumn col in dgvData.Columns)
+            {
+                if (col.Visible)
+                {
+                    cIndex++;
+                    report.AddSingleValue(col.HeaderText, rIndex, cIndex);
+                }
+            }
+            report.SetBorders(rIndex, 1, rIndex, cIndex);
+            report.SetCellAlignmentToCenter(rIndex, 1, rIndex, cIndex);
+            rIndex++;
+
+            foreach (DataRowView row in dtData.DefaultView)
+            {
+                cIndex = 0;
+                foreach (DataGridViewColumn col in dgvData.Columns)
+                    if (col.Visible)
+                    {
+                        cIndex++;
+                        report.AddSingleValue(row[col.DataPropertyName].ToString(), rIndex, cIndex);
+                    }
+
+                if (!(bool)row["isActive"])
+                    report.SetCellColor(rIndex, 1, rIndex, cIndex, panel1.BackColor);
+
+                report.SetBorders(rIndex, 1, rIndex, cIndex);
+                report.SetCellAlignmentToCenter(rIndex, 1, rIndex, cIndex);
+                rIndex++;
+            }
+
+            report.Merge(rIndex, 2, rIndex, 5);
+            report.SetCellColor(rIndex, 1, rIndex, 1, panel1.BackColor);
+            report.AddSingleValue("- не действующие", rIndex, 2);
+            rIndex++;
+
+            report.SetColumnAutoSize(1, 1, rIndex, maxMerge);
+            report.Show();
         }
     }
 }
