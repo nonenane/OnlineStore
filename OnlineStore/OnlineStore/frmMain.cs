@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -99,7 +100,7 @@ namespace OnlineStore
             task.Wait();
             DataTable dtTU = task.Result;
             task = null;
-            
+
             DoOnUIThread(delegate ()
             {
                 cmbTU.DataSource = dtTU;
@@ -107,7 +108,7 @@ namespace OnlineStore
                 cmbTU.ValueMember = "id";
             });
 
-            
+
             task = Config.hCntMain.getInv(id_otdel);
             task.Wait();
             DataTable dtInv = task.Result;
@@ -119,7 +120,7 @@ namespace OnlineStore
                 cmbInv.DisplayMember = "cName";
                 cmbInv.ValueMember = "id";
             });
-            
+
             DoOnUIThread(delegate () { this.Enabled = true; });
         }
 
@@ -142,7 +143,7 @@ namespace OnlineStore
 
         private void dgvData_Paint(object sender, PaintEventArgs e)
         {
-            tbName.Location = new Point(dgvData.Location.X+cId_tovar.Width+cEan.Width, tbName.Location.Y);
+            tbName.Location = new Point(dgvData.Location.X + cId_tovar.Width + cEan.Width, tbName.Location.Y);
             tbName.Size = new Size(cName.Width, tbName.Height);
         }
 
@@ -335,7 +336,7 @@ namespace OnlineStore
                             MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        Task.Run(()=>get_data());
+                        Task.Run(() => get_data());
                         return;
                     }
                 }
@@ -461,6 +462,19 @@ namespace OnlineStore
 
             report.SetColumnAutoSize(1, 1, rIndex, maxMerge);
             report.Show();
+        }
+
+        private void отображаемыеНаФормеТоварыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TableToCsv tableToCsv = new TableToCsv();
+            tableToCsv.insertData(dtData);
+        }
+
+        private void выгрузитьИзмененныеТоварыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TableToCsv tableToCsv = new TableToCsv();
+            tableToCsv.insertData(dtData);
+
         }
     }
 }

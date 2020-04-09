@@ -14,3 +14,11 @@ D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmMai
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\CsvHelper.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.ValueTuple.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\CsvHelper.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.ValueTuple.xml

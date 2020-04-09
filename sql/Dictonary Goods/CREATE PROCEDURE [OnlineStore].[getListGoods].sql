@@ -226,11 +226,14 @@ select
 	g.id_Category,
 	g.isActive,
 	g.FullName,
-	t.id_otdel
+	t.id_otdel,
+	cast(0 as bit) as isSelect,
+	case when c.id_ParentCategory is not null then cp.NameCategory + ' > ' else '' end +c.NameCategory as nameCategoryToCsv
 from 
 	OnlineStore.s_Goods g
 		left join dbo.s_tovar t on t.id = g.id_Tovar
 		left join OnlineStore.s_Category c on c.id = g.id_Category	
+		left join OnlineStore.s_Category cp on cp.id = c.id_ParentCategory
 		left join #table_dvig_today tdt on tdt.id_tovar = g.id_Tovar
 		left join #table_ost_tovar tot on tot.id_tovar = g.id_Tovar
 where 

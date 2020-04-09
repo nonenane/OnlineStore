@@ -34,6 +34,11 @@
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.категорийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.формированиеCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отображаемыеНаФормеТоварыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выгрузитьИзмененныеТоварыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbDeps = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,14 +48,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbParentCategory = new System.Windows.Forms.ComboBox();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.chbUnable = new System.Windows.Forms.CheckBox();
-            this.btUpdate = new System.Windows.Forms.Button();
-            this.btAdd = new System.Windows.Forms.Button();
-            this.btEdit = new System.Windows.Forms.Button();
-            this.btPrint = new System.Windows.Forms.Button();
-            this.btDel = new System.Windows.Forms.Button();
             this.cId_tovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cEan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +58,14 @@
             this.cRcena = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRcenaOnline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRcenaOnlineAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.chbUnable = new System.Windows.Forms.CheckBox();
+            this.btUpdate = new System.Windows.Forms.Button();
+            this.btAdd = new System.Windows.Forms.Button();
+            this.btEdit = new System.Windows.Forms.Button();
+            this.btPrint = new System.Windows.Forms.Button();
+            this.btDel = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
@@ -69,7 +74,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникToolStripMenuItem,
-            this.выходToolStripMenuItem});
+            this.выходToolStripMenuItem,
+            this.формированиеCSVToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1243, 24);
@@ -97,6 +103,43 @@
             this.выходToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
+            // 
+            // формированиеCSVToolStripMenuItem
+            // 
+            this.формированиеCSVToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem,
+            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem,
+            this.отображаемыеНаФормеТоварыToolStripMenuItem,
+            this.выгрузитьИзмененныеТоварыToolStripMenuItem});
+            this.формированиеCSVToolStripMenuItem.Name = "формированиеCSVToolStripMenuItem";
+            this.формированиеCSVToolStripMenuItem.Size = new System.Drawing.Size(128, 20);
+            this.формированиеCSVToolStripMenuItem.Text = "Формирование CSV";
+            // 
+            // выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem
+            // 
+            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Name = "выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem";
+            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Text = "Выгрузить все доступные товары в файл";
+            // 
+            // выгрузитьВыбранныеТоварыВФайлToolStripMenuItem
+            // 
+            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Name = "выгрузитьВыбранныеТоварыВФайлToolStripMenuItem";
+            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Text = "Выгрузить выбранные товары в файл ";
+            // 
+            // отображаемыеНаФормеТоварыToolStripMenuItem
+            // 
+            this.отображаемыеНаФормеТоварыToolStripMenuItem.Name = "отображаемыеНаФормеТоварыToolStripMenuItem";
+            this.отображаемыеНаФормеТоварыToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.отображаемыеНаФормеТоварыToolStripMenuItem.Text = "Отображаемые на форме товары";
+            this.отображаемыеНаФормеТоварыToolStripMenuItem.Click += new System.EventHandler(this.отображаемыеНаФормеТоварыToolStripMenuItem_Click);
+            // 
+            // выгрузитьИзмененныеТоварыToolStripMenuItem
+            // 
+            this.выгрузитьИзмененныеТоварыToolStripMenuItem.Name = "выгрузитьИзмененныеТоварыToolStripMenuItem";
+            this.выгрузитьИзмененныеТоварыToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.выгрузитьИзмененныеТоварыToolStripMenuItem.Text = "Выгрузить измененные товары";
+            this.выгрузитьИзмененныеТоварыToolStripMenuItem.Click += new System.EventHandler(this.выгрузитьИзмененныеТоварыToolStripMenuItem_Click);
             // 
             // cmbDeps
             // 
@@ -214,6 +257,76 @@
             this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
             this.dgvData.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvData_Paint);
             // 
+            // cId_tovar
+            // 
+            this.cId_tovar.DataPropertyName = "id_Tovar";
+            this.cId_tovar.HeaderText = "Артикул товара ";
+            this.cId_tovar.Name = "cId_tovar";
+            this.cId_tovar.ReadOnly = true;
+            // 
+            // cEan
+            // 
+            this.cEan.DataPropertyName = "ean";
+            this.cEan.HeaderText = "EAN";
+            this.cEan.Name = "cEan";
+            this.cEan.ReadOnly = true;
+            // 
+            // cName
+            // 
+            this.cName.DataPropertyName = "ShortName";
+            this.cName.HeaderText = "Наименование товара";
+            this.cName.Name = "cName";
+            this.cName.ReadOnly = true;
+            // 
+            // cNameCategory
+            // 
+            this.cNameCategory.DataPropertyName = "nameCategory";
+            this.cNameCategory.HeaderText = "Категория товара";
+            this.cNameCategory.Name = "cNameCategory";
+            this.cNameCategory.ReadOnly = true;
+            // 
+            // cCountOnline
+            // 
+            this.cCountOnline.DataPropertyName = "countOnlineSell";
+            this.cCountOnline.HeaderText = "Он-лайн продажи товара";
+            this.cCountOnline.Name = "cCountOnline";
+            this.cCountOnline.ReadOnly = true;
+            // 
+            // сMoveNow
+            // 
+            this.сMoveNow.DataPropertyName = "moveNow";
+            this.сMoveNow.HeaderText = "Движение товара за сегодня";
+            this.сMoveNow.Name = "сMoveNow";
+            this.сMoveNow.ReadOnly = true;
+            // 
+            // cOstNow
+            // 
+            this.cOstNow.DataPropertyName = "ostNow";
+            this.cOstNow.HeaderText = "Остаток товара в магазине на К21";
+            this.cOstNow.Name = "cOstNow";
+            this.cOstNow.ReadOnly = true;
+            // 
+            // cRcena
+            // 
+            this.cRcena.DataPropertyName = "rcena";
+            this.cRcena.HeaderText = "Цена продажи";
+            this.cRcena.Name = "cRcena";
+            this.cRcena.ReadOnly = true;
+            // 
+            // cRcenaOnline
+            // 
+            this.cRcenaOnline.DataPropertyName = "rcenaOnline";
+            this.cRcenaOnline.HeaderText = "Цена продажи он-лайн";
+            this.cRcenaOnline.Name = "cRcenaOnline";
+            this.cRcenaOnline.ReadOnly = true;
+            // 
+            // cRcenaOnlineAction
+            // 
+            this.cRcenaOnlineAction.DataPropertyName = "rcenaPromo";
+            this.cRcenaOnlineAction.HeaderText = "Цена распродажи он-лайн";
+            this.cRcenaOnlineAction.Name = "cRcenaOnlineAction";
+            this.cRcenaOnlineAction.ReadOnly = true;
+            // 
             // tbName
             // 
             this.tbName.Location = new System.Drawing.Point(13, 87);
@@ -299,76 +412,6 @@
             this.btDel.UseVisualStyleBackColor = true;
             this.btDel.Click += new System.EventHandler(this.btDel_Click);
             // 
-            // cId_tovar
-            // 
-            this.cId_tovar.DataPropertyName = "id_Tovar";
-            this.cId_tovar.HeaderText = "Артикул товара ";
-            this.cId_tovar.Name = "cId_tovar";
-            this.cId_tovar.ReadOnly = true;
-            // 
-            // cEan
-            // 
-            this.cEan.DataPropertyName = "ean";
-            this.cEan.HeaderText = "EAN";
-            this.cEan.Name = "cEan";
-            this.cEan.ReadOnly = true;
-            // 
-            // cName
-            // 
-            this.cName.DataPropertyName = "ShortName";
-            this.cName.HeaderText = "Наименование товара";
-            this.cName.Name = "cName";
-            this.cName.ReadOnly = true;
-            // 
-            // cNameCategory
-            // 
-            this.cNameCategory.DataPropertyName = "nameCategory";
-            this.cNameCategory.HeaderText = "Категория товара";
-            this.cNameCategory.Name = "cNameCategory";
-            this.cNameCategory.ReadOnly = true;
-            // 
-            // cCountOnline
-            // 
-            this.cCountOnline.DataPropertyName = "countOnlineSell";
-            this.cCountOnline.HeaderText = "Он-лайн продажи товара";
-            this.cCountOnline.Name = "cCountOnline";
-            this.cCountOnline.ReadOnly = true;
-            // 
-            // сMoveNow
-            // 
-            this.сMoveNow.DataPropertyName = "moveNow";
-            this.сMoveNow.HeaderText = "Движение товара за сегодня";
-            this.сMoveNow.Name = "сMoveNow";
-            this.сMoveNow.ReadOnly = true;
-            // 
-            // cOstNow
-            // 
-            this.cOstNow.DataPropertyName = "ostNow";
-            this.cOstNow.HeaderText = "Остаток товара в магазине на К21";
-            this.cOstNow.Name = "cOstNow";
-            this.cOstNow.ReadOnly = true;
-            // 
-            // cRcena
-            // 
-            this.cRcena.DataPropertyName = "rcena";
-            this.cRcena.HeaderText = "Цена продажи";
-            this.cRcena.Name = "cRcena";
-            this.cRcena.ReadOnly = true;
-            // 
-            // cRcenaOnline
-            // 
-            this.cRcenaOnline.DataPropertyName = "rcenaOnline";
-            this.cRcenaOnline.HeaderText = "Цена продажи он-лайн";
-            this.cRcenaOnline.Name = "cRcenaOnline";
-            this.cRcenaOnline.ReadOnly = true;
-            // 
-            // cRcenaOnlineAction
-            // 
-            this.cRcenaOnlineAction.DataPropertyName = "rcenaPromo";
-            this.cRcenaOnlineAction.HeaderText = "Цена распродажи он-лайн";
-            this.cRcenaOnlineAction.Name = "cRcenaOnlineAction";
-            this.cRcenaOnlineAction.ReadOnly = true;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,6 +483,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcena;
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcenaOnline;
         private System.Windows.Forms.DataGridViewTextBoxColumn cRcenaOnlineAction;
+        private System.Windows.Forms.ToolStripMenuItem формированиеCSVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выгрузитьВыбранныеТоварыВФайлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem отображаемыеНаФормеТоварыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выгрузитьИзмененныеТоварыToolStripMenuItem;
     }
 }
 
