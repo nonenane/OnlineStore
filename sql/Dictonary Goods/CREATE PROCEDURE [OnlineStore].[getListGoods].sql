@@ -228,7 +228,9 @@ select
 	g.FullName,
 	t.id_otdel,
 	cast(0 as bit) as isSelect,
-	case when c.id_ParentCategory is not null then cp.NameCategory + ' > ' else '' end +c.NameCategory as nameCategoryToCsv
+	case when c.id_ParentCategory is not null then cp.NameCategory + ' > ' else '' end +c.NameCategory as nameCategoryToCsv,
+	g.isInsert,
+	g.DateEdit
 from 
 	OnlineStore.s_Goods g
 		left join dbo.s_tovar t on t.id = g.id_Tovar

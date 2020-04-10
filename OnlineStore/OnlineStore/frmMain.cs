@@ -17,7 +17,7 @@ namespace OnlineStore
     public partial class frmMain : Form
     {
         private DataTable dtData;
-
+        FolderBrowserDialog folderBrowserDialog1;
         public frmMain()
         {
             InitializeComponent();
@@ -26,6 +26,16 @@ namespace OnlineStore
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            this.Text = Nwuram.Framework.Settings.Connection.ConnectionSettings.ProgramName + " - " + Nwuram.Framework.Settings.User.UserSettings.User.FullUsername;
+            this.folderBrowserDialog1 = new FolderBrowserDialog();
+            this.folderBrowserDialog1.Description = "Выберите каталог, для сохранения файлов CSV.";
+
+            // Do not allow the user to create new files via the FolderBrowserDialog.
+            this.folderBrowserDialog1.ShowNewFolderButton = true;
+
+            // Default to the My Documents folder.
+            this.folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+
             Task.Run(() => { init_combobox(true); get_data(); });
         }
 
@@ -42,6 +52,7 @@ namespace OnlineStore
         private void категорийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new dictonaryCategory.frmListCategory().ShowDialog();
+            init_combo_category();
         }
 
         private void init_combobox(bool isAll)
@@ -56,6 +67,12 @@ namespace OnlineStore
                 DataTable dtDeps = task.Result;
                 DoOnUIThread(delegate ()
                 {
+                    DataRow row = dtDeps.NewRow();
+                    row["id"] = 0;
+                    row["cName"] = "Все отделы";
+                    dtDeps.Rows.Add(row);
+                    dtDeps.DefaultView.Sort = "id asc";
+
                     cmbDeps.DataSource = dtDeps;
                     cmbDeps.DisplayMember = "cName";
                     cmbDeps.ValueMember = "id";
@@ -73,28 +90,31 @@ namespace OnlineStore
                 id_otdel = (int)cmbDeps.SelectedValue;
             });
 
-            task = Config.hCntMain.getDicCategoryWithDep(id_otdel);
-            task.Wait();
-            DataTable dtCategory = task.Result;
-            task = null;
+            init_combo_category();
 
-            if (dtCategory != null && dtCategory.Rows.Count > 0)
-            {
-                DataRow row = dtCategory.NewRow();
-                row["id"] = 0;
-                row["cName"] = "";
-                row["isActive"] = 1;
-                dtCategory.Rows.Add(row);
+            //task = Config.hCntMain.getDicCategoryWithDep(id_otdel);
+            //task.Wait();
+            //DataTable dtCategory = task.Result;
+            //task = null;
 
-                dtCategory.DefaultView.RowFilter = "isActive = 1";
-                dtCategory.DefaultView.Sort = "id ASC";
-            }
-            DoOnUIThread(delegate ()
-            {
-                cmbParentCategory.DataSource = dtCategory;
-                cmbParentCategory.DisplayMember = "cName";
-                cmbParentCategory.ValueMember = "id";
-            });
+            //if (dtCategory != null && dtCategory.Rows.Count > 0)
+            //{
+            //    DataRow row = dtCategory.NewRow();
+            //    row["id"] = 0;
+            //    row["cName"] = "";
+            //    row["isActive"] = 1;
+            //    dtCategory.Rows.Add(row);
+
+            //    dtCategory.DefaultView.RowFilter = "isActive = 1";
+            //    dtCategory.DefaultView.Sort = "id ASC";
+            //}
+
+            //DoOnUIThread(delegate ()
+            //{
+            //    cmbParentCategory.DataSource = dtCategory;
+            //    cmbParentCategory.DisplayMember = "cName";
+            //    cmbParentCategory.ValueMember = "id";
+            //});
 
             task = Config.hCntMain.getTU(id_otdel);
             task.Wait();
@@ -124,9 +144,44 @@ namespace OnlineStore
             DoOnUIThread(delegate () { this.Enabled = true; });
         }
 
+        private void init_combo_category()
+        {
+            Task<DataTable> task;
+            int id_otdel = -1;
+            DoOnUIThread(delegate ()
+            {
+                id_otdel = (int)cmbDeps.SelectedValue;
+            });
+
+            task = Config.hCntMain.getDicCategoryWithDep(id_otdel);
+            task.Wait();
+            DataTable dtCategory = task.Result;
+            task = null;
+
+            if (dtCategory != null && dtCategory.Rows.Count > 0)
+            {
+                DataRow row = dtCategory.NewRow();
+                row["id"] = 0;
+                row["cName"] = "";
+                row["isActive"] = 1;
+                dtCategory.Rows.Add(row);
+
+                dtCategory.DefaultView.RowFilter = "isActive = 1";
+                dtCategory.DefaultView.Sort = "id ASC";
+            }
+
+            DoOnUIThread(delegate ()
+            {
+                cmbParentCategory.DataSource = dtCategory;
+                cmbParentCategory.DisplayMember = "cName";
+                cmbParentCategory.ValueMember = "id";
+            });
+        }
+
         private void cmbDeps_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            Task.Run(() => { init_combobox(false); get_data(); });
+            //Task.Run(() => { init_combobox(false); get_data(); });
+            setFilter();
         }
 
         private void cmbTU_SelectionChangeCommitted(object sender, EventArgs e)
@@ -166,8 +221,11 @@ namespace OnlineStore
 
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.BackColor = rColor;
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = rColor;
-
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
+
+                if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"])
+                    dgvData.Rows[e.RowIndex].Cells[cId_tovar.Index].Style.BackColor =
+                         dgvData.Rows[e.RowIndex].Cells[cId_tovar.Index].Style.SelectionBackColor = Color.Blue;
             }
         }
 
@@ -200,6 +258,15 @@ namespace OnlineStore
 
             btDel.Enabled = true;
             btEdit.Enabled = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isActive"];
+        }
+
+        private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dtData != null && dtData.Rows.Count > 0 && dtData.DefaultView.Count > 0 && e.RowIndex != -1)
+            {
+                dtData.DefaultView[e.RowIndex]["isSelect"] = !(bool)dtData.DefaultView[e.RowIndex]["isSelect"];
+                dtData.AcceptChanges();
+            }
         }
 
         private void btEdit_Click(object sender, EventArgs e)
@@ -268,6 +335,9 @@ namespace OnlineStore
 
                     if (cmbParentCategory.SelectedValue != null && (int)cmbParentCategory.SelectedValue != 0)
                         filter += (filter.Length == 0 ? "" : " and ") + $"id_Category = {cmbParentCategory.SelectedValue}";
+
+                    if (cmbDeps.SelectedValue != null && (int)cmbDeps.SelectedValue != 0)
+                        filter += (filter.Length == 0 ? "" : " and ") + $"id_otdel = {cmbDeps.SelectedValue}";
 
 
                     dtData.DefaultView.RowFilter = filter;
@@ -466,15 +536,82 @@ namespace OnlineStore
 
         private void отображаемыеНаФормеТоварыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TableToCsv tableToCsv = new TableToCsv();
-            tableToCsv.insertData(dtData);
+            if (dtData == null || dtData.Rows.Count == 0 || dtData.DefaultView.Count == 0) return;
+
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string folderName = folderBrowserDialog1.SelectedPath;
+                TableToCsv tableToCsv = new TableToCsv();
+                tableToCsv.insertData(dtData.DefaultView.ToTable().Copy(), folderName);
+                MessageBox.Show("Выгрузка завершена!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void выгрузитьИзмененныеТоварыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TableToCsv tableToCsv = new TableToCsv();
-            tableToCsv.insertData(dtData);
+            if (dtData == null || dtData.Rows.Count == 0 || dtData.DefaultView.Count == 0) return;
+
+            if (DialogResult.OK == new frmSelectData().ShowDialog())
+            {
+                DateTime dateSelect = frmSelectData.date;
+                EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
+               .Where(r => r.Field<DateTime>("DateEdit").Date > dateSelect.Date);
+
+                if (rowCollect.Count() > 0)
+                {
+                    DialogResult result = folderBrowserDialog1.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        string folderName = folderBrowserDialog1.SelectedPath;
+                        TableToCsv tableToCsv = new TableToCsv();
+                        tableToCsv.insertData(rowCollect.CopyToDataTable(), folderName);
+                        MessageBox.Show("Выгрузка завершена!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
 
         }
+
+        private void выгрузитьВыбранныеТоварыВФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dtData == null || dtData.Rows.Count == 0 || dtData.DefaultView.Count == 0) return;
+
+            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
+                .Where(r => r.Field<bool>("isSelect"));
+
+            if (rowCollect.Count() > 0)
+            {
+                DialogResult result = folderBrowserDialog1.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string folderName = folderBrowserDialog1.SelectedPath;
+                    TableToCsv tableToCsv = new TableToCsv();
+                    tableToCsv.insertData(rowCollect.CopyToDataTable(), folderName);
+                    MessageBox.Show("Выгрузка завершена!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Task<DataTable> task = Config.hCntMain.getListGoods(0);
+            task.Wait();
+            DataTable dtLoad = task.Result;
+
+            if (dtLoad != null && dtLoad.Rows.Count > 0)
+            {
+                DialogResult result = folderBrowserDialog1.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string folderName = folderBrowserDialog1.SelectedPath;
+                    TableToCsv tableToCsv = new TableToCsv();
+                    tableToCsv.insertData(dtLoad, folderName);
+                    MessageBox.Show("Выгрузка завершена!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+
     }
 }

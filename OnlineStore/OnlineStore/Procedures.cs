@@ -100,14 +100,15 @@ namespace OnlineStore
             return dtResult;
         }
 
-        public async Task<DataTable> getCategory()
+        public async Task<DataTable> getCategory(int id_deps)
         {
             ap.Clear();
             ap.Add(true);
-            
-            if (UserSettings.User.StatusCode.ToLower().Equals("ркв"))
-                ap.Add(UserSettings.User.IdDepartment);
-            else ap.Add(0);
+            ap.Add(id_deps);
+
+            //if (UserSettings.User.StatusCode.ToLower().Equals("ркв"))
+            //    ap.Add(UserSettings.User.IdDepartment);
+            //else ap.Add(0);
 
             DataTable dtResult = executeProcedure("[OnlineStore].[getDataComboForCategory]",
                  new string[2] { "@isCategory","@id_deps" },
@@ -257,7 +258,11 @@ namespace OnlineStore
         public async Task<DataTable> getListGoods(int id_deps)
         {
             ap.Clear();
-            ap.Add(id_deps);
+            //ap.Add(id_deps);
+            if (UserSettings.User.StatusCode.ToLower().Equals("ркв"))
+                ap.Add(UserSettings.User.IdDepartment);
+            else ap.Add(0);
+
 
             DataTable dtResult = executeProcedure("[OnlineStore].[getListGoods]",
                  new string[1] { "@id_deps" },

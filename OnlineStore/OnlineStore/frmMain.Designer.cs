@@ -74,8 +74,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникToolStripMenuItem,
-            this.выходToolStripMenuItem,
-            this.формированиеCSVToolStripMenuItem});
+            this.формированиеCSVToolStripMenuItem,
+            this.выходToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1243, 24);
@@ -93,7 +93,7 @@
             // категорийToolStripMenuItem
             // 
             this.категорийToolStripMenuItem.Name = "категорийToolStripMenuItem";
-            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.категорийToolStripMenuItem.Text = "Категорий";
             this.категорийToolStripMenuItem.Click += new System.EventHandler(this.категорийToolStripMenuItem_Click);
             // 
@@ -120,12 +120,14 @@
             this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Name = "выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem";
             this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Text = "Выгрузить все доступные товары в файл";
+            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Click += new System.EventHandler(this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem_Click);
             // 
             // выгрузитьВыбранныеТоварыВФайлToolStripMenuItem
             // 
             this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Name = "выгрузитьВыбранныеТоварыВФайлToolStripMenuItem";
             this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Text = "Выгрузить выбранные товары в файл ";
+            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Click += new System.EventHandler(this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem_Click);
             // 
             // отображаемыеНаФормеТоварыToolStripMenuItem
             // 
@@ -252,6 +254,7 @@
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvData.Size = new System.Drawing.Size(1218, 403);
             this.dgvData.TabIndex = 27;
+            this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
             this.dgvData.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvData_RowPostPaint);
             this.dgvData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvData_RowPrePaint);
             this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);

@@ -22,3 +22,4 @@ D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\CsvHelper.xml
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.ValueTuple.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources

@@ -4,7 +4,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using CsvHelper;
+using System.Linq;
 
 
 namespace OnlineStore
@@ -18,58 +18,18 @@ namespace OnlineStore
 
     class TableToCsv
     {
-        public void insertData_notUserd(DataTable dtData)
+        public void insertData(DataTable dtData,string folderName)
         {
-            //TextWriter writer = null;
-            //CsvWriter csvWriter = null;
-            //long readBytesCount = 0;
-            //long chunkSize = 30 * 1024; //divide CSV file into each CSV file with byte size up to 30KB
-
-            //string fileName = $"BlobHourMetrics_{Guid.NewGuid()}.csv";
-            //writer = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName), true);
-            //csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
-
-
-            //return;
-            var records = new List<goods>();
-            foreach (DataRow row in dtData.Rows)
-            {
-                goods g = new goods();
-                g.CustomerName = "test";
-                g.Title = "test";
-                g.Deadline = DateTime.Now;
-                records.Add(g);
-            }
-
-
-            foreach (var cur in records)
-            {                                
-                //var curRecordByteCount = curRecord.Sum(r => Encoding.UTF8.GetByteCount(r));// + headers.Count() + 1;
-            }
-
-
-            string fileName = $"csv\\BlobHourMetrics_{Guid.NewGuid()}.csv";
-            //using (var mem = new MemoryStream())
-            using (var writer = new StreamWriter(fileName))
-            using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                csvWriter.Configuration.Delimiter = ",";
-                csvWriter.Configuration.HasHeaderRecord = true;
-                csvWriter.Configuration.AutoMap<goods>();                
-
-
-                csvWriter.WriteHeader<goods>();
-                csvWriter.NextRecord();
-                csvWriter.WriteRecords(records);
-
-                writer.Flush();
-                writer.Close();
-                //var result = Encoding.UTF8.GetString(mem.ToArray());
-                //Console.WriteLine(result);
-            }
+            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable().Where(r => r.Field<int>("isInsert")==0);
+            if (rowCollect.Count() > 0)
+                newTovar(rowCollect.CopyToDataTable().Copy(), folderName, true);         
+            
+            rowCollect = dtData.AsEnumerable().Where(r => r.Field<int>("isInsert") == 1);
+            if (rowCollect.Count() > 0)
+                newTovar(rowCollect.CopyToDataTable().Copy(), folderName, false);            
         }
 
-        public void insertData(DataTable dtData)
+        private void newTovar(DataTable dtData, string folderName, bool isNew)
         {
             long chunkSize = 40 * 1024 * 1024;
             StringBuilder csv = null;
@@ -77,14 +37,15 @@ namespace OnlineStore
             int countFile = 0;
             string header = "Артикул,Имя,\"Короткое описание\",Описание,Запасы,\"Цена распродажи\",\"Базовая цена\",Категории";
             string dirSave = "";
+            string fileName = isNew ? "newTovar" : "oldTovar";
 
-            if (!Directory.Exists("csv"))
-                Directory.CreateDirectory("csv");
+            //if (!Directory.Exists("csv"))
+            //    Directory.CreateDirectory("csv");
 
             foreach (DataRow row in dtData.Rows)
             {
-                string line = $"{row["id_Tovar"]},\"{row["ShortName"]}\",\"{row["ShortName"]}\",\"{row["FullName"]}\",{row["ostNow"]},{row["rcenaPromo"]},{row["rcenaOnline"]},\"{row["nameCategoryToCsv"]}\"";
-                
+                string line = $"{row["id_Tovar"]},\"{row["ShortName"].ToString()}\",\"{row["ShortName"].ToString().PadLeft(50)}\",\"{row["FullName"]}\",{row["ostNow"]},{row["rcenaPromo"].ToString().Replace(',', '.')},{row["rcenaOnline"].ToString().Replace(',', '.')},\"{row["nameCategoryToCsv"]}\"";
+
                 readBytesCount += Encoding.UTF8.GetByteCount(line) + 1;
 
                 if (csv == null || readBytesCount > chunkSize)
@@ -95,7 +56,8 @@ namespace OnlineStore
                     }
 
                     countFile++;
-                    dirSave = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + $@"csv\test_{countFile}.csv");
+                    //dirSave = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + $@"csv\test_{countFile}.csv");
+                    dirSave = Path.Combine(folderName + $@"\{fileName}_{countFile}.csv");
                     csv = new StringBuilder();
                     csv.AppendLine(header);
                     readBytesCount = Encoding.UTF8.GetByteCount(header) + 1;
@@ -107,6 +69,5 @@ namespace OnlineStore
                 File.WriteAllText(dirSave, csv.ToString());
             }
         }
-
     }
 }

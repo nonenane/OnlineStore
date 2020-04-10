@@ -29,6 +29,19 @@ namespace OnlineStore.dictonaryCategory
 
         private void frmListCategory_Load(object sender, EventArgs e)
         {
+            Task<DataTable> task = Config.hCntMain.getDeps();
+            task.Wait();
+            DataTable dtDeps = task.Result;
+
+            cmbDeps.DataSource = dtDeps;
+            cmbDeps.DisplayMember = "cName";
+            cmbDeps.ValueMember = "id";            
+            if (UserSettings.User.StatusCode.ToLower().Equals("ркв"))
+            {
+                cmbDeps.SelectedValue = UserSettings.User.IdDepartment;
+                cmbDeps.Enabled = false;
+            }
+
             get_data();
         }
 
@@ -65,6 +78,10 @@ namespace OnlineStore.dictonaryCategory
 
                 if (tbName.Text.Trim().Length != 0)
                     filter += (filter.Length == 0 ? "" : " and ") + string.Format("cName like '%{0}%'", tbName.Text.Trim());
+
+                if (cmbDeps.SelectedValue != null && (int)cmbDeps.SelectedValue != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"id_Departments = {cmbDeps.SelectedValue}";
+                
 
                 if (!chbUnable.Checked)
                     filter += (filter.Length == 0 ? "" : " and ") + string.Format("isActive = 1", "");
@@ -350,6 +367,11 @@ namespace OnlineStore.dictonaryCategory
                 Logging.StopFirstLevel();
             }
 
+        }
+
+        private void cmbDeps_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            setFilter();
         }
     }
 }

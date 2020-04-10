@@ -26,9 +26,9 @@ IF @isDep is not null
 	END
 ELSE IF @isCategory is not null
 	BEGIN
-		select null as id,'' as cName
+		select null as id,'' as cName, 0 as id_Departments
 		union all
-		select id,ltrim(rtrim(NameCategory)) as cName 
+		select id,ltrim(rtrim(NameCategory)) as cName,id_Departments
 		from OnlineStore.s_Category
 		where id_ParentCategory is null and (@id_deps=0 or id_Departments = @id_deps)
 	END

@@ -23,7 +23,8 @@ IF @id is null
 			ltrim(rtrim(c.NameCategory)) as cName,
 			ltrim(rtrim(d.name)) as nameDep,
 			ltrim(rtrim(isnull(cc.NameCategory,''))) as cNameParent,
-			c.isActive
+			c.isActive,
+			c.id_Departments
 		from 
 			OnlineStore.s_Category c
 				left join dbo.departments d on d.id = c.id_Departments
@@ -39,7 +40,8 @@ ELSE
 			ltrim(rtrim(isnull(cc.NameCategory,''))) as cNameParent,
 			c.isActive,
 			c.id_ParentCategory,
-			c.id_Departments
+			c.id_Departments,
+			cast(case when exists (select TOP(1) ch.id from OnlineStore.s_Category ch where ch.id_ParentCategory = c.id ) then 1 else 0 end as bit) as isParent
 		from 
 			OnlineStore.s_Category c
 				left join dbo.departments d on d.id = c.id_Departments

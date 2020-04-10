@@ -42,6 +42,9 @@ namespace OnlineStore.dictonaryCategory
                         cmbParentCategory.SelectedValue = (int?)dtTemp.Rows[0]["id_ParentCategory"];
                     else
                         cmbParentCategory.SelectedValue = DBNull.Value;
+
+                    bool isParent = (bool)dtTemp.Rows[0]["isParent"];
+                    if (isParent) cmbDeps.Enabled = false;
                 }
             }
             isEdit = false;
@@ -75,7 +78,16 @@ namespace OnlineStore.dictonaryCategory
                 cmbDeps.Enabled = false;
             }
 
-            task = Config.hCntMain.getCategory();
+            init_category();
+            //cmbParentCategory.SelectedIndex = -1;
+
+            DoOnUIThread(delegate () { this.Enabled = true; });
+        }
+
+        private void init_category()
+        {
+            int id_deps = cmbDeps.SelectedValue == null ? -1 : (int)cmbDeps.SelectedValue;
+            Task<DataTable> task = Config.hCntMain.getCategory(id_deps);
             task.Wait();
             DataTable dtCategory = task.Result;
             if (id != 0)
@@ -91,13 +103,15 @@ namespace OnlineStore.dictonaryCategory
             cmbParentCategory.DataSource = dtCategory;
             cmbParentCategory.DisplayMember = "cName";
             cmbParentCategory.ValueMember = "id";
-            //cmbParentCategory.SelectedIndex = -1;
-
-            DoOnUIThread(delegate () { this.Enabled = true; });
         }
 
         private void cmpDeps_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if ((sender as ComboBox).Name.Equals(cmbDeps.Name))
+            {
+                init_category();
+                cmbParentCategory.SelectedIndex = -1;
+            }
             isEdit = true;
         }
 
