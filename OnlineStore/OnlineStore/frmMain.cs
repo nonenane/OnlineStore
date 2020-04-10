@@ -180,7 +180,7 @@ namespace OnlineStore
 
         private void cmbDeps_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //Task.Run(() => { init_combobox(false); get_data(); });
+            Task.Run(() => { init_combobox(false); });
             setFilter();
         }
 
