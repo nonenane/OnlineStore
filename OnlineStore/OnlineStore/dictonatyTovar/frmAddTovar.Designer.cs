@@ -43,13 +43,25 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbActionPrice = new System.Windows.Forms.TextBox();
             this.chbActive = new System.Windows.Forms.CheckBox();
+            this.lMinOrder = new System.Windows.Forms.Label();
+            this.tbMinOrder = new System.Windows.Forms.TextBox();
+            this.lMaxOrder = new System.Windows.Forms.Label();
+            this.tbMaxOrder = new System.Windows.Forms.TextBox();
+            this.lStep = new System.Windows.Forms.Label();
+            this.tbStep = new System.Windows.Forms.TextBox();
+            this.lDefaultNetto = new System.Windows.Forms.Label();
+            this.tbDefaultNetto = new System.Windows.Forms.TextBox();
+            this.lPriceSuffix = new System.Windows.Forms.Label();
+            this.tbPriceSuffix = new System.Windows.Forms.TextBox();
+            this.lQuantitySuffix = new System.Windows.Forms.Label();
+            this.tbQuantitySuffix = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btSave
             // 
-            this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btSave.Image = global::OnlineStore.Properties.Resources.filesave_2175;
-            this.btSave.Location = new System.Drawing.Point(374, 264);
+            this.btSave.Location = new System.Drawing.Point(376, 264);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 6;
@@ -58,9 +70,9 @@
             // 
             // btClose
             // 
-            this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btClose.Image = global::OnlineStore.Properties.Resources.exit_8633;
-            this.btClose.Location = new System.Drawing.Point(412, 264);
+            this.btClose.Location = new System.Drawing.Point(414, 264);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 7;
@@ -198,11 +210,129 @@
             this.chbActive.Text = "Действующий товар";
             this.chbActive.UseVisualStyleBackColor = true;
             // 
+            // lMinOrder
+            // 
+            this.lMinOrder.AutoSize = true;
+            this.lMinOrder.Location = new System.Drawing.Point(538, 44);
+            this.lMinOrder.Name = "lMinOrder";
+            this.lMinOrder.Size = new System.Drawing.Size(181, 13);
+            this.lMinOrder.TabIndex = 10;
+            this.lMinOrder.Text = "Минимальное количество заказа:";
+            // 
+            // tbMinOrder
+            // 
+            this.tbMinOrder.Location = new System.Drawing.Point(725, 40);
+            this.tbMinOrder.MaxLength = 17;
+            this.tbMinOrder.Name = "tbMinOrder";
+            this.tbMinOrder.Size = new System.Drawing.Size(127, 20);
+            this.tbMinOrder.TabIndex = 11;
+            this.tbMinOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbMinOrder.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDecimal_KeyPress);
+            this.tbMinOrder.Validating += new System.ComponentModel.CancelEventHandler(this.tbMinOrder_Validating);
+            // 
+            // lMaxOrder
+            // 
+            this.lMaxOrder.AutoSize = true;
+            this.lMaxOrder.Location = new System.Drawing.Point(529, 69);
+            this.lMaxOrder.Name = "lMaxOrder";
+            this.lMaxOrder.Size = new System.Drawing.Size(190, 13);
+            this.lMaxOrder.TabIndex = 10;
+            this.lMaxOrder.Text = "Максимальное  количество заказа:";
+            // 
+            // tbMaxOrder
+            // 
+            this.tbMaxOrder.Location = new System.Drawing.Point(725, 65);
+            this.tbMaxOrder.MaxLength = 17;
+            this.tbMaxOrder.Name = "tbMaxOrder";
+            this.tbMaxOrder.Size = new System.Drawing.Size(127, 20);
+            this.tbMaxOrder.TabIndex = 11;
+            this.tbMaxOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbMaxOrder.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDecimal_KeyPress);
+            this.tbMaxOrder.Validating += new System.ComponentModel.CancelEventHandler(this.tbMinOrder_Validating);
+            // 
+            // lStep
+            // 
+            this.lStep.AutoSize = true;
+            this.lStep.Location = new System.Drawing.Point(467, 95);
+            this.lStep.Name = "lStep";
+            this.lStep.Size = new System.Drawing.Size(252, 13);
+            this.lStep.TabIndex = 10;
+            this.lStep.Text = "Возможный шаг количества при заказе товара:";
+            // 
+            // tbStep
+            // 
+            this.tbStep.Location = new System.Drawing.Point(725, 91);
+            this.tbStep.MaxLength = 17;
+            this.tbStep.Name = "tbStep";
+            this.tbStep.Size = new System.Drawing.Size(127, 20);
+            this.tbStep.TabIndex = 11;
+            this.tbStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbStep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDecimal_KeyPress);
+            this.tbStep.Validating += new System.ComponentModel.CancelEventHandler(this.tbMinOrder_Validating);
+            // 
+            // lDefaultNetto
+            // 
+            this.lDefaultNetto.AutoSize = true;
+            this.lDefaultNetto.Location = new System.Drawing.Point(484, 121);
+            this.lDefaultNetto.Name = "lDefaultNetto";
+            this.lDefaultNetto.Size = new System.Drawing.Size(235, 13);
+            this.lDefaultNetto.TabIndex = 10;
+            this.lDefaultNetto.Text = "Значение заказанного товара по умолчанию";
+            // 
+            // tbDefaultNetto
+            // 
+            this.tbDefaultNetto.Location = new System.Drawing.Point(725, 117);
+            this.tbDefaultNetto.MaxLength = 17;
+            this.tbDefaultNetto.Name = "tbDefaultNetto";
+            this.tbDefaultNetto.Size = new System.Drawing.Size(127, 20);
+            this.tbDefaultNetto.TabIndex = 11;
+            this.tbDefaultNetto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbDefaultNetto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDecimal_KeyPress);
+            this.tbDefaultNetto.Validating += new System.ComponentModel.CancelEventHandler(this.tbMinOrder_Validating);
+            // 
+            // lPriceSuffix
+            // 
+            this.lPriceSuffix.AutoSize = true;
+            this.lPriceSuffix.Location = new System.Drawing.Point(529, 146);
+            this.lPriceSuffix.Name = "lPriceSuffix";
+            this.lPriceSuffix.Size = new System.Drawing.Size(130, 13);
+            this.lPriceSuffix.TabIndex = 10;
+            this.lPriceSuffix.Text = "Суффикс к цене товара:";
+            // 
+            // tbPriceSuffix
+            // 
+            this.tbPriceSuffix.Location = new System.Drawing.Point(665, 143);
+            this.tbPriceSuffix.MaxLength = 50;
+            this.tbPriceSuffix.Multiline = true;
+            this.tbPriceSuffix.Name = "tbPriceSuffix";
+            this.tbPriceSuffix.Size = new System.Drawing.Size(187, 55);
+            this.tbPriceSuffix.TabIndex = 11;
+            this.tbPriceSuffix.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lQuantitySuffix
+            // 
+            this.lQuantitySuffix.AutoSize = true;
+            this.lQuantitySuffix.Location = new System.Drawing.Point(496, 208);
+            this.lQuantitySuffix.Name = "lQuantitySuffix";
+            this.lQuantitySuffix.Size = new System.Drawing.Size(163, 13);
+            this.lQuantitySuffix.TabIndex = 10;
+            this.lQuantitySuffix.Text = "Суффикс к количеству товара:";
+            // 
+            // tbQuantitySuffix
+            // 
+            this.tbQuantitySuffix.Location = new System.Drawing.Point(665, 205);
+            this.tbQuantitySuffix.MaxLength = 50;
+            this.tbQuantitySuffix.Multiline = true;
+            this.tbQuantitySuffix.Name = "tbQuantitySuffix";
+            this.tbQuantitySuffix.Size = new System.Drawing.Size(187, 72);
+            this.tbQuantitySuffix.TabIndex = 11;
+            this.tbQuantitySuffix.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // frmAddTovar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 308);
+            this.ClientSize = new System.Drawing.Size(464, 300);
             this.ControlBox = false;
             this.Controls.Add(this.chbActive);
             this.Controls.Add(this.cmbParentCategory);
@@ -211,6 +341,18 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbActionPrice);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.tbQuantitySuffix);
+            this.Controls.Add(this.lQuantitySuffix);
+            this.Controls.Add(this.tbPriceSuffix);
+            this.Controls.Add(this.lPriceSuffix);
+            this.Controls.Add(this.tbDefaultNetto);
+            this.Controls.Add(this.lDefaultNetto);
+            this.Controls.Add(this.tbStep);
+            this.Controls.Add(this.lStep);
+            this.Controls.Add(this.tbMaxOrder);
+            this.Controls.Add(this.lMaxOrder);
+            this.Controls.Add(this.tbMinOrder);
+            this.Controls.Add(this.lMinOrder);
             this.Controls.Add(this.tbRcena);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbShotName);
@@ -251,5 +393,17 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbActionPrice;
         private System.Windows.Forms.CheckBox chbActive;
+        private System.Windows.Forms.Label lMinOrder;
+        private System.Windows.Forms.TextBox tbMinOrder;
+        private System.Windows.Forms.Label lMaxOrder;
+        private System.Windows.Forms.TextBox tbMaxOrder;
+        private System.Windows.Forms.Label lStep;
+        private System.Windows.Forms.TextBox tbStep;
+        private System.Windows.Forms.Label lDefaultNetto;
+        private System.Windows.Forms.TextBox tbDefaultNetto;
+        private System.Windows.Forms.Label lPriceSuffix;
+        private System.Windows.Forms.TextBox tbPriceSuffix;
+        private System.Windows.Forms.Label lQuantitySuffix;
+        private System.Windows.Forms.TextBox tbQuantitySuffix;
     }
 }

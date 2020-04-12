@@ -35,7 +35,14 @@ namespace OnlineStore
             StringBuilder csv = null;
             long readBytesCount = 0;
             int countFile = 0;
-            string header = "Артикул,Имя,\"Короткое описание\",Описание,Запасы,\"Цена распродажи\",\"Базовая цена\",Категории";
+            string header = "Артикул,Имя,\"Короткое описание\",Описание,Запасы,\"Цена распродажи\",\"Базовая цена\",Категории," +
+                "\"Мета: _advanced - qty - input - picker\"," +
+                "\"Мета: _advanced-qty-quantity-suffix\"," +
+                "\"Мета: _advanced-qty-price-suffix\"," +
+                "\"Мета: _advanced-qty-value\"," +
+                "\"Мета: _advanced-qty-max\"," +
+                "\"Мета: _advanced-qty-step\"," +
+                "\"Мета: _advanced-qty-min\" ";
             string dirSave = "";
             string fileName = isNew ? "newTovar" : "oldTovar";
 
@@ -44,7 +51,22 @@ namespace OnlineStore
 
             foreach (DataRow row in dtData.Rows)
             {
-                string line = $"{row["id_Tovar"]},\"{row["ShortName"].ToString()}\",\"{row["ShortName"].ToString().PadLeft(50)}\",\"{row["FullName"]}\",{row["ostNow"]},{row["rcenaPromo"].ToString().Replace(',', '.')},{row["rcenaOnline"].ToString().Replace(',', '.')},\"{row["nameCategoryToCsv"]}\"";
+                string line = $"{row["id_Tovar"]}," +
+                    $"\"{row["ShortName"].ToString()}\"," +
+                    $"\"{row["ShortName"].ToString().PadLeft(50)}\"," +
+                    $"\"{row["FullName"]}\"," +
+                    $"{row["ostNow"]}," +
+                    $"{row["rcenaPromo"].ToString().Replace(',', '.')}," +
+                    $"{row["rcenaOnline"].ToString().Replace(',', '.')}," +
+                    $"\"{row["nameCategoryToCsv"]}\"," +
+                    $"\"slider-input\"," +
+                    $"\"{row["QuantitySuffix"]}\"," +
+                    $"\"{row["PriceSuffix"]}\"," +
+                    $"{row["DefaultNetto"].ToString().Replace(',', '.')}," +
+                    $"{row["MaxOrder"].ToString().Replace(',', '.')}," +
+                    $"{row["Step"].ToString().Replace(',', '.')}," +
+                    $"{row["MinOrder"].ToString().Replace(',', '.')}," +                    
+                    $"";
 
                 readBytesCount += Encoding.UTF8.GetByteCount(line) + 1;
 

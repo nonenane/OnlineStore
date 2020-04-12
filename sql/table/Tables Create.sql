@@ -60,3 +60,35 @@ GO
 
 ALTER TABLE [OnlineStore].[s_Goods] ADD CONSTRAINT FK_s_Goods_id_Editor FOREIGN KEY (id_Editor)  REFERENCES [dbo].[ListUsers] (id)
 GO
+
+
+
+CREATE TABLE [OnlineStore].[s_AttributeGoods](
+	[id] [int] IDENTITY(1,1) NOT NULL,	
+	[id_Goods]				int				not null,
+	[MinOrder]				numeric(16,2)	not null,
+	[MaxOrder]				numeric(16,2)	not null,
+	[Step]					numeric(16,2)	not null,
+	[DefaultNetto]			numeric(16,2)	not null,
+	[PriceSuffix]			varchar(50)		not null,
+	[QuantitySuffix]		varchar(50)		not null,
+	[id_Creator]			int				not null,
+	[DateCreate]			datetime		not null,
+	[id_Editor]				int				null,
+	[DateEdit]				datetime		null,
+ CONSTRAINT [PK_s_AttributeGoods] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = ON, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [OnlineStore].[s_AttributeGoods] ADD CONSTRAINT FK_s_AttributeGoods_id_Goods FOREIGN KEY (id_Goods)  REFERENCES [OnlineStore].[s_Goods] (id)
+GO
+
+ALTER TABLE [OnlineStore].[s_AttributeGoods] ADD CONSTRAINT FK_s_AttributeGoods_id_Creator FOREIGN KEY (id_Creator)  REFERENCES [dbo].[ListUsers] (id)
+GO
+
+ALTER TABLE [OnlineStore].[s_AttributeGoods] ADD CONSTRAINT FK_s_AttributeGoods_id_Editor FOREIGN KEY (id_Editor)  REFERENCES [dbo].[ListUsers] (id)
+GO

@@ -271,6 +271,27 @@ namespace OnlineStore
             return dtResult;
         }
 
+
+        public async Task<DataTable> setAttribute(int id, int id_Goods, decimal MinOrder, decimal MaxOrder, decimal Step, decimal DefaultNetto, string PriceSuffix,string QuantitySuffix)
+        {
+            ap.Clear();
+            ap.Add(id);
+            ap.Add(id_Goods);
+            ap.Add(MinOrder);
+            ap.Add(MaxOrder);
+            ap.Add(Step);
+            ap.Add(DefaultNetto);
+            ap.Add(PriceSuffix);
+            ap.Add(QuantitySuffix);
+            ap.Add(UserSettings.User.Id);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setAttribute]",
+                 new string[9] { "@id", "@id_Goods", "@MinOrder", "@MaxOrder", "@Step", "@DefaultNetto", "@PriceSuffix", "@QuantitySuffix", "@id_user" },
+                 new DbType[9] { DbType.Int32, DbType.Int32, DbType.Decimal, DbType.Decimal, DbType.Decimal, DbType.Decimal, DbType.String, DbType.String, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
         #endregion
 
 

@@ -230,7 +230,13 @@ select
 	cast(0 as bit) as isSelect,
 	case when c.id_ParentCategory is not null then cp.NameCategory + ' > ' else '' end +c.NameCategory as nameCategoryToCsv,
 	g.isInsert,
-	g.DateEdit
+	g.DateEdit,
+	isnull(a.MaxOrder,0) as MaxOrder,
+	isnull(a.MinOrder,0) as MinOrder,
+	isnull(a.Step,0) as Step,
+	isnull(a.DefaultNetto,0) as DefaultNetto,
+	isnull(a.PriceSuffix,'') as PriceSuffix,
+	isnull(a.QuantitySuffix,'') as QuantitySuffix
 from 
 	OnlineStore.s_Goods g
 		left join dbo.s_tovar t on t.id = g.id_Tovar
@@ -238,6 +244,7 @@ from
 		left join OnlineStore.s_Category cp on cp.id = c.id_ParentCategory
 		left join #table_dvig_today tdt on tdt.id_tovar = g.id_Tovar
 		left join #table_ost_tovar tot on tot.id_tovar = g.id_Tovar
+		left join OnlineStore.s_AttributeGoods a on a.id_Goods = g.id
 where 
 	@id_deps = 0 or t.id_otdel  = @id_deps
 

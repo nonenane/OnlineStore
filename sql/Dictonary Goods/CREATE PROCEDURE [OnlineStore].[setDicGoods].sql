@@ -50,6 +50,7 @@ ELSE
 	BEGIN
 		IF @result = 0
 			BEGIN				
+				DELETE OnlineStore.s_AttributeGoods where id_Goods = @id
 				DELETE OnlineStore.s_Goods where id = @id
 			END
 		ELSE
