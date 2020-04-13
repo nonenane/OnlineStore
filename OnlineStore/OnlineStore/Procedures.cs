@@ -292,6 +292,19 @@ namespace OnlineStore
             return dtResult;
         }
 
+        public async Task<DataTable> setInsertGoods(int id)
+        {
+            ap.Clear();
+            ap.Add(id);
+            ap.Add(UserSettings.User.Id);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setInsertGoods]",
+                 new string[2] { "@id", "@id_user" },
+                 new DbType[2] { DbType.Int32, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
         #endregion
 
 

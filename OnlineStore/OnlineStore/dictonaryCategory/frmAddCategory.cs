@@ -100,6 +100,8 @@ namespace OnlineStore.dictonaryCategory
                 }
             }
 
+            dtCategory.DefaultView.Sort = " id_Departments asc, cName asc";
+
             cmbParentCategory.DataSource = dtCategory;
             cmbParentCategory.DisplayMember = "cName";
             cmbParentCategory.ValueMember = "id";

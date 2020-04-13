@@ -47,7 +47,7 @@ namespace OnlineStore.dictonatyTovar
                 {
                     tbMinOrder.Text = ((decimal)row["MinOrder"]).ToString("0.000");
                     tbMaxOrder.Text = ((decimal)row["MaxOrder"]).ToString("0.000");
-                    tbStep.Text = ((decimal)row["Step"]).ToString("0.00");
+                    tbStep.Text = ((decimal)row["Step"]).ToString("0.000");
                     tbDefaultNetto.Text = ((decimal)row["DefaultNetto"]).ToString("0.000");
                     tbPriceSuffix.Text = (string)row["PriceSuffix"];
                     tbQuantitySuffix.Text = (string)row["QuantitySuffix"];
@@ -89,38 +89,43 @@ namespace OnlineStore.dictonatyTovar
         {
             if (tbEan.Enabled && e.KeyCode == Keys.Enter)
             {
-                //тут получение данных по товару
-                Task<DataTable> task = Config.hCntMain.getGoods(tbEan.Text.Trim());
-                task.Wait();
-
-                if(task.Result==null)
-                {
-                    MessageBox.Show(Config.centralText("При получение данных возникли ошибки.\nОбратитесь в ОЭЭС\n"), "Получение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    clearValue();
-                    return;
-                }
-
-                if ((int)task.Result.Rows[0]["id"] != 0)
-                {
-                    int error = (int)task.Result.Rows[0]["id"];
-                    if (error == -1)
-                        MessageBox.Show(Config.centralText("Товар не найден.\n"), "Получение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else if (error == -2)
-                        MessageBox.Show(Config.centralText("Товар резервный или уценённый.\n"), "Получение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    clearValue();
-                    return;
-                }
-
-                tbActionPrice.Clear();
-                id_tovar = (int)task.Result.Rows[0]["id_tovar"];
-                tbShotName.Text = (string)task.Result.Rows[0]["cNameShort"];
-                tbFullName.Text = (string)task.Result.Rows[0]["cNameFull"];
-                tbRcena.Text = ((decimal)task.Result.Rows[0]["rcena"]).ToString("0.00");
-                id_otdel= (int)task.Result.Rows[0]["id_otdel"];
-                init_combobox();
-                addTovarData();
+                init_tovar_data();
             }
+        }
+
+        private void init_tovar_data()
+        {
+            //тут получение данных по товару
+            Task<DataTable> task = Config.hCntMain.getGoods(tbEan.Text.Trim());
+            task.Wait();
+
+            if (task.Result == null)
+            {
+                MessageBox.Show(Config.centralText("При получение данных возникли ошибки.\nОбратитесь в ОЭЭС\n"), "Получение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                clearValue();
+                return;
+            }
+
+            if ((int)task.Result.Rows[0]["id"] != 0)
+            {
+                int error = (int)task.Result.Rows[0]["id"];
+                if (error == -1)
+                    MessageBox.Show(Config.centralText("Товар не найден.\n"), "Получение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (error == -2)
+                    MessageBox.Show(Config.centralText("Товар резервный или уценённый.\n"), "Получение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                clearValue();
+                return;
+            }
+
+            tbActionPrice.Clear();
+            id_tovar = (int)task.Result.Rows[0]["id_tovar"];
+            tbShotName.Text = (string)task.Result.Rows[0]["cNameShort"];
+            tbFullName.Text = (string)task.Result.Rows[0]["cNameFull"];
+            tbRcena.Text = ((decimal)task.Result.Rows[0]["rcena"]).ToString("0.00");
+            id_otdel = (int)task.Result.Rows[0]["id_otdel"];
+            init_combobox();
+            addTovarData();
         }
 
         private void clearValue()
@@ -208,35 +213,124 @@ namespace OnlineStore.dictonatyTovar
 
         private bool validateToSave()
         {
-            if (id_tovar == 0) { MessageBox.Show("Необходимо выбрать товар!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbEan.Focus(); return false; }
+            if (id_tovar == 0) { MessageBox.Show(Config.centralText("Необходимо заполнить поле \"EAN\"\n товара для заполнения данных на форме!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbEan.Focus(); return false; }
             if (tbShotName.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Короткое наименование товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbShotName.Focus(); return false; }
             if (tbFullName.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Полное наименование товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbFullName.Focus(); return false; }
             if (cmbParentCategory.SelectedIndex == -1 || cmbParentCategory.SelectedValue == null) { MessageBox.Show("Необходимо выбрать \"Категорию товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); cmbParentCategory.Focus(); return false; }
 
-            decimal _tmpValue;
+            decimal _tmpValue = 0, _tmpPrice = 0;
 
-            if (!decimal.TryParse(tbRcena.Text, out _tmpValue))
+            if (!decimal.TryParse(tbRcena.Text, out _tmpPrice))
             { MessageBox.Show("Необходимо заполнить \"Цену товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbRcena.Focus(); return false; }
 
             if (tbActionPrice.Text.Trim().Length > 0 && !decimal.TryParse(tbActionPrice.Text, out _tmpValue))
-            { MessageBox.Show("Необходимо заполнить \"Акционную цену товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbActionPrice.Focus(); return false; }
+            {
+                MessageBox.Show("Необходимо заполнить \"Акционную цену товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbActionPrice.Focus(); return false;
+            }
+            if (tbActionPrice.Text.Trim().Length > 0)
+                if (_tmpPrice < _tmpValue)
+                { MessageBox.Show("Акционная цена должна быть меньше Базовой цены товара!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbActionPrice.Focus(); return false; }
+
 
             if (tbEan.Text.Trim().Length == 4)
             {
-                if (tbMinOrder.Text.Trim().Length == 0) { MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lMinOrder.Text.Replace(":","")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    tbMinOrder.Focus(); return false; }
-                if (tbMaxOrder.Text.Trim().Length == 0) { MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lMaxOrder.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    tbMaxOrder.Focus(); return false; }
-                if (tbStep.Text.Trim().Length == 0) { MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lStep.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
-                    tbStep.Focus(); return false; }
-                if (tbDefaultNetto.Text.Trim().Length == 0) { MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lDefaultNetto.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
-                    tbDefaultNetto.Focus(); return false; }
-                if (tbPriceSuffix.Text.Trim().Length == 0) { MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lPriceSuffix.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    tbPriceSuffix.Focus(); return false; }
-                if (tbQuantitySuffix.Text.Trim().Length == 0) { MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lQuantitySuffix.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
-                    tbQuantitySuffix.Focus(); return false; }
+                if (tbMinOrder.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lMinOrder.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbMinOrder.Focus(); return false;
+                }
+                if (tbMaxOrder.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lMaxOrder.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbMaxOrder.Focus(); return false;
+                }
+                if (tbStep.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lStep.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbStep.Focus(); return false;
+                }
+                if (tbDefaultNetto.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lDefaultNetto.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbDefaultNetto.Focus(); return false;
+                }
+                if (tbPriceSuffix.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lPriceSuffix.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbPriceSuffix.Focus(); return false;
+                }
+                if (tbQuantitySuffix.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lQuantitySuffix.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbQuantitySuffix.Focus(); return false;
+                }
 
+                decimal _tmpMin = 0, _tmpMax = 0, _tmpDefault = 0,_tmpStep = 0;
 
+                if (!decimal.TryParse(tbMinOrder.Text, out _tmpMin))
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lMinOrder.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbMinOrder.Focus(); return false;
+                }
+
+                if (_tmpMin < 0 || _tmpMin > 100)
+                {
+                    MessageBox.Show(Config.centralText($"Значение \"{lMinOrder.Text.Replace(":", "")}\"\n должно быть от 0 до 100.\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbMinOrder.Focus(); return false;
+                }
+
+                if (!decimal.TryParse(tbMaxOrder.Text, out _tmpMax))
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lMaxOrder.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbMaxOrder.Focus(); return false;
+                }
+
+                if (_tmpMax < 0 || _tmpMax > 100)
+                {
+                    MessageBox.Show(Config.centralText($"Значение \"{lMaxOrder.Text.Replace(":", "")}\"\n должно быть от 0 до 100.\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbMaxOrder.Focus(); return false;
+                }
+
+                if (_tmpMin > _tmpMax)
+                {
+                    MessageBox.Show(Config.centralText($"Минимальное количество заказа должно быть меньше\n Максимального количества заказа!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbMinOrder.Focus(); return false;
+                }
+
+                if (!decimal.TryParse(tbDefaultNetto.Text, out _tmpDefault))
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lDefaultNetto.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbDefaultNetto.Focus(); return false;
+                }
+
+                if (_tmpDefault < 0 || _tmpDefault > 100)
+                {
+                    MessageBox.Show(Config.centralText($"Значение \"{lDefaultNetto.Text.Replace(":", "")}\"\n должно быть от 0 до 100.\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbDefaultNetto.Focus(); return false;
+                }
+
+                if (_tmpDefault < _tmpMin || _tmpDefault > _tmpMax)
+                {
+                    MessageBox.Show(Config.centralText($"Значение заказанного товара по умолчанию\nдолжно быть от {_tmpMin.ToString("0.000")} до {_tmpMax.ToString("0.000")} \n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbDefaultNetto.Focus(); return false;
+                }
+
+                if (!decimal.TryParse(tbStep.Text, out _tmpStep))
+                {
+                    MessageBox.Show(Config.centralText($"Необходимо заполнить:\n \"{lStep.Text.Replace(":", "")}\"!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbStep.Focus(); return false;
+                }
+
+                if (_tmpStep < 0 || _tmpStep > 100)
+                {
+                    MessageBox.Show(Config.centralText($"Значение \"{lStep.Text.Replace(":", "")}\"\n должно быть от 0 до 100.\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbStep.Focus(); return false;
+                }
+                if (_tmpStep > _tmpMax / 2)
+                {
+                    MessageBox.Show(Config.centralText($"Значение \"{lStep.Text.Replace(":", "")}\"\n должно быть от 0 до {(_tmpMax / 2).ToString("0.000")}.\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbStep.Focus(); return false;
+                }
 
             }
 
@@ -253,12 +347,12 @@ namespace OnlineStore.dictonatyTovar
             if (dtCategory != null && dtCategory.Rows.Count > 0)
             {
                 dtCategory.DefaultView.RowFilter = "isActive = 1";
-            //    EnumerableRowCollection<DataRow> rowCollect = dtCategory.AsEnumerable().Where(r => r.Field<object>("id") == null || r.Field<object>("id") != DBNull.Value );
-            //    if (rowCollect.Count() > 0)
-            //    {
-            //        rowCollect.First().Delete();
-            //        dtCategory.AcceptChanges();
-            //    }
+                //    EnumerableRowCollection<DataRow> rowCollect = dtCategory.AsEnumerable().Where(r => r.Field<object>("id") == null || r.Field<object>("id") != DBNull.Value );
+                //    if (rowCollect.Count() > 0)
+                //    {
+                //        rowCollect.First().Delete();
+                //        dtCategory.AcceptChanges();
+                //    }
             }
 
             cmbParentCategory.DataSource = dtCategory;
@@ -274,12 +368,41 @@ namespace OnlineStore.dictonatyTovar
 
             decimal value;
             if (!decimal.TryParse(text, out value))
-                e.Cancel = true;
+            { e.Cancel = true; return; }
 
-            if (value < 0 || value > 100)
-                e.Cancel = true;
+            //if (tb.Name.Equals(tbDefaultNetto.Name))
+            //{
+            //    decimal valueMin, valueMax;
+            //    if (decimal.TryParse(tbMinOrder.Text, out valueMin))
+            //        if (decimal.TryParse(tbMaxOrder.Text, out valueMax))
+            //            if (value < valueMin || value > valueMax) { e.Cancel = true; return; }
+            //}
+            //else
+            //if (value < 0 || value > 100)
+            //{ e.Cancel = true; return; }
 
             tb.Text = value.ToString("0.000");
+        }
+
+        private void tbEan_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbEan.Enabled)
+                init_tovar_data();
+        }
+
+        private void tbRcena_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox tb = (sender as TextBox);
+            string text = tb.Text;
+
+            decimal value;
+            if (!decimal.TryParse(text, out value))
+            { e.Cancel = true; return; }
+
+            //if (value < 0 || value > 100)
+            //    e.Cancel = true;
+
+            tb.Text = value.ToString("0.00");
         }
 
         private void addTovarData()

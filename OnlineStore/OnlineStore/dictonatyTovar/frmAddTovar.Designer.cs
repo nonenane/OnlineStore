@@ -61,7 +61,7 @@
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btSave.Image = global::OnlineStore.Properties.Resources.filesave_2175;
-            this.btSave.Location = new System.Drawing.Point(376, 264);
+            this.btSave.Location = new System.Drawing.Point(375, 236);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 6;
@@ -72,7 +72,7 @@
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btClose.Image = global::OnlineStore.Properties.Resources.exit_8633;
-            this.btClose.Location = new System.Drawing.Point(414, 264);
+            this.btClose.Location = new System.Drawing.Point(413, 236);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 7;
@@ -88,6 +88,7 @@
             this.tbEan.TabIndex = 9;
             this.tbEan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbName_KeyDown);
             this.tbEan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbInt_KeyPress);
+            this.tbEan.Validating += new System.ComponentModel.CancelEventHandler(this.tbEan_Validating);
             // 
             // label1
             // 
@@ -140,7 +141,7 @@
             this.cmbParentCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbParentCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbParentCategory.FormattingEnabled = true;
-            this.cmbParentCategory.Location = new System.Drawing.Point(183, 181);
+            this.cmbParentCategory.Location = new System.Drawing.Point(183, 183);
             this.cmbParentCategory.Name = "cmbParentCategory";
             this.cmbParentCategory.Size = new System.Drawing.Size(262, 21);
             this.cmbParentCategory.TabIndex = 13;
@@ -149,7 +150,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(76, 185);
+            this.label4.Location = new System.Drawing.Point(76, 187);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 12;
@@ -159,7 +160,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(59, 212);
+            this.label5.Location = new System.Drawing.Point(59, 214);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(118, 13);
             this.label5.TabIndex = 10;
@@ -168,19 +169,20 @@
             // tbRcena
             // 
             this.tbRcena.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbRcena.Location = new System.Drawing.Point(183, 208);
+            this.tbRcena.Location = new System.Drawing.Point(183, 210);
             this.tbRcena.MaxLength = 17;
             this.tbRcena.Name = "tbRcena";
             this.tbRcena.Size = new System.Drawing.Size(130, 20);
             this.tbRcena.TabIndex = 11;
             this.tbRcena.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbRcena.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDecimal_KeyPress);
+            this.tbRcena.Validating += new System.ComponentModel.CancelEventHandler(this.tbRcena_Validating);
             // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(44, 238);
+            this.label6.Location = new System.Drawing.Point(44, 240);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(133, 13);
             this.label6.TabIndex = 10;
@@ -189,13 +191,14 @@
             // tbActionPrice
             // 
             this.tbActionPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbActionPrice.Location = new System.Drawing.Point(183, 234);
+            this.tbActionPrice.Location = new System.Drawing.Point(183, 236);
             this.tbActionPrice.MaxLength = 17;
             this.tbActionPrice.Name = "tbActionPrice";
             this.tbActionPrice.Size = new System.Drawing.Size(130, 20);
             this.tbActionPrice.TabIndex = 11;
             this.tbActionPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbActionPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDecimal_KeyPress);
+            this.tbActionPrice.Validating += new System.ComponentModel.CancelEventHandler(this.tbRcena_Validating);
             // 
             // chbActive
             // 
@@ -203,7 +206,7 @@
             this.chbActive.AutoSize = true;
             this.chbActive.Checked = true;
             this.chbActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbActive.Location = new System.Drawing.Point(183, 260);
+            this.chbActive.Location = new System.Drawing.Point(183, 262);
             this.chbActive.Name = "chbActive";
             this.chbActive.Size = new System.Drawing.Size(130, 17);
             this.chbActive.TabIndex = 14;
@@ -332,7 +335,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 300);
+            this.ClientSize = new System.Drawing.Size(460, 298);
             this.ControlBox = false;
             this.Controls.Add(this.chbActive);
             this.Controls.Add(this.cmbParentCategory);

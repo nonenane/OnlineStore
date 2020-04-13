@@ -26,6 +26,9 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+IF @StockPrice = 0 
+	set @StockPrice = null
+
 IF @isAdd = 1
 	BEGIN
 		IF @id = 0

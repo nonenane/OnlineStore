@@ -215,6 +215,8 @@ namespace OnlineStore
                 Color rColor = Color.White;
                 if (!(bool)dtData.DefaultView[e.RowIndex]["isActive"])
                     rColor = panel1.BackColor;
+                else if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"])
+                    rColor = Color.FromArgb(153, 217, 234);
                 //else
                 //    if (e.RowIndex % 2 == 0)
                 //        rColor = Color.Aqua;
@@ -223,9 +225,9 @@ namespace OnlineStore
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = rColor;
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
 
-                if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"])
-                    dgvData.Rows[e.RowIndex].Cells[cId_tovar.Index].Style.BackColor =
-                         dgvData.Rows[e.RowIndex].Cells[cId_tovar.Index].Style.SelectionBackColor = Color.Blue;
+                //if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"])
+                //    dgvData.Rows[e.RowIndex].Cells[cId_tovar.Index].Style.BackColor =
+                //         dgvData.Rows[e.RowIndex].Cells[cId_tovar.Index].Style.SelectionBackColor = Color.Blue;
             }
         }
 
@@ -264,8 +266,11 @@ namespace OnlineStore
         {
             if (dtData != null && dtData.Rows.Count > 0 && dtData.DefaultView.Count > 0 && e.RowIndex != -1)
             {
-                dtData.DefaultView[e.RowIndex]["isSelect"] = !(bool)dtData.DefaultView[e.RowIndex]["isSelect"];
-                dtData.AcceptChanges();
+                if ((bool)dtData.DefaultView[e.RowIndex]["isActive"])
+                {
+                    dtData.DefaultView[e.RowIndex]["isSelect"] = !(bool)dtData.DefaultView[e.RowIndex]["isSelect"];
+                    dtData.AcceptChanges();
+                }
             }
         }
 
@@ -505,6 +510,7 @@ namespace OnlineStore
             }
             report.SetBorders(rIndex, 1, rIndex, cIndex);
             report.SetCellAlignmentToCenter(rIndex, 1, rIndex, cIndex);
+            report.SetWrapText(rIndex, 1, rIndex, cIndex);
             rIndex++;
 
             foreach (DataRowView row in dtData.DefaultView)
@@ -556,7 +562,7 @@ namespace OnlineStore
             {
                 DateTime dateSelect = frmSelectData.date;
                 EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
-               .Where(r => r.Field<DateTime>("DateEdit").Date > dateSelect.Date);
+               .Where(r => r.Field<DateTime>("DateEdit").Date >= dateSelect.Date && r.Field<bool>("isActive"));
 
                 if (rowCollect.Count() > 0)
                 {

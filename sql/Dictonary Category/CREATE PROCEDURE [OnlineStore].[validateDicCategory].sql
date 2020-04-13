@@ -9,7 +9,7 @@ GO
 -- Create date: 07-04-2020
 -- Description:	Проверка категории для удаления
 -- =============================================
-CREATE PROCEDURE [OnlineStore].[validateDicCategory]	
+ALTER PROCEDURE [OnlineStore].[validateDicCategory]	
 		@id int,		
 		@cName	varchar(max) = null
 AS
@@ -42,6 +42,12 @@ ELSE
 				return
 			END
 	
+		IF EXISTS (select * from OnlineStore.s_Goods where id_Category = @id )
+			BEGIN
+				select -2 as id;
+				return
+			END
+
 		select 0 as id;
 	END
 END

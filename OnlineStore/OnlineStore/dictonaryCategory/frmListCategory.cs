@@ -98,6 +98,7 @@ namespace OnlineStore.dictonaryCategory
                 btPrint.Enabled =
                     //btEdit.Enabled = btDel.Enabled = 
                     dtData.DefaultView.Count != 0;
+                dtData.DefaultView.Sort = " id_Departments asc, cName asc";
                 dgvData_SelectionChanged(null, null);
             }
         }
@@ -105,7 +106,7 @@ namespace OnlineStore.dictonaryCategory
 
         private void dgvData_Paint(object sender, PaintEventArgs e)
         {
-            tbName.Location = new Point(dgvData.Location.X, tbName.Location.Y);
+            tbName.Location = new Point(dgvData.Location.X+cDeps.Width, tbName.Location.Y);
             tbName.Size = new Size(cName.Width, tbName.Height);
         }
 
@@ -220,8 +221,8 @@ namespace OnlineStore.dictonaryCategory
 
             foreach (DataRowView row in dtData.DefaultView)
             {
-                report.AddSingleValue(row["cName"].ToString(), rIndex, 1);
-                report.AddSingleValue(row["nameDep"].ToString(), rIndex, 2);
+                report.AddSingleValue(row["nameDep"].ToString(), rIndex, 1);
+                report.AddSingleValue(row["cName"].ToString(), rIndex, 2);                
                 report.AddSingleValue(row["cNameParent"].ToString(), rIndex, 3);
                  if (!(bool)row["isActive"])
                      report.SetCellColor(rIndex, 1, rIndex, cIndex, panel1.BackColor);

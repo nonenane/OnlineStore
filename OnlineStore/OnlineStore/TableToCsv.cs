@@ -5,7 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace OnlineStore
 {
@@ -20,11 +20,18 @@ namespace OnlineStore
     {
         public void insertData(DataTable dtData,string folderName)
         {
-            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable().Where(r => r.Field<int>("isInsert")==0);
+            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable().Where(r => r.Field<int>("isInsert")==0 && r.Field<bool>("isActive"));
             if (rowCollect.Count() > 0)
-                newTovar(rowCollect.CopyToDataTable().Copy(), folderName, true);         
+            {
+                newTovar(rowCollect.CopyToDataTable().Copy(), folderName, true);
+                foreach (DataRow row in rowCollect)
+                {
+                    Task<DataTable> task = Config.hCntMain.setInsertGoods((int)row["id"]);
+                    task.Wait();
+                }
+            }
             
-            rowCollect = dtData.AsEnumerable().Where(r => r.Field<int>("isInsert") == 1);
+            rowCollect = dtData.AsEnumerable().Where(r => r.Field<int>("isInsert") == 1 && r.Field<bool>("isActive"));
             if (rowCollect.Count() > 0)
                 newTovar(rowCollect.CopyToDataTable().Copy(), folderName, false);            
         }
