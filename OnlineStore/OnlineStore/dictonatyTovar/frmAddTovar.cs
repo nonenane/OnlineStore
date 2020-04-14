@@ -223,6 +223,9 @@ namespace OnlineStore.dictonatyTovar
             if (!decimal.TryParse(tbRcena.Text, out _tmpPrice))
             { MessageBox.Show("Необходимо заполнить \"Цену товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbRcena.Focus(); return false; }
 
+            if(_tmpPrice==0)
+            { MessageBox.Show("Необходимо заполнить \"Цену товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbRcena.Focus(); return false; }
+
             if (tbActionPrice.Text.Trim().Length > 0 && !decimal.TryParse(tbActionPrice.Text, out _tmpValue))
             {
                 MessageBox.Show("Необходимо заполнить \"Акционную цену товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbActionPrice.Focus(); return false;
@@ -366,6 +369,8 @@ namespace OnlineStore.dictonatyTovar
             TextBox tb = (sender as TextBox);
             string text = tb.Text;
 
+            if (text.Trim().Length == 0) return;
+
             decimal value;
             if (!decimal.TryParse(text, out value))
             { e.Cancel = true; return; }
@@ -386,7 +391,7 @@ namespace OnlineStore.dictonatyTovar
 
         private void tbEan_Validating(object sender, CancelEventArgs e)
         {
-            if (tbEan.Enabled)
+            if (tbEan.Enabled && tbEan.Text.Trim().Length>0)
                 init_tovar_data();
         }
 
@@ -394,6 +399,8 @@ namespace OnlineStore.dictonatyTovar
         {
             TextBox tb = (sender as TextBox);
             string text = tb.Text;
+
+            if (text.Trim().Length == 0) return;
 
             decimal value;
             if (!decimal.TryParse(text, out value))

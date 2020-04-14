@@ -62,7 +62,7 @@ namespace OnlineStore
                     $"\"{row["ShortName"].ToString()}\"," +
                     $"\"{row["ShortName"].ToString().PadLeft(50)}\"," +
                     $"\"{row["FullName"]}\"," +
-                    $"{row["ostNow"]}," +
+                    $"{row["ostNow"].ToString().Replace(',', '.')}," +
                     $"{row["rcenaPromo"].ToString().Replace(',', '.')}," +
                     $"{row["rcenaOnline"].ToString().Replace(',', '.')}," +
                     $"\"{row["nameCategoryToCsv"]}\"," +
@@ -72,7 +72,7 @@ namespace OnlineStore
                     $"{row["DefaultNetto"].ToString().Replace(',', '.')}," +
                     $"{row["MaxOrder"].ToString().Replace(',', '.')}," +
                     $"{row["Step"].ToString().Replace(',', '.')}," +
-                    $"{row["MinOrder"].ToString().Replace(',', '.')}," +                    
+                    $"{row["MinOrder"].ToString().Replace(',', '.')}" +                    
                     $"";
 
                 readBytesCount += Encoding.UTF8.GetByteCount(line) + 1;
