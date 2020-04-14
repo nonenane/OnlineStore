@@ -60,19 +60,19 @@ namespace OnlineStore
             {
                 string line = $"{row["id_Tovar"]}," +
                     $"\"{row["ShortName"].ToString()}\"," +
-                    $"\"{row["ShortName"].ToString().PadLeft(50)}\"," +
+                    $"\"{row["ShortName"].ToString().PadRight(50)}\"," +
                     $"\"{row["FullName"]}\"," +
                     $"{row["ostNow"].ToString().Replace(',', '.')}," +
-                    $"{row["rcenaPromo"].ToString().Replace(',', '.')}," +
+                    $"{row["rcenaPromo_str"].ToString().Replace(',', '.')}," +
                     $"{row["rcenaOnline"].ToString().Replace(',', '.')}," +
                     $"\"{row["nameCategoryToCsv"]}\"," +
                     $"\"slider-input\"," +
-                    $"\"{row["QuantitySuffix"]}\"," +
-                    $"\"{row["PriceSuffix"]}\"," +
-                    $"{row["DefaultNetto"].ToString().Replace(',', '.')}," +
-                    $"{row["MaxOrder"].ToString().Replace(',', '.')}," +
-                    $"{row["Step"].ToString().Replace(',', '.')}," +
-                    $"{row["MinOrder"].ToString().Replace(',', '.')}" +                    
+                    (row["QuantitySuffix"].ToString().Length == 0 ? "" : $"\"{row["QuantitySuffix"]}\",") +
+                    (row["PriceSuffix"].ToString().Length == 0 ? "" : $"\"{row["PriceSuffix"]}\",") +
+                    $"{row["DefaultNetto_str"].ToString().Replace(',', '.')}," +
+                    $"{row["MaxOrder_str"].ToString().Replace(',', '.')}," +
+                    $"{row["Step_str"].ToString().Replace(',', '.')}," +
+                    $"{row["MinOrder_str"].ToString().Replace(',', '.')}" +
                     $"";
 
                 readBytesCount += Encoding.UTF8.GetByteCount(line) + 1;

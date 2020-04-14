@@ -236,7 +236,13 @@ select
 	isnull(a.Step,0) as Step,
 	isnull(a.DefaultNetto,0) as DefaultNetto,
 	isnull(a.PriceSuffix,'') as PriceSuffix,
-	isnull(a.QuantitySuffix,'') as QuantitySuffix
+	isnull(a.QuantitySuffix,'') as QuantitySuffix,
+	--
+	isnull(cast(g.StockPrice as varchar(max)),'') as rcenaPromo_str,
+	isnull(cast(a.MaxOrder as varchar(max)),'') as MaxOrder_str,
+	isnull(cast(a.MinOrder as varchar(max)),'') as MinOrder_str,
+	isnull(cast(a.Step as varchar(max)),'') as Step_str,
+	isnull(cast(a.DefaultNetto as varchar(max)),'') as DefaultNetto_str
 from 
 	OnlineStore.s_Goods g
 		left join dbo.s_tovar t on t.id = g.id_Tovar
