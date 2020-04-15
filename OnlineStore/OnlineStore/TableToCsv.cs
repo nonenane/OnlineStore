@@ -59,16 +59,16 @@ namespace OnlineStore
             foreach (DataRow row in dtData.Rows)
             {
                 string line = $"{row["id_Tovar"]}," +
-                    $"\"{row["ShortName"].ToString()}\"," +
-                    $"\"{row["ShortName"].ToString().PadRight(50)}\"," +
-                    $"\"{row["FullName"]}\"," +
+                    $"\"{row["ShortName"].ToString().Replace("\"","").Replace(",",@"\,")}\"," +
+                    $"\"{row["ShortName"].ToString().Replace("\"", "").Replace(",", @"\,").PadRight(50)}\"," +
+                    $"\"{row["FullName"].ToString().Replace("\"", "").Replace(",", @"\,")}\"," +
                     $"{row["ostNow"].ToString().Replace(',', '.')}," +
                     $"{row["rcenaPromo_str"].ToString().Replace(',', '.')}," +
                     $"{row["rcenaOnline"].ToString().Replace(',', '.')}," +
-                    $"\"{row["nameCategoryToCsv"]}\"," +
+                    $"\"{row["nameCategoryToCsv"].ToString().Replace("\"", "").Replace(",", @"\,")}\"," +
                     $"\"slider-input\"," +
-                    (row["QuantitySuffix"].ToString().Length == 0 ? "" : $"\"{row["QuantitySuffix"]}\",") +
-                    (row["PriceSuffix"].ToString().Length == 0 ? "" : $"\"{row["PriceSuffix"]}\",") +
+                    (row["QuantitySuffix"].ToString().Length == 0 ? "" : $"\"{row["QuantitySuffix"].ToString().Replace("\"", "").Replace(",", @"\,")}\",") +
+                    (row["PriceSuffix"].ToString().Length == 0 ? "" : $"\"{row["PriceSuffix"].ToString().Replace("\"", "").Replace(",", @"\,")}\",") +
                     $"{row["DefaultNetto_str"].ToString().Replace(',', '.')}," +
                     $"{row["MaxOrder_str"].ToString().Replace(',', '.')}," +
                     $"{row["Step_str"].ToString().Replace(',', '.')}," +
