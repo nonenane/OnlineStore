@@ -1,0 +1,186 @@
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\OnlineStore.exe.config
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\OnlineStore.exe
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\OnlineStore.pdb
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\EPPlus.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\Framework.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.CoreCompileInputs.cache
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.exe
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.pdb
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\CsvHelper.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.ValueTuple.dll
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\CsvHelper.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\bin\Debug\System.ValueTuple.xml
+D:\Работа\OnlineStore\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\OnlineStore.exe.config
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\OnlineStore.exe
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\CsvHelper.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\System.ValueTuple.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\CsvHelper.xml
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\System.ValueTuple.xml
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.exe
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmSettings.resources
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\OnlineShopOrders.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\netstandard.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\Interop.Excel.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\bin\Debug\stdole.dll
+C:\Users\user\Desktop\OnlineStore\OnlineStore\obj\Debug\OnlineStore.frmPercents.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.exe.config
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.exe
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\CsvHelper.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\System.ValueTuple.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\Interop.Excel.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\OnlineShopOrders.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\netstandard.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\stdole.dll
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\CsvHelper.xml
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\bin\Debug\System.ValueTuple.xml
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmPercents.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmSettings.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.exe
+C:\Users\user\Desktop\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.exe.config
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.exe
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\CsvHelper.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\System.ValueTuple.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\Interop.Excel.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\OnlineShopOrders.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\netstandard.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\stdole.dll
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\CsvHelper.xml
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\bin\Debug\System.ValueTuple.xml
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmPercents.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmSettings.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.exe
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddAllTovar.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCatVsGrp2.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCatVsGrp2.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmNeedCatGrp.resources
+C:\Users\user\Desktop\Архив (проекты)\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmEditAttribute.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStore.exe.config
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStore.exe
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\CsvHelper.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\System.ValueTuple.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\Interop.Excel.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineShopOrders.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\netstandard.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\stdole.dll
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\CsvHelper.xml
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\bin\Debug\System.ValueTuple.xml
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCatVsGrp2.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCatVsGrp2.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmNeedCatGrp.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddAllTovar.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmEditAttribute.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmPercents.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmSettings.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.exe
+C:\Users\user\Desktop\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStore.exe.config
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStore.exe
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\CsvHelper.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\System.ValueTuple.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\Interop.Excel.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\netstandard.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\stdole.dll
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\CsvHelper.xml
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\System.ValueTuple.xml
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCatVsGrp2.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCatVsGrp2.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmNeedCatGrp.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddAllTovar.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmEditAttribute.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmPercents.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmSettings.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.exe
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.pdb
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmWait.resources
+C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.pdb

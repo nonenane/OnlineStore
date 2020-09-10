@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC32A90A-D86B-4EA2-BBA4-6B68F1EB980E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>OnlineStore</RootNamespace>
+    <AssemblyName>OnlineStore</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8-store-front-100.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.15.0.4\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\DLL\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Framework">
+      <HintPath>..\..\..\DLL\Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OnlineStoreViewOrders, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\OnlineStoreViewOrders.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WooCommerce.NET, Version=0.8.0.0, Culture=neutral, PublicKeyToken=9b0d24766a02c278, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WooCommerce.NET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="dictonaryCategory\frmAddCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmAddCategory.Designer.cs">
+      <DependentUpon>frmAddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmAddCatVsGrp2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmAddCatVsGrp2.Designer.cs">
+      <DependentUpon>frmAddCatVsGrp2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmListCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmListCategory.Designer.cs">
+      <DependentUpon>frmListCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmListCatVsGrp2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmListCatVsGrp2.Designer.cs">
+      <DependentUpon>frmListCatVsGrp2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmNeedCatGrp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmNeedCatGrp.Designer.cs">
+      <DependentUpon>frmNeedCatGrp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dictonatyTovar\frmAddAllTovar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonatyTovar\frmAddAllTovar.Designer.cs">
+      <DependentUpon>frmAddAllTovar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dictonatyTovar\frmAddTovar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonatyTovar\frmAddTovar.Designer.cs">
+      <DependentUpon>frmAddTovar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dictonatyTovar\frmEditAttribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonatyTovar\frmEditAttribute.Designer.cs">
+      <DependentUpon>frmEditAttribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPercents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPercents.Designer.cs">
+      <DependentUpon>frmPercents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectData.Designer.cs">
+      <DependentUpon>frmSelectData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWait.Designer.cs">
+      <DependentUpon>frmWait.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Procedures.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableToCsv.cs" />
+    <EmbeddedResource Include="dictonaryCategory\frmAddCategory.resx">
+      <DependentUpon>frmAddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonaryCategory\frmAddCatVsGrp2.resx">
+      <DependentUpon>frmAddCatVsGrp2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonaryCategory\frmListCategory.resx">
+      <DependentUpon>frmListCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonaryCategory\frmListCatVsGrp2.resx">
+      <DependentUpon>frmListCatVsGrp2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonaryCategory\frmNeedCatGrp.resx">
+      <DependentUpon>frmNeedCatGrp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonatyTovar\frmAddAllTovar.resx">
+      <DependentUpon>frmAddAllTovar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonatyTovar\frmAddTovar.resx">
+      <DependentUpon>frmAddTovar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonatyTovar\frmEditAttribute.resx">
+      <DependentUpon>frmEditAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPercents.resx">
+      <DependentUpon>frmPercents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectData.resx">
+      <DependentUpon>frmSelectData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWait.resx">
+      <DependentUpon>frmWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons8-store-front-100.ico" />
+    <None Include="Resources\TDXV.gif" />
+    <None Include="Resources\btnChangePrice.jpg" />
+    <None Include="Resources\add-book_icon-icons.com_71795.png" />
+    <None Include="Resources\editdocument_105148.png" />
+    <None Include="Resources\button_refresh_15001 %281%29.ico" />
+    <None Include="Resources\button_refresh_15001 %281%29.png" />
+    <Content Include="Resources\pngExit.png" />
+    <None Include="Resources\viewOrder.png" />
+    <None Include="Resources\reload_8055.png" />
+    <None Include="Resources\klpq_2511.png" />
+    <None Include="Resources\filetypes_7401.png" />
+    <None Include="Resources\filesave_2175.png" />
+    <None Include="Resources\exit_8633.png" />
+    <None Include="Resources\editdelete_3805.png" />
+    <None Include="Resources\edit_1761.png" />
+    <None Include="Resources\compfile_1551.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
