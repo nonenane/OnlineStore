@@ -184,3 +184,40 @@ C:\Users\user\Desktop\Онлайн магазин\Добавление новы�
 C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.pdb
 C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\obj\Debug\OnlineStore.frmWait.resources
 C:\Users\user\Desktop\Онлайн магазин\Добавление новых товаров\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\OnlineStore.exe.config
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\OnlineStore.exe
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\OnlineStore.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\CsvHelper.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\System.ValueTuple.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Interop.Excel.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\OnlineShopOrders.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\netstandard.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\stdole.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\CsvHelper.xml
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\System.ValueTuple.xml
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCatVsGrp2.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCatVsGrp2.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmNeedCatGrp.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddAllTovar.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmEditAttribute.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.frmPercents.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.frmSettings.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.frmWait.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.csproj.CoreCompileInputs.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.exe
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.pdb
