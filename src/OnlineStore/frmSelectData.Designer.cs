@@ -46,7 +46,7 @@
             this.btEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btEdit.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btEdit.Image = global::OnlineStore.Properties.Resources.compfile_1551;
-            this.btEdit.Location = new System.Drawing.Point(49, 42);
+            this.btEdit.Location = new System.Drawing.Point(96, 42);
             this.btEdit.Name = "btEdit";
             this.btEdit.Size = new System.Drawing.Size(32, 32);
             this.btEdit.TabIndex = 35;
@@ -58,7 +58,7 @@
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btClose.Image = global::OnlineStore.Properties.Resources.exit_8633;
-            this.btClose.Location = new System.Drawing.Point(87, 42);
+            this.btClose.Location = new System.Drawing.Point(134, 42);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 34;
@@ -68,7 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(127, 82);
+            this.ClientSize = new System.Drawing.Size(170, 78);
             this.ControlBox = false;
             this.Controls.Add(this.btEdit);
             this.Controls.Add(this.btClose);

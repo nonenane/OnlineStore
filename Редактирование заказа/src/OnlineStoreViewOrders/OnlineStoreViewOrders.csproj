@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2B4E2AD4-C1A4-4CC7-BD51-FB1751B95A24}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>OnlineStoreViewOrders</RootNamespace>
+    <AssemblyName>OnlineStoreViewOrders</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Framework, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="OnlineShopOrders, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\OnlineShopOrders.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WooCommerce.NET, Version=0.8.0.0, Culture=neutral, PublicKeyToken=9b0d24766a02c278, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WooCommerce.NET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Check\frmAddCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Check\frmAddCheck.Designer.cs">
+      <DependentUpon>frmAddCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Check\frmView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Check\frmView.Designer.cs">
+      <DependentUpon>frmView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Config.cs" />
+    <Compile Include="frmAddTovar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddTovar.Designer.cs">
+      <DependentUpon>frmAddTovar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Check\frmCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Check\frmCheck.Designer.cs">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPackage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPackage.Designer.cs">
+      <DependentUpon>frmPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewContentOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewContentOrder.Designer.cs">
+      <DependentUpon>frmViewContentOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewOrders.Designer.cs">
+      <DependentUpon>frmViewOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Procedures.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="workWithStatus\frmJournalStatusOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="workWithStatus\frmJournalStatusOrder.Designer.cs">
+      <DependentUpon>frmJournalStatusOrder.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Check\frmAddCheck.resx">
+      <DependentUpon>frmAddCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Check\frmView.resx">
+      <DependentUpon>frmView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddTovar.resx">
+      <DependentUpon>frmAddTovar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Check\frmCheck.resx">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPackage.resx">
+      <DependentUpon>frmPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewContentOrder.resx">
+      <DependentUpon>frmViewContentOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewOrders.resx">
+      <DependentUpon>frmViewOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="workWithStatus\frmJournalStatusOrder.resx">
+      <DependentUpon>frmJournalStatusOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoomview_6277.png" />
+    <None Include="Resources\iconfinder-download-4341287_120571.png" />
+    <None Include="Resources\ic_add_circle_outline_128_28123.png" />
+    <None Include="Resources\4213403-bill-check-ecommerce-invoice-payment-receipt-shopping_115368.png" />
+    <None Include="Resources\delete_delete_exit_1577.png" />
+    <None Include="Resources\documentediting_editdocuments_text_documentedi_2820.png" />
+    <Content Include="Resources\pngAdd.png" />
+    <Content Include="Resources\pngExit.png" />
+    <None Include="Resources\pngGALOCHKA.png" />
+    <Content Include="Resources\pngPrint.png" />
+    <Content Include="Resources\pngUpdate.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

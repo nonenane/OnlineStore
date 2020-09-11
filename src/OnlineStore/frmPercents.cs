@@ -16,6 +16,9 @@ namespace OnlineStore
         public frmPercents()
         {
             InitializeComponent();
+            dgvDataGrp.AutoGenerateColumns = false;
+            dgvPercents.AutoGenerateColumns = false;
+            dgvDataTovar.AutoGenerateColumns = false;
         }
 
         DataTable dtPercent, dtPercentOld;
@@ -25,18 +28,17 @@ namespace OnlineStore
 
         private void frmPercents_Load(object sender, EventArgs e)
         {
+            init_combobx();
             dgvPercents_Init();
+            getGoods();
+            getGroups();
             chckUseSale.Checked = Config.isSale;
             oldSale = Config.isSale;
-
-
         }
-
-
+      
         private void dgvPercents_Init()
         {
             dtPercent = Config.hCntMain.GetPercents();
-            dgvPercents.AutoGenerateColumns = false;
             dgvPercents.DataSource = dtPercent;
 
             dtPercentOld = dtPercent.Copy();
@@ -230,7 +232,6 @@ namespace OnlineStore
             }
         }
 
-
         private void dgvPercents_EditingControlShowing_1(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (dgvPercents.CurrentCell.ColumnIndex == 1 || dgvPercents.CurrentCell.ColumnIndex == 2)
@@ -272,10 +273,411 @@ namespace OnlineStore
             e.Cancel = false;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
+
+
+
+
+        #region "Общее"
+
+        private void DoOnUIThread(MethodInvoker d)
+        {
+            if (this.InvokeRequired) { this.Invoke(d); } else { d(); }
         }
+
+        private void init_combobx()
+        {
+            Task<DataTable> task = Config.hCntMain.getDeps();
+            task.Wait();
+            DataTable dtDeps = task.Result;
+            DoOnUIThread(delegate ()
+            {
+                DataRow row = dtDeps.NewRow();
+                row["id"] = 0;
+                row["cName"] = "Все отделы";
+                dtDeps.Rows.Add(row);
+                dtDeps.DefaultView.Sort = "id asc";
+
+                cmbDepsGrp.DataSource = dtDeps.DefaultView.ToTable().Copy();
+                cmbDepsGrp.DisplayMember = "cName";
+                cmbDepsGrp.ValueMember = "id";
+
+                cmbDepsTovar.DataSource = dtDeps.DefaultView.ToTable().Copy();
+                cmbDepsTovar.DisplayMember = "cName";
+                cmbDepsTovar.ValueMember = "id";
+            });
+        }
+
+        private void init_combobox(bool isAll)
+        {
+            DoOnUIThread(delegate () { //this.Enabled = false;
+            });
+
+            Task<DataTable> task;
+
+            int id_otdel = -1;
+            DoOnUIThread(delegate ()
+            {
+                id_otdel = (int)cmbDepsTovar.SelectedValue;
+            });
+
+
+
+            task = Config.hCntMain.getTU(id_otdel);
+            task.Wait();
+            DataTable dtTU = task.Result;
+            task = null;
+
+            DoOnUIThread(delegate ()
+            {
+                cmbTU.DataSource = dtTU;
+                cmbTU.DisplayMember = "cName";
+                cmbTU.ValueMember = "id";
+            });
+
+
+            task = Config.hCntMain.getInv(id_otdel);
+            task.Wait();
+            DataTable dtInv = task.Result;
+            task = null;
+
+            DoOnUIThread(delegate ()
+            {
+                cmbInv.DataSource = dtInv;
+                cmbInv.DisplayMember = "cName";
+                cmbInv.ValueMember = "id";
+            });
+
+            DoOnUIThread(delegate () {
+                //this.Enabled = true;
+                cmbTU.SelectedIndex = 0;
+                cmbInv.SelectedIndex = 0;
+                setFilterTovar();
+            });
+        }
+
+        #endregion
+
+        #region "Группы"
+        private void dgvDataGrp_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            tbNameGrp.Location = new Point(dgvDataGrp.Location.X + 1, tbNameGrp.Location.Y);
+            tbNameGrp.Size = new Size(cNameGrp.Width, tbNameGrp.Size.Height);
+        }
+
+        private void cmbDepsGrp_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            setFilterGrp();
+        }
+
+        DataTable dtGroups, dtGoods;
+
+        private void getGroups()
+        {
+            Task<DataTable> task = Config.hCntMain.getGrp2VsPercentSettingsGroups();
+            task.Wait();
+
+            dtGroups = task.Result;
+            setFilterGrp();
+            dgvDataGrp.DataSource = dtGroups;
+        }
+
+        private void tbNameGrp_TextChanged(object sender, EventArgs e)
+        {
+            setFilterGrp();
+        }
+
+        private void setFilterGrp()
+        {
+            if (dtGroups == null || dtGroups.Rows.Count == 0)
+            {
+                btDelGrp.Enabled = false;
+                return;
+            }
+
+            try
+            {
+                string filter = "";
+
+                if((int)cmbDepsGrp.SelectedValue != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"id_otdel  = {cmbDepsGrp.SelectedValue}";
+                
+                if (tbNameGrp.Text.Trim().Length != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"cName like '%{tbNameGrp.Text.Trim()}%'";
+
+                if (chbUsedPrc.Checked)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"id_percent is not null";
+
+                dtGroups.DefaultView.RowFilter = filter;
+            }
+            catch
+            {
+                dtGroups.DefaultView.RowFilter = "id = -1";
+            }
+            finally
+            {
+                btDelGrp.Enabled = dtGroups.DefaultView.Count != 0;
+                dgvDataGrp_SelectionChanged(null, null);
+            }
+        }
+
+        private void dgvDataGrp_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDataGrp.CurrentRow == null || dgvDataGrp.CurrentRow.Index == -1 || dtGroups == null || dtGroups.DefaultView.Count == 0 || dgvDataGrp.CurrentRow.Index >= dtGroups.DefaultView.Count)
+            {
+                btDelGrp.Enabled = false;
+                return;
+            }
+
+            //btDelGrp.Enabled = true;
+            btDelGrp.Enabled = dtGroups.DefaultView[dgvDataGrp.CurrentRow.Index]["id_percent"] != DBNull.Value;
+        }
+
+        private void chbUsedPrc_CheckedChanged(object sender, EventArgs e)
+        {
+            setFilterGrp();
+        }
+
+        private void btDelGrp_Click(object sender, EventArgs e)
+        {         
+            if (dgvDataGrp.CurrentRow != null && dgvDataGrp.CurrentRow.Index != -1 && dtGroups != null && dtGroups.DefaultView.Count != 0)
+            {
+                decimal? MarkUpPercent = null;
+                decimal? salePercent = null;
+                
+                DataRowView row = dtGroups.DefaultView[dgvDataGrp.CurrentRow.Index];
+                int id = (int)row["id"];
+
+                if (row["MarkUpPercent"] != DBNull.Value)
+                    MarkUpPercent = (decimal)row["MarkUpPercent"];
+
+                if (row["salePercent"] != DBNull.Value)
+                    salePercent = (decimal)row["salePercent"];
+
+                Task<DataTable> task = Config.hCntMain.setPercentSettingsGroups(id, MarkUpPercent, salePercent, true, 0, true);
+                task.Wait();
+
+                if (task.Result == null || task.Result.Rows.Count == 0)
+                {
+                    MessageBox.Show("Не удалось сохранить данные", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if ((int)task.Result.Rows[0]["id"] == -9999)
+                {
+                    MessageBox.Show($"{task.Result.Rows[0]["msg"].ToString()}", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if ((int)task.Result.Rows[0]["id"] == -1)
+                {
+                    MessageBox.Show(Config.centralText("Запись уже удалена другим пользователем\n"), "Удаление записи", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    getGroups();
+                    return;
+                }
+
+                if (DialogResult.Yes == MessageBox.Show("Удалить выбранную запись?", "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                {
+                    task = Config.hCntMain.setPercentSettingsGroups(id, MarkUpPercent, salePercent, true, 1, true);
+                    task.Wait();
+
+                    getGroups();
+                }
+            }
+        }
+
+            private void btAddGrp_Click(object sender, EventArgs e)
+        {
+            if (dgvDataGrp.CurrentRow != null && dgvDataGrp.CurrentRow.Index != -1 && dtGroups != null && dtGroups.DefaultView.Count != 0)
+            {
+                DataRowView row = dtGroups.DefaultView[dgvDataGrp.CurrentRow.Index];
+
+                if (new frmAddPercent() { row = row, Text = "Добавление процентов",isGroup=true }.ShowDialog() == DialogResult.OK)
+                    getGroups();
+            }
+        }
+
+        #endregion
+
+        #region "Товары"
+
+        private void cmbDepsTovar_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Task.Run(() => { init_combobox(false); });
+        }
+
+        private void cmbTU_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            cmbInv.SelectedValue = 0;
+            setFilterTovar();
+        }
+
+        private void cmbInv_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            cmbTU.SelectedValue = 0;
+            setFilterTovar();
+        }
+
+        private void dgvDataTovar_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            int width = 0;
+
+            foreach (DataGridViewColumn col in dgvDataTovar.Columns)
+            {
+                if (!col.Visible) continue;
+
+                if (col.Name.Equals(cEan.Name))
+                {
+                    tbEan.Location = new Point(dgvDataTovar.Location.X + 1 + width, tbEan.Location.Y);
+                    tbEan.Size = new Size(cEan.Width, tbEan.Size.Height);
+                }
+                else if (col.Name.Equals(cNameTovar.Name))
+                {
+                    tbNameTovar.Location = new Point(dgvDataTovar.Location.X + 1 + width, tbEan.Location.Y);
+                    tbNameTovar.Size = new Size(cNameTovar.Width, tbEan.Size.Height);
+                }
+
+                width += col.Width;
+            }
+        }
+
+        private void dgvDataTovar_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDataTovar.CurrentRow == null || dgvDataTovar.CurrentRow.Index == -1 || dtGoods == null || dtGoods.DefaultView.Count == 0 || dgvDataTovar.CurrentRow.Index >= dtGoods.DefaultView.Count)
+            {
+                btDeleteTovar.Enabled = false;
+                return;
+            }
+
+            //btDeleteTovar.Enabled = true;
+            btDeleteTovar.Enabled = dtGoods.DefaultView[dgvDataTovar.CurrentRow.Index]["id_percent"] !=DBNull.Value;
+        }
+
+        private void chbUserPrcTovar_CheckedChanged(object sender, EventArgs e)
+        {
+            setFilterTovar();
+        }
+
+        private void tbEan_TextChanged(object sender, EventArgs e)
+        {
+            setFilterTovar();
+        }
+
+        private void btDeleteTovar_Click(object sender, EventArgs e)
+        {
+            if (dgvDataTovar.CurrentRow != null && dgvDataTovar.CurrentRow.Index != -1 && dtGoods != null && dtGoods.DefaultView.Count != 0)
+            {              
+                decimal? MarkUpPercent = null;
+                decimal? salePercent = null;
+
+                DataRowView row = dtGoods.DefaultView[dgvDataTovar.CurrentRow.Index];
+                int id = (int)row["id"];
+
+                if (row["MarkUpPercent"] != DBNull.Value)
+                    MarkUpPercent = (decimal)row["MarkUpPercent"];
+
+                if (row["salePercent"] != DBNull.Value)
+                    salePercent = (decimal)row["salePercent"];
+
+                Task<DataTable> task = Config.hCntMain.setPercentSettingsGroups(id, MarkUpPercent, salePercent, false, 0, true);
+                task.Wait();
+
+                if (task.Result == null || task.Result.Rows.Count == 0)
+                {
+                    MessageBox.Show("Не удалось сохранить данные", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if ((int)task.Result.Rows[0]["id"] == -9999)
+                {
+                    MessageBox.Show($"{task.Result.Rows[0]["msg"].ToString()}", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if ((int)task.Result.Rows[0]["id"] == -1)
+                {
+                    MessageBox.Show(Config.centralText("Запись уже удалена другим пользователем\n"), "Удаление записи", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    getGoods();
+                    return;
+                }
+
+                if (DialogResult.Yes == MessageBox.Show("Удалить выбранную запись?", "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                {
+                    task = Config.hCntMain.setPercentSettingsGroups(id, MarkUpPercent, salePercent, false, 1, true);
+                    task.Wait();
+
+                    getGoods();
+                }
+            }
+        }
+
+        private void btAddGood_Click(object sender, EventArgs e)
+        {
+            if (dgvDataTovar.CurrentRow != null && dgvDataTovar.CurrentRow.Index != -1 && dtGoods != null && dtGoods.DefaultView.Count != 0)
+            {
+                DataRowView row = dtGoods.DefaultView[dgvDataTovar.CurrentRow.Index];
+
+                if (new frmAddPercent() { row = row, Text = "Добавление процентов", isGroup = false }.ShowDialog() == DialogResult.OK)
+                    getGoods();
+            }
+        }
+       
+        private void getGoods()
+        {
+            Task<DataTable> task = Config.hCntMain.getGoodsVsPercentSettingsGoods();
+            task.Wait();
+
+            dtGoods = task.Result;
+            setFilterTovar();
+            dgvDataTovar.DataSource = dtGoods;
+        }
+
+        private void setFilterTovar()
+        {
+            if (dtGoods == null || dtGoods.Rows.Count == 0)
+            {
+                btDeleteTovar.Enabled = false;
+                return;
+            }
+
+            try
+            {
+                string filter = "";
+
+                if (cmbDepsTovar.SelectedValue != null && (int)cmbDepsTovar.SelectedValue != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"id_otdel  = {cmbDepsTovar.SelectedValue}";
+
+                if (cmbTU.SelectedValue != null && (int)cmbTU.SelectedValue != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"id_grp1  = {cmbTU.SelectedValue}";
+
+                if (cmbInv.SelectedValue != null && (int)cmbInv.SelectedValue != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"id_grp2  = {cmbInv.SelectedValue}";
+
+
+                if (tbNameTovar.Text.Trim().Length != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"cName like '%{tbNameTovar.Text.Trim()}%'";
+
+                if (tbEan.Text.Trim().Length != 0)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"ean like '%{tbEan.Text.Trim()}%'";
+
+                if (chbUserPrcTovar.Checked)
+                    filter += (filter.Length == 0 ? "" : " and ") + $"id_percent is not null";
+
+                dtGoods.DefaultView.RowFilter = filter;
+            }
+            catch
+            {
+                dtGoods.DefaultView.RowFilter = "id = -1";
+            }
+            finally
+            {
+                btDeleteTovar.Enabled =
+                dtGoods.DefaultView.Count != 0;
+                dgvDataTovar_SelectionChanged(null, null);
+            }
+        }
+
+        #endregion
     }
 }
 

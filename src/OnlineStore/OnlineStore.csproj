@@ -44,10 +44,6 @@
     <Reference Include="Framework">
       <HintPath>..\..\..\DLL\Framework.dll</HintPath>
     </Reference>
-    <Reference Include="OnlineStoreViewOrders, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\OnlineStoreViewOrders.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -123,6 +119,12 @@
     <Compile Include="dictonatyTovar\frmEditAttribute.Designer.cs">
       <DependentUpon>frmEditAttribute.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddPercent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddPercent.Designer.cs">
+      <DependentUpon>frmAddPercent.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dictonatyTovar\frmEditAttribute.resx">
       <DependentUpon>frmEditAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddPercent.resx">
+      <DependentUpon>frmAddPercent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -241,6 +246,12 @@
     <None Include="Resources\editdelete_3805.png" />
     <None Include="Resources\edit_1761.png" />
     <None Include="Resources\compfile_1551.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Редактирование заказа\src\OnlineStoreViewOrders\OnlineStoreViewOrders.csproj">
+      <Project>{2b4e2ad4-c1a4-4cc7-bd51-fb1751b95a24}</Project>
+      <Name>OnlineStoreViewOrders</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

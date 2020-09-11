@@ -58,8 +58,6 @@ namespace OnlineStore
             return dtResult.DefaultView.ToTable();
         }
 
-
-
         public async Task<DataTable> validateDicCategory(int id,string cName)
         {
             ap.Clear();
@@ -488,7 +486,44 @@ namespace OnlineStore
         }
 
 
-       
+
+
+        #endregion
+
+
+        #region "Настройки наценок для инв группы и товаров"
+        public async Task<DataTable> getGrp2VsPercentSettingsGroups()
+        {
+            ap.Clear();
+            return executeProcedure("[OnlineStore].[getGrp2VsPercentSettingsGroups]",
+                new string[] { },
+                new DbType[] { }, ap);
+        }
+
+        public async Task<DataTable> getGoodsVsPercentSettingsGoods()
+        {
+            ap.Clear();
+            return executeProcedure("[OnlineStore].[getGoodsVsPercentSettingsGoods]",
+                new string[] { },
+                new DbType[] { }, ap);
+        }
+
+        public async Task<DataTable> setPercentSettingsGroups(int id, decimal? MarkUpPercent, decimal? salePercent, bool isGroup, int result, bool isDel)
+        {
+            ap.Clear();
+
+            ap.Add(id);
+            ap.Add(MarkUpPercent);
+            ap.Add(salePercent);
+            ap.Add(isGroup);
+            ap.Add(UserSettings.User.Id);
+            ap.Add(result);
+            ap.Add(isDel);
+
+            return executeProcedure("[OnlineStore].[setPercentSettingsGroups]",
+                new string[7] { "@id", "@MarkUpPercent", "@salePercent", "@isGroup", "@id_user", "@result", "@isDel" },
+                new DbType[7] { DbType.Int32, DbType.Decimal, DbType.Decimal, DbType.Boolean, DbType.Int32, DbType.Int32, DbType.Boolean }, ap);
+        }
 
         #endregion
     }
