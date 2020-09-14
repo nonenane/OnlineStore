@@ -25,6 +25,9 @@ namespace OnlineStoreViewOrders
 
         public DataTable dtOrders;
         public DataTable dtContentOrder;
+
+        private bool isLoadData=false;
+
         public frmViewOrders()
         {
             InitializeComponent();
@@ -43,9 +46,7 @@ namespace OnlineStoreViewOrders
 
         private void frmViewOrders_Load(object sender, EventArgs e)
         {
-            dtpStart.Value = DateTime.Now.Date;
-            dtpEnd.Value = DateTime.Now.Date;
-            GetOrders();
+            isLoadData = true;
             ToolTip ttButton = new ToolTip();
             ttButton.SetToolTip(btnAdd, "Добавить заказы");
             ttButton.SetToolTip(btnExit, "Выход");
@@ -64,6 +65,13 @@ namespace OnlineStoreViewOrders
 
             dtpStart.MaxDate = DateTime.Now.AddDays(-1);
             dtpEnd.MaxDate = DateTime.Now;
+
+            dtpStart.Value = DateTime.Now.Date.AddDays(-1); ;
+            dtpEnd.Value = DateTime.Now.Date;
+            init_combobox();
+            GetOrders();
+            isLoadData = false;
+
         }
 
         private void setEnabledPR()
@@ -100,6 +108,13 @@ namespace OnlineStoreViewOrders
             }
             if (UserSettings.User.StatusCode.ToLower() == "пр")
                 btnCheck.Enabled = false;
+
+
+            int id_Status = 0;
+            if (dgvOrders.CurrentRow != null && dgvOrders.CurrentRow.Index != -1 && dtOrders != null && dtOrders.DefaultView.Count != 0)
+                id_Status = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+            btnEdit.Enabled = new List<int>(new int[] { 1, 2 }).Contains(id_Status);
+
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -111,6 +126,17 @@ namespace OnlineStoreViewOrders
             DataRow dr = dtOrders.AsEnumerable().Where(x => x.Field<int>("id") == int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString())).First();
             tbComment.Text = dr["Comment"].ToString();
             tbCommentOrder.Text = dr["CommentOrder"].ToString();
+
+            if ((int)dr["id_Status"] == 3)
+            {
+                tbDeliveryDate.Text = dr["DeliveryDate"].ToString();
+                tbDeliveryCost.Text = dr["DeliveryCost"].ToString();
+            }
+            else
+            {
+                tbDeliveryDate.Text = tbDeliveryCost.Text = "";
+            }
+
             EnabledControls();
         }
 
@@ -153,6 +179,9 @@ namespace OnlineStoreViewOrders
                     searchString += (searchString.Length == 0 ? "" : " and ") + (string.Format("Phone like '%{0}%'", tbPhone.Text));
                 if (tbAddress.Text.Trim().Length != 0)
                     searchString += (searchString.Length == 0 ? "" : " and ") + (string.Format("Address like '%{0}%'", tbAddress.Text));
+                if(cmbStatus.SelectedValue!=null && (int)cmbStatus.SelectedValue!=0)
+                    searchString += (searchString.Length == 0 ? "" : " and ") + ($"id_Status = {cmbStatus.SelectedValue}");
+
 
                 dtOrders.DefaultView.RowFilter = searchString;
 
@@ -218,6 +247,14 @@ namespace OnlineStoreViewOrders
             Color rowcolor = Color.White;
             if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1")
                 rowcolor = panel1.BackColor;
+
+            if ((int)dtOrders.DefaultView[e.RowIndex]["id_Status"] == 3)
+                rowcolor = pEnd.BackColor;
+            else if ((int)dtOrders.DefaultView[e.RowIndex]["id_Status"] == 2)
+                rowcolor = pInWork.BackColor;
+            else if ((int)dtOrders.DefaultView[e.RowIndex]["id_Status"] == 4)
+                rowcolor = pCancel.BackColor;
+
             dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor =
                      dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = rowcolor;
@@ -568,14 +605,17 @@ namespace OnlineStoreViewOrders
 
         private void dtpStart_ValueChanged(object sender, EventArgs e)
         {
+            if (isLoadData) return;
+
             if (dtpEnd.Value < dtpStart.Value)
                 dtpEnd.Value = dtpStart.Value;
-            GetOrders();
-           
+            GetOrders();           
         }
 
         private void dtpEnd_ValueChanged(object sender, EventArgs e)
         {
+            if (isLoadData) return;
+
             if (dtpStart.Value > dtpEnd.Value)
                 dtpStart.Value = dtpEnd.Value;
             GetOrders();
@@ -583,6 +623,14 @@ namespace OnlineStoreViewOrders
 
         private void cmsPackage_Opening(object sender, CancelEventArgs e)
         {
+            int id_Status = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+            изменитьСтоимостьДоставкиToolStripMenuItem.Visible = new List<string>(new string[] { "КД" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode) && new List<int>(new int[] { 1, 2 }).Contains(id_Status);
+
+            заказВОбработкеToolStripMenuItem.Visible = new List<string>(new string[] { "КД" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode) && new List<int>(new int[] { 1,4 }).Contains(id_Status);
+
+            заказВыполненToolStripMenuItem.Visible = new List<string>(new string[] { "КД" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode) && new List<int>(new int[] { 2 }).Contains(id_Status);
+
+            заказОтменёнToolStripMenuItem.Visible = new List<string>(new string[] { "КД" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode) && new List<int>(new int[] { 1,2 }).Contains(id_Status);
 
         }
 
@@ -612,7 +660,8 @@ namespace OnlineStoreViewOrders
                 frmCheck frm = new frmCheck()
                 {
                     id_tOrder = int.Parse(dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id"].ToString()),
-                    num_Order = int.Parse(dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["OrderNumber"].ToString())
+                    num_Order = int.Parse(dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["OrderNumber"].ToString()),
+                    id_status = 1
                 };
                 frm.ShowDialog();
             }
@@ -746,6 +795,85 @@ namespace OnlineStoreViewOrders
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
 
             new workWithStatus.frmJournalStatusOrder() { id = idtOrder, numOrder = numOrder }.ShowDialog();
+        }
+
+        private void заказВОбработкеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
+            if (DialogResult.No == MessageBox.Show("Сменить статус заказа?", "Запрос на действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
+
+            DataTable dtResult = Config.connect.setStatusOrder(idtOrder, null, null, 2, null);
+            dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 2;
+            dtOrders.AcceptChanges();
+        }
+
+        private void заказВыполненToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
+            DateTime _DateOrder = (DateTime)dgvOrders.CurrentRow.Cells["DateOrder"].Value;
+            DataTable dtCheck = Config.connect.GetCheckvsOrder(idtOrder);
+            if (dtCheck == null || dtCheck.Rows.Count == 0)
+            {
+                MessageBox.Show("К заказу не прикреплён чек с товарами.\nСмена статуса невозможна.\n", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            EnumerableRowCollection<DataRow> rowCollect = dtCheck.AsEnumerable().Where(r => !r.Field<bool>("isPackage"));
+            if (rowCollect.Count() == 0)
+            {
+                MessageBox.Show("К заказу не прикреплён чек с товарами.\nСмена статуса невозможна.\n", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (DialogResult.No == MessageBox.Show("Статус \"Выполнен\" нельзя сменить\nпосле присвоения.\nПродолжить?\n", "Запрос на действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
+
+
+            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 3,dateOrder = _DateOrder, idtOrder = idtOrder }.ShowDialog())
+            {
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 3;
+                dtOrders.AcceptChanges();
+            }
+
+        }
+
+        private void заказОтменёнToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
+            DateTime _DateOrder = (DateTime)dgvOrders.CurrentRow.Cells["DateOrder"].Value;
+
+            if (DialogResult.No == MessageBox.Show("Сменить статус заказа?", "Запрос на действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
+
+            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 4, dateOrder = _DateOrder, idtOrder = idtOrder }.ShowDialog())
+            {
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 4;
+                dtOrders.AcceptChanges();
+            }
+        }
+
+        private void изменитьСтоимостьДоставкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
+            int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
+            decimal SummaDelivery = (decimal)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["SummaDelivery"];
+            frmChangeSummaDelivery frmCSD = new frmChangeSummaDelivery() { idtOrder = idtOrder, Text = $"Стоимость доставки заказа №{numOrder}", SummaDelivery = SummaDelivery };
+            if (DialogResult.OK == frmCSD.ShowDialog())
+            {
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["SummaDelivery"] = frmCSD.SummaDelivery;
+                dtOrders.AcceptChanges();
+            }
+        }
+
+        private void init_combobox()
+        {
+            DataTable dtStatus = Config.connect.getListStatus(true);
+            cmbStatus.DataSource = dtStatus;
+            cmbStatus.DisplayMember = "cName";
+            cmbStatus.ValueMember = "id";
+        }
+
+        private void cmbStatus_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            FilterOrders();
         }
     }
 }

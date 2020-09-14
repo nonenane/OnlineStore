@@ -8,6 +8,7 @@ using Nwuram.Framework.Data;
 using Nwuram.Framework.Settings.User;
 using Nwuram.Framework.Settings.Connection;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace OnlineStoreViewOrders
 {
@@ -168,18 +169,19 @@ namespace OnlineStoreViewOrders
                 new string[] { "@id" },
                 new DbType[] { DbType.Int32 }, ap);
         }
-        public DataTable SetCheckOrder(int CheckNumber, int KassNumber, DateTime dateCheck, int id_tOrder, bool isPackage)
+        public DataTable SetCheckOrder(int CheckNumber, int KassNumber, DateTime dateCheck, decimal summa, int id_tOrder, bool isPackage)
         {
             ap.Clear();
             ap.Add(CheckNumber);
             ap.Add(KassNumber);
             ap.Add(dateCheck);
+            ap.Add(summa);
             ap.Add(id_tOrder);
             ap.Add(UserSettings.User.Id);
             ap.Add(isPackage);
             return executeProcedure("[OnlineStore].[setCheckOrder]",
-                new string[] { "@CheckNumber", "@KassNumber", "@DateCheck", "@id_tOrder", "@id_Editor", "@isPackage" },
-                new DbType[] { DbType.Int32, DbType.Int32, DbType.DateTime, DbType.Int32, DbType.Int32, DbType.Boolean }, ap);
+                new string[7] { "@CheckNumber", "@KassNumber", "@DateCheck", "@summa", "@id_tOrder", "@id_Editor", "@isPackage" },
+                new DbType[7] { DbType.Int32, DbType.Int32, DbType.DateTime, DbType.Decimal, DbType.Int32, DbType.Int32, DbType.Boolean }, ap);
         }
 
         public DataTable getPackage(int doc_id, DateTime date, int terminal)
@@ -212,6 +214,20 @@ namespace OnlineStoreViewOrders
         }
 
         #region "Работа со статусами"
+
+        public DateTime getDate()
+        {
+            ap.Clear();
+            DataTable dtResult = executeProcedure("dbo.GetDate",
+                new string[0] { },
+                new DbType[0] { }, ap);
+
+            if (dtResult == null || dtResult.Rows.Count == 0)
+                return DateTime.Now;
+            else
+                return (DateTime)dtResult.Rows[0][0];
+        }
+
         public DataTable getHistoryJournalStatus(int id_tOrders)
         {
             ap.Clear();
@@ -221,6 +237,66 @@ namespace OnlineStoreViewOrders
                 new DbType[] { DbType.Int32 }, ap);
         }
 
+        public DataTable setStatusOrder( int id_tOrder,decimal? DeliveriCost,DateTime? DeliveryDate, int id_status,string commentOrder)
+        {
+            ap.Clear();            
+            ap.Add(id_tOrder);
+            ap.Add(DeliveriCost);
+            ap.Add(DeliveryDate);
+            ap.Add(id_status);
+            ap.Add(commentOrder);
+            ap.Add(UserSettings.User.Id);
+            return executeProcedure("OnlineStore.set_tOrder", 
+                new string[6] { "@idOrder", "@DeliveriCost", "@DeliveryDate", "@id_status","@commentOrder", "@id_person" },
+                new DbType[6] { DbType.Int32, DbType.Decimal,DbType.Date,DbType.Int32,DbType.String, DbType.Int32 }, ap);
+        }
+
+        public DataTable updateSummaDelivery(int id_tOrder, decimal summaDelivery)
+        {
+            ap.Clear();
+            ap.Add(id_tOrder);
+            ap.Add(summaDelivery);
+            ap.Add(UserSettings.User.Id);
+            return executeProcedure("OnlineStore.set_tOrder",
+                new string[3] { "@idOrder", "@summaDelivery", "@id_person" },
+                new DbType[3] { DbType.Int32, DbType.Decimal, DbType.Int32 }, ap);
+        }
+
+        public DataTable getListStatus(bool isAll)
+        {
+            ap.Clear();
+            DataTable dtResult = executeProcedure("[OnlineStore].[getListStatus]",
+                new string[0] {  },
+                new DbType[0] {}, ap);
+
+            if (isAll)
+            {
+                DataColumn col = new DataColumn("isMain", typeof(bool));
+                col.DefaultValue = false;
+                dtResult.Columns.Add(col);
+
+                DataRow newRow = dtResult.NewRow();
+
+                newRow["id"] = 0;
+                newRow["cName"] = "Все статусы";
+                newRow["isActive"] = true;
+                newRow["isMain"] = true;
+
+                dtResult.Rows.Add(newRow);
+
+                dtResult.DefaultView.RowFilter = "isActive = 1";
+                dtResult.DefaultView.Sort = "isMain desc, id asc";
+                dtResult = dtResult.DefaultView.ToTable().Copy();
+            }
+            else
+            {
+                dtResult.DefaultView.RowFilter = "isActive = 1";
+                dtResult.DefaultView.Sort = "id asc";
+                dtResult = dtResult.DefaultView.ToTable().Copy();
+            }
+
+            return dtResult;
+        }
 
         #endregion
     }

@@ -20,7 +20,7 @@ namespace OnlineStoreViewOrders.Check
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (tbCheck.Text.Trim().Length ==0 || tbKass.Text.Trim().Length == 0)
+            if (tbCheck.Text.Trim().Length == 0 || tbKass.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Необходимо ввести числовые значения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -31,15 +31,24 @@ namespace OnlineStoreViewOrders.Check
                 MessageBox.Show("Нет подключения к серверу", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (dtCheckCheck.Rows.Count == 0 )
+            if (dtCheckCheck.Rows.Count == 0)
             {
                 MessageBox.Show("Чек по дате, номеру и кассе не обнаружен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
+            if (dtCheckCheck.Rows.Count > 0 && dtCheckCheck.Columns.Contains("id") && (int)dtCheckCheck.Rows[0]["id"] == -1)
+            {
+                MessageBox.Show("Данный чек уже используется в заказе", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
             Config.connect.SetCheckOrder(
                 int.Parse(dtCheckCheck.Rows[0]["doc_id"].ToString()),
                 int.Parse(dtCheckCheck.Rows[0]["terminal"].ToString()),
-               Convert.ToDateTime( dtCheckCheck.Rows[0]["time"].ToString()).Date,
+                Convert.ToDateTime(dtCheckCheck.Rows[0]["time"].ToString()).Date,
+                decimal.Parse(dtCheckCheck.Rows[0]["summa"].ToString()),
                 id_tOrder,
                 chckPackage.Checked);
             MessageBox.Show("Чек добавлен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -15,6 +15,8 @@ namespace OnlineStoreViewOrders
 
         public int id_tOrder { get; set; }
         public int num_Order { get; set; }
+        public int id_status { set; private get; }
+
         private DataTable dtCheck;
         public frmCheck()
         {
@@ -27,6 +29,7 @@ namespace OnlineStoreViewOrders
             dgvCheck.AutoGenerateColumns = false;
             dgvCheck.DataSource = dtCheck;
             GetPackage();
+            getSumma();
         }
 
         private void frmCheck_Load(object sender, EventArgs e)
@@ -37,6 +40,7 @@ namespace OnlineStoreViewOrders
             ttButton.SetToolTip(btnDelCheck, "Удалить чек");
             ttButton.SetToolTip(btnViewCheck, "Просмотр чека");
             this.Text = "Чеки по заказу № " + num_Order.ToString();
+            btnAdd.Visible = btnDelCheck.Visible = !new List<int>(new int[] { 3, 4 }).Contains(id_status);
             dgvCheck_Init();
 
         }
@@ -78,18 +82,33 @@ namespace OnlineStoreViewOrders
                     int totalCount = 0;
                     if (dtPack != null && dtPack.Rows.Count > 0)
                         totalCount = dtPack.AsEnumerable().Sum(r => r.Field<int>("totalCount"));
-                    label1.Text = "Кол-во пакетов: " + totalCount.ToString();
+                    lCountPackage.Text = "Кол-во пакетов: " + totalCount.ToString()+ " шт.";
                 }
                 else
                 {
-                    label1.Text = "Кол-во пакетов: 0";
+                    lCountPackage.Text = "Кол-во пакетов: 0 шт.";
                 }
             }
             else
             {
-                label1.Text = "Кол-во пакетов: 0";
+                lCountPackage.Text = "Кол-во пакетов: 0 шт.";
             }
             EnableButtons();
+        }
+
+        private void getSumma()
+        {
+            object objSumma = dtCheck.Compute("Sum(Summa)", "isPackage = 1");
+            if (objSumma != DBNull.Value)
+                lSumPackage.Text = $"Сумма: {((decimal)objSumma).ToString("0.00")} руб.";
+            else
+                lSumPackage.Text = $"Сумма: 0 руб.";
+
+            objSumma = dtCheck.Compute("Sum(Summa)", "isPackage = 0");
+            if (objSumma != DBNull.Value)
+                tbResult.Text = ((decimal)objSumma).ToString("0.00");
+            else
+                tbResult.Text = "0.00";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -126,6 +145,10 @@ namespace OnlineStoreViewOrders
         {
             DataGridView dgv = (DataGridView)sender;
             Color rowcolor = Color.White;
+
+            if (dtCheck != null && dtCheck.DefaultView.Count > 0)
+                if ((bool)dtCheck.DefaultView[e.RowIndex]["isPackage"])
+                    rowcolor = panel1.BackColor;
 
             dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor =

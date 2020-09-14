@@ -224,3 +224,46 @@ C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.frmAddPercent.resources
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.dll.config
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.exe.config
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.exe
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\OnlineStore.pdb
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\CsvHelper.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\EPPlus.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\Framework.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\System.ValueTuple.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\OnlineShopOrders.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\Interop.Excel.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\Interop.WIA.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\netstandard.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\Interop.Microsoft.Office.Core.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\stdole.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.pdb
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\OnlineStoreViewOrders.dll.config
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\CsvHelper.xml
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\System.ValueTuple.xml
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csprojAssemblyReference.cache
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCategory.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmAddCatVsGrp2.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCategory.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmListCatVsGrp2.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmNeedCatGrp.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddAllTovar.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmAddTovar.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.dictonatyTovar.frmEditAttribute.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmAddPercent.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmMain.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmPercents.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmSelectData.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmSettings.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmWait.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.Properties.Resources.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.GenerateResource.cache
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.CoreCompileInputs.cache
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.CopyComplete
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.exe
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.pdb

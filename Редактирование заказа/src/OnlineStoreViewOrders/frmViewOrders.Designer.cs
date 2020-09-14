@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewOrders));
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.OrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +48,11 @@
             this.Payment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmsPackage = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.историяСтатусовЗаказаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьСтоимостьДоставкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заказВОбработкеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заказВыполненToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заказОтменёнToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.lblDateStart = new System.Windows.Forms.Label();
@@ -77,7 +82,20 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.историяСтатусовЗаказаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pEnd = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pInWork = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pCancel = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btCreateReport = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbDeliveryDate = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbDeliveryCost = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.cmsPackage.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -93,14 +111,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderNumber,
@@ -119,7 +137,7 @@
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.RowHeadersVisible = false;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(961, 320);
+            this.dgvOrders.Size = new System.Drawing.Size(961, 287);
             this.dgvOrders.TabIndex = 0;
             this.dgvOrders.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellEnter);
             this.dgvOrders.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrders_CellMouseDoubleClick);
@@ -131,8 +149,8 @@
             // OrderNumber
             // 
             this.OrderNumber.DataPropertyName = "OrderNumber";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderNumber.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderNumber.DefaultCellStyle = dataGridViewCellStyle7;
             this.OrderNumber.FillWeight = 63.05103F;
             this.OrderNumber.HeaderText = "Номер заказа";
             this.OrderNumber.Name = "OrderNumber";
@@ -149,8 +167,8 @@
             // DateOrder
             // 
             this.DateOrder.DataPropertyName = "DateOrder";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DateOrder.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DateOrder.DefaultCellStyle = dataGridViewCellStyle8;
             this.DateOrder.FillWeight = 109.2885F;
             this.DateOrder.HeaderText = "Дата заказа";
             this.DateOrder.Name = "DateOrder";
@@ -191,8 +209,8 @@
             // Column2
             // 
             this.Column2.DataPropertyName = "sumOrder";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle9;
             this.Column2.FillWeight = 81.21827F;
             this.Column2.HeaderText = "Сумма заказа";
             this.Column2.Name = "Column2";
@@ -201,8 +219,8 @@
             // cDelivery
             // 
             this.cDelivery.DataPropertyName = "SummaDelivery";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cDelivery.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cDelivery.DefaultCellStyle = dataGridViewCellStyle10;
             this.cDelivery.HeaderText = "Сумма доставки";
             this.cDelivery.Name = "cDelivery";
             this.cDelivery.ReadOnly = true;
@@ -219,22 +237,62 @@
             // 
             this.cmsPackage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
-            this.историяСтатусовЗаказаToolStripMenuItem});
+            this.историяСтатусовЗаказаToolStripMenuItem,
+            this.изменитьСтоимостьДоставкиToolStripMenuItem,
+            this.заказВОбработкеToolStripMenuItem,
+            this.заказВыполненToolStripMenuItem,
+            this.заказОтменёнToolStripMenuItem});
             this.cmsPackage.Name = "cmsPackage";
-            this.cmsPackage.Size = new System.Drawing.Size(224, 70);
+            this.cmsPackage.Size = new System.Drawing.Size(242, 136);
             this.cmsPackage.Opening += new System.ComponentModel.CancelEventHandler(this.cmsPackage_Opening);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(223, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(241, 22);
             this.toolStripMenuItem1.Text = "Указать количество пакетов";
+            this.toolStripMenuItem1.Visible = false;
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // историяСтатусовЗаказаToolStripMenuItem
+            // 
+            this.историяСтатусовЗаказаToolStripMenuItem.Name = "историяСтатусовЗаказаToolStripMenuItem";
+            this.историяСтатусовЗаказаToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.историяСтатусовЗаказаToolStripMenuItem.Text = "Журнал статусов заказа";
+            this.историяСтатусовЗаказаToolStripMenuItem.Click += new System.EventHandler(this.историяСтатусовЗаказаToolStripMenuItem_Click);
+            // 
+            // изменитьСтоимостьДоставкиToolStripMenuItem
+            // 
+            this.изменитьСтоимостьДоставкиToolStripMenuItem.Name = "изменитьСтоимостьДоставкиToolStripMenuItem";
+            this.изменитьСтоимостьДоставкиToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.изменитьСтоимостьДоставкиToolStripMenuItem.Text = "Изменить стоимость доставки";
+            this.изменитьСтоимостьДоставкиToolStripMenuItem.Click += new System.EventHandler(this.изменитьСтоимостьДоставкиToolStripMenuItem_Click);
+            // 
+            // заказВОбработкеToolStripMenuItem
+            // 
+            this.заказВОбработкеToolStripMenuItem.Name = "заказВОбработкеToolStripMenuItem";
+            this.заказВОбработкеToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.заказВОбработкеToolStripMenuItem.Text = "Заказ в обработке";
+            this.заказВОбработкеToolStripMenuItem.Click += new System.EventHandler(this.заказВОбработкеToolStripMenuItem_Click);
+            // 
+            // заказВыполненToolStripMenuItem
+            // 
+            this.заказВыполненToolStripMenuItem.Name = "заказВыполненToolStripMenuItem";
+            this.заказВыполненToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.заказВыполненToolStripMenuItem.Text = "Заказ выполнен";
+            this.заказВыполненToolStripMenuItem.Click += new System.EventHandler(this.заказВыполненToolStripMenuItem_Click);
+            // 
+            // заказОтменёнToolStripMenuItem
+            // 
+            this.заказОтменёнToolStripMenuItem.Name = "заказОтменёнToolStripMenuItem";
+            this.заказОтменёнToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.заказОтменёнToolStripMenuItem.Text = "Заказ отменён";
+            this.заказОтменёнToolStripMenuItem.Click += new System.EventHandler(this.заказОтменёнToolStripMenuItem_Click);
             // 
             // dtpStart
             // 
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStart.Location = new System.Drawing.Point(33, 12);
+            this.dtpStart.Location = new System.Drawing.Point(33, 10);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(96, 20);
             this.dtpStart.TabIndex = 1;
@@ -243,7 +301,7 @@
             // dtpEnd
             // 
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEnd.Location = new System.Drawing.Point(163, 12);
+            this.dtpEnd.Location = new System.Drawing.Point(163, 10);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(92, 20);
             this.dtpEnd.TabIndex = 2;
@@ -252,7 +310,7 @@
             // lblDateStart
             // 
             this.lblDateStart.AutoSize = true;
-            this.lblDateStart.Location = new System.Drawing.Point(12, 18);
+            this.lblDateStart.Location = new System.Drawing.Point(12, 14);
             this.lblDateStart.Name = "lblDateStart";
             this.lblDateStart.Size = new System.Drawing.Size(16, 13);
             this.lblDateStart.TabIndex = 3;
@@ -261,7 +319,7 @@
             // lblDateEnd
             // 
             this.lblDateEnd.AutoSize = true;
-            this.lblDateEnd.Location = new System.Drawing.Point(135, 18);
+            this.lblDateEnd.Location = new System.Drawing.Point(135, 14);
             this.lblDateEnd.Name = "lblDateEnd";
             this.lblDateEnd.Size = new System.Drawing.Size(22, 13);
             this.lblDateEnd.TabIndex = 4;
@@ -271,7 +329,7 @@
             // 
             this.tbCommentOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCommentOrder.Location = new System.Drawing.Point(15, 438);
+            this.tbCommentOrder.Location = new System.Drawing.Point(15, 453);
             this.tbCommentOrder.Multiline = true;
             this.tbCommentOrder.Name = "tbCommentOrder";
             this.tbCommentOrder.ReadOnly = true;
@@ -283,7 +341,7 @@
             this.lblCommentOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCommentOrder.AutoSize = true;
-            this.lblCommentOrder.Location = new System.Drawing.Point(12, 415);
+            this.lblCommentOrder.Location = new System.Drawing.Point(12, 437);
             this.lblCommentOrder.Name = "lblCommentOrder";
             this.lblCommentOrder.Size = new System.Drawing.Size(141, 13);
             this.lblCommentOrder.TabIndex = 6;
@@ -293,7 +351,7 @@
             // 
             this.tbComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbComment.Location = new System.Drawing.Point(514, 438);
+            this.tbComment.Location = new System.Drawing.Point(513, 453);
             this.tbComment.Multiline = true;
             this.tbComment.Name = "tbComment";
             this.tbComment.ReadOnly = true;
@@ -305,7 +363,7 @@
             this.lblComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(511, 415);
+            this.lblComment.Location = new System.Drawing.Point(510, 437);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(134, 13);
             this.lblComment.TabIndex = 8;
@@ -364,14 +422,14 @@
             // tsConnect
             // 
             this.tsConnect.Name = "tsConnect";
-            this.tsConnect.Size = new System.Drawing.Size(56, 17);
+            this.tsConnect.Size = new System.Drawing.Size(61, 17);
             this.tsConnect.Text = "tsConnect";
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(547, 22);
+            this.label1.Location = new System.Drawing.Point(535, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(176, 13);
             this.label1.TabIndex = 20;
@@ -382,7 +440,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.panel1.Location = new System.Drawing.Point(15, 395);
+            this.panel1.Location = new System.Drawing.Point(15, 396);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(16, 16);
             this.panel1.TabIndex = 22;
@@ -400,10 +458,9 @@
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(577, 395);
+            this.label3.Location = new System.Drawing.Point(566, 366);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 25;
@@ -411,10 +468,9 @@
             // 
             // tbSumOrders
             // 
-            this.tbSumOrders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSumOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSumOrders.Enabled = false;
-            this.tbSumOrders.Location = new System.Drawing.Point(661, 392);
+            this.tbSumOrders.Location = new System.Drawing.Point(650, 362);
             this.tbSumOrders.Name = "tbSumOrders";
             this.tbSumOrders.Size = new System.Drawing.Size(85, 20);
             this.tbSumOrders.TabIndex = 26;
@@ -424,7 +480,7 @@
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.Image = global::OnlineStoreViewOrders.Properties.Resources.documentediting_editdocuments_text_documentedi_2820;
-            this.btnEdit.Location = new System.Drawing.Point(865, 400);
+            this.btnEdit.Location = new System.Drawing.Point(864, 415);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(32, 32);
             this.btnEdit.TabIndex = 29;
@@ -436,7 +492,7 @@
             this.btnView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnView.BackColor = System.Drawing.Color.White;
             this.btnView.Image = global::OnlineStoreViewOrders.Properties.Resources.Zoomview_6277;
-            this.btnView.Location = new System.Drawing.Point(903, 400);
+            this.btnView.Location = new System.Drawing.Point(902, 415);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(32, 32);
             this.btnView.TabIndex = 28;
@@ -448,7 +504,7 @@
             this.btnAllReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAllReport.BackColor = System.Drawing.Color.White;
             this.btnAllReport.Image = ((System.Drawing.Image)(resources.GetObject("btnAllReport.Image")));
-            this.btnAllReport.Location = new System.Drawing.Point(941, 400);
+            this.btnAllReport.Location = new System.Drawing.Point(940, 415);
             this.btnAllReport.Name = "btnAllReport";
             this.btnAllReport.Size = new System.Drawing.Size(32, 32);
             this.btnAllReport.TabIndex = 27;
@@ -460,7 +516,7 @@
             this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheck.BackColor = System.Drawing.Color.White;
             this.btnCheck.Image = global::OnlineStoreViewOrders.Properties.Resources._4213403_bill_check_ecommerce_invoice_payment_receipt_shopping_115368;
-            this.btnCheck.Location = new System.Drawing.Point(767, 12);
+            this.btnCheck.Location = new System.Drawing.Point(764, 4);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(32, 32);
             this.btnCheck.TabIndex = 24;
@@ -472,7 +528,7 @@
             this.btnAddFromSite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddFromSite.BackColor = System.Drawing.Color.White;
             this.btnAddFromSite.Image = global::OnlineStoreViewOrders.Properties.Resources.iconfinder_download_4341287_120571;
-            this.btnAddFromSite.Location = new System.Drawing.Point(729, 12);
+            this.btnAddFromSite.Location = new System.Drawing.Point(727, 4);
             this.btnAddFromSite.Name = "btnAddFromSite";
             this.btnAddFromSite.Size = new System.Drawing.Size(32, 32);
             this.btnAddFromSite.TabIndex = 19;
@@ -484,7 +540,7 @@
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.BackColor = System.Drawing.Color.White;
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(804, 12);
+            this.btnPrint.Location = new System.Drawing.Point(801, 4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(32, 32);
             this.btnPrint.TabIndex = 17;
@@ -496,7 +552,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackColor = System.Drawing.Color.White;
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(918, 12);
+            this.btnExit.Location = new System.Drawing.Point(949, 4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(32, 32);
             this.btnExit.TabIndex = 16;
@@ -508,7 +564,7 @@
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdate.BackColor = System.Drawing.Color.White;
             this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
-            this.btnUpdate.Location = new System.Drawing.Point(842, 12);
+            this.btnUpdate.Location = new System.Drawing.Point(838, 4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(32, 32);
             this.btnUpdate.TabIndex = 10;
@@ -520,7 +576,7 @@
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.BackColor = System.Drawing.Color.White;
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
-            this.btnAdd.Location = new System.Drawing.Point(880, 12);
+            this.btnAdd.Location = new System.Drawing.Point(875, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(32, 32);
             this.btnAdd.TabIndex = 9;
@@ -528,24 +584,166 @@
             this.btnAdd.Visible = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // историяСтатусовЗаказаToolStripMenuItem
+            // pEnd
             // 
-            this.историяСтатусовЗаказаToolStripMenuItem.Name = "историяСтатусовЗаказаToolStripMenuItem";
-            this.историяСтатусовЗаказаToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.историяСтатусовЗаказаToolStripMenuItem.Text = "История статусов заказа";
-            this.историяСтатусовЗаказаToolStripMenuItem.Click += new System.EventHandler(this.историяСтатусовЗаказаToolStripMenuItem_Click);
+            this.pEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pEnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(255)))), ((int)(((byte)(179)))));
+            this.pEnd.Location = new System.Drawing.Point(15, 370);
+            this.pEnd.Name = "pEnd";
+            this.pEnd.Size = new System.Drawing.Size(16, 16);
+            this.pEnd.TabIndex = 22;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(37, 372);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Выполнен";
+            // 
+            // pInWork
+            // 
+            this.pInWork.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pInWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(207)))), ((int)(((byte)(11)))));
+            this.pInWork.Location = new System.Drawing.Point(99, 370);
+            this.pInWork.Name = "pInWork";
+            this.pInWork.Size = new System.Drawing.Size(16, 16);
+            this.pInWork.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(121, 372);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "В обработке";
+            // 
+            // pCancel
+            // 
+            this.pCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(117)))), ((int)(((byte)(117)))));
+            this.pCancel.Location = new System.Drawing.Point(193, 370);
+            this.pCancel.Name = "pCancel";
+            this.pCancel.Size = new System.Drawing.Size(16, 16);
+            this.pCancel.TabIndex = 22;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(215, 372);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Отменён";
+            // 
+            // btCreateReport
+            // 
+            this.btCreateReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btCreateReport.BackColor = System.Drawing.Color.White;
+            this.btCreateReport.Location = new System.Drawing.Point(912, 4);
+            this.btCreateReport.Name = "btCreateReport";
+            this.btCreateReport.Size = new System.Drawing.Size(32, 32);
+            this.btCreateReport.TabIndex = 30;
+            this.btCreateReport.UseVisualStyleBackColor = false;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(766, 366);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 13);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Дата доставки";
+            // 
+            // tbDeliveryDate
+            // 
+            this.tbDeliveryDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDeliveryDate.Enabled = false;
+            this.tbDeliveryDate.Location = new System.Drawing.Point(855, 362);
+            this.tbDeliveryDate.Name = "tbDeliveryDate";
+            this.tbDeliveryDate.Size = new System.Drawing.Size(117, 20);
+            this.tbDeliveryDate.TabIndex = 26;
+            this.tbDeliveryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(735, 390);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(114, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Затраты на доставку";
+            // 
+            // tbDeliveryCost
+            // 
+            this.tbDeliveryCost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDeliveryCost.Enabled = false;
+            this.tbDeliveryCost.Location = new System.Drawing.Point(855, 386);
+            this.tbDeliveryCost.Name = "tbDeliveryCost";
+            this.tbDeliveryCost.Size = new System.Drawing.Size(85, 20);
+            this.tbDeliveryCost.TabIndex = 26;
+            this.tbDeliveryCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(946, 390);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "руб.";
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(376, 10);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(141, 21);
+            this.cmbStatus.TabIndex = 31;
+            this.cmbStatus.SelectionChangeCommitted += new System.EventHandler(this.cmbStatus_SelectionChangeCommitted);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(279, 14);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(91, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Статусы заказа:";
             // 
             // frmViewOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 527);
+            this.Controls.Add(this.cmbStatus);
+            this.Controls.Add(this.btCreateReport);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.btnAllReport);
+            this.Controls.Add(this.tbDeliveryCost);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.tbDeliveryDate);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.tbSumOrders);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCheck);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.pCancel);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.pInWork);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.pEnd);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -564,6 +762,7 @@
             this.Controls.Add(this.tbComment);
             this.Controls.Add(this.lblCommentOrder);
             this.Controls.Add(this.tbCommentOrder);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.lblDateEnd);
             this.Controls.Add(this.lblDateStart);
             this.Controls.Add(this.dtpEnd);
@@ -630,6 +829,24 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.ToolStripMenuItem историяСтатусовЗаказаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem изменитьСтоимостьДоставкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem заказВОбработкеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem заказВыполненToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem заказОтменёнToolStripMenuItem;
+        private System.Windows.Forms.Panel pEnd;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pInWork;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel pCancel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btCreateReport;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tbDeliveryDate;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbDeliveryCost;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbStatus;
+        private System.Windows.Forms.Label label10;
     }
 }
 

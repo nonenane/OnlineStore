@@ -89,3 +89,26 @@ C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.pdb
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.workWithStatus.frmJournalStatusOrder.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.dll.config
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.dll
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.pdb
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\Interop.Excel.dll
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\Interop.Microsoft.Office.Core.dll
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\stdole.dll
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csprojAssemblyReference.cache
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Check.frmAddCheck.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Check.frmView.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmAddTovar.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCheck.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmPackage.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmViewContentOrder.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmViewOrders.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Properties.Resources.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.workWithStatus.frmJournalStatusOrder.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.GenerateResource.cache
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.CoreCompileInputs.cache
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.CopyComplete
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.dll
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.pdb
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeStatus.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeSummaDelivery.resources
