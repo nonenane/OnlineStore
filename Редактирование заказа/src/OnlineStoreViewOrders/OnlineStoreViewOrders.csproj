@@ -103,6 +103,12 @@
     <Compile Include="frmChangeSummaDelivery.Designer.cs">
       <DependentUpon>frmChangeSummaDelivery.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCreateReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateReport.Designer.cs">
+      <DependentUpon>frmCreateReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPackage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmChangeSummaDelivery.resx">
       <DependentUpon>frmChangeSummaDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateReport.resx">
+      <DependentUpon>frmCreateReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPackage.resx">
       <DependentUpon>frmPackage.cs</DependentUpon>

@@ -86,7 +86,7 @@ namespace OnlineStoreViewOrders
             decimal? DeliveriCost = null;
             if (tbSumma.Visible)
             {
-                DeliveriCost = decimal.Parse(tbSumma.Text);
+                DeliveriCost = decimal.Parse(tbSumma.Text.Replace(".", ","));
                 if (DeliveriCost == 0) {
                     MessageBox.Show($"Необходимо указать \"{label3.Text}\" отличные от 0", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     tbSumma.Focus();
@@ -102,10 +102,55 @@ namespace OnlineStoreViewOrders
             string commentOrder = tbComment.Text.Trim();
 
             DataTable dtResult = Config.connect.setStatusOrder(idtOrder, DeliveriCost, DeliveryDate, id_status, commentOrder);
+
+            if (id_status == 3)
+            {
+                int countPackage = getCountPackage(idtOrder);
+                Config.connect.Set_tOrderPackage(countPackage, idtOrder);
+            }
+
             isEditData = false;
             MessageBox.Show("Данные сохранены.", "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;
         }
+
+
+        private int getCountPackage(int id_tOrder)
+        {
+          int countPackage = 0;
+          DataTable  dtCheck = Config.connect.GetCheckvsOrder(id_tOrder);
+
+            if (dtCheck != null && dtCheck.Rows.Count > 0)
+            {
+
+                DataTable dtTemp = dtCheck.AsEnumerable().Where(r => r.Field<bool>("isPackage") == true).Count() > 0 ?
+                     dtCheck.AsEnumerable().Where(r => r.Field<bool>("isPackage") == true).CopyToDataTable() : null;
+                DataTable dtPack = null;
+                if (dtTemp != null && dtTemp.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dtTemp.Rows)
+                    {
+                        if (dtPack == null)
+                            dtPack = Config.connect.getPackage(int.Parse(dr["CheckNumber"].ToString()),
+                                 DateTime.Parse(dr["DateCheck"].ToString()),
+                                 int.Parse(dr["KassNumber"].ToString()));
+                        else
+                            dtPack.Merge(Config.connect.getPackage(int.Parse(dr["CheckNumber"].ToString()),
+                                DateTime.Parse(dr["DateCheck"].ToString()),
+                                int.Parse(dr["KassNumber"].ToString())));
+                    }
+
+                    int totalCount = 0;
+                    if (dtPack != null && dtPack.Rows.Count > 0)
+                        totalCount = dtPack.AsEnumerable().Sum(r => r.Field<int>("totalCount"));
+                    countPackage = totalCount;
+                }
+                
+            }
+
+            return countPackage;
+        }
+
 
         private void frmChangeStatus_FormClosing(object sender, FormClosingEventArgs e)
         {

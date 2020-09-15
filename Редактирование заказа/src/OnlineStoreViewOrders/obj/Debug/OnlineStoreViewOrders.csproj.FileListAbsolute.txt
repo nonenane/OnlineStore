@@ -112,3 +112,6 @@ D:\Работа\OnlineStore\Редактирование заказа\src\Online
 D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.pdb
 D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeStatus.resources
 D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeSummaDelivery.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeStatus.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeSummaDelivery.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCreateReport.resources

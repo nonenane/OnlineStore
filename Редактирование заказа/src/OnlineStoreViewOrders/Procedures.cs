@@ -298,6 +298,17 @@ namespace OnlineStoreViewOrders
             return dtResult;
         }
 
+        public DataTable getReportData(DateTime dateStart, DateTime dateEnd,int id_status)
+        {
+            ap.Clear();
+            ap.Add(dateStart.Date);
+            ap.Add(dateEnd.Date);
+            ap.Add(id_status);
+            return executeProcedure("OnlineStore.getReportData",
+                new string[3] { "@dateStart", "@dateEnd", "@id_status" },
+                new DbType[3] { DbType.Date, DbType.Date, DbType.Int32 }, ap);
+        }
+
         #endregion
     }
 }

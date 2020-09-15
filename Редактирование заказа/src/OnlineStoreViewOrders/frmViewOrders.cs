@@ -875,5 +875,10 @@ namespace OnlineStoreViewOrders
         {
             FilterOrders();
         }
+
+        private void btCreateReport_Click(object sender, EventArgs e)
+        {
+            new frmCreateReport().ShowDialog();
+        }
     }
 }
