@@ -215,6 +215,40 @@ namespace OnlineStoreViewOrders
 
         #region "Работа со статусами"
 
+        public DataTable getDeps(bool isAll)
+        {
+            ap.Clear();
+            ap.Add(true);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getDataComboForCategory]",
+                 new string[1] { "@isDep" },
+                 new DbType[1] { DbType.Boolean }, ap);
+
+            if (isAll)
+            {
+                DataColumn col = new DataColumn("isMain", typeof(bool));
+                col.DefaultValue = false;
+                dtResult.Columns.Add(col);
+
+                DataRow newRow = dtResult.NewRow();
+
+                newRow["id"] = 0;
+                newRow["cName"] = "Все Отделы";                
+                newRow["isMain"] = true;
+
+                dtResult.Rows.Add(newRow);                
+                dtResult.DefaultView.Sort = "isMain desc, id asc";
+                dtResult = dtResult.DefaultView.ToTable().Copy();
+            }
+            else
+            {                
+                dtResult.DefaultView.Sort = "id asc";
+                dtResult = dtResult.DefaultView.ToTable().Copy();
+            }
+
+            return dtResult;            
+        }
+
         public DateTime getDate()
         {
             ap.Clear();
@@ -306,6 +340,18 @@ namespace OnlineStoreViewOrders
             ap.Add(id_status);
             return executeProcedure("OnlineStore.getReportData",
                 new string[3] { "@dateStart", "@dateEnd", "@id_status" },
+                new DbType[3] { DbType.Date, DbType.Date, DbType.Int32 }, ap);
+        }
+
+        public DataTable getPopularTovarInfo(DateTime dateStart, DateTime dateEnd, int id_period)
+        {
+            ap.Clear();
+            ap.Add(dateStart.Date);
+            ap.Add(dateEnd.Date);
+            ap.Add(id_period);
+
+            return executeProcedure("OnlineStore.getPopularTovarInfo",
+                new string[3] { "@dateStart", "@dateEnd", "@id_period" },
                 new DbType[3] { DbType.Date, DbType.Date, DbType.Int32 }, ap);
         }
 
