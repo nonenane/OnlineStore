@@ -28,17 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStatistic));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStatistic));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvPeriod = new System.Windows.Forms.DataGridView();
+            this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDateStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDateEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button2 = new System.Windows.Forms.Button();
@@ -79,20 +93,30 @@
             this.btPrintPopularTovar = new System.Windows.Forms.Button();
             this.btGetDataPopularTovar = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.dgvPeriod = new System.Windows.Forms.DataGridView();
-            this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDateStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDateEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dgvStatistic = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStaticCountOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStaticSumOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStaticSumTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatic_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatic_2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatic_3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeriod)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataTovar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPeriod)).BeginInit();
+            this.tabControl2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStatistic)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -108,6 +132,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tabControl2);
             this.tabPage1.Controls.Add(this.dgvPeriod);
             this.tabPage1.Controls.Add(this.radioButton2);
             this.tabPage1.Controls.Add(this.radioButton1);
@@ -116,7 +141,6 @@
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.chart1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -124,6 +148,78 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Статистика";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvPeriod
+            // 
+            this.dgvPeriod.AllowUserToAddRows = false;
+            this.dgvPeriod.AllowUserToDeleteRows = false;
+            this.dgvPeriod.AllowUserToResizeRows = false;
+            this.dgvPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPeriod.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPeriod.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPeriod.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvPeriod.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPeriod.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cName,
+            this.cDateStart,
+            this.cDateEnd,
+            this.cColor});
+            this.dgvPeriod.Location = new System.Drawing.Point(521, 25);
+            this.dgvPeriod.MultiSelect = false;
+            this.dgvPeriod.Name = "dgvPeriod";
+            this.dgvPeriod.ReadOnly = true;
+            this.dgvPeriod.RowHeadersVisible = false;
+            this.dgvPeriod.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPeriod.ShowCellErrors = false;
+            this.dgvPeriod.ShowCellToolTips = false;
+            this.dgvPeriod.ShowEditingIcon = false;
+            this.dgvPeriod.ShowRowErrors = false;
+            this.dgvPeriod.Size = new System.Drawing.Size(581, 87);
+            this.dgvPeriod.TabIndex = 27;
+            this.dgvPeriod.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPeriod_RowPostPaint);
+            this.dgvPeriod.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvPeriod_RowPrePaint);
+            // 
+            // cName
+            // 
+            this.cName.DataPropertyName = "cName";
+            this.cName.HeaderText = "Наименование";
+            this.cName.Name = "cName";
+            this.cName.ReadOnly = true;
+            this.cName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cDateStart
+            // 
+            this.cDateStart.DataPropertyName = "dateStart";
+            this.cDateStart.HeaderText = "Дата начала";
+            this.cDateStart.Name = "cDateStart";
+            this.cDateStart.ReadOnly = true;
+            this.cDateStart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cDateStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cDateEnd
+            // 
+            this.cDateEnd.DataPropertyName = "dateEnd";
+            this.cDateEnd.HeaderText = "Дата окончания";
+            this.cDateEnd.Name = "cDateEnd";
+            this.cDateEnd.ReadOnly = true;
+            this.cDateEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cDateEnd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cColor
+            // 
+            this.cColor.HeaderText = "Цвет";
+            this.cColor.Name = "cColor";
+            this.cColor.ReadOnly = true;
             // 
             // radioButton2
             // 
@@ -357,21 +453,19 @@
             // 
             // chart1
             // 
-            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(8, 124);
+            this.chart1.Location = new System.Drawing.Point(3, 3);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(960, 426);
+            this.chart1.Size = new System.Drawing.Size(946, 394);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -422,14 +516,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDataTovar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDataTovar.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDataTovar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDataTovar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvDataTovar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDataTovar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cPeriod,
@@ -484,10 +578,10 @@
             // 
             this.cPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.cPrice.DataPropertyName = "midPrice";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.cPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.cPrice.DefaultCellStyle = dataGridViewCellStyle12;
             this.cPrice.HeaderText = "Средняя цена продажи";
             this.cPrice.MinimumWidth = 80;
             this.cPrice.Name = "cPrice";
@@ -498,10 +592,10 @@
             // 
             this.cCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.cCount.DataPropertyName = "countTovar";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.cCount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.cCount.DefaultCellStyle = dataGridViewCellStyle13;
             this.cCount.HeaderText = "Кол-во";
             this.cCount.MinimumWidth = 80;
             this.cCount.Name = "cCount";
@@ -512,10 +606,10 @@
             // 
             this.cPrcPopular.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.cPrcPopular.DataPropertyName = "prcBuy";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.cPrcPopular.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.cPrcPopular.DefaultCellStyle = dataGridViewCellStyle14;
             this.cPrcPopular.HeaderText = "Процент популярности";
             this.cPrcPopular.MinimumWidth = 80;
             this.cPrcPopular.Name = "cPrcPopular";
@@ -595,16 +689,45 @@
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // dgvPeriod
+            // tabControl2
             // 
-            this.dgvPeriod.AllowUserToAddRows = false;
-            this.dgvPeriod.AllowUserToDeleteRows = false;
-            this.dgvPeriod.AllowUserToResizeRows = false;
-            this.dgvPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPeriod.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPeriod.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(8, 124);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(960, 426);
+            this.tabControl2.TabIndex = 28;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.chart1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(952, 400);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Диаграмма";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.dgvStatistic);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(952, 400);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Таблица";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dgvStatistic
+            // 
+            this.dgvStatistic.AllowUserToAddRows = false;
+            this.dgvStatistic.AllowUserToDeleteRows = false;
+            this.dgvStatistic.AllowUserToResizeRows = false;
+            this.dgvStatistic.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvStatistic.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -612,60 +735,109 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPeriod.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvPeriod.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPeriod.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cName,
-            this.cDateStart,
-            this.cDateEnd,
-            this.cColor});
-            this.dgvPeriod.Location = new System.Drawing.Point(521, 25);
-            this.dgvPeriod.MultiSelect = false;
-            this.dgvPeriod.Name = "dgvPeriod";
-            this.dgvPeriod.ReadOnly = true;
-            this.dgvPeriod.RowHeadersVisible = false;
-            this.dgvPeriod.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPeriod.ShowCellErrors = false;
-            this.dgvPeriod.ShowCellToolTips = false;
-            this.dgvPeriod.ShowEditingIcon = false;
-            this.dgvPeriod.ShowRowErrors = false;
-            this.dgvPeriod.Size = new System.Drawing.Size(581, 87);
-            this.dgvPeriod.TabIndex = 27;
-            this.dgvPeriod.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPeriod_RowPostPaint);
-            this.dgvPeriod.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvPeriod_RowPrePaint);
+            this.dgvStatistic.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvStatistic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStatistic.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.cStaticCountOrder,
+            this.cStaticSumOrder,
+            this.cStaticSumTransfer,
+            this.cStatic_1,
+            this.cStatic_2,
+            this.cStatic_3});
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvStatistic.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvStatistic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvStatistic.Location = new System.Drawing.Point(3, 3);
+            this.dgvStatistic.MultiSelect = false;
+            this.dgvStatistic.Name = "dgvStatistic";
+            this.dgvStatistic.ReadOnly = true;
+            this.dgvStatistic.RowHeadersVisible = false;
+            this.dgvStatistic.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvStatistic.ShowCellErrors = false;
+            this.dgvStatistic.ShowCellToolTips = false;
+            this.dgvStatistic.ShowEditingIcon = false;
+            this.dgvStatistic.ShowRowErrors = false;
+            this.dgvStatistic.Size = new System.Drawing.Size(946, 394);
+            this.dgvStatistic.TabIndex = 26;
             // 
-            // cName
+            // dataGridViewTextBoxColumn1
             // 
-            this.cName.DataPropertyName = "cName";
-            this.cName.HeaderText = "Наименование";
-            this.cName.Name = "cName";
-            this.cName.ReadOnly = true;
-            this.cName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "namePeriod";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Наименование периода";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 140;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 150;
             // 
-            // cDateStart
+            // cStaticCountOrder
             // 
-            this.cDateStart.DataPropertyName = "dateStart";
-            this.cDateStart.HeaderText = "Дата начала";
-            this.cDateStart.Name = "cDateStart";
-            this.cDateStart.ReadOnly = true;
-            this.cDateStart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cDateStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cStaticCountOrder.DataPropertyName = "cntOrder";
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.cStaticCountOrder.DefaultCellStyle = dataGridViewCellStyle3;
+            this.cStaticCountOrder.HeaderText = "Кол-во заказов";
+            this.cStaticCountOrder.Name = "cStaticCountOrder";
+            this.cStaticCountOrder.ReadOnly = true;
             // 
-            // cDateEnd
+            // cStaticSumOrder
             // 
-            this.cDateEnd.DataPropertyName = "dateEnd";
-            this.cDateEnd.HeaderText = "Дата окончания";
-            this.cDateEnd.Name = "cDateEnd";
-            this.cDateEnd.ReadOnly = true;
-            this.cDateEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.cDateEnd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.cStaticSumOrder.DataPropertyName = "sumOrder";
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.cStaticSumOrder.DefaultCellStyle = dataGridViewCellStyle4;
+            this.cStaticSumOrder.HeaderText = "Сумма Заказов";
+            this.cStaticSumOrder.Name = "cStaticSumOrder";
+            this.cStaticSumOrder.ReadOnly = true;
             // 
-            // cColor
+            // cStaticSumTransfer
             // 
-            this.cColor.HeaderText = "Цвет";
-            this.cColor.Name = "cColor";
-            this.cColor.ReadOnly = true;
+            this.cStaticSumTransfer.DataPropertyName = "SummaDelivery";
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.cStaticSumTransfer.DefaultCellStyle = dataGridViewCellStyle5;
+            this.cStaticSumTransfer.HeaderText = "Стоимость доставки";
+            this.cStaticSumTransfer.Name = "cStaticSumTransfer";
+            this.cStaticSumTransfer.ReadOnly = true;
+            // 
+            // cStatic_1
+            // 
+            this.cStatic_1.DataPropertyName = "DeliveryCost";
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.cStatic_1.DefaultCellStyle = dataGridViewCellStyle6;
+            this.cStatic_1.HeaderText = "Затраты на доставку";
+            this.cStatic_1.Name = "cStatic_1";
+            this.cStatic_1.ReadOnly = true;
+            // 
+            // cStatic_2
+            // 
+            this.cStatic_2.DataPropertyName = "ostDelivery";
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.cStatic_2.DefaultCellStyle = dataGridViewCellStyle7;
+            this.cStatic_2.HeaderText = "Остаток по доставке";
+            this.cStatic_2.Name = "cStatic_2";
+            this.cStatic_2.ReadOnly = true;
+            // 
+            // cStatic_3
+            // 
+            this.cStatic_3.DataPropertyName = "delta";
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.cStatic_3.DefaultCellStyle = dataGridViewCellStyle8;
+            this.cStatic_3.HeaderText = "∆ по чеку";
+            this.cStatic_3.Name = "cStatic_3";
+            this.cStatic_3.ReadOnly = true;
             // 
             // frmStatistic
             // 
@@ -686,6 +858,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeriod)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -695,7 +868,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataTovar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPeriod)).EndInit();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStatistic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -749,5 +925,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cDateStart;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDateEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn cColor;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView dgvStatistic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cStaticCountOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cStaticSumOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cStaticSumTransfer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cStatic_1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cStatic_2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cStatic_3;
     }
 }

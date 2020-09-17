@@ -880,5 +880,10 @@ namespace OnlineStoreViewOrders
         {
             new frmCreateReport().ShowDialog();
         }
+
+        private void btStatistic_Click(object sender, EventArgs e)
+        {
+            new statisticOrder.frmStatistic().ShowDialog();
+        }
     }
 }

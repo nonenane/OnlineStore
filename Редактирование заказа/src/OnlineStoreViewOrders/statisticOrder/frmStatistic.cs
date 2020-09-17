@@ -34,6 +34,8 @@ namespace OnlineStoreViewOrders.statisticOrder
             frmLPeriod.Owner = this;
             dgvDataTovar.AutoGenerateColumns = false;
             dgvPeriod.AutoGenerateColumns = false;
+            dgvStatistic.AutoGenerateColumns = false;
+            updatePeriod();
 
             chart1.Series.Clear();
             chart1.ChartAreas.Clear();
@@ -119,11 +121,21 @@ namespace OnlineStoreViewOrders.statisticOrder
         private DataTable dtPopularTovar;
         private void btGetDataPopularTovar_Click(object sender, EventArgs e)
         {
-            DateTime dateStart = new DateTime(2020, 09, 01);
-            DateTime dateEnd = new DateTime(2020, 09, 20);
-            int id_period = 1;
+            dtPopularTovar = null;
+            foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
+            {
+                int id_period = (int)row["id"];
+                DateTime dateStart = (DateTime)row["dateStart"];
+                DateTime dateEnd = (DateTime)row["dateEnd"];
 
-            dtPopularTovar = Config.connect.getPopularTovarInfo(dateStart, dateEnd, id_period);
+                DataTable dtTmp =  Config.connect.getPopularTovarInfo(dateStart, dateEnd, id_period);
+                if (dtTmp == null || dtTmp.Rows.Count == 0) continue;
+
+                if (dtPopularTovar == null)
+                    dtPopularTovar = dtTmp.Copy();
+                else
+                    dtPopularTovar.Merge(dtTmp);
+            }
             filter();
             dgvDataTovar.DataSource = dtPopularTovar;
         }
@@ -270,9 +282,10 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         #endregion
 
+        #region "Статистика по периодам"
+
         private void button4_Click(object sender, EventArgs e)
-        {
-            
+        {            
             frmLPeriod.Show();
         }
 
@@ -283,6 +296,23 @@ namespace OnlineStoreViewOrders.statisticOrder
                 dgvPeriod.DataSource = rowCollcect.CopyToDataTable();
             else
                 dgvPeriod.DataSource = frmLPeriod.dtData.Clone();
+
+            createPeridoCombobox();
+            frmLPeriod.Hide();
+        }
+
+        public void createPeridoCombobox()
+        {
+            DataTable dtListPeriod = (dgvPeriod.DataSource as DataTable).Copy();
+            DataRow newRow = dtListPeriod.NewRow();
+            newRow["id"] = 0;
+            newRow["cName"] = "Все периоды";
+            dtListPeriod.Rows.Add(newRow);
+            dtListPeriod.DefaultView.Sort = "id asc";
+
+            cmbPeriod.DataSource = dtListPeriod;
+            cmbPeriod.DisplayMember = "cName";
+            cmbPeriod.ValueMember = "id";
         }
 
         private void dgvPeriod_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -328,6 +358,11 @@ namespace OnlineStoreViewOrders.statisticOrder
             chart1.Series.Clear();
             chart1.ChartAreas.Clear();
 
+            if ((dgvPeriod.DataSource as DataTable).Rows.Count == 0 )
+            { return; }
+            getDataStastic();
+
+
             /*
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             
@@ -340,27 +375,82 @@ namespace OnlineStoreViewOrders.statisticOrder
             chart1.ChartAreas.Add(chartArea);
             */
 
+            chart1.ChartAreas.Add("area");
+
+            int[] x = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+            int[] y = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+
+            for (int i = 1; i <= 20; i++)
+            {
+                chart1.Series.Add("series" + i.ToString());
+                //chart1.Series["series" + i.ToString()].Color = Color.FromArgb(255 - y[i] * 20, 0, 255 - y[i] * 10);
+                if (y[i] >= 7)
+                    chart1.Series["series" + i.ToString()].Color = Color.Red;
+                else
+                    chart1.Series["series" + i.ToString()].Color = Color.Blue;
+                chart1.Series["series" + i.ToString()].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                chart1.Series["series" + i.ToString()].Points.AddXY(x[i - 1], y[i - 1]);
+                chart1.Series["series" + i.ToString()].Points.AddXY(x[i], y[i]);
+            }
+
+
             Random rn = new Random();
 
 
-            for (int j = 0; j < 10; j++)
-            {
-                chart1.Series.Add(j.ToString());
-                if (j == 0)
-                    chart1.ChartAreas.Add(j.ToString());
+            //for (int j = 0; j < 10; j++)
+            //{
+            //    chart1.Series.Add(j.ToString());
+            //    if (j == 0)
+            //        chart1.ChartAreas.Add(j.ToString());
 
 
-                string[] labels = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
-                int i = 0;
-                for (double y = 0.1; y < 1; y += 0.1)
-                {
-                    chart1.Series[j].Points.AddXY(i + 1, rn.NextDouble());
-                    if (j == 0)
-                        chart1.ChartAreas[j].AxisX.CustomLabels.Add(new CustomLabel(i, i + 2, labels[i], 0, LabelMarkStyle.Box));
-                    i++;
-                }
-            }
+            //    string[] labels = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
+            //    int i = 0;
+            //    for (double y = 0.1; y < 1; y += 0.1)
+            //    {
+            //        chart1.Series[j].Points.AddXY(i + 1, rn.NextDouble());
+            //        if (j == 0)
+            //            chart1.ChartAreas[j].AxisX.CustomLabels.Add(new CustomLabel(i, i + 2, labels[i], 0, LabelMarkStyle.Box));
+            //        i++;
+            //    }
+            //}
             //iina++;
         }
+        private DataTable dtDataStatic;
+        private void getDataStastic()
+        {
+            dtDataStatic = null;
+            foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
+            {
+                int id_period = (int)row["id"];
+                DateTime dateStart = (DateTime)row["dateStart"];
+                DateTime dateEnd = (DateTime)row["dateEnd"];
+
+                DataTable dtHead = Config.connect.getStasticOrder(dateStart, dateEnd, id_period);
+                DataTable dtBody = Config.connect.getSumOrderWithRCena(dateStart, dateEnd, id_period);
+                
+
+                if (dtHead != null && dtHead.Rows.Count > 0)
+                {
+                    if (dtBody != null && dtBody.Rows.Count > 0)
+                    {
+                        dtHead.Rows[0]["sumResult"] = dtBody.Rows[0]["sumResult"];
+                    }
+
+                    dtHead.Rows[0]["ostDelivery"] = (decimal)dtHead.Rows[0]["SummaDelivery"] - (decimal)dtHead.Rows[0]["DeliveryCost"] - (decimal)dtHead.Rows[0]["sumPackage"];
+                    dtHead.Rows[0]["delta"] = (decimal)dtHead.Rows[0]["sumGoods"] - (decimal)dtHead.Rows[0]["sumResult"];
+                }
+
+
+                if (dtDataStatic == null)
+                    dtDataStatic = dtHead.Copy();
+                else
+                    dtDataStatic.Merge(dtHead);
+            }
+
+            dgvStatistic.DataSource = dtDataStatic;
+        }
+
+        #endregion
     }
 }

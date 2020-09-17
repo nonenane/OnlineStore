@@ -20,6 +20,7 @@ namespace OnlineStoreViewOrders.statisticOrder
 
             dgvDataTovar.AutoGenerateColumns = false;
             dtData = new DataTable();
+            dtData.Columns.Add("id", typeof(int));
             dtData.Columns.Add("isSelect",typeof(bool));
             dtData.Columns.Add("cName", typeof(string));
             dtData.Columns.Add("dateStart", typeof(DateTime));
@@ -28,7 +29,7 @@ namespace OnlineStoreViewOrders.statisticOrder
             dtData.Columns.Add("g", typeof(int));
             dtData.Columns.Add("b", typeof(int));
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 DataRow newRow = dtData.NewRow();
 
@@ -39,6 +40,7 @@ namespace OnlineStoreViewOrders.statisticOrder
                 newRow["r"] = -1;
                 newRow["g"] = -1;
                 newRow["b"] = -1;
+                newRow["id"] = i;
 
                 dtData.Rows.Add(newRow);
             }
@@ -49,7 +51,7 @@ namespace OnlineStoreViewOrders.statisticOrder
         private void btHide_Click(object sender, EventArgs e)
         {
             ((frmStatistic)this.Owner).updatePeriod();
-            this.Hide();
+            //this.Hide();
         }
 
         private void frmListPeriod_FormClosing(object sender, FormClosingEventArgs e)
