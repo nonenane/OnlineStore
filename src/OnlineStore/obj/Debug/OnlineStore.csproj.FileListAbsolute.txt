@@ -269,3 +269,4 @@ D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.exe
 D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.pdb
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Interop.WIA.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.csproj.ResolveComReference.cache
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.csproj.ResolveComReference.cache

@@ -117,3 +117,6 @@ C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCreateReport.resources
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmStatistic.resources
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmListPeriod.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCreateReport.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmListPeriod.resources
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmStatistic.resources

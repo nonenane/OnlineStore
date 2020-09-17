@@ -416,6 +416,7 @@ namespace OnlineStoreViewOrders.statisticOrder
             //}
             //iina++;
         }
+  
         private DataTable dtDataStatic;
         private void getDataStastic()
         {
@@ -452,5 +453,40 @@ namespace OnlineStoreViewOrders.statisticOrder
         }
 
         #endregion
+
+        class legends
+        {
+            public legends()
+            { }
+            public string name { set; get; }
+            public Color color { set; get; }
+        }
+
+        private List<legends> listLegends;
+
+        private void chbCountOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+
+            chart1.ChartAreas.Add("0");
+            foreach (Control cnt in gLegends.Controls)
+            {
+                if (cnt is CheckBox)
+                {
+                    CheckBox checkBox = (cnt as CheckBox);
+                    if (checkBox.Checked)
+                    {
+                        Series ser = new Series();
+                        ser.Name = checkBox.Name.Replace("chb", "ser");
+                        ser.LegendText = checkBox.Text;
+                        ser.Color = gLegends.Controls[checkBox.Name.Replace("chb", "p")].BackColor;
+                        chart1.Series.Add(ser);
+                    }
+                }
+            }           
+        }
+
+
     }
 }

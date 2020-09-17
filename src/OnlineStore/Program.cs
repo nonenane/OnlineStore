@@ -38,8 +38,8 @@ namespace OnlineStore
                     if (new List<string>(new string[] { "ркв", "кд", "пр" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode.ToLower()))
                     {
 
-                        //Application.Run(new OnlineStoreViewOrders.statisticOrder.frmStatistic());
-                        Application.Run(new frmMain());
+                        Application.Run(new OnlineStoreViewOrders.statisticOrder.frmStatistic());
+                        //Application.Run(new frmMain());
                         //Application.Run(new dictonaryCategory.frmListCategory());
                         //Application.Run(new dictonatyTovar.frmAddTovar());
                     }

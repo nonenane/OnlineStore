@@ -28,15 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStatistic));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -46,8 +40,26 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStatistic));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dgvStatistic = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStaticCountOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStaticSumOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStaticSumTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatic_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatic_2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatic_3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPeriod = new System.Windows.Forms.DataGridView();
             this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cDateStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,22 +72,21 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.gLegends = new System.Windows.Forms.GroupBox();
+            this.pDeltaNote = new System.Windows.Forms.Panel();
+            this.pResultDelivery = new System.Windows.Forms.Panel();
+            this.pDeliveryCost = new System.Windows.Forms.Panel();
+            this.pPriceDelivery = new System.Windows.Forms.Panel();
+            this.pSumOrder = new System.Windows.Forms.Panel();
+            this.pCountOrder = new System.Windows.Forms.Panel();
+            this.chbDeltaNote = new System.Windows.Forms.CheckBox();
+            this.chbResultDelivery = new System.Windows.Forms.CheckBox();
+            this.chbDeliveryCost = new System.Windows.Forms.CheckBox();
+            this.chbPriceDelivery = new System.Windows.Forms.CheckBox();
+            this.chbSumOrder = new System.Windows.Forms.CheckBox();
+            this.chbCountOrder = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tbNameTovar = new System.Windows.Forms.TextBox();
             this.tbEan = new System.Windows.Forms.TextBox();
@@ -93,30 +104,19 @@
             this.btPrintPopularTovar = new System.Windows.Forms.Button();
             this.btGetDataPopularTovar = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dgvStatistic = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStaticCountOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStaticSumOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStaticSumTransfer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStatic_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStatic_2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStatic_3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPeriod)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDataTovar)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStatistic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeriod)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.gLegends.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataTovar)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -139,7 +139,7 @@
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.btDataStatistic);
             this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.gLegends);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -148,6 +148,174 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Статистика";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(8, 124);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(960, 426);
+            this.tabControl2.TabIndex = 28;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.chart1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(952, 400);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Диаграмма";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(3, 3);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(946, 394);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.dgvStatistic);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(952, 400);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Таблица";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dgvStatistic
+            // 
+            this.dgvStatistic.AllowUserToAddRows = false;
+            this.dgvStatistic.AllowUserToDeleteRows = false;
+            this.dgvStatistic.AllowUserToResizeRows = false;
+            this.dgvStatistic.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvStatistic.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStatistic.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvStatistic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStatistic.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.cStaticCountOrder,
+            this.cStaticSumOrder,
+            this.cStaticSumTransfer,
+            this.cStatic_1,
+            this.cStatic_2,
+            this.cStatic_3});
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvStatistic.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvStatistic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvStatistic.Location = new System.Drawing.Point(3, 3);
+            this.dgvStatistic.MultiSelect = false;
+            this.dgvStatistic.Name = "dgvStatistic";
+            this.dgvStatistic.ReadOnly = true;
+            this.dgvStatistic.RowHeadersVisible = false;
+            this.dgvStatistic.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvStatistic.ShowCellErrors = false;
+            this.dgvStatistic.ShowCellToolTips = false;
+            this.dgvStatistic.ShowEditingIcon = false;
+            this.dgvStatistic.ShowRowErrors = false;
+            this.dgvStatistic.Size = new System.Drawing.Size(946, 394);
+            this.dgvStatistic.TabIndex = 26;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "namePeriod";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Наименование периода";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 140;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 150;
+            // 
+            // cStaticCountOrder
+            // 
+            this.cStaticCountOrder.DataPropertyName = "cntOrder";
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.cStaticCountOrder.DefaultCellStyle = dataGridViewCellStyle3;
+            this.cStaticCountOrder.HeaderText = "Кол-во заказов";
+            this.cStaticCountOrder.Name = "cStaticCountOrder";
+            this.cStaticCountOrder.ReadOnly = true;
+            // 
+            // cStaticSumOrder
+            // 
+            this.cStaticSumOrder.DataPropertyName = "sumOrder";
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.cStaticSumOrder.DefaultCellStyle = dataGridViewCellStyle4;
+            this.cStaticSumOrder.HeaderText = "Сумма Заказов";
+            this.cStaticSumOrder.Name = "cStaticSumOrder";
+            this.cStaticSumOrder.ReadOnly = true;
+            // 
+            // cStaticSumTransfer
+            // 
+            this.cStaticSumTransfer.DataPropertyName = "SummaDelivery";
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.cStaticSumTransfer.DefaultCellStyle = dataGridViewCellStyle5;
+            this.cStaticSumTransfer.HeaderText = "Стоимость доставки";
+            this.cStaticSumTransfer.Name = "cStaticSumTransfer";
+            this.cStaticSumTransfer.ReadOnly = true;
+            // 
+            // cStatic_1
+            // 
+            this.cStatic_1.DataPropertyName = "DeliveryCost";
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.cStatic_1.DefaultCellStyle = dataGridViewCellStyle6;
+            this.cStatic_1.HeaderText = "Затраты на доставку";
+            this.cStatic_1.Name = "cStatic_1";
+            this.cStatic_1.ReadOnly = true;
+            // 
+            // cStatic_2
+            // 
+            this.cStatic_2.DataPropertyName = "ostDelivery";
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.cStatic_2.DefaultCellStyle = dataGridViewCellStyle7;
+            this.cStatic_2.HeaderText = "Остаток по доставке";
+            this.cStatic_2.Name = "cStatic_2";
+            this.cStatic_2.ReadOnly = true;
+            // 
+            // cStatic_3
+            // 
+            this.cStatic_3.DataPropertyName = "delta";
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.cStatic_3.DefaultCellStyle = dataGridViewCellStyle8;
+            this.cStatic_3.HeaderText = "∆ по чеку";
+            this.cStatic_3.Name = "cStatic_3";
+            this.cStatic_3.ReadOnly = true;
             // 
             // dgvPeriod
             // 
@@ -298,135 +466,141 @@
             this.radioButton4.Text = "Параметры";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // gLegends
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.panel6);
-            this.groupBox2.Controls.Add(this.panel5);
-            this.groupBox2.Controls.Add(this.panel4);
-            this.groupBox2.Controls.Add(this.panel3);
-            this.groupBox2.Controls.Add(this.panel2);
-            this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Controls.Add(this.checkBox6);
-            this.groupBox2.Controls.Add(this.checkBox5);
-            this.groupBox2.Controls.Add(this.checkBox4);
-            this.groupBox2.Controls.Add(this.checkBox3);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Location = new System.Drawing.Point(974, 124);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(185, 164);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Настройки легенды";
+            this.gLegends.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gLegends.Controls.Add(this.pDeltaNote);
+            this.gLegends.Controls.Add(this.pResultDelivery);
+            this.gLegends.Controls.Add(this.pDeliveryCost);
+            this.gLegends.Controls.Add(this.pPriceDelivery);
+            this.gLegends.Controls.Add(this.pSumOrder);
+            this.gLegends.Controls.Add(this.pCountOrder);
+            this.gLegends.Controls.Add(this.chbDeltaNote);
+            this.gLegends.Controls.Add(this.chbResultDelivery);
+            this.gLegends.Controls.Add(this.chbDeliveryCost);
+            this.gLegends.Controls.Add(this.chbPriceDelivery);
+            this.gLegends.Controls.Add(this.chbSumOrder);
+            this.gLegends.Controls.Add(this.chbCountOrder);
+            this.gLegends.Location = new System.Drawing.Point(974, 124);
+            this.gLegends.Name = "gLegends";
+            this.gLegends.Size = new System.Drawing.Size(185, 164);
+            this.gLegends.TabIndex = 20;
+            this.gLegends.TabStop = false;
+            this.gLegends.Text = "Настройки легенды";
             // 
-            // panel6
+            // pDeltaNote
             // 
-            this.panel6.BackColor = System.Drawing.Color.Yellow;
-            this.panel6.Location = new System.Drawing.Point(10, 133);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(19, 19);
-            this.panel6.TabIndex = 1;
+            this.pDeltaNote.BackColor = System.Drawing.Color.Yellow;
+            this.pDeltaNote.Location = new System.Drawing.Point(10, 133);
+            this.pDeltaNote.Name = "pDeltaNote";
+            this.pDeltaNote.Size = new System.Drawing.Size(19, 19);
+            this.pDeltaNote.TabIndex = 1;
             // 
-            // panel5
+            // pResultDelivery
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(80)))));
-            this.panel5.Location = new System.Drawing.Point(10, 110);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(19, 19);
-            this.panel5.TabIndex = 1;
+            this.pResultDelivery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(80)))));
+            this.pResultDelivery.Location = new System.Drawing.Point(10, 110);
+            this.pResultDelivery.Name = "pResultDelivery";
+            this.pResultDelivery.Size = new System.Drawing.Size(19, 19);
+            this.pResultDelivery.TabIndex = 1;
             // 
-            // panel4
+            // pDeliveryCost
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(117)))), ((int)(((byte)(117)))));
-            this.panel4.Location = new System.Drawing.Point(10, 87);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(19, 19);
-            this.panel4.TabIndex = 1;
+            this.pDeliveryCost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(117)))), ((int)(((byte)(117)))));
+            this.pDeliveryCost.Location = new System.Drawing.Point(10, 87);
+            this.pDeliveryCost.Name = "pDeliveryCost";
+            this.pDeliveryCost.Size = new System.Drawing.Size(19, 19);
+            this.pDeliveryCost.TabIndex = 1;
             // 
-            // panel3
+            // pPriceDelivery
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
-            this.panel3.Location = new System.Drawing.Point(10, 64);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(19, 19);
-            this.panel3.TabIndex = 1;
+            this.pPriceDelivery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
+            this.pPriceDelivery.Location = new System.Drawing.Point(10, 64);
+            this.pPriceDelivery.Name = "pPriceDelivery";
+            this.pPriceDelivery.Size = new System.Drawing.Size(19, 19);
+            this.pPriceDelivery.TabIndex = 1;
             // 
-            // panel2
+            // pSumOrder
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.panel2.Location = new System.Drawing.Point(10, 41);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(19, 19);
-            this.panel2.TabIndex = 1;
+            this.pSumOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.pSumOrder.Location = new System.Drawing.Point(10, 41);
+            this.pSumOrder.Name = "pSumOrder";
+            this.pSumOrder.Size = new System.Drawing.Size(19, 19);
+            this.pSumOrder.TabIndex = 1;
             // 
-            // panel1
+            // pCountOrder
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(240)))));
-            this.panel1.Location = new System.Drawing.Point(10, 18);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(19, 19);
-            this.panel1.TabIndex = 1;
+            this.pCountOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(240)))));
+            this.pCountOrder.Location = new System.Drawing.Point(10, 18);
+            this.pCountOrder.Name = "pCountOrder";
+            this.pCountOrder.Size = new System.Drawing.Size(19, 19);
+            this.pCountOrder.TabIndex = 1;
             // 
-            // checkBox6
+            // chbDeltaNote
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(35, 134);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(73, 17);
-            this.checkBox6.TabIndex = 0;
-            this.checkBox6.Text = "∆ по чеку";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.chbDeltaNote.AutoSize = true;
+            this.chbDeltaNote.Location = new System.Drawing.Point(35, 134);
+            this.chbDeltaNote.Name = "chbDeltaNote";
+            this.chbDeltaNote.Size = new System.Drawing.Size(73, 17);
+            this.chbDeltaNote.TabIndex = 0;
+            this.chbDeltaNote.Text = "∆ по чеку";
+            this.chbDeltaNote.UseVisualStyleBackColor = true;
+            this.chbDeltaNote.CheckedChanged += new System.EventHandler(this.chbCountOrder_CheckedChanged);
             // 
-            // checkBox5
+            // chbResultDelivery
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(35, 111);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(133, 17);
-            this.checkBox5.TabIndex = 0;
-            this.checkBox5.Text = "Остаток по доставке";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.chbResultDelivery.AutoSize = true;
+            this.chbResultDelivery.Location = new System.Drawing.Point(35, 111);
+            this.chbResultDelivery.Name = "chbResultDelivery";
+            this.chbResultDelivery.Size = new System.Drawing.Size(133, 17);
+            this.chbResultDelivery.TabIndex = 0;
+            this.chbResultDelivery.Text = "Остаток по доставке";
+            this.chbResultDelivery.UseVisualStyleBackColor = true;
+            this.chbResultDelivery.CheckedChanged += new System.EventHandler(this.chbCountOrder_CheckedChanged);
             // 
-            // checkBox4
+            // chbDeliveryCost
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(35, 88);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(133, 17);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "Затраты на доставку";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chbDeliveryCost.AutoSize = true;
+            this.chbDeliveryCost.Location = new System.Drawing.Point(35, 88);
+            this.chbDeliveryCost.Name = "chbDeliveryCost";
+            this.chbDeliveryCost.Size = new System.Drawing.Size(133, 17);
+            this.chbDeliveryCost.TabIndex = 0;
+            this.chbDeliveryCost.Text = "Затраты на доставку";
+            this.chbDeliveryCost.UseVisualStyleBackColor = true;
+            this.chbDeliveryCost.CheckedChanged += new System.EventHandler(this.chbCountOrder_CheckedChanged);
             // 
-            // checkBox3
+            // chbPriceDelivery
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(35, 65);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(131, 17);
-            this.checkBox3.TabIndex = 0;
-            this.checkBox3.Text = "Стоимость доставки";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chbPriceDelivery.AutoSize = true;
+            this.chbPriceDelivery.Location = new System.Drawing.Point(35, 65);
+            this.chbPriceDelivery.Name = "chbPriceDelivery";
+            this.chbPriceDelivery.Size = new System.Drawing.Size(131, 17);
+            this.chbPriceDelivery.TabIndex = 0;
+            this.chbPriceDelivery.Text = "Стоимость доставки";
+            this.chbPriceDelivery.UseVisualStyleBackColor = true;
+            this.chbPriceDelivery.CheckedChanged += new System.EventHandler(this.chbCountOrder_CheckedChanged);
             // 
-            // checkBox2
+            // chbSumOrder
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(35, 42);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(105, 17);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "Сумма заказов";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chbSumOrder.AutoSize = true;
+            this.chbSumOrder.Location = new System.Drawing.Point(35, 42);
+            this.chbSumOrder.Name = "chbSumOrder";
+            this.chbSumOrder.Size = new System.Drawing.Size(105, 17);
+            this.chbSumOrder.TabIndex = 0;
+            this.chbSumOrder.Text = "Сумма заказов";
+            this.chbSumOrder.UseVisualStyleBackColor = true;
+            this.chbSumOrder.CheckedChanged += new System.EventHandler(this.chbCountOrder_CheckedChanged);
             // 
-            // checkBox1
+            // chbCountOrder
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(35, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(105, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Кол-во заказов";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chbCountOrder.AutoSize = true;
+            this.chbCountOrder.Location = new System.Drawing.Point(35, 19);
+            this.chbCountOrder.Name = "chbCountOrder";
+            this.chbCountOrder.Size = new System.Drawing.Size(105, 17);
+            this.chbCountOrder.TabIndex = 0;
+            this.chbCountOrder.Text = "Кол-во заказов";
+            this.chbCountOrder.UseVisualStyleBackColor = true;
+            this.chbCountOrder.CheckedChanged += new System.EventHandler(this.chbCountOrder_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -450,24 +624,6 @@
             this.button4.TabIndex = 24;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(3, 3);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(946, 394);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
             // 
             // tabPage2
             // 
@@ -689,156 +845,6 @@
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // tabControl2
-            // 
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Location = new System.Drawing.Point(8, 124);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(960, 426);
-            this.tabControl2.TabIndex = 28;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.chart1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(952, 400);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Диаграмма";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.dgvStatistic);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(952, 400);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Таблица";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // dgvStatistic
-            // 
-            this.dgvStatistic.AllowUserToAddRows = false;
-            this.dgvStatistic.AllowUserToDeleteRows = false;
-            this.dgvStatistic.AllowUserToResizeRows = false;
-            this.dgvStatistic.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvStatistic.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvStatistic.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvStatistic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStatistic.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.cStaticCountOrder,
-            this.cStaticSumOrder,
-            this.cStaticSumTransfer,
-            this.cStatic_1,
-            this.cStatic_2,
-            this.cStatic_3});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvStatistic.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvStatistic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStatistic.Location = new System.Drawing.Point(3, 3);
-            this.dgvStatistic.MultiSelect = false;
-            this.dgvStatistic.Name = "dgvStatistic";
-            this.dgvStatistic.ReadOnly = true;
-            this.dgvStatistic.RowHeadersVisible = false;
-            this.dgvStatistic.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvStatistic.ShowCellErrors = false;
-            this.dgvStatistic.ShowCellToolTips = false;
-            this.dgvStatistic.ShowEditingIcon = false;
-            this.dgvStatistic.ShowRowErrors = false;
-            this.dgvStatistic.Size = new System.Drawing.Size(946, 394);
-            this.dgvStatistic.TabIndex = 26;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "namePeriod";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Наименование периода";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 140;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 150;
-            // 
-            // cStaticCountOrder
-            // 
-            this.cStaticCountOrder.DataPropertyName = "cntOrder";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.cStaticCountOrder.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cStaticCountOrder.HeaderText = "Кол-во заказов";
-            this.cStaticCountOrder.Name = "cStaticCountOrder";
-            this.cStaticCountOrder.ReadOnly = true;
-            // 
-            // cStaticSumOrder
-            // 
-            this.cStaticSumOrder.DataPropertyName = "sumOrder";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.cStaticSumOrder.DefaultCellStyle = dataGridViewCellStyle4;
-            this.cStaticSumOrder.HeaderText = "Сумма Заказов";
-            this.cStaticSumOrder.Name = "cStaticSumOrder";
-            this.cStaticSumOrder.ReadOnly = true;
-            // 
-            // cStaticSumTransfer
-            // 
-            this.cStaticSumTransfer.DataPropertyName = "SummaDelivery";
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.cStaticSumTransfer.DefaultCellStyle = dataGridViewCellStyle5;
-            this.cStaticSumTransfer.HeaderText = "Стоимость доставки";
-            this.cStaticSumTransfer.Name = "cStaticSumTransfer";
-            this.cStaticSumTransfer.ReadOnly = true;
-            // 
-            // cStatic_1
-            // 
-            this.cStatic_1.DataPropertyName = "DeliveryCost";
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.cStatic_1.DefaultCellStyle = dataGridViewCellStyle6;
-            this.cStatic_1.HeaderText = "Затраты на доставку";
-            this.cStatic_1.Name = "cStatic_1";
-            this.cStatic_1.ReadOnly = true;
-            // 
-            // cStatic_2
-            // 
-            this.cStatic_2.DataPropertyName = "ostDelivery";
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.cStatic_2.DefaultCellStyle = dataGridViewCellStyle7;
-            this.cStatic_2.HeaderText = "Остаток по доставке";
-            this.cStatic_2.Name = "cStatic_2";
-            this.cStatic_2.ReadOnly = true;
-            // 
-            // cStatic_3
-            // 
-            this.cStatic_3.DataPropertyName = "delta";
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.cStatic_3.DefaultCellStyle = dataGridViewCellStyle8;
-            this.cStatic_3.HeaderText = "∆ по чеку";
-            this.cStatic_3.Name = "cStatic_3";
-            this.cStatic_3.ReadOnly = true;
-            // 
             // frmStatistic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -858,20 +864,20 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStatistic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeriod)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gLegends.ResumeLayout(false);
+            this.gLegends.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataTovar)).EndInit();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStatistic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -902,23 +908,23 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btDataStatistic;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gLegends;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Panel pDeltaNote;
+        private System.Windows.Forms.Panel pResultDelivery;
+        private System.Windows.Forms.Panel pDeliveryCost;
+        private System.Windows.Forms.Panel pPriceDelivery;
+        private System.Windows.Forms.Panel pSumOrder;
+        private System.Windows.Forms.Panel pCountOrder;
+        private System.Windows.Forms.CheckBox chbDeltaNote;
+        private System.Windows.Forms.CheckBox chbResultDelivery;
+        private System.Windows.Forms.CheckBox chbDeliveryCost;
+        private System.Windows.Forms.CheckBox chbPriceDelivery;
+        private System.Windows.Forms.CheckBox chbSumOrder;
+        private System.Windows.Forms.CheckBox chbCountOrder;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dgvPeriod;
         private System.Windows.Forms.DataGridViewTextBoxColumn cName;
