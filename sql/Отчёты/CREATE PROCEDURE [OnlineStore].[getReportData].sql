@@ -65,7 +65,8 @@ ELSE IF @id_status = 3
 			oo.CheckNumber,
 			oo.KassNumber,
 			isnull(oo.Summa,0) as sumNote,
-			(select isnull(sum(isnull(op.Summa,0)),0) from OnlineStore.Check_vs_Order op where op.id_tOrder = o.id and op.isPackage = 1) as sumPackage			
+			(select isnull(sum(isnull(op.Summa,0)),0) from OnlineStore.Check_vs_Order op where op.id_tOrder = o.id and op.isPackage = 1) as sumPackage,
+			t.id_tOrders
 		from 
 			@table t
 			inner join OnlineStore.j_tOrders o on o.id = t.id_tOrders

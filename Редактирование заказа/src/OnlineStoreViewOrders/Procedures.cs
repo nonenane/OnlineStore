@@ -379,6 +379,18 @@ namespace OnlineStoreViewOrders
                 new DbType[3] { DbType.Date, DbType.Date, DbType.Int32 }, ap);
         }
 
+        public DataTable getSumNotesOrderWithRCena(DateTime dateStart, DateTime dateEnd, int id_period)
+        {
+            ap.Clear();
+            ap.Add(dateStart.Date);
+            ap.Add(dateEnd.Date);
+            ap.Add(id_period);
+
+            return executeProcedure("OnlineStore.getSumOrderWithRCena",
+                new string[3] { "@StartDate", "@EndDate", "@id_period" },
+                new DbType[3] { DbType.Date, DbType.Date, DbType.Int32 }, ap);
+        }
+
         #endregion
     }
 }
