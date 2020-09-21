@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,14 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         private void frmStatistic_Load(object sender, EventArgs e)
         {
+            dicCheckBoxVsColumnName.Add("chbCountOrder", "cntOrder");
+            dicCheckBoxVsColumnName.Add("chbSumOrder", "sumOrder");
+            dicCheckBoxVsColumnName.Add("chbPriceDelivery", "SummaDelivery");
+            dicCheckBoxVsColumnName.Add("chbDeliveryCost", "DeliveryCost");
+            dicCheckBoxVsColumnName.Add("chbResultDelivery", "ostDelivery");
+            dicCheckBoxVsColumnName.Add("chbDeltaNote", "delta");
+
+
             DataTable dtDeps = Config.connect.getDeps(true);
             cmbDeps.DataSource = dtDeps;
             cmbDeps.DisplayMember = "cName";
@@ -122,6 +131,14 @@ namespace OnlineStoreViewOrders.statisticOrder
         private void btGetDataPopularTovar_Click(object sender, EventArgs e)
         {
             dtPopularTovar = null;
+
+            if ((dgvPeriod.DataSource as DataTable).Rows.Count == 0)
+            {
+                MessageBox.Show("Необходимо выбрать период выборки!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvDataTovar.DataSource = null;
+                return;
+            }
+
             foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
             {
                 int id_period = (int)row["id"];
@@ -284,8 +301,13 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         #region "Статистика по периодам"
 
+        Dictionary<string, string> dicCheckBoxVsColumnName = new Dictionary<string, string>();
+
         private void button4_Click(object sender, EventArgs e)
-        {            
+        {
+            if (frmLPeriod.WindowState != FormWindowState.Normal)
+                frmLPeriod.WindowState = FormWindowState.Normal;
+            else
             frmLPeriod.Show();
         }
 
@@ -298,7 +320,10 @@ namespace OnlineStoreViewOrders.statisticOrder
                 dgvPeriod.DataSource = frmLPeriod.dtData.Clone();
 
             createPeridoCombobox();
-            frmLPeriod.Hide();
+            paintGraphic();
+            //frmLPeriod.Hide();
+            if (this.WindowState != FormWindowState.Normal)
+                this.Show();
         }
 
         public void createPeridoCombobox()
@@ -359,10 +384,13 @@ namespace OnlineStoreViewOrders.statisticOrder
             chart1.ChartAreas.Clear();
 
             if ((dgvPeriod.DataSource as DataTable).Rows.Count == 0 )
-            { return; }
+            {
+                MessageBox.Show("Необходимо выбрать период выборки!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return; 
+            }
+
             getDataStastic();
-
-
+            return;
             /*
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             
@@ -449,7 +477,108 @@ namespace OnlineStoreViewOrders.statisticOrder
                     dtDataStatic.Merge(dtHead);
             }
 
+            if (dtDataStatic == null || dtDataStatic.Rows.Count == 0)
+            {
+                dgvStatistic.DataSource = null;
+                return;
+            }
+
             dgvStatistic.DataSource = dtDataStatic;
+
+            paintGraphic();
+        }
+
+        private void paintGraphic()
+        {
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+
+            if (dtDataStatic == null || dtDataStatic.Rows.Count == 0) return;
+
+            Random rn = new Random();
+            if (rbParamet.Checked)
+            {
+                chart1.ChartAreas.Add("0");
+
+                foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
+                {
+                    Series ser = new Series();
+                    ser.Name = $"ser{row["id"]}";
+                    ser.LegendText = $"{row["cName"]}";
+                    ser.Color = Color.FromArgb((int)row["r"], (int)row["g"], (int)row["b"]);
+                    chart1.Series.Add(ser);
+                }
+
+                int indexSeries = 0;                
+
+                foreach (Control cnt in gLegends.Controls)
+                {
+                    if (cnt is CheckBox)
+                    {
+                        CheckBox checkBox = (cnt as CheckBox);
+                        if (checkBox.Checked)
+                        {                         
+                            foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
+                            {
+                                EnumerableRowCollection<DataRow> rowCollect = dtDataStatic.AsEnumerable()
+                                    .Where(r => r.Field<int>("id_period") == (int)row["id"]);
+                                if (rowCollect.Count() > 0)
+                                    chart1.Series[$"ser{row["id"]}"].Points.AddXY(indexSeries + 1, rowCollect.First()[dicCheckBoxVsColumnName[checkBox.Name]]);
+                                else
+                                    chart1.Series[$"ser{row["id"]}"].Points.AddXY(indexSeries + 1, 0);
+                            }
+
+                            chart1.ChartAreas[0].AxisX.CustomLabels.Add(new CustomLabel(indexSeries, indexSeries + 2, checkBox.Text, indexSeries % 2, LabelMarkStyle.None));
+                            indexSeries++;
+                        }
+                    }
+                }
+            }
+            else if (rbPeriod.Checked)
+            {
+                chart1.ChartAreas.Add("0");
+
+                foreach (Control cnt in gLegends.Controls)
+                {
+                    if (cnt is CheckBox)
+                    {
+                        CheckBox checkBox = (cnt as CheckBox);
+                        if (checkBox.Checked)
+                        {
+                            Series ser = new Series();
+                            ser.Name = checkBox.Name.Replace("chb", "ser");
+                            ser.LegendText = checkBox.Text;
+                            ser.Color = gLegends.Controls[checkBox.Name.Replace("chb", "p")].BackColor;
+                            chart1.Series.Add(ser);
+                        }
+                    }
+                }
+                int i = 0;
+                DataTable dtData = (dgvPeriod.DataSource as DataTable);
+                foreach (DataRow row in dtData.Rows)
+                {
+                    EnumerableRowCollection<DataRow> rowCollect = dtDataStatic.AsEnumerable()
+                                .Where(r => r.Field<int>("id_period") == (int)row["id"]);
+                    //if (rowCollect.Count() == 0) continue;
+
+                    foreach (Series ser in chart1.Series)
+                    {
+                        string nameSeries = ser.Name;
+                        if (rowCollect.Count() == 0)
+                            chart1.Series[nameSeries].Points.AddXY(i + 1, 0);
+                        else                                
+                            chart1.Series[nameSeries].Points.AddXY(i + 1, rowCollect.First()[dicCheckBoxVsColumnName[nameSeries.Replace("ser", "chb")]]);
+                    }
+                    i++;
+                }
+
+                i = 0;
+                foreach (DataRow row in dtData.Rows)
+                {
+                    chart1.ChartAreas[0].AxisX.CustomLabels.Add(new CustomLabel(i, i + 2, (string)row["cName"], i % 2, LabelMarkStyle.None));
+                    i++;
+                }
+            }
         }
 
         #endregion
@@ -466,27 +595,31 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         private void chbCountOrder_CheckedChanged(object sender, EventArgs e)
         {
-            chart1.Series.Clear();
-            chart1.ChartAreas.Clear();
+            paintGraphic();
+            //chart1.Series.Clear();
+            //chart1.ChartAreas.Clear();
 
-            chart1.ChartAreas.Add("0");
-            foreach (Control cnt in gLegends.Controls)
-            {
-                if (cnt is CheckBox)
-                {
-                    CheckBox checkBox = (cnt as CheckBox);
-                    if (checkBox.Checked)
-                    {
-                        Series ser = new Series();
-                        ser.Name = checkBox.Name.Replace("chb", "ser");
-                        ser.LegendText = checkBox.Text;
-                        ser.Color = gLegends.Controls[checkBox.Name.Replace("chb", "p")].BackColor;
-                        chart1.Series.Add(ser);
-                    }
-                }
-            }           
+            //chart1.ChartAreas.Add("0");
+            //foreach (Control cnt in gLegends.Controls)
+            //{
+            //    if (cnt is CheckBox)
+            //    {
+            //        CheckBox checkBox = (cnt as CheckBox);
+            //        if (checkBox.Checked)
+            //        {
+            //            Series ser = new Series();
+            //            ser.Name = checkBox.Name.Replace("chb", "ser");
+            //            ser.LegendText = checkBox.Text;
+            //            ser.Color = gLegends.Controls[checkBox.Name.Replace("chb", "p")].BackColor;
+            //            chart1.Series.Add(ser);
+            //        }
+            //    }
+            //}           
         }
 
-
+        private void rbParamet_CheckedChanged(object sender, EventArgs e)
+        {
+            paintGraphic();
+        }
     }
 }

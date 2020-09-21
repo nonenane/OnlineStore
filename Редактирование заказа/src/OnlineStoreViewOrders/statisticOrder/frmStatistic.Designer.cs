@@ -65,13 +65,11 @@
             this.cDateStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cDateEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button2 = new System.Windows.Forms.Button();
             this.btDataStatistic = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.rbPeriod = new System.Windows.Forms.RadioButton();
+            this.rbParamet = new System.Windows.Forms.RadioButton();
             this.gLegends = new System.Windows.Forms.GroupBox();
             this.pDeltaNote = new System.Windows.Forms.Panel();
             this.pResultDelivery = new System.Windows.Forms.Panel();
@@ -134,8 +132,6 @@
             // 
             this.tabPage1.Controls.Add(this.tabControl2);
             this.tabPage1.Controls.Add(this.dgvPeriod);
-            this.tabPage1.Controls.Add(this.radioButton2);
-            this.tabPage1.Controls.Add(this.radioButton1);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.btDataStatistic);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -389,28 +385,6 @@
             this.cColor.Name = "cColor";
             this.cColor.ReadOnly = true;
             // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(165, 38);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(68, 17);
-            this.radioButton2.TabIndex = 23;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Таблица";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(165, 15);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 17);
-            this.radioButton1.TabIndex = 23;
-            this.radioButton1.Text = "Диаграмма";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Transparent;
@@ -435,8 +409,8 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.radioButton3);
-            this.groupBox3.Controls.Add(this.radioButton4);
+            this.groupBox3.Controls.Add(this.rbPeriod);
+            this.groupBox3.Controls.Add(this.rbParamet);
             this.groupBox3.Location = new System.Drawing.Point(974, 294);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(185, 77);
@@ -444,27 +418,28 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Тип диаграммы";
             // 
-            // radioButton3
+            // rbPeriod
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 42);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(71, 17);
-            this.radioButton3.TabIndex = 24;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Периоды";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbPeriod.AutoSize = true;
+            this.rbPeriod.Checked = true;
+            this.rbPeriod.Location = new System.Drawing.Point(6, 42);
+            this.rbPeriod.Name = "rbPeriod";
+            this.rbPeriod.Size = new System.Drawing.Size(71, 17);
+            this.rbPeriod.TabIndex = 24;
+            this.rbPeriod.TabStop = true;
+            this.rbPeriod.Text = "Периоды";
+            this.rbPeriod.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rbParamet
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(6, 19);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(84, 17);
-            this.radioButton4.TabIndex = 25;
-            this.radioButton4.Text = "Параметры";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rbParamet.AutoSize = true;
+            this.rbParamet.Location = new System.Drawing.Point(6, 19);
+            this.rbParamet.Name = "rbParamet";
+            this.rbParamet.Size = new System.Drawing.Size(84, 17);
+            this.rbParamet.TabIndex = 25;
+            this.rbParamet.Text = "Параметры";
+            this.rbParamet.UseVisualStyleBackColor = true;
+            this.rbParamet.CheckedChanged += new System.EventHandler(this.rbParamet_CheckedChanged);
             // 
             // gLegends
             // 
@@ -859,11 +834,10 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmStatistic";
+            this.Text = "Статистика по заказам";
             this.Load += new System.EventHandler(this.frmStatistic_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
@@ -909,10 +883,8 @@
         private System.Windows.Forms.Button btDataStatistic;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox gLegends;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton rbPeriod;
+        private System.Windows.Forms.RadioButton rbParamet;
         private System.Windows.Forms.Panel pDeltaNote;
         private System.Windows.Forms.Panel pResultDelivery;
         private System.Windows.Forms.Panel pDeliveryCost;

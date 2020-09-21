@@ -89,7 +89,7 @@
             this.dgvDataTovar.ShowRowErrors = false;
             this.dgvDataTovar.Size = new System.Drawing.Size(471, 354);
             this.dgvDataTovar.TabIndex = 26;
-            this.dgvDataTovar.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataTovar_CellClick);
+            this.dgvDataTovar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataTovar_CellDoubleClick);
             this.dgvDataTovar.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDataTovar_RowPostPaint);
             this.dgvDataTovar.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvDataTovar_RowPrePaint);
             // 
@@ -132,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 416);
+            this.ClientSize = new System.Drawing.Size(491, 412);
             this.ControlBox = false;
             this.Controls.Add(this.dgvDataTovar);
             this.Controls.Add(this.btHide);

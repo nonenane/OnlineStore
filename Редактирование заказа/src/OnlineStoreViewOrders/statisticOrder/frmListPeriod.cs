@@ -37,9 +37,9 @@ namespace OnlineStoreViewOrders.statisticOrder
                 newRow["cName"] = $"П - {i}";
                 newRow["dateStart"] = Config.connect.getDate().AddDays(-1).Date;
                 newRow["dateEnd"] = Config.connect.getDate().Date;
-                newRow["r"] = -1;
-                newRow["g"] = -1;
-                newRow["b"] = -1;
+                newRow["r"] = 255;
+                newRow["g"] = 255;
+                newRow["b"] = 255;
                 newRow["id"] = i;
 
                 dtData.Rows.Add(newRow);
@@ -50,13 +50,15 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         private void btHide_Click(object sender, EventArgs e)
         {
+            Close();
             ((frmStatistic)this.Owner).updatePeriod();
-            //this.Hide();
+            
         }
 
         private void frmListPeriod_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Hide();
+            //this.Hide();
+            WindowState = FormWindowState.Minimized;
             e.Cancel = true;
         }
 
@@ -338,12 +340,12 @@ namespace OnlineStoreViewOrders.statisticOrder
             }
         }
 
-        private void dgvDataTovar_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDataTovar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1) return;
 
             if (e.ColumnIndex == cColor.Index)
-            {                
+            {
                 colorDialog1.AllowFullOpen = true;
 
                 if (colorDialog1.ShowDialog() == DialogResult.OK)
