@@ -46,7 +46,8 @@ BEGIN
 		sum(a.sumGoods) as sumGoods,
 		0.0 as sumResult,
 		0.0 as ostDelivery,
-		0.0 as delta
+		0.0 as delta,
+		'' as namePeriod
 	from(
 			Select 
 				@id_period as id_period,

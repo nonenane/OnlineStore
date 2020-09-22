@@ -457,7 +457,7 @@ namespace OnlineStoreViewOrders.statisticOrder
 
                 DataTable dtHead = Config.connect.getStasticOrder(dateStart, dateEnd, id_period);
                 DataTable dtBody = Config.connect.getSumOrderWithRCena(dateStart, dateEnd, id_period);
-                
+
 
                 if (dtHead != null && dtHead.Rows.Count > 0)
                 {
@@ -481,6 +481,17 @@ namespace OnlineStoreViewOrders.statisticOrder
             {
                 dgvStatistic.DataSource = null;
                 return;
+            }
+
+            foreach(DataRow rowPeriod in (dgvPeriod.DataSource as DataTable).Rows)
+            {
+                int id_period = (int)rowPeriod["id"];
+                EnumerableRowCollection<DataRow> rowCollect = dtDataStatic.AsEnumerable().Where(r => r.Field<int>("id_period") == id_period);
+
+                foreach (DataRow row in rowCollect)
+                {
+                    row["namePeriod"] = $"{rowPeriod["cName"]} -[{((DateTime)rowPeriod["dateStart"]).ToShortDateString()} - {((DateTime)rowPeriod["dateEnd"]).ToShortDateString()}] ";
+                }
             }
 
             dgvStatistic.DataSource = dtDataStatic;
