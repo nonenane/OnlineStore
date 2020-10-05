@@ -29,15 +29,18 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvPercents = new System.Windows.Forms.DataGridView();
+            this.cDep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMargin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cSale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.chckUseSale = new System.Windows.Forms.CheckBox();
@@ -50,6 +53,9 @@
             this.btAddGrp = new System.Windows.Forms.Button();
             this.btDelGrp = new System.Windows.Forms.Button();
             this.dgvDataGrp = new System.Windows.Forms.DataGridView();
+            this.cNameGrp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbDepsGrp = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -64,18 +70,12 @@
             this.btAddGood = new System.Windows.Forms.Button();
             this.btDeleteTovar = new System.Windows.Forms.Button();
             this.dgvDataTovar = new System.Windows.Forms.DataGridView();
-            this.cmbDepsTovar = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cDep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cMargin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cSale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cNameGrp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cEan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cNameTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbDepsTovar = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPercents)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -125,6 +125,36 @@
             this.dgvPercents.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPercents_RowPostPaint);
             this.dgvPercents.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvPercents_RowPrePaint);
             this.dgvPercents.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvPercents_KeyPress);
+            // 
+            // cDep
+            // 
+            this.cDep.DataPropertyName = "name";
+            this.cDep.FillWeight = 152.2843F;
+            this.cDep.HeaderText = "Отдел";
+            this.cDep.Name = "cDep";
+            this.cDep.ReadOnly = true;
+            // 
+            // cMargin
+            // 
+            this.cMargin.DataPropertyName = "MarkUpPercent";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.cMargin.DefaultCellStyle = dataGridViewCellStyle2;
+            this.cMargin.FillWeight = 73.85786F;
+            this.cMargin.HeaderText = "Процент наценки";
+            this.cMargin.Name = "cMargin";
+            // 
+            // cSale
+            // 
+            this.cSale.DataPropertyName = "salePercent";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.cSale.DefaultCellStyle = dataGridViewCellStyle3;
+            this.cSale.FillWeight = 73.85786F;
+            this.cSale.HeaderText = "Процент распродажи";
+            this.cSale.Name = "cSale";
             // 
             // btnExit
             // 
@@ -299,6 +329,38 @@
             this.dgvDataGrp.TabIndex = 13;
             this.dgvDataGrp.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvDataGrp_ColumnWidthChanged);
             this.dgvDataGrp.SelectionChanged += new System.EventHandler(this.dgvDataGrp_SelectionChanged);
+            // 
+            // cNameGrp
+            // 
+            this.cNameGrp.DataPropertyName = "cName";
+            this.cNameGrp.FillWeight = 152.2843F;
+            this.cNameGrp.HeaderText = "Инвентаризационная группа";
+            this.cNameGrp.Name = "cNameGrp";
+            this.cNameGrp.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "MarkUpPercent";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn2.FillWeight = 73.85786F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Процент наценки";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "salePercent";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewTextBoxColumn3.FillWeight = 73.85786F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Процент распродажи";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // cmbDepsGrp
             // 
@@ -484,87 +546,6 @@
             this.dgvDataTovar.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvDataTovar_ColumnWidthChanged);
             this.dgvDataTovar.SelectionChanged += new System.EventHandler(this.dgvDataTovar_SelectionChanged);
             // 
-            // cmbDepsTovar
-            // 
-            this.cmbDepsTovar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDepsTovar.FormattingEnabled = true;
-            this.cmbDepsTovar.Location = new System.Drawing.Point(56, 8);
-            this.cmbDepsTovar.Name = "cmbDepsTovar";
-            this.cmbDepsTovar.Size = new System.Drawing.Size(169, 21);
-            this.cmbDepsTovar.TabIndex = 19;
-            this.cmbDepsTovar.SelectionChangeCommitted += new System.EventHandler(this.cmbDepsTovar_SelectionChangeCommitted);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Отдел:";
-            // 
-            // cDep
-            // 
-            this.cDep.DataPropertyName = "name";
-            this.cDep.FillWeight = 152.2843F;
-            this.cDep.HeaderText = "Отдел";
-            this.cDep.Name = "cDep";
-            this.cDep.ReadOnly = true;
-            // 
-            // cMargin
-            // 
-            this.cMargin.DataPropertyName = "MarkUpPercent";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.cMargin.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cMargin.FillWeight = 73.85786F;
-            this.cMargin.HeaderText = "Процент наценки";
-            this.cMargin.Name = "cMargin";
-            // 
-            // cSale
-            // 
-            this.cSale.DataPropertyName = "salePercent";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.cSale.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cSale.FillWeight = 73.85786F;
-            this.cSale.HeaderText = "Процент распродажи";
-            this.cSale.Name = "cSale";
-            // 
-            // cNameGrp
-            // 
-            this.cNameGrp.DataPropertyName = "cName";
-            this.cNameGrp.FillWeight = 152.2843F;
-            this.cNameGrp.HeaderText = "Инвентаризационная группа";
-            this.cNameGrp.Name = "cNameGrp";
-            this.cNameGrp.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "MarkUpPercent";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn2.FillWeight = 73.85786F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Процент наценки";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "salePercent";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewTextBoxColumn3.FillWeight = 73.85786F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Процент распродажи";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
             // cEan
             // 
             this.cEan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -607,6 +588,25 @@
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
+            // cmbDepsTovar
+            // 
+            this.cmbDepsTovar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDepsTovar.FormattingEnabled = true;
+            this.cmbDepsTovar.Location = new System.Drawing.Point(56, 8);
+            this.cmbDepsTovar.Name = "cmbDepsTovar";
+            this.cmbDepsTovar.Size = new System.Drawing.Size(169, 21);
+            this.cmbDepsTovar.TabIndex = 19;
+            this.cmbDepsTovar.SelectionChangeCommitted += new System.EventHandler(this.cmbDepsTovar_SelectionChangeCommitted);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Отдел:";
+            // 
             // frmPercents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -615,7 +615,11 @@
             this.ControlBox = false;
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPercents";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Настройка процентов";
             this.Load += new System.EventHandler(this.frmPercents_Load);

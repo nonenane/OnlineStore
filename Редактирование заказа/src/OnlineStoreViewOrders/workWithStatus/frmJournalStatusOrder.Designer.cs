@@ -31,12 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJournalStatusOrder));
             this.dgvHistory = new System.Windows.Forms.DataGridView();
+            this.btPrint = new System.Windows.Forms.Button();
+            this.btExit = new System.Windows.Forms.Button();
             this.cDateEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cFIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btPrint = new System.Windows.Forms.Button();
-            this.btExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,34 +73,6 @@
             this.dgvHistory.Size = new System.Drawing.Size(776, 308);
             this.dgvHistory.TabIndex = 1;
             // 
-            // cDateEdit
-            // 
-            this.cDateEdit.DataPropertyName = "DateEdit";
-            this.cDateEdit.HeaderText = "Дата изменения";
-            this.cDateEdit.Name = "cDateEdit";
-            this.cDateEdit.ReadOnly = true;
-            // 
-            // cStatus
-            // 
-            this.cStatus.DataPropertyName = "cName";
-            this.cStatus.HeaderText = "Статус";
-            this.cStatus.Name = "cStatus";
-            this.cStatus.ReadOnly = true;
-            // 
-            // cFIO
-            // 
-            this.cFIO.DataPropertyName = "FIO";
-            this.cFIO.HeaderText = "Автор изменения";
-            this.cFIO.Name = "cFIO";
-            this.cFIO.ReadOnly = true;
-            // 
-            // cComment
-            // 
-            this.cComment.DataPropertyName = "Comment";
-            this.cComment.HeaderText = "Комментарий";
-            this.cComment.Name = "cComment";
-            this.cComment.ReadOnly = true;
-            // 
             // btPrint
             // 
             this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -125,11 +97,49 @@
             this.btExit.UseVisualStyleBackColor = false;
             this.btExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // cDateEdit
+            // 
+            this.cDateEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cDateEdit.DataPropertyName = "DateEdit";
+            this.cDateEdit.Frozen = true;
+            this.cDateEdit.HeaderText = "Дата изменения";
+            this.cDateEdit.MinimumWidth = 120;
+            this.cDateEdit.Name = "cDateEdit";
+            this.cDateEdit.ReadOnly = true;
+            this.cDateEdit.Width = 120;
+            // 
+            // cStatus
+            // 
+            this.cStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cStatus.DataPropertyName = "cName";
+            this.cStatus.HeaderText = "Статус";
+            this.cStatus.MinimumWidth = 120;
+            this.cStatus.Name = "cStatus";
+            this.cStatus.ReadOnly = true;
+            this.cStatus.Width = 120;
+            // 
+            // cFIO
+            // 
+            this.cFIO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cFIO.DataPropertyName = "FIO";
+            this.cFIO.HeaderText = "Автор изменения";
+            this.cFIO.MinimumWidth = 160;
+            this.cFIO.Name = "cFIO";
+            this.cFIO.ReadOnly = true;
+            this.cFIO.Width = 160;
+            // 
+            // cComment
+            // 
+            this.cComment.DataPropertyName = "Comment";
+            this.cComment.HeaderText = "Комментарий";
+            this.cComment.Name = "cComment";
+            this.cComment.ReadOnly = true;
+            // 
             // frmJournalStatusOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 366);
+            this.ClientSize = new System.Drawing.Size(792, 362);
             this.ControlBox = false;
             this.Controls.Add(this.btPrint);
             this.Controls.Add(this.btExit);
@@ -151,11 +161,11 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvHistory;
+        private System.Windows.Forms.Button btPrint;
+        private System.Windows.Forms.Button btExit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDateEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn cStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn cFIO;
         private System.Windows.Forms.DataGridViewTextBoxColumn cComment;
-        private System.Windows.Forms.Button btPrint;
-        private System.Windows.Forms.Button btExit;
     }
 }

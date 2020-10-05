@@ -41,7 +41,14 @@ namespace OnlineStoreViewOrders
                 return;
             }
 
-            decimal SummaDelivery = decimal.Parse(tbSumma.Text.Replace(".", ","));
+            decimal SummaDelivery ;
+            if (!decimal.TryParse(tbSumma.Text.Replace(".", ","), out SummaDelivery))
+            {
+                MessageBox.Show($"Необходимо указать \"{label3.Text}\"", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tbSumma.Focus();
+                return;
+            }
+
 
             DataTable dtResult = Config.connect.updateSummaDelivery(idtOrder, SummaDelivery);
             this.SummaDelivery = SummaDelivery;
@@ -49,5 +56,23 @@ namespace OnlineStoreViewOrders
             this.DialogResult = DialogResult.OK;
         }
 
+        private void tbSumma_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.ToString().Contains(e.KeyChar) || (sender as TextBox).Text.ToString().Length == 0))
+            {
+                e.Handled = true;
+            }
+            else
+                if ((!Char.IsNumber(e.KeyChar) && (e.KeyChar != ',')))
+            {
+                if (e.KeyChar != '\b')
+                { e.Handled = true; }
+            }
+        }
     }
 }

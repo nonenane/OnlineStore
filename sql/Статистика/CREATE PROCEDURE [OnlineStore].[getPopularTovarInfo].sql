@@ -20,7 +20,8 @@ BEGIN
 
 DECLARE @countOrder numeric(20,2)
 	select @countOrder = count(t.id) from OnlineStore.j_tOrders t
-	where  @dateStart <= t.DateOrder and t.DateOrder<=@dateEnd
+	--where  @dateStart <= cast(t.DateOrder as date) and cast(t.DateOrder as date)<=@dateEnd
+	where  @dateStart <= cast(t.DeliveryDate as date) and cast(t.DeliveryDate as date)<=@dateEnd
 
 select 	
 	convert(varchar(12),@dateStart,104)+ ' - ' + convert(varchar(12),@dateEnd,104) as namePeriod,
@@ -38,7 +39,8 @@ from
 		inner join OnlineStore.s_Goods g on g.id_Tovar = o.id_Tovar
 		inner join dbo.s_tovar tov on tov.id = o.id_Tovar
 where 
-	@dateStart <= t.DateOrder and t.DateOrder<=@dateEnd
+	--@dateStart <= cast(t.DateOrder as date) and cast(t.DateOrder as date) <=@dateEnd
+	@dateStart <= cast(t.DeliveryDate as date) and cast(t.DeliveryDate as date) <=@dateEnd
 group by 
 	tov.ean,
 	g.ShortName,

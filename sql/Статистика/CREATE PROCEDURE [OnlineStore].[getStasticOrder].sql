@@ -67,7 +67,8 @@ BEGIN
 				@table t
 				inner join OnlineStore.j_tOrders o on o.id = t.id_tOrders
 			where 
-				@dateStart<=o.DateOrder and o.DateOrder<=@dateEnd ) as a
+				--@dateStart<=cast(o.DateOrder as date) and cast(o.DateOrder as date)<=@dateEnd ) as a
+				@dateStart<=cast(o.DeliveryDate as date) and cast(o.DeliveryDate as date)<=@dateEnd ) as a
 	group by a.id_period
 
 END

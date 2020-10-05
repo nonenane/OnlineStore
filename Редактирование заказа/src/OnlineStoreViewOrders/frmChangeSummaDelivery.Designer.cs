@@ -44,6 +44,7 @@
             this.tbSumma.TabIndex = 17;
             this.tbSumma.Text = "0.00";
             this.tbSumma.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbSumma.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSumma_KeyPress);
             // 
             // label4
             // 
@@ -59,9 +60,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(9, 28);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 13);
+            this.label3.Size = new System.Drawing.Size(112, 13);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Затраты на доставку";
+            this.label3.Text = "Стоимость доставки";
             // 
             // btClose
             // 
@@ -89,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 74);
+            this.ClientSize = new System.Drawing.Size(341, 70);
             this.ControlBox = false;
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.tbSumma);
