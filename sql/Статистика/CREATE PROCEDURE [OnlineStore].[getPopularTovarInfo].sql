@@ -28,7 +28,7 @@ select
 	ltrim(rtrim(tov.ean)) as ean,
 	count(t.id) as cntUseTovar,
 	g.ShortName as cName,	
-	sum(o.BasicPrice)/count(tov.ean) as midPrice,
+	sum(o.Price)/count(tov.ean) as midPrice,
 	count(tov.ean) as countTovar,
 	round(count(t.id)*100 / @countOrder,2) as prcBuy,
 	o.id_Departments,

@@ -212,12 +212,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\reload_8055.png" />
+    <None Include="Resources\x-office-spreadsheet.png" />
     <None Include="Resources\Zoomview_6277.png" />
     <None Include="Resources\iconfinder-download-4341287_120571.png" />
     <None Include="Resources\ic_add_circle_outline_128_28123.png" />
     <None Include="Resources\4213403-bill-check-ecommerce-invoice-payment-receipt-shopping_115368.png" />
     <None Include="Resources\delete_delete_exit_1577.png" />
     <None Include="Resources\documentediting_editdocuments_text_documentedi_2820.png" />
+    <None Include="Resources\klpq_2511.png" />
     <Content Include="Resources\pngAdd.png" />
     <Content Include="Resources\pngExit.png" />
     <None Include="Resources\pngGALOCHKA.png" />

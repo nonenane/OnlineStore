@@ -31,6 +31,7 @@ namespace OnlineStoreViewOrders
         {
             dtpDate.MinDate = dateOrder.Date;
             dtpDate.MaxDate = Config.connect.getDate().Date;
+            dtpDate.Value= dateOrder.Date;
 
             if (nextStatus == 4)
             {

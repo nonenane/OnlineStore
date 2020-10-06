@@ -13,6 +13,7 @@ namespace OnlineStoreViewOrders.Check
     public partial class frmAddCheck : Form
     {
         public int id_tOrder { get; set; }
+        public DateTime DateOrder { set; private get; }
         public frmAddCheck()
         {
             InitializeComponent();
@@ -71,6 +72,7 @@ namespace OnlineStoreViewOrders.Check
             ToolTip ttButton = new ToolTip();
             ttButton.SetToolTip(btnExit, "Выход");
             ttButton.SetToolTip(btnAdd, "Добавить");
+            dtpDate.Value = DateOrder.Date;
         }
 
         private void tbCheck_KeyUp(object sender, KeyEventArgs e)

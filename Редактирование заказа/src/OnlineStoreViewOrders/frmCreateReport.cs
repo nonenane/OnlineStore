@@ -50,18 +50,18 @@ namespace OnlineStoreViewOrders
                     int indexRow = 1;
                     int maxColumns = 12;
 
-                    setWidthColumn(indexRow, 1, 20, report);
-                    setWidthColumn(indexRow, 2, 20, report);
-                    setWidthColumn(indexRow, 3, 20, report);
-                    setWidthColumn(indexRow, 4, 20, report);
-                    setWidthColumn(indexRow, 5, 20, report);
-                    setWidthColumn(indexRow, 6, 20, report);
-                    setWidthColumn(indexRow, 7, 20, report);
-                    setWidthColumn(indexRow, 8, 20, report);
-                    setWidthColumn(indexRow, 9, 20, report);
-                    setWidthColumn(indexRow, 10, 20, report);
-                    setWidthColumn(indexRow, 11, 20, report);
-                    setWidthColumn(indexRow, 12, 20, report);
+                    setWidthColumn(indexRow, 1, 12, report);
+                    setWidthColumn(indexRow, 2, 16, report);
+                    setWidthColumn(indexRow, 3, 17, report);
+                    setWidthColumn(indexRow, 4, 16, report);
+                    setWidthColumn(indexRow, 5, 16, report);
+                    setWidthColumn(indexRow, 6, 22, report);
+                    setWidthColumn(indexRow, 7, 16, report);
+                    setWidthColumn(indexRow, 8, 12, report);
+                    setWidthColumn(indexRow, 9, 14, report);
+                    setWidthColumn(indexRow, 10, 16, report);
+                    setWidthColumn(indexRow, 11, 16, report);
+                    setWidthColumn(indexRow, 12, 13, report);
 
                     #region "Head"
                     report.Merge(indexRow, 1, indexRow, maxColumns);
@@ -166,11 +166,11 @@ namespace OnlineStoreViewOrders
                     int indexRow = 1;
                     int maxColumns = 5;
 
-                    setWidthColumn(indexRow, 1, 20, report);
-                    setWidthColumn(indexRow, 2, 20, report);
-                    setWidthColumn(indexRow, 3, 20, report);
-                    setWidthColumn(indexRow, 4, 20, report);
-                    setWidthColumn(indexRow, 5, 20, report);
+                    setWidthColumn(indexRow, 1, 9, report);
+                    setWidthColumn(indexRow, 2, 18, report);
+                    setWidthColumn(indexRow, 3, 16, report);
+                    setWidthColumn(indexRow, 4, 16, report);
+                    setWidthColumn(indexRow, 5, 40, report);
 
                     #region "Head"
                     report.Merge(indexRow, 1, indexRow, maxColumns);

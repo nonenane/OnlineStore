@@ -356,14 +356,15 @@ namespace OnlineStore.dictonatyTovar
            // Task<DataTable> task = Config.hCntMain.SetTovarByGroup(selectedGroups.ToString(), dateRealiz,
             //  min, max, step, tDefault,
             //   pSuf, qSuf, dep);
-            task.Wait();
-            MessageBox.Show("Товары добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            task.Wait();          
             if (!form.IsDisposed)
                 DoOnUIThread(delegate ()
                 {
                     dgvGroups_Init();
                     CloseForm();
                 });
+
+            MessageBox.Show("Товары добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         frmWait form;

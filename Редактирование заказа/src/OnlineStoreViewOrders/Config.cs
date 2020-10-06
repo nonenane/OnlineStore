@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace OnlineStoreViewOrders
 {
@@ -15,6 +16,9 @@ namespace OnlineStoreViewOrders
 
         public static DateTime _LASTLOADDATE { get; set; }
 
-
+        public static void DoOnUIThread(MethodInvoker d, Form _this)
+        {
+            if (_this.InvokeRequired) { _this.Invoke(d); } else { d(); }
+        }
     }
 }

@@ -128,7 +128,7 @@ namespace OnlineStoreViewOrders.statisticOrder
         }
 
         private DataTable dtPopularTovar;
-        private void btGetDataPopularTovar_Click(object sender, EventArgs e)
+        private async void btGetDataPopularTovar_Click(object sender, EventArgs e)
         {
             dtPopularTovar = null;
 
@@ -139,22 +139,41 @@ namespace OnlineStoreViewOrders.statisticOrder
                 return;
             }
 
-            foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
+            var result = await Task<bool>.Factory.StartNew(() =>
             {
-                int id_period = (int)row["id"];
-                DateTime dateStart = (DateTime)row["dateStart"];
-                DateTime dateEnd = (DateTime)row["dateEnd"];
+                Config.DoOnUIThread(() =>
+            {
+                blockers.SaveControlsEnabledState(this);
+                blockers.SetControlsEnabled(this, false);
+                progressBar1.Visible = true;
+            }, this);
 
-                DataTable dtTmp =  Config.connect.getPopularTovarInfo(dateStart, dateEnd, id_period);
-                if (dtTmp == null || dtTmp.Rows.Count == 0) continue;
+                foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
+                {
+                    int id_period = (int)row["id"];
+                    DateTime dateStart = (DateTime)row["dateStart"];
+                    DateTime dateEnd = (DateTime)row["dateEnd"];
 
-                if (dtPopularTovar == null)
-                    dtPopularTovar = dtTmp.Copy();
-                else
-                    dtPopularTovar.Merge(dtTmp);
-            }
-            filter();
-            dgvDataTovar.DataSource = dtPopularTovar;
+                    DataTable dtTmp = Config.connect.getPopularTovarInfo(dateStart, dateEnd, id_period);
+                    if (dtTmp == null || dtTmp.Rows.Count == 0) continue;
+
+                    if (dtPopularTovar == null)
+                        dtPopularTovar = dtTmp.Copy();
+                    else
+                        dtPopularTovar.Merge(dtTmp);
+                }
+
+                Config.DoOnUIThread(() =>
+                {
+                    progressBar1.Visible = false;
+                    blockers.RestoreControlEnabledState(this);
+                    filter();
+                    dgvDataTovar.DataSource = dtPopularTovar;
+                }, this);
+                return true;
+            });
+          
+
         }
 
         private void filter()
@@ -446,57 +465,82 @@ namespace OnlineStoreViewOrders.statisticOrder
         }
   
         private DataTable dtDataStatic;
-        private void getDataStastic()
+        private Nwuram.Framework.UI.Service.EnableControlsServiceInProg blockers = new Nwuram.Framework.UI.Service.EnableControlsServiceInProg();
+
+        private async void getDataStastic()
         {
             dtDataStatic = null;
-            foreach (DataRow row in (dgvPeriod.DataSource as DataTable).Rows)
+            DataTable dtPeriod = (dgvPeriod.DataSource as DataTable);
+            var result = await Task<bool>.Factory.StartNew(() =>
             {
-                int id_period = (int)row["id"];
-                DateTime dateStart = (DateTime)row["dateStart"];
-                DateTime dateEnd = (DateTime)row["dateEnd"];
-
-                DataTable dtHead = Config.connect.getStasticOrder(dateStart, dateEnd, id_period);
-                DataTable dtBody = Config.connect.getSumOrderWithRCena(dateStart, dateEnd, id_period);
-
-
-                if (dtHead != null && dtHead.Rows.Count > 0)
+                Config.DoOnUIThread(() =>
                 {
-                    if (dtBody != null && dtBody.Rows.Count > 0)
+                    blockers.SaveControlsEnabledState(this);
+                    blockers.SetControlsEnabled(this, false);
+                    progressBar1.Visible = true;
+                }, this);
+
+                foreach (DataRow row in dtPeriod.Rows)
+                {
+                    int id_period = (int)row["id"];
+                    DateTime dateStart = (DateTime)row["dateStart"];
+                    DateTime dateEnd = (DateTime)row["dateEnd"];
+
+                    DataTable dtHead = Config.connect.getStasticOrder(dateStart, dateEnd, id_period);
+                    DataTable dtBody = Config.connect.getSumOrderWithRCena(dateStart, dateEnd, id_period);
+
+
+                    if (dtHead != null && dtHead.Rows.Count > 0)
                     {
-                        dtHead.Rows[0]["sumResult"] = dtBody.Rows[0]["sumResult"];
+                        if (dtBody != null && dtBody.Rows.Count > 0)
+                        {
+                            dtHead.Rows[0]["sumResult"] = dtBody.Rows[0]["sumResult"];
+                        }
+
+                        dtHead.Rows[0]["ostDelivery"] = (decimal)dtHead.Rows[0]["SummaDelivery"] - (decimal)dtHead.Rows[0]["DeliveryCost"] - (decimal)dtHead.Rows[0]["sumPackage"];
+                        dtHead.Rows[0]["delta"] = (decimal)dtHead.Rows[0]["sumGoods"] - (decimal)dtHead.Rows[0]["sumResult"];
                     }
 
-                    dtHead.Rows[0]["ostDelivery"] = (decimal)dtHead.Rows[0]["SummaDelivery"] - (decimal)dtHead.Rows[0]["DeliveryCost"] - (decimal)dtHead.Rows[0]["sumPackage"];
-                    dtHead.Rows[0]["delta"] = (decimal)dtHead.Rows[0]["sumGoods"] - (decimal)dtHead.Rows[0]["sumResult"];
+
+                    if (dtDataStatic == null)
+                        dtDataStatic = dtHead.Copy();
+                    else
+                        dtDataStatic.Merge(dtHead);
                 }
 
-
-                if (dtDataStatic == null)
-                    dtDataStatic = dtHead.Copy();
-                else
-                    dtDataStatic.Merge(dtHead);
-            }
-
-            if (dtDataStatic == null || dtDataStatic.Rows.Count == 0)
-            {
-                dgvStatistic.DataSource = null;
-                return;
-            }
-
-            foreach(DataRow rowPeriod in (dgvPeriod.DataSource as DataTable).Rows)
-            {
-                int id_period = (int)rowPeriod["id"];
-                EnumerableRowCollection<DataRow> rowCollect = dtDataStatic.AsEnumerable().Where(r => r.Field<int>("id_period") == id_period);
-
-                foreach (DataRow row in rowCollect)
+                if (dtDataStatic == null || dtDataStatic.Rows.Count == 0)
                 {
-                    row["namePeriod"] = $"{rowPeriod["cName"]} -[{((DateTime)rowPeriod["dateStart"]).ToShortDateString()} - {((DateTime)rowPeriod["dateEnd"]).ToShortDateString()}] ";
+                    Config.DoOnUIThread(() =>
+                    {
+                        dgvStatistic.DataSource = null;
+                        blockers.RestoreControlEnabledState(this);
+                        progressBar1.Visible = false;                        
+                    }, this);
+                    
+                    return false;
                 }
-            }
 
-            dgvStatistic.DataSource = dtDataStatic;
+                foreach (DataRow rowPeriod in dtPeriod.Rows)
+                {
+                    int id_period = (int)rowPeriod["id"];
+                    EnumerableRowCollection<DataRow> rowCollect = dtDataStatic.AsEnumerable().Where(r => r.Field<int>("id_period") == id_period);
 
-            paintGraphic();
+                    foreach (DataRow row in rowCollect)
+                    {
+                        row["namePeriod"] = $"{rowPeriod["cName"]} -[{((DateTime)rowPeriod["dateStart"]).ToShortDateString()} - {((DateTime)rowPeriod["dateEnd"]).ToShortDateString()}] ";
+                    }
+                }
+
+              
+                Config.DoOnUIThread(() =>
+                {
+                    dgvStatistic.DataSource = dtDataStatic;
+                    blockers.RestoreControlEnabledState(this);
+                    progressBar1.Visible = false;
+                    paintGraphic();
+                }, this);
+                return true;
+            });
         }
 
         private void paintGraphic()
@@ -631,6 +675,94 @@ namespace OnlineStoreViewOrders.statisticOrder
         private void rbParamet_CheckedChanged(object sender, EventArgs e)
         {
             paintGraphic();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            Nwuram.Framework.ToExcelNew.ExcelUnLoad report = new Nwuram.Framework.ToExcelNew.ExcelUnLoad();
+
+            int indexRow = 1;
+
+            int maxColumns = 0;
+
+            foreach (DataGridViewColumn col in dgvStatistic.Columns)
+                if (col.Visible)
+                {
+                    maxColumns++;
+                    if (col.Name.Equals("dataGridViewTextBoxColumn1")) setWidthColumn(indexRow, maxColumns, 22, report);
+                    if (col.Name.Equals("cStaticCountOrder")) setWidthColumn(indexRow, maxColumns, 13, report);
+                    if (col.Name.Equals("cStaticSumOrder")) setWidthColumn(indexRow, maxColumns, 17, report);
+                    if (col.Name.Equals("cStaticSumTransfer")) setWidthColumn(indexRow, maxColumns, 13, report);
+                    if (col.Name.Equals("cStatic_1")) setWidthColumn(indexRow, maxColumns, 12, report);
+                    if (col.Name.Equals("cStatic_2")) setWidthColumn(indexRow, maxColumns, 12, report);
+                    if (col.Name.Equals("cStatic_3")) setWidthColumn(indexRow, maxColumns, 12, report);
+                }
+
+            #region "Head"
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue($"Отчёт по статистике", indexRow, 1);
+            report.SetFontBold(indexRow, 1, indexRow, 1);
+            report.SetFontSize(indexRow, 1, indexRow, 1, 16);
+            report.SetCellAlignmentToCenter(indexRow, 1, indexRow, 1);
+            indexRow++;
+            indexRow++;
+
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue("Выгрузил: " + Nwuram.Framework.Settings.User.UserSettings.User.FullUsername, indexRow, 1);
+            indexRow++;
+
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue("Дата выгрузки: " + DateTime.Now.ToString(), indexRow, 1);
+            indexRow++;
+            indexRow++;
+            #endregion
+
+            int indexCol = 0;
+            foreach (DataGridViewColumn col in dgvStatistic.Columns)
+                if (col.Visible)
+                {
+                    indexCol++;
+                    report.AddSingleValue(col.HeaderText, indexRow, indexCol);
+                }
+            report.SetFontBold(indexRow, 1, indexRow, maxColumns);
+            report.SetBorders(indexRow, 1, indexRow, maxColumns);
+            report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+            report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+            report.SetWrapText(indexRow, 1, indexRow, maxColumns);
+            indexRow++;
+
+            foreach (DataRowView row in dtDataStatic.DefaultView)
+            {
+                indexCol = 1;
+                report.SetWrapText(indexRow, indexCol, indexRow, maxColumns);
+                foreach (DataGridViewColumn col in dgvStatistic.Columns)
+                {
+                    if (col.Visible)
+                    {
+                        if (row[col.DataPropertyName] is DateTime)
+                            report.AddSingleValue(((DateTime)row[col.DataPropertyName]).ToShortDateString(), indexRow, indexCol);
+                        else
+                           if (row[col.DataPropertyName] is decimal)
+                        {
+                            report.AddSingleValueObject(row[col.DataPropertyName], indexRow, indexCol);
+                            report.SetFormat(indexRow, indexCol, indexRow, indexCol, "0.00");
+                        }
+                        else
+                            report.AddSingleValue(row[col.DataPropertyName].ToString(), indexRow, indexCol);
+
+                        indexCol++;
+                    }
+                }
+
+                report.SetBorders(indexRow, 1, indexRow, maxColumns);
+                report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+                report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+
+                indexRow++;
+            }
+
+            report.Show();
         }
     }
 }

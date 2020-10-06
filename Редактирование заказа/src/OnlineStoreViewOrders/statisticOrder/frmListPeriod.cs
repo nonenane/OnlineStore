@@ -50,6 +50,14 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         private void btHide_Click(object sender, EventArgs e)
         {
+            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable().Where(r =>
+            (int)r["r"] == 255 && (int)r["g"] == 255 && (int)r["b"] == 255 && r.Field<bool>("isSelect"));
+            if (rowCollect.Count() > 0)
+            {
+                MessageBox.Show("Необходимо сменить легенду с белой","Информирование",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
+            }
+
             Close();
             ((frmStatistic)this.Owner).updatePeriod();
             

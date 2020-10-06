@@ -79,7 +79,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pCancel = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.btCreateReport = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.tbDeliveryDate = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -87,6 +86,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btStatistic = new System.Windows.Forms.Button();
+            this.btCreateReport = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnView = new System.Windows.Forms.Button();
             this.btnAllReport = new System.Windows.Forms.Button();
@@ -96,7 +97,6 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btStatistic = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.cmsPackage.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -533,17 +533,6 @@
             this.label6.TabIndex = 23;
             this.label6.Text = "Отменён";
             // 
-            // btCreateReport
-            // 
-            this.btCreateReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btCreateReport.BackColor = System.Drawing.Color.White;
-            this.btCreateReport.Location = new System.Drawing.Point(912, 4);
-            this.btCreateReport.Name = "btCreateReport";
-            this.btCreateReport.Size = new System.Drawing.Size(32, 32);
-            this.btCreateReport.TabIndex = 30;
-            this.btCreateReport.UseVisualStyleBackColor = false;
-            this.btCreateReport.Click += new System.EventHandler(this.btCreateReport_Click);
-            // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -560,7 +549,7 @@
             this.tbDeliveryDate.Enabled = false;
             this.tbDeliveryDate.Location = new System.Drawing.Point(855, 362);
             this.tbDeliveryDate.Name = "tbDeliveryDate";
-            this.tbDeliveryDate.Size = new System.Drawing.Size(117, 20);
+            this.tbDeliveryDate.Size = new System.Drawing.Size(85, 20);
             this.tbDeliveryDate.TabIndex = 26;
             this.tbDeliveryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -612,6 +601,30 @@
             this.label10.Size = new System.Drawing.Size(91, 13);
             this.label10.TabIndex = 4;
             this.label10.Text = "Статусы заказа:";
+            // 
+            // btStatistic
+            // 
+            this.btStatistic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btStatistic.BackColor = System.Drawing.SystemColors.Control;
+            this.btStatistic.Image = global::OnlineStoreViewOrders.Properties.Resources.x_office_spreadsheet;
+            this.btStatistic.Location = new System.Drawing.Point(738, 415);
+            this.btStatistic.Name = "btStatistic";
+            this.btStatistic.Size = new System.Drawing.Size(32, 32);
+            this.btStatistic.TabIndex = 32;
+            this.btStatistic.UseVisualStyleBackColor = false;
+            this.btStatistic.Click += new System.EventHandler(this.btStatistic_Click);
+            // 
+            // btCreateReport
+            // 
+            this.btCreateReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btCreateReport.BackColor = System.Drawing.SystemColors.Control;
+            this.btCreateReport.Image = global::OnlineStoreViewOrders.Properties.Resources.klpq_2511;
+            this.btCreateReport.Location = new System.Drawing.Point(912, 4);
+            this.btCreateReport.Name = "btCreateReport";
+            this.btCreateReport.Size = new System.Drawing.Size(32, 32);
+            this.btCreateReport.TabIndex = 30;
+            this.btCreateReport.UseVisualStyleBackColor = false;
+            this.btCreateReport.Click += new System.EventHandler(this.btCreateReport_Click);
             // 
             // btnEdit
             // 
@@ -721,17 +734,6 @@
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Visible = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btStatistic
-            // 
-            this.btStatistic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStatistic.BackColor = System.Drawing.Color.White;
-            this.btStatistic.Location = new System.Drawing.Point(738, 415);
-            this.btStatistic.Name = "btStatistic";
-            this.btStatistic.Size = new System.Drawing.Size(32, 32);
-            this.btStatistic.TabIndex = 32;
-            this.btStatistic.UseVisualStyleBackColor = false;
-            this.btStatistic.Click += new System.EventHandler(this.btStatistic_Click);
             // 
             // frmViewOrders
             // 

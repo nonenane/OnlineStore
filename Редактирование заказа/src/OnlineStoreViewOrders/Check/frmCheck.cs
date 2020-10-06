@@ -16,6 +16,7 @@ namespace OnlineStoreViewOrders
         public int id_tOrder { get; set; }
         public int num_Order { get; set; }
         public int id_status { set; private get; }
+        public DateTime DateOrder { set; private get; }
 
         private DataTable dtCheck;
         public frmCheck()
@@ -113,7 +114,7 @@ namespace OnlineStoreViewOrders
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Check.frmAddCheck frm = new Check.frmAddCheck() { id_tOrder = id_tOrder };
+            Check.frmAddCheck frm = new Check.frmAddCheck() { id_tOrder = id_tOrder, DateOrder = DateOrder };
             frm.ShowDialog();
             dgvCheck_Init();
 

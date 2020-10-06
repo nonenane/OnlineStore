@@ -129,7 +129,7 @@ namespace OnlineStoreViewOrders
 
             if ((int)dr["id_Status"] == 3)
             {
-                tbDeliveryDate.Text = dr["DeliveryDate"].ToString();
+                tbDeliveryDate.Text = dr["DeliveryDate"] != DBNull.Value ? ((DateTime)dr["DeliveryDate"]).ToShortDateString() : "";
                 tbDeliveryCost.Text = dr["DeliveryCost"].ToString();
             }
             else
@@ -247,7 +247,7 @@ namespace OnlineStoreViewOrders
             Color rowcolor = Color.White;
             if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1")
                 rowcolor = panel1.BackColor;
-
+            else
             if ((int)dtOrders.DefaultView[e.RowIndex]["id_Status"] == 3)
                 rowcolor = pEnd.BackColor;
             else if ((int)dtOrders.DefaultView[e.RowIndex]["id_Status"] == 2)
@@ -657,11 +657,15 @@ namespace OnlineStoreViewOrders
         {
             if (dtOrders.DefaultView.Count > 0)
             {
+                int id_Status = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+                DateTime _DateOrder = (DateTime)dgvOrders.CurrentRow.Cells["DateOrder"].Value;
+
                 frmCheck frm = new frmCheck()
                 {
                     id_tOrder = int.Parse(dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id"].ToString()),
                     num_Order = int.Parse(dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["OrderNumber"].ToString()),
-                    id_status = 1
+                    id_status = id_Status,
+                    DateOrder = _DateOrder
                 };
                 frm.ShowDialog();
             }

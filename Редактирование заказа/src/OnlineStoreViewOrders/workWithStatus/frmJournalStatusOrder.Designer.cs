@@ -31,12 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJournalStatusOrder));
             this.dgvHistory = new System.Windows.Forms.DataGridView();
-            this.btPrint = new System.Windows.Forms.Button();
-            this.btExit = new System.Windows.Forms.Button();
             this.cDateEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cFIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btPrint = new System.Windows.Forms.Button();
+            this.btExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,32 +70,8 @@
             this.dgvHistory.ReadOnly = true;
             this.dgvHistory.RowHeadersVisible = false;
             this.dgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHistory.Size = new System.Drawing.Size(776, 308);
+            this.dgvHistory.Size = new System.Drawing.Size(785, 287);
             this.dgvHistory.TabIndex = 1;
-            // 
-            // btPrint
-            // 
-            this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btPrint.BackColor = System.Drawing.Color.White;
-            this.btPrint.Image = ((System.Drawing.Image)(resources.GetObject("btPrint.Image")));
-            this.btPrint.Location = new System.Drawing.Point(718, 326);
-            this.btPrint.Name = "btPrint";
-            this.btPrint.Size = new System.Drawing.Size(32, 32);
-            this.btPrint.TabIndex = 29;
-            this.btPrint.UseVisualStyleBackColor = false;
-            this.btPrint.Click += new System.EventHandler(this.btnAllReport_Click);
-            // 
-            // btExit
-            // 
-            this.btExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btExit.BackColor = System.Drawing.Color.White;
-            this.btExit.Image = ((System.Drawing.Image)(resources.GetObject("btExit.Image")));
-            this.btExit.Location = new System.Drawing.Point(756, 326);
-            this.btExit.Name = "btExit";
-            this.btExit.Size = new System.Drawing.Size(32, 32);
-            this.btExit.TabIndex = 28;
-            this.btExit.UseVisualStyleBackColor = false;
-            this.btExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // cDateEdit
             // 
@@ -135,11 +111,35 @@
             this.cComment.Name = "cComment";
             this.cComment.ReadOnly = true;
             // 
+            // btPrint
+            // 
+            this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btPrint.BackColor = System.Drawing.Color.White;
+            this.btPrint.Image = ((System.Drawing.Image)(resources.GetObject("btPrint.Image")));
+            this.btPrint.Location = new System.Drawing.Point(727, 314);
+            this.btPrint.Name = "btPrint";
+            this.btPrint.Size = new System.Drawing.Size(32, 32);
+            this.btPrint.TabIndex = 29;
+            this.btPrint.UseVisualStyleBackColor = false;
+            this.btPrint.Click += new System.EventHandler(this.btnAllReport_Click);
+            // 
+            // btExit
+            // 
+            this.btExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btExit.BackColor = System.Drawing.Color.White;
+            this.btExit.Image = ((System.Drawing.Image)(resources.GetObject("btExit.Image")));
+            this.btExit.Location = new System.Drawing.Point(765, 314);
+            this.btExit.Name = "btExit";
+            this.btExit.Size = new System.Drawing.Size(32, 32);
+            this.btExit.TabIndex = 28;
+            this.btExit.UseVisualStyleBackColor = false;
+            this.btExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // frmJournalStatusOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 362);
+            this.ClientSize = new System.Drawing.Size(809, 358);
             this.ControlBox = false;
             this.Controls.Add(this.btPrint);
             this.Controls.Add(this.btExit);
