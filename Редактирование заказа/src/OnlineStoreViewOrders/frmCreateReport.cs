@@ -230,7 +230,10 @@ namespace OnlineStoreViewOrders
 
 
             if (isShow)
+            {
+                report.SetPageSetup(1, 9999, true);
                 report.Show();
+            }
             else
             {
                 MessageBox.Show("Нет данных для отчёта", "Выгрузка отчёта", MessageBoxButtons.OK, MessageBoxIcon.Information);

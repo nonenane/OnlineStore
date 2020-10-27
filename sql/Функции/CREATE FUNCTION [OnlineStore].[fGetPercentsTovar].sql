@@ -35,7 +35,7 @@ begin
 		END
 
 	IF @isSale = 0
-		SET @prc =  case when isnull(@prc,0) = 0 then 10 else @prc end
+		SET @prc =  case when @prc is null then 10 else @prc end
 	ELSE
 		SET @prc = case when @prc is null then null else @prc end
 	

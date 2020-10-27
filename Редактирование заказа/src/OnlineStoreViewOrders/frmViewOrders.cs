@@ -57,6 +57,7 @@ namespace OnlineStoreViewOrders
             ttButton.SetToolTip(btnAllReport, "Печать с формы");
             ttButton.SetToolTip(btnView, "Просмотр заказа");
             ttButton.SetToolTip(btnEdit, "Редактирование заказа");
+            ttButton.SetToolTip(btStatistic, "Статистика");
             tsConnect.Text = Nwuram.Framework.Settings.Connection.ConnectionSettings.GetServer() + " " +
                 Nwuram.Framework.Settings.Connection.ConnectionSettings.GetDatabase();
             if (UserSettings.User.StatusCode.ToLower() == "пр")
@@ -245,9 +246,9 @@ namespace OnlineStoreViewOrders
         {
             DataGridView dgv = (DataGridView)sender;
             Color rowcolor = Color.White;
-            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1")
-                rowcolor = panel1.BackColor;
-            else
+            //if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1")
+            //    rowcolor = panel1.BackColor;
+            //else 
             if ((int)dtOrders.DefaultView[e.RowIndex]["id_Status"] == 3)
                 rowcolor = pEnd.BackColor;
             else if ((int)dtOrders.DefaultView[e.RowIndex]["id_Status"] == 2)
@@ -258,6 +259,13 @@ namespace OnlineStoreViewOrders
             dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor =
                      dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = rowcolor;
+
+            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1")
+            {
+                //Column2
+                dgv.Rows[e.RowIndex].Cells["Column2"].Style.BackColor =
+                dgv.Rows[e.RowIndex].Cells["Column2"].Style.SelectionBackColor = panel1.BackColor;
+            }
         }
 
         private void dgvOrders_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -292,7 +300,7 @@ namespace OnlineStoreViewOrders
         private void btnPrint_Click(object sender, EventArgs e)
         {
             DataTable dtBuf;
-            KillExcel();
+            //KillExcel();
             int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
             dtContentOrder = Config.connect.Get_Goods(idtOrder);
 
@@ -677,7 +685,7 @@ namespace OnlineStoreViewOrders
             if (dtOrders.DefaultView.Count == 0)
                 return;
             DataTable dtBuf;
-            KillExcel();
+            //KillExcel();
 
             HandmadeReport rep = new HandmadeReport();
 

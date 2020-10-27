@@ -606,7 +606,7 @@
             // 
             this.btStatistic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btStatistic.BackColor = System.Drawing.SystemColors.Control;
-            this.btStatistic.Image = global::OnlineStoreViewOrders.Properties.Resources.x_office_spreadsheet;
+            this.btStatistic.Image = global::OnlineStoreViewOrders.Properties.Resources.Статистика;
             this.btStatistic.Location = new System.Drawing.Point(738, 415);
             this.btStatistic.Name = "btStatistic";
             this.btStatistic.Size = new System.Drawing.Size(32, 32);

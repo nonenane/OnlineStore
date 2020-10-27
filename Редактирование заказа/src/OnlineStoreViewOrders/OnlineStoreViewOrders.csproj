@@ -212,6 +212,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Статистика.png" />
     <None Include="Resources\reload_8055.png" />
     <None Include="Resources\x-office-spreadsheet.png" />
     <None Include="Resources\Zoomview_6277.png" />

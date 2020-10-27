@@ -10,7 +10,7 @@ GO
 -- Create date: 2020-09-11
 -- Description:	Запись процентов на наценку
 -- =============================================
-CREATE PROCEDURE [OnlineStore].[setPercentSettingsGroups]		
+ALTER PROCEDURE [OnlineStore].[setPercentSettingsGroups]		
 	@id int,
 	@MarkUpPercent numeric(5,2) = null,
 	@salePercent numeric(5,2) = null,
@@ -89,9 +89,14 @@ ELSE
 						return
 					END
 
-				DELETE FROM OnlineStore.s_PercentSettingsGroups where id_grp2 = @id
-				select @id as id
-				return
+
+
+					IF @result = 1
+					BEGIN
+						DELETE FROM OnlineStore.s_PercentSettingsGroups where id_grp2 = @id
+						select @id as id
+						return
+					END else BEGIN select 0 as id; return; END
 
 			END
 		ELSE
@@ -102,9 +107,12 @@ ELSE
 						return
 					END
 
-				DELETE FROM OnlineStore.s_PercentSettingsGoods where id_Tovar = @id
-				select @id as id
-				return
+				IF @result = 1
+					BEGIN
+						DELETE FROM OnlineStore.s_PercentSettingsGoods where id_Tovar = @id
+						select @id as id
+						return
+					END else BEGIN select 0 as id; return; END
 
 			END
 	END

@@ -443,9 +443,9 @@ namespace OnlineStore
                     }
                     if (tbEan.Text.Length > 0)
                     {
-                        Int64 ean;
-                        if (Int64.TryParse(tbEan.Text, out ean))
-                            filter += (filter.Length == 0 ? "" : " and ") + $"ean like '%{ean}%'";
+                        //Int64 ean;
+                        //if (Int64.TryParse(tbEan.Text, out ean))
+                            filter += (filter.Length == 0 ? "" : " and ") + $"ean like '%{tbEan.Text.Trim()}%'";
                     }
                     if (chckPrice.Checked)
                     {

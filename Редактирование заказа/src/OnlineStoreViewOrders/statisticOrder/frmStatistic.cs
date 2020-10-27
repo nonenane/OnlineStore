@@ -231,6 +231,8 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         private void btPrintPopularTovar_Click(object sender, EventArgs e)
         {
+            if (dtPopularTovar == null || dtPopularTovar.DefaultView.Count == 0) return;
+
             Nwuram.Framework.ToExcelNew.ExcelUnLoad report = new Nwuram.Framework.ToExcelNew.ExcelUnLoad();
 
             int indexRow = 1;
@@ -679,6 +681,7 @@ namespace OnlineStoreViewOrders.statisticOrder
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (dtDataStatic == null || dtDataStatic.DefaultView.Count == 0) return;
 
             Nwuram.Framework.ToExcelNew.ExcelUnLoad report = new Nwuram.Framework.ToExcelNew.ExcelUnLoad();
 

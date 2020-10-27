@@ -121,7 +121,7 @@ namespace OnlineStoreViewOrders.Check
         }
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            KillExcel();
+            //KillExcel();
             HandmadeReport rep = new HandmadeReport();
            
             rep.AddSingleValue("Чек №" + doc_id.ToString(), 1, 1);
