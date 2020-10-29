@@ -386,7 +386,7 @@ namespace OnlineStoreViewOrders
             ap.Add(dateEnd.Date);
             ap.Add(id_period);
 
-            return executeProcedure("OnlineStore.getSumOrderWithRCena",
+            return executeProcedure("OnlineStore.getSumNotesOrderWithRCena",
                 new string[3] { "@StartDate", "@EndDate", "@id_period" },
                 new DbType[3] { DbType.Date, DbType.Date, DbType.Int32 }, ap);
         }

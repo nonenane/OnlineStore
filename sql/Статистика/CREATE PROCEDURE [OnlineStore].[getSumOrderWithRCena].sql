@@ -13,7 +13,9 @@ GO
 ALTER PROCEDURE [OnlineStore].[getSumOrderWithRCena]	
 	@StartDate datetime,
 	@EndDate datetime,
-	@id_period int
+	@id_period int,
+	@id_prog int =  435
+
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -81,7 +83,7 @@ BEGIN
 								+' group by terminal, doc_id, time'
 								+') as a  inner join ' + @journal + ' j on j.terminal = a.terminal and j.doc_id = a.doc_id'
 								+' where convert(datetime, j.time) >= convert(datetime, ''' + convert(varchar,@dateStart,120) + ''') and convert(datetime, j.time) <= convert(datetime, ''' + convert(varchar,@dateEnd,120) + ''')'
-								+'and op_code in (505,507)'					
+								+'and op_code in (505,507) and dpt_no not in (select value from dbo.prog_config where id_prog = '+cast(@id_prog as varchar(10))+' and id_value =''nudo'')'						
 
 			DECLARE @Table table (ean varchar(13), cnt numeric(15,3))
 			delete from @Table

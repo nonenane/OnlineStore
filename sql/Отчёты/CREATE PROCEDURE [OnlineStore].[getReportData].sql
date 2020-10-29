@@ -49,7 +49,7 @@ IF @id_status = 4
 			@table t
 			inner join OnlineStore.j_tOrders o on o.id = t.id_tOrders
 		where 
-			@dateStart<=o.DateOrder and o.DateOrder<=@dateEnd
+			@dateStart<=cast(o.DateOrder as date) and cast(o.DateOrder as date)<=@dateEnd
 
 		return;
 	END
@@ -73,7 +73,7 @@ ELSE IF @id_status = 3
 			inner join OnlineStore.Check_vs_Order oo on oo.id_tOrder = o.id and (oo.isPackage = 0 or oo.isPackage is null)
 			--left join OnlineStore.Check_vs_Order op on op.id_tOrder = o.id and op.isPackage = 1
 		where 
-			@dateStart<=o.DeliveryDate and o.DeliveryDate<=@dateEnd
+			@dateStart<=cast(o.DeliveryDate as date) and cast(o.DeliveryDate as date)<=@dateEnd
 
 	END
 END

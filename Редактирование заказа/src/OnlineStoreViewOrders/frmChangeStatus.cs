@@ -77,7 +77,7 @@ namespace OnlineStoreViewOrders
                 return;
             }
 
-            if (tbComment.Text.Trim().Length == 0)
+            if (tbComment.Text.Trim().Length == 0 && nextStatus!=3)
             {
                 MessageBox.Show($"Необходимо заполнить \"{label2.Text}\"", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 tbComment.Focus();

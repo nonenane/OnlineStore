@@ -183,6 +183,16 @@ namespace OnlineStoreViewOrders.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap reportImg {
+            get {
+                object obj = ResourceManager.GetObject("reportImg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap x_office_spreadsheet {
             get {
                 object obj = ResourceManager.GetObject("x-office-spreadsheet", resourceCulture);
