@@ -40,7 +40,9 @@ BEGIN
 
 	DECLARE notes_cursor CURSOR LOCAL FOR
 		select c.DateCheck,c.CheckNumber,c.KassNumber from @tableStatus t inner join OnlineStore.j_tOrders o on o.id = t.id_tOrders inner join OnlineStore.Check_vs_Order c on c.id_tOrder = t.id_tOrders
-		where @StartDate<=o.DateOrder and o.DateOrder<=@EndDate and c.isPackage = 0
+		where 
+		@StartDate<=cast(o.DateOrder as date) and cast(o.DateOrder as date)<=@EndDate
+		and c.isPackage = 0
 	OPEN notes_cursor
 	FETCH NEXT FROM notes_cursor INTO @DateCheck, @CheckNumber,@KassNumber
 	WHILE @@FETCH_STATUS=0
