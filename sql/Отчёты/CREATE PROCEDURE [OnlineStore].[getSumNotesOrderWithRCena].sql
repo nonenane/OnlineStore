@@ -13,7 +13,8 @@ GO
 ALTER PROCEDURE [OnlineStore].[getSumNotesOrderWithRCena]	
 	@StartDate datetime,
 	@EndDate datetime,
-	@id_period int
+	@id_period int,
+	@id_prog int =  435
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -22,6 +23,7 @@ BEGIN
 	DECLARE @resultSum numeric(38,2) = 0
 	DECLARE @tableStatus table (id_tOrders int ,id_Status int,Comment varchar(max))
 	DECLARE @tableResult table (id_tOrders int ,resultSum numeric(38,2))
+	DECLARE @Table table (ean varchar(13), cnt numeric(15,3))
 
 	insert into @tableStatus
 	select distinct
@@ -41,7 +43,8 @@ BEGIN
 
 	DECLARE notes_cursor CURSOR LOCAL FOR
 		select c.DateCheck,c.CheckNumber,c.KassNumber,t.id_tOrders from @tableStatus t inner join OnlineStore.j_tOrders o on o.id = t.id_tOrders inner join OnlineStore.Check_vs_Order c on c.id_tOrder = t.id_tOrders
-		where @StartDate<=o.DateOrder and o.DateOrder<=@EndDate and c.isPackage = 0
+		--where @StartDate<=cast(o.DateOrder as date) and cast(o.DateOrder as date)<=@EndDate and c.isPackage = 0
+		where @StartDate<=cast(o.DeliveryDate as date) and cast(o.DeliveryDate as date)<=@EndDate and c.isPackage = 0
 	OPEN notes_cursor
 	FETCH NEXT FROM notes_cursor INTO @DateCheck, @CheckNumber,@KassNumber,@id_tOrders
 	WHILE @@FETCH_STATUS=0
@@ -80,12 +83,11 @@ BEGIN
 								+' group by terminal, doc_id, time'
 								+') as a  inner join ' + @journal + ' j on j.terminal = a.terminal and j.doc_id = a.doc_id'
 								+' where convert(datetime, j.time) >= convert(datetime, ''' + convert(varchar,@dateStart,120) + ''') and convert(datetime, j.time) <= convert(datetime, ''' + convert(varchar,@dateEnd,120) + ''')'
-								+'and op_code in (505,507)'					
+								+'and op_code in (505,507) and dpt_no not in (select value from dbo.prog_config where id_prog = '+cast(@id_prog as varchar(10))+' and id_value =''nudo'')'					
 
-			DECLARE @Table table (ean varchar(13), cnt numeric(15,3))
 			delete from @Table
 
-			print @SQL
+			--print @SQL
 
 			INSERT INTO @Table 
 			exec (@SQL)

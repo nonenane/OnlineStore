@@ -31,7 +31,7 @@ namespace OnlineStoreViewOrders
         {
             if (!chbCancel.Checked && !chbComplete.Checked) return;
 
-            
+
 
             Nwuram.Framework.ToExcelNew.ExcelUnLoad report = new Nwuram.Framework.ToExcelNew.ExcelUnLoad();
             bool isShow = false;
@@ -47,13 +47,16 @@ namespace OnlineStoreViewOrders
                     isShow = true;
                     report.changeNameTab("Выполненные");
 
+                    decimal sumOrder = 0, sumNote = 0, SummaDelivery = 0, sumPackage = 0, DeliveryCost = 0, valueOst = 0, valueDelta = 0;
+
+
                     int indexRow = 1;
                     int maxColumns = 12;
 
-                    setWidthColumn(indexRow, 1, 12, report);
-                    setWidthColumn(indexRow, 2, 16, report);
+                    setWidthColumn(indexRow, 1, 6, report);
+                    setWidthColumn(indexRow, 2, 10, report);
                     setWidthColumn(indexRow, 3, 17, report);
-                    setWidthColumn(indexRow, 4, 16, report);
+                    setWidthColumn(indexRow, 4, 11, report);
                     setWidthColumn(indexRow, 5, 16, report);
                     setWidthColumn(indexRow, 6, 22, report);
                     setWidthColumn(indexRow, 7, 16, report);
@@ -83,7 +86,7 @@ namespace OnlineStoreViewOrders
                     #endregion
 
                     report.AddSingleValue("№ п/п", indexRow, 1);
-                    report.AddSingleValue("Номер заказа", indexRow, 2);                    
+                    report.AddSingleValue("Номер заказа", indexRow, 2);
                     report.AddSingleValue("Сумма заказа", indexRow, 3);
                     report.AddSingleValue("Дата доставки", indexRow, 4);
                     report.AddSingleValue("Сумма чека", indexRow, 5);
@@ -92,7 +95,7 @@ namespace OnlineStoreViewOrders
                     report.AddSingleValue("Кол-во пакетов", indexRow, 8);
                     report.AddSingleValue("Стоимость пакетов", indexRow, 9);
                     report.AddSingleValue("Затраты на доставку", indexRow, 10);
-                    report.AddSingleValue("Остаток на доставку", indexRow, 11);
+                    report.AddSingleValue("Остаток по доставке", indexRow, 11);
                     report.AddSingleValue("∆ по чеку", indexRow, 12);
 
 
@@ -105,18 +108,43 @@ namespace OnlineStoreViewOrders
 
                     int npp = 1;
 
-                    foreach (DataRowView row in dtDataStatus3.DefaultView)
+                    var groupOrder = dtDataStatus3.AsEnumerable()
+                        .GroupBy(r => new { id_tOrders = r.Field<int>("id_tOrders") })
+                        .Select(g => new
+                        {
+                            g.Key.id_tOrders,
+                            sumNote = g.Sum(r => r.Field<decimal>("sumNote"))
+                        });
+
+                    foreach (var g in groupOrder)
                     {
-                        report.SetWrapText(indexRow, 1, indexRow, maxColumns);
+                        EnumerableRowCollection<DataRow> rowCollect = dtDataStatus3.AsEnumerable().Where(r => r.Field<int>("id_tOrders") == g.id_tOrders);
+                        DataRow row = rowCollect.First();
+                        int startRow = indexRow;
+                        report.SetWrapText(indexRow, 1, indexRow + rowCollect.Count() - 1, maxColumns);
+                        report.Merge(indexRow, 1, indexRow + rowCollect.Count() - 1, 1);
+                        report.Merge(indexRow, 2, indexRow + rowCollect.Count() - 1, 2);
+                        report.Merge(indexRow, 3, indexRow + rowCollect.Count() - 1, 3);
+                        report.Merge(indexRow, 4, indexRow + rowCollect.Count() - 1, 4);
+                        report.Merge(indexRow, 5, indexRow + rowCollect.Count() - 1, 5);
+
+                        report.Merge(indexRow, 7, indexRow + rowCollect.Count() - 1, 7);
+                        report.Merge(indexRow, 8, indexRow + rowCollect.Count() - 1, 8);
+                        report.Merge(indexRow, 9, indexRow + rowCollect.Count() - 1, 9);
+                        report.Merge(indexRow, 10, indexRow + rowCollect.Count() - 1, 10);
+                        report.Merge(indexRow, 11, indexRow + rowCollect.Count() - 1, 11);
+                        report.Merge(indexRow, 12, indexRow + rowCollect.Count() - 1, 12);
+
+
 
                         report.AddSingleValue(npp.ToString(), indexRow, 1);
-                        report.AddSingleValue(row["OrderNumber"].ToString(), indexRow, 2);                        
+                        report.AddSingleValue(row["OrderNumber"].ToString(), indexRow, 2);
                         report.AddSingleValueObject(row["sumOrder"], indexRow, 3);
                         report.SetFormat(indexRow, 3, indexRow, 3, "0.00");
                         report.AddSingleValue(((DateTime)row["DeliveryDate"]).ToShortDateString(), indexRow, 4);
-                        report.AddSingleValueObject(row["sumNote"], indexRow, 5);
+
+                        report.AddSingleValueObject(g.sumNote, indexRow, 5);
                         report.SetFormat(indexRow, 5, indexRow, 5, "0.00");
-                        report.AddSingleValue($"Касса:{row["KassNumber"]} Чек:{row["CheckNumber"]}", indexRow, 6);
 
                         report.AddSingleValueObject(row["SummaDelivery"], indexRow, 7);
                         report.SetFormat(indexRow, 7, indexRow, 7, "0.00");
@@ -130,23 +158,66 @@ namespace OnlineStoreViewOrders
                         report.AddSingleValueObject(row["DeliveryCost"], indexRow, 10);
                         report.SetFormat(indexRow, 10, indexRow, 10, "0.00");
 
+
+                        sumOrder += (decimal)row["sumOrder"];
+                        sumNote += g.sumNote;
+                        SummaDelivery += (decimal)row["SummaDelivery"];
+                        sumPackage += (decimal)row["sumPackage"];
+                        DeliveryCost += (decimal)row["DeliveryCost"];
+
                         decimal value = (decimal)row["SummaDelivery"] - (decimal)row["sumPackage"] - (decimal)row["DeliveryCost"];
+                        valueOst += value;
                         report.AddSingleValueObject(value, indexRow, 11);
                         report.SetFormat(indexRow, 11, indexRow, 11, "0.00");
 
-                        report.AddSingleValueObject(0, indexRow, 12);
-                        report.SetFormat(indexRow, 12, indexRow, 12, "0.00");                        
+                        if (dtDataStatus3Body != null)
+                        {
+                            decimal sum = dtDataStatus3Body.AsEnumerable().Where(r => r.Field<int>("id_tOrders") == (int)row["id_tOrders"]).Sum(r => r.Field<decimal>("resultSum"));
+                            report.AddSingleValueObject(g.sumNote - sum, indexRow, 12);
+                            valueDelta += g.sumNote - sum;
+                        }
+                        else
+                            report.AddSingleValueObject(0, indexRow, 12);
+                        report.SetFormat(indexRow, 12, indexRow, 12, "0.00");
+
+                        foreach (DataRow rowSelect in rowCollect)
+                        {
+                            //report.AddSingleValueObject(rowSelect["sumNote"], indexRow, 5);
+                            //report.SetFormat(indexRow, 5, indexRow, 5, "0.00");
+                            report.AddSingleValue($"Касса:{rowSelect["KassNumber"]} Чек:{rowSelect["CheckNumber"]}", indexRow, 6);
+                            indexRow++;
+                        }
 
 
-                        report.SetBorders(indexRow, 1, indexRow, maxColumns);
-                        report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
-                        report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
-                        indexRow++;
+                        
+
+                        report.SetBorders(startRow, 1, indexRow - 1, maxColumns);
+                        report.SetCellAlignmentToCenter(startRow, 1, indexRow - 1, maxColumns);
+                        report.SetCellAlignmentToJustify(startRow, 1, indexRow - 1, maxColumns);
+                        //indexRow++;
                         npp++;
                     }
 
+                  
+                    report.SetFormat(indexRow, 2, indexRow, maxColumns, "0.00");
+
+                    report.AddSingleValue($"Итого:", indexRow, 1);
+                    report.AddSingleValueObject(sumOrder, indexRow, 3);
+                    report.AddSingleValueObject(sumNote, indexRow, 5);
+                    report.AddSingleValueObject(SummaDelivery, indexRow, 7);
+                    report.AddSingleValueObject(sumPackage, indexRow, 9);
+                    report.AddSingleValueObject(DeliveryCost, indexRow, 10);
+                    report.AddSingleValueObject(valueOst, indexRow, 11);
+                    report.AddSingleValueObject(valueDelta, indexRow, 12);
+
+                    report.SetBorders(indexRow, 1, indexRow, maxColumns);
+                    report.SetFontBold(indexRow, 1, indexRow, maxColumns);
+                    report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+                    report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);                    
                 }
             }
+
+
 
             if (chbCancel.Checked)
             {
@@ -165,6 +236,7 @@ namespace OnlineStoreViewOrders
 
                     int indexRow = 1;
                     int maxColumns = 5;
+                    decimal sumOrder = 0;
 
                     setWidthColumn(indexRow, 1, 9, report);
                     setWidthColumn(indexRow, 2, 18, report);
@@ -217,12 +289,25 @@ namespace OnlineStoreViewOrders
                         report.SetFormat(indexRow, 4, indexRow, 4, "0.00");
                         report.AddSingleValue(row["Comment"].ToString(), indexRow, 5);
 
+                        sumOrder += (decimal)row["sumOrder"];
+
                         report.SetBorders(indexRow, 1, indexRow, maxColumns);
                         report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
                         report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
                         indexRow++;
                         npp++;
                     }
+
+                    report.SetFormat(indexRow, 2, indexRow, maxColumns, "0.00");
+
+                    report.AddSingleValue($"Итого:", indexRow, 1);
+                    report.AddSingleValueObject(sumOrder, indexRow, 4);
+
+                    report.SetBorders(indexRow, 1, indexRow, maxColumns);
+                    report.SetFontBold(indexRow, 1, indexRow, maxColumns);
+                    report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+                    report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+
                 }
             }
 

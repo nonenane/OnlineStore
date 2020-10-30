@@ -58,6 +58,7 @@ namespace OnlineStoreViewOrders
             ttButton.SetToolTip(btnView, "Просмотр заказа");
             ttButton.SetToolTip(btnEdit, "Редактирование заказа");
             ttButton.SetToolTip(btStatistic, "Статистика");
+            ttButton.SetToolTip(btCreateReport, "Отчет о выполненных и отмененных заказах");
             tsConnect.Text = Nwuram.Framework.Settings.Connection.ConnectionSettings.GetServer() + " " +
                 Nwuram.Framework.Settings.Connection.ConnectionSettings.GetDatabase();
             if (UserSettings.User.StatusCode.ToLower() == "пр")
