@@ -437,3 +437,8 @@ C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.validateGoods.frmView.resources
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\Newtonsoft.Json.dll
+D:\Работа\OnlineStore\src\OnlineStore\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.frmSettingsTimeDelivery.resources
+D:\Работа\OnlineStore\src\OnlineStore\obj\Debug\OnlineStore.validateGoods.frmView.resources

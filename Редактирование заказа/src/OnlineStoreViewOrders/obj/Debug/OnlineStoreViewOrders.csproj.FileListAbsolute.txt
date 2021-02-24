@@ -173,3 +173,4 @@ C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\sr
 C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\EPPlus.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\Newtonsoft.Json.dll
+D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\EPPlus.dll
