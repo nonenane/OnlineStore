@@ -1,0 +1,10 @@
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\bin\Debug\OnlineStoreServiceLogic.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\bin\Debug\OnlineStoreServiceLogic.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\bin\Debug\Framework.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\bin\Debug\stdole.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\obj\Debug\OnlineStoreServiceLogic.csproj.CoreCompileInputs.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\obj\Debug\OnlineStoreServiceLogic.csproj.CopyComplete
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\obj\Debug\OnlineStoreServiceLogic.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\obj\Debug\OnlineStoreServiceLogic.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\obj\Debug\OnlineStoreServiceLogic.csprojAssemblyReference.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\OnlineStoreServiceLogic\bin\Debug\Newtonsoft.Json.dll

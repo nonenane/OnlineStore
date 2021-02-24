@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -52,8 +53,29 @@ namespace OnlineStoreViewOrders.Check
                 decimal.Parse(dtCheckCheck.Rows[0]["summa"].ToString()),
                 id_tOrder,
                 chckPackage.Checked);
+            setLog(708);
             MessageBox.Show("Чек добавлен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
+        }
+
+        private void setLog(int id_log)
+        {
+           
+            DataTable dtInfo = Config.connect.getOrderInfo(id_tOrder);
+            if (dtInfo == null || dtInfo.Rows.Count == 0)
+                return;
+            Logging.StartFirstLevel(id_log);
+            Logging.Comment("Добавление чека");
+            Logging.Comment($"id заказа: {id_tOrder}");
+            Logging.Comment($"Номер заказа: {dtInfo.Rows[0]["OrderNumber"].ToString()}");
+            Logging.Comment($"Дата и время заказа: {dtInfo.Rows[0]["DateOrder"].ToString()}");
+            Logging.Comment($"ФИО покупателя: {dtInfo.Rows[0]["FIO"].ToString()}");
+            Logging.Comment($"Сумма заказа: {dtInfo.Rows[0]["sumOrder"].ToString()}");
+            Logging.Comment($"Сумма доставки: {dtInfo.Rows[0]["SummaDelivery"].ToString()}");
+            Logging.Comment($"Тип оплаты: {dtInfo.Rows[0]["namePayment"].ToString()}");
+            Logging.Comment($"Параметры добавленного чека - Дата: {dtpDate.Value.ToShortDateString()}, Номер чека: {tbCheck.Text}, Номер кассы: {tbKass.Text}, Пакет: {(chckPackage.Checked? "Да" : "Нет")}");
+            Logging.Comment($"Завершение добавления чека");
+            Logging.StopFirstLevel();
         }
 
         private void tbKass_KeyPress(object sender, KeyPressEventArgs e)

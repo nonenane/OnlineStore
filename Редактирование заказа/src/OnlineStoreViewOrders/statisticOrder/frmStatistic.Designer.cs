@@ -42,13 +42,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStatistic));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStatistic));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -92,6 +92,12 @@
             this.tbNameTovar = new System.Windows.Forms.TextBox();
             this.tbEan = new System.Windows.Forms.TextBox();
             this.dgvDataTovar = new System.Windows.Forms.DataGridView();
+            this.cPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cEan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cNameTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cPrcPopular = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPercentOrder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbDeps = new System.Windows.Forms.ComboBox();
@@ -100,12 +106,6 @@
             this.btGetDataPopularTovar = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.cPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cEan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cNameTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cPrcPopular = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -129,7 +129,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1163, 582);
+            this.tabControl1.Size = new System.Drawing.Size(1159, 582);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPage1
@@ -144,7 +144,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1155, 556);
+            this.tabPage1.Size = new System.Drawing.Size(1151, 556);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Статистика";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -351,7 +351,7 @@
             this.dgvPeriod.ShowCellToolTips = false;
             this.dgvPeriod.ShowEditingIcon = false;
             this.dgvPeriod.ShowRowErrors = false;
-            this.dgvPeriod.Size = new System.Drawing.Size(569, 87);
+            this.dgvPeriod.Size = new System.Drawing.Size(565, 87);
             this.dgvPeriod.TabIndex = 27;
             this.dgvPeriod.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPeriod_RowPostPaint);
             this.dgvPeriod.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvPeriod_RowPrePaint);
@@ -416,7 +416,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.rbPeriod);
             this.groupBox3.Controls.Add(this.rbParamet);
-            this.groupBox3.Location = new System.Drawing.Point(962, 294);
+            this.groupBox3.Location = new System.Drawing.Point(958, 294);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(185, 77);
             this.groupBox3.TabIndex = 20;
@@ -461,7 +461,7 @@
             this.gLegends.Controls.Add(this.chbPriceDelivery);
             this.gLegends.Controls.Add(this.chbSumOrder);
             this.gLegends.Controls.Add(this.chbCountOrder);
-            this.gLegends.Location = new System.Drawing.Point(962, 124);
+            this.gLegends.Location = new System.Drawing.Point(958, 124);
             this.gLegends.Name = "gLegends";
             this.gLegends.Size = new System.Drawing.Size(185, 164);
             this.gLegends.TabIndex = 20;
@@ -586,7 +586,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Location = new System.Drawing.Point(503, 6);
+            this.groupBox1.Location = new System.Drawing.Point(499, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(644, 112);
             this.groupBox1.TabIndex = 20;
@@ -619,7 +619,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1155, 556);
+            this.tabPage2.Size = new System.Drawing.Size(1151, 556);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Популярные товары";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -678,9 +678,85 @@
             this.dgvDataTovar.ShowCellToolTips = false;
             this.dgvDataTovar.ShowEditingIcon = false;
             this.dgvDataTovar.ShowRowErrors = false;
-            this.dgvDataTovar.Size = new System.Drawing.Size(1139, 456);
+            this.dgvDataTovar.Size = new System.Drawing.Size(1135, 456);
             this.dgvDataTovar.TabIndex = 25;
             this.dgvDataTovar.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvDataTovar_ColumnWidthChanged);
+            // 
+            // cPeriod
+            // 
+            this.cPeriod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cPeriod.DataPropertyName = "namePeriod";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cPeriod.DefaultCellStyle = dataGridViewCellStyle12;
+            this.cPeriod.HeaderText = "Период";
+            this.cPeriod.MinimumWidth = 140;
+            this.cPeriod.Name = "cPeriod";
+            this.cPeriod.ReadOnly = true;
+            this.cPeriod.Width = 150;
+            // 
+            // cEan
+            // 
+            this.cEan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cEan.DataPropertyName = "ean";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cEan.DefaultCellStyle = dataGridViewCellStyle13;
+            this.cEan.HeaderText = "EAN";
+            this.cEan.MinimumWidth = 110;
+            this.cEan.Name = "cEan";
+            this.cEan.ReadOnly = true;
+            this.cEan.Width = 110;
+            // 
+            // cNameTovar
+            // 
+            this.cNameTovar.DataPropertyName = "cName";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cNameTovar.DefaultCellStyle = dataGridViewCellStyle14;
+            this.cNameTovar.FillWeight = 152.2843F;
+            this.cNameTovar.HeaderText = "Наименование товара";
+            this.cNameTovar.Name = "cNameTovar";
+            this.cNameTovar.ReadOnly = true;
+            // 
+            // cPrice
+            // 
+            this.cPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cPrice.DataPropertyName = "midPrice";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = null;
+            this.cPrice.DefaultCellStyle = dataGridViewCellStyle15;
+            this.cPrice.HeaderText = "Средняя цена продажи";
+            this.cPrice.MinimumWidth = 80;
+            this.cPrice.Name = "cPrice";
+            this.cPrice.ReadOnly = true;
+            this.cPrice.Width = 80;
+            // 
+            // cCount
+            // 
+            this.cCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cCount.DataPropertyName = "countTovar";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = null;
+            this.cCount.DefaultCellStyle = dataGridViewCellStyle16;
+            this.cCount.HeaderText = "Кол-во";
+            this.cCount.MinimumWidth = 80;
+            this.cCount.Name = "cCount";
+            this.cCount.ReadOnly = true;
+            this.cCount.Width = 80;
+            // 
+            // cPrcPopular
+            // 
+            this.cPrcPopular.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cPrcPopular.DataPropertyName = "prcBuy";
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Format = "N2";
+            dataGridViewCellStyle17.NullValue = null;
+            this.cPrcPopular.DefaultCellStyle = dataGridViewCellStyle17;
+            this.cPrcPopular.HeaderText = "Процент популярности";
+            this.cPrcPopular.MinimumWidth = 80;
+            this.cPrcPopular.Name = "cPrcPopular";
+            this.cPrcPopular.ReadOnly = true;
+            this.cPrcPopular.Width = 80;
             // 
             // tbPercentOrder
             // 
@@ -765,87 +841,11 @@
             this.progressBar1.TabIndex = 19;
             this.progressBar1.Visible = false;
             // 
-            // cPeriod
-            // 
-            this.cPeriod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cPeriod.DataPropertyName = "namePeriod";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cPeriod.DefaultCellStyle = dataGridViewCellStyle12;
-            this.cPeriod.HeaderText = "Период";
-            this.cPeriod.MinimumWidth = 140;
-            this.cPeriod.Name = "cPeriod";
-            this.cPeriod.ReadOnly = true;
-            this.cPeriod.Width = 150;
-            // 
-            // cEan
-            // 
-            this.cEan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cEan.DataPropertyName = "ean";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cEan.DefaultCellStyle = dataGridViewCellStyle13;
-            this.cEan.HeaderText = "EAN";
-            this.cEan.MinimumWidth = 110;
-            this.cEan.Name = "cEan";
-            this.cEan.ReadOnly = true;
-            this.cEan.Width = 110;
-            // 
-            // cNameTovar
-            // 
-            this.cNameTovar.DataPropertyName = "cName";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cNameTovar.DefaultCellStyle = dataGridViewCellStyle14;
-            this.cNameTovar.FillWeight = 152.2843F;
-            this.cNameTovar.HeaderText = "Наименование товара";
-            this.cNameTovar.Name = "cNameTovar";
-            this.cNameTovar.ReadOnly = true;
-            // 
-            // cPrice
-            // 
-            this.cPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cPrice.DataPropertyName = "midPrice";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.Format = "N2";
-            dataGridViewCellStyle15.NullValue = null;
-            this.cPrice.DefaultCellStyle = dataGridViewCellStyle15;
-            this.cPrice.HeaderText = "Средняя цена продажи";
-            this.cPrice.MinimumWidth = 80;
-            this.cPrice.Name = "cPrice";
-            this.cPrice.ReadOnly = true;
-            this.cPrice.Width = 80;
-            // 
-            // cCount
-            // 
-            this.cCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cCount.DataPropertyName = "countTovar";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.cCount.DefaultCellStyle = dataGridViewCellStyle16;
-            this.cCount.HeaderText = "Кол-во";
-            this.cCount.MinimumWidth = 80;
-            this.cCount.Name = "cCount";
-            this.cCount.ReadOnly = true;
-            this.cCount.Width = 80;
-            // 
-            // cPrcPopular
-            // 
-            this.cPrcPopular.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cPrcPopular.DataPropertyName = "prcBuy";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Format = "N2";
-            dataGridViewCellStyle17.NullValue = null;
-            this.cPrcPopular.DefaultCellStyle = dataGridViewCellStyle17;
-            this.cPrcPopular.HeaderText = "Процент популярности";
-            this.cPrcPopular.MinimumWidth = 80;
-            this.cPrcPopular.Name = "cPrcPopular";
-            this.cPrcPopular.ReadOnly = true;
-            this.cPrcPopular.Width = 80;
-            // 
             // frmStatistic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 639);
+            this.ClientSize = new System.Drawing.Size(1159, 635);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.tabControl1);

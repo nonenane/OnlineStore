@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -120,6 +121,22 @@ namespace OnlineStoreViewOrders.workWithStatus
             }
 
             report.Show();
+
+            #region log
+            DataTable dtInfo = Config.connect.getOrderInfo(id);
+            if (dtInfo == null || dtInfo.Rows.Count == 0)
+                return;
+            Logging.StartFirstLevel(79);
+            Logging.Comment("Произведена выгрузка журнала статусов заказа");     
+            Logging.Comment($"id заказа: {id}");
+            Logging.Comment($"Номер заказа: {dtInfo.Rows[0]["OrderNumber"].ToString()}");
+            Logging.Comment($"Дата и время заказа: {dtInfo.Rows[0]["DateOrder"].ToString()}");
+            Logging.Comment($"ФИО покупателя: {dtInfo.Rows[0]["FIO"].ToString()}");
+            Logging.Comment($"Сумма заказа: {dtInfo.Rows[0]["sumOrder"].ToString()}");
+            Logging.Comment($"Сумма доставки: {dtInfo.Rows[0]["SummaDelivery"].ToString()}");
+            Logging.Comment($"Тип оплаты: {dtInfo.Rows[0]["namePayment"].ToString()}");         
+            Logging.StopFirstLevel();
+            #endregion
         }
 
         private void frmJournalStatusOrder_Load(object sender, EventArgs e)

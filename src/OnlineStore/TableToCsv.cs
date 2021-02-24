@@ -75,7 +75,7 @@ namespace OnlineStore
             else
             {
                 header = $"Артикул,Имя,\"Короткое описание\",Описание,Запасы,\"Цена распродажи\",\"Базовая цена\",\"Вес\",Категории," +
-                    (Config.needImage ? "Изображения," : "") +
+                    (Config.ImageTovar ? "Изображения," : "") +
                     "\"Мета: _advanced - qty - input - picker\"," +
                     "\"Мета: _advanced-qty-quantity-suffix\"," +
                     "\"Мета: _advanced-qty-price-suffix\"," +
@@ -102,7 +102,7 @@ namespace OnlineStore
                 {
                    line = $"{row["id_Tovar"]}," +
                        $"\"{row["ShortName"].ToString().Replace("\"", "").Replace(",", @"\,")}\"," +
-                       $"\"{row["ShortName"].ToString().Replace("\"", "").Replace(",", @"\,").PadRight(50)}\"," +
+                       $"\"{row["ShortDescription"].ToString().Replace("\"", "").Replace(",", @"\,").PadRight(50)}\"," +
                        $"\"{row["FullName"].ToString().Replace("\"", "").Replace(",", @"\,")}\"," +
                        (isAll && ((decimal) row["ostNow"] == 0 || !(bool) row["isActive"]) ? "0.000," : $"{row["ostNow"].ToString().Replace(',', '.')}," )+
                       //цена распродажи - если stockPrice not null (ну тип там в виде строки из запроса приходит "" если нулл)
@@ -112,7 +112,7 @@ namespace OnlineStore
                        //вес товара 
                        $"{row["ves"].ToString().Replace(',', '.')}," +
                        $"\"{row["nameCategoryToCsv"].ToString().Replace("\"", "").Replace(",", @"\,")}\"," +
-                      (Config.needImage ? (Config.ImageTovar ? "https://narodniy.spb.ru/wp-content/uploads/products/" + row["ean"].ToString() + ".png," : row["PathImage"].ToString() + ",") : "") +
+                       (Config.ImageTovar ? "https://narodniy.spb.ru/wp-content/uploads/products/" + row["ean"].ToString() + ".png," : "") +
                        $"\"slider-input\"," +
                        (row["QuantitySuffix"].ToString().Length == 0 ? "" : $"\"{row["QuantitySuffix"].ToString().Replace("\"", "").Replace(",", @"\,")}\",") +
                        (row["PriceSuffix"].ToString().Length == 0 ? "" : $"\"{row["PriceSuffix"].ToString().Replace("\"", "").Replace(",", @"\,")}\",") +

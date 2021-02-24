@@ -1,4 +1,5 @@
-﻿using Nwuram.Framework.Settings.Connection;
+﻿using Nwuram.Framework.Logging;
+using Nwuram.Framework.Settings.Connection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -315,6 +316,30 @@ namespace OnlineStoreViewOrders.statisticOrder
             }
 
             report.Show();
+
+            #region log
+            Logging.StartFirstLevel(79);
+            Logging.Comment("Произведена выгрузка статистики по онлайн магазину по популярным товарам");
+            DataTable dtPeriod = dgvPeriod.DataSource as DataTable;
+            int id_Period =(int) cmbPeriod.SelectedValue;
+            DateTime dateStart, dateEnd;
+            if (id_Period!=0)
+            {
+                EnumerableRowCollection<DataRow> rcoll = dtPeriod.AsEnumerable().Where(r => r.Field<int>("id") == id_Period);
+                dateStart =(DateTime) rcoll.FirstOrDefault()["dateStart"];
+                dateEnd = (DateTime)rcoll.FirstOrDefault()["dateEnd"];
+            }
+            else
+            {
+                dateStart = dtPeriod.AsEnumerable().Min(r => r.Field<DateTime>("dateStart"));
+                dateEnd = dtPeriod.AsEnumerable().Max(r => r.Field<DateTime>("dateEnd"));
+            }
+            Logging.Comment($"Наименование периода: {cmbPeriod.Text}, Дата начала периода: {dateStart.ToShortDateString()}, Дата окончания периода: {dateEnd.ToShortDateString()}");
+            Logging.Comment($"Отдел: id: {cmbDeps.SelectedValue.ToString()}, Наименование: {cmbDeps.Text}");
+            Logging.Comment($"Доля заказов с товаром: {tbPercentOrder.Text}");
+            Logging.Comment("Завершение выгрузки статистики по популярным товарам");
+            Logging.StopFirstLevel();
+            #endregion
         }
 
 
@@ -766,6 +791,17 @@ namespace OnlineStoreViewOrders.statisticOrder
             }
 
             report.Show();
+
+            #region log
+            Logging.StartFirstLevel(79);
+            Logging.Comment("Произведена выгрузка статистики по онлайн-магазину");
+            foreach (DataRow dr in (dgvPeriod.DataSource as DataTable).Rows)
+            {
+                Logging.Comment($"Наименование периода: {dr["cName"].ToString()}, Начало: {dr["dateStart"].ToString()}, Конец: {dr["dateEnd"].ToString()}");
+            }
+            Logging.Comment("Завершение выгрузки статистики по онлайн-магазину");
+            Logging.StopFirstLevel();
+            #endregion
         }
     }
 }

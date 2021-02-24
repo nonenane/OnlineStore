@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -80,7 +81,14 @@ namespace OnlineStore.dictonaryCategory
             }
             foreach (DataGridViewRow dr in dgvData.Rows)
             {
-                Config.hCntMain.SetCategoryVsGroup(int.Parse(dr.Cells["cCat"].Value.ToString()), int.Parse(dr.Cells["idgrp"].Value.ToString()));             
+                DataTable dt = Config.hCntMain.SetCategoryVsGroup(int.Parse(dr.Cells["cCat"].Value.ToString()), int.Parse(dr.Cells["idgrp"].Value.ToString()));
+                Logging.StartFirstLevel(1583);
+                Logging.Comment("Добавлении связи группы и категории");
+                Logging.Comment($"id Связи: {dt.Rows[0]["id"].ToString()}");
+                Logging.Comment($"id Категории: {dr.Cells["cCat"].Value.ToString()}");
+                Logging.Comment($"id группы: {dr.Cells["idgrp"].Value.ToString()}");
+                Logging.Comment($"Завершение добавления связи группы и категории");
+                Logging.StopFirstLevel();
             }
 
             MessageBox.Show("Связь группы и категории добавлена", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);

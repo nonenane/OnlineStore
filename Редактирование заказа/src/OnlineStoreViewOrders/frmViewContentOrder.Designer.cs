@@ -29,21 +29,14 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewContentOrder));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewContentOrder));
             this.dgvOrder = new System.Windows.Forms.DataGridView();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Netto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SummTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbEan = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.lblSum = new System.Windows.Forms.Label();
@@ -55,6 +48,13 @@
             this.btnAddTovar = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Netto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SummTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,73 +104,6 @@
             this.dgvOrder.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvOrder_RowPostPaint);
             this.dgvOrder.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvOrder_RowPrePaint);
             this.dgvOrder.Validating += new System.ComponentModel.CancelEventHandler(this.dgvOrder_Validating);
-            // 
-            // Position
-            // 
-            this.Position.DataPropertyName = "Position";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Position.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Position.FillWeight = 25.03671F;
-            this.Position.HeaderText = "№";
-            this.Position.Name = "Position";
-            this.Position.ReadOnly = true;
-            // 
-            // cDep
-            // 
-            this.cDep.DataPropertyName = "name";
-            this.cDep.FillWeight = 97.78143F;
-            this.cDep.HeaderText = "Отдел";
-            this.cDep.Name = "cDep";
-            this.cDep.ReadOnly = true;
-            // 
-            // EAN
-            // 
-            this.EAN.DataPropertyName = "ean";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.EAN.DefaultCellStyle = dataGridViewCellStyle3;
-            this.EAN.FillWeight = 95.93908F;
-            this.EAN.HeaderText = "Код";
-            this.EAN.Name = "EAN";
-            this.EAN.ReadOnly = true;
-            // 
-            // NameTovar
-            // 
-            this.NameTovar.DataPropertyName = "nameTovar";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.NameTovar.DefaultCellStyle = dataGridViewCellStyle4;
-            this.NameTovar.FillWeight = 287.0169F;
-            this.NameTovar.HeaderText = "Наименование";
-            this.NameTovar.Name = "NameTovar";
-            this.NameTovar.ReadOnly = true;
-            // 
-            // Netto
-            // 
-            this.Netto.DataPropertyName = "Netto";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Netto.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Netto.FillWeight = 63.05667F;
-            this.Netto.HeaderText = "Количество";
-            this.Netto.Name = "Netto";
-            // 
-            // Price
-            // 
-            this.Price.DataPropertyName = "Price";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Price.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Price.FillWeight = 62.02179F;
-            this.Price.HeaderText = "Цена";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // SummTovar
-            // 
-            this.SummTovar.DataPropertyName = "sumTovar";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SummTovar.DefaultCellStyle = dataGridViewCellStyle7;
-            this.SummTovar.FillWeight = 69.14739F;
-            this.SummTovar.HeaderText = "Сумма";
-            this.SummTovar.Name = "SummTovar";
-            this.SummTovar.ReadOnly = true;
             // 
             // tbEan
             // 
@@ -280,6 +213,80 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // Position
+            // 
+            this.Position.DataPropertyName = "Position";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Position.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Position.FillWeight = 25.03671F;
+            this.Position.HeaderText = "№";
+            this.Position.Name = "Position";
+            this.Position.ReadOnly = true;
+            this.Position.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cDep
+            // 
+            this.cDep.DataPropertyName = "name";
+            this.cDep.FillWeight = 97.78143F;
+            this.cDep.HeaderText = "Отдел";
+            this.cDep.Name = "cDep";
+            this.cDep.ReadOnly = true;
+            this.cDep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // EAN
+            // 
+            this.EAN.DataPropertyName = "ean";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.EAN.DefaultCellStyle = dataGridViewCellStyle3;
+            this.EAN.FillWeight = 95.93908F;
+            this.EAN.HeaderText = "Код";
+            this.EAN.Name = "EAN";
+            this.EAN.ReadOnly = true;
+            this.EAN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // NameTovar
+            // 
+            this.NameTovar.DataPropertyName = "nameTovar";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.NameTovar.DefaultCellStyle = dataGridViewCellStyle4;
+            this.NameTovar.FillWeight = 287.0169F;
+            this.NameTovar.HeaderText = "Наименование";
+            this.NameTovar.Name = "NameTovar";
+            this.NameTovar.ReadOnly = true;
+            this.NameTovar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Netto
+            // 
+            this.Netto.DataPropertyName = "Netto";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Netto.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Netto.FillWeight = 63.05667F;
+            this.Netto.HeaderText = "Количество";
+            this.Netto.Name = "Netto";
+            this.Netto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Price
+            // 
+            this.Price.DataPropertyName = "Price";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Price.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Price.FillWeight = 62.02179F;
+            this.Price.HeaderText = "Цена";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SummTovar
+            // 
+            this.SummTovar.DataPropertyName = "sumTovar";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SummTovar.DefaultCellStyle = dataGridViewCellStyle7;
+            this.SummTovar.FillWeight = 69.14739F;
+            this.SummTovar.HeaderText = "Сумма";
+            this.SummTovar.Name = "SummTovar";
+            this.SummTovar.ReadOnly = true;
+            this.SummTovar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // frmViewContentOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,6 +330,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.CheckBox chckDeleted;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnAddTovar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDep;
         private System.Windows.Forms.DataGridViewTextBoxColumn EAN;
@@ -330,9 +341,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Netto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn SummTovar;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.CheckBox chckDeleted;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnAddTovar;
     }
 }

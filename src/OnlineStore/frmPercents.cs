@@ -96,8 +96,22 @@ namespace OnlineStore
             if (changed)
             {
                 Logging.StartFirstLevel(11);
-                Logging.Comment("Изменение настроек процента наценки/распродажи");
-                Logging.CompareDataTable(dtPercentOld, dtPercent, "id", new int[2] { 2, 3 });
+                Logging.Comment("Изменение настроек процента наценки/распродажи отдела");
+                foreach (DataRow dr in dtPercent.Rows)
+                {
+                    DataRow drold = dtPercentOld.AsEnumerable().Where(r => r.Field<int>("id") == (int)dr["id"]).First();
+                    bool start = false;
+                    if (!(Equals(dr["MarkUpPercent"], drold["MarkUpPercent"]) && Equals(dr["salePercent"], drold["salePercent"])))
+                    {
+                        Logging.Comment($"id отдела: {dr["id_Department"]}, название отдела: {dr["name"]}");
+                        Logging.VariableChange("Процент наценки", dr["MarkUpPercent"], drold["MarkUpPercent"]);
+                        Logging.VariableChange("Процент распродажи", dr["salePercent"], drold["salePercent"]);
+                    }
+
+                }
+                //Logging.CompareDataTable(dtPercentOld, dtPercent, "id_Department", new int[4] {1, 2, 3, 4 });
+                //Logging.CompareDataTable(dtPercentOld, dtPercent, "Код отдела", new int[4] { 1, 2, 3, 4 }, new string[] { "Код отдела", "Наименование отдела" }, new int[] { 1, 2, 3, 4 });
+                Logging.Comment($"Использовать цены для распродажи: {(chckUseSale.Checked ? "Да" : "Нет")}");
                 Logging.Comment("Завершение редактирования настроек процента наценки/распродажи");
                 Logging.StopFirstLevel();
             }
@@ -122,8 +136,11 @@ namespace OnlineStore
             SaveData();
             if (error) return;
             Config.dtPercents =  Config.hCntMain.GetPercents();
+            //dtPercent = Config.dtPercents.Copy();
+            //dtPercentOld = Config.dtPercents.Copy();
             MessageBox.Show("Проценты сохранены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            dgvPercents_Init();
+            //this.Close();
         }
 
         private void dgvPercents_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -481,6 +498,15 @@ namespace OnlineStore
                     task = Config.hCntMain.setPercentSettingsGroups(id, MarkUpPercent, salePercent, true, 1, true);
                     task.Wait();
 
+                    #region log
+                    Logging.StartFirstLevel(1591);
+                    Logging.Comment("Начало удаления процентов наценки/распродажи у группы");
+                    Logging.Comment($"id: {row["id"].ToString()}, Наименование: {row["cName"].ToString()}");
+                    Logging.Comment($"Процент наценки: {MarkUpPercent}");
+                    Logging.Comment($"Процент распродажи: {salePercent}");
+                    Logging.Comment("Завершение удаления процентов наценки/распродажи у группы");
+                    Logging.StopFirstLevel();
+                    #endregion
                     getGroups();
                 }
             }
@@ -606,6 +632,15 @@ namespace OnlineStore
                     task = Config.hCntMain.setPercentSettingsGroups(id, MarkUpPercent, salePercent, false, 1, true);
                     task.Wait();
 
+                    #region log
+                    Logging.StartFirstLevel(1591);
+                    Logging.Comment("Начало удаления процентов наценки/распродажи у товара");
+                    Logging.Comment($"id: {row["id"].ToString()}, Наименование: {row["cName"].ToString()}");
+                    Logging.Comment($"Процент наценки: {MarkUpPercent}");
+                    Logging.Comment($"Процент распродажи: {salePercent}");
+                    Logging.Comment("Завершение удаления процентов наценки/распродажи у товара");
+                    Logging.StopFirstLevel();
+                    #endregion
                     getGoods();
                 }
             }

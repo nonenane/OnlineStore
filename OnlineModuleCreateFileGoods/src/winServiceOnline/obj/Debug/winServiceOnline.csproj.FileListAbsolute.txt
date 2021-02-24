@@ -1,0 +1,15 @@
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\winServiceOnline.exe.config
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\winServiceOnline.exe
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\winServiceOnline.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\OnlineStoreServiceLogic.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\Framework.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\stdole.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\OnlineStoreServiceLogic.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\obj\Debug\winServiceOnline.csprojAssemblyReference.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\obj\Debug\winServiceOnline.ProjectInstaller.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\obj\Debug\winServiceOnline.csproj.GenerateResource.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\obj\Debug\winServiceOnline.csproj.CoreCompileInputs.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\obj\Debug\winServiceOnline.csproj.CopyComplete
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\obj\Debug\winServiceOnline.exe
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\obj\Debug\winServiceOnline.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\OnlineModuleCreateFileGoods\src\winServiceOnline\bin\Debug\Newtonsoft.Json.dll

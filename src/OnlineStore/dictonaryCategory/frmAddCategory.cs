@@ -197,16 +197,17 @@ namespace OnlineStore.dictonaryCategory
 
             if (id == 0)
             {
-                Logging.StartFirstLevel(1469);
+                Logging.StartFirstLevel(43);
 
-                Logging.Comment("Создание Категории");
+                Logging.Comment("Добавление новой категории товара");
                 Logging.Comment($"ID:{task.Result.Rows[0]["id"].ToString()}");             
                 Logging.Comment($"Наименование категории: {tbName.Text}");
                 Logging.Comment($"Отдел категории id:{cmbDeps.SelectedValue.ToString()}; Наименование:{cmbDeps.Text}");
 
                 if (id_ParentCategory != null)
                     Logging.Comment($"Родительская категория id:{cmbParentCategory.SelectedValue.ToString()}; Наименование:{cmbParentCategory.Text}");
-
+                Logging.Comment($"Выгружать на сайт: {(chckIsUnload.Checked ? "Да" : "Нет")}");
+                Logging.Comment($"Путь к картинке категории: {tbPathImage.Text}");
                 Logging.StopFirstLevel();
             }
             else
@@ -214,7 +215,7 @@ namespace OnlineStore.dictonaryCategory
                 if (dtTemp != null && dtTemp.Rows.Count > 0)
                 {
 
-                    Logging.StartFirstLevel(1470);
+                    Logging.StartFirstLevel(44);
 
                     Logging.Comment("Отредактирована категория в справочнике категорий");
                     Logging.Comment($"ID:{id}");
@@ -223,6 +224,8 @@ namespace OnlineStore.dictonaryCategory
 
                     Logging.VariableChange("Отдел категории id", cmbDeps.SelectedValue.ToString(), (int)dtTemp.Rows[0]["id_Departments"], typeLog._int);
                     Logging.VariableChange("Отдел категории Наименование", cmbDeps.Text.ToString(), dtTemp.Rows[0]["nameDep"], typeLog._string);
+                    Logging.VariableChange("Выгружать на сайт", chckIsUnload.Checked, (bool)dtTemp.Rows[0]["isUnload"]);
+                    Logging.VariableChange("Путь к картинке категории", tbPathImage.Text, dtTemp.Rows[0]["PathImage"].ToString());
 
                     /*
                     Logging.VariableChange("Родительская категория id", cmbParentCategory.SelectedValue, (int)dtTemp.Rows[0]["id_ParentCategory"], typeLog._int);

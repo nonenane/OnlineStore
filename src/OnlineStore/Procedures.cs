@@ -204,7 +204,7 @@ namespace OnlineStore
             return dtResult;
         }
 
-        public async Task<DataTable> setDicGoods(int id,int id_tovar,string ShortName,  string FullName, int id_Category, decimal BasicPrice, decimal? StockPrice,bool isActive)
+        public async Task<DataTable> setDicGoods(int id,int id_tovar,string ShortName,  string FullName, int id_Category, decimal BasicPrice, decimal? StockPrice,bool isActive, string shortDescription)
         {
             ap.Clear();
             ap.Add(id);
@@ -218,15 +218,16 @@ namespace OnlineStore
             ap.Add(0);
             ap.Add(true);
             ap.Add(UserSettings.User.Id);
+            ap.Add(shortDescription);
 
             DataTable dtResult = executeProcedure("[OnlineStore].[setDicGoods]",
-                 new string[11] { "@id","@id_tovar", "@ShortName","@FullName", "@id_Category", "@BasicPrice", "@StockPrice", "@isActive","@isInsert", "@isAdd", "@id_user" },
-                 new DbType[11] { DbType.Int32, DbType.Int32, DbType.String, DbType.String, DbType.Int32,DbType.Decimal,DbType.Decimal, DbType.Boolean,DbType.Int32, DbType.Boolean, DbType.Int32 }, ap);
+                 new string[12] { "@id","@id_tovar", "@ShortName","@FullName", "@id_Category", "@BasicPrice", "@StockPrice", "@isActive","@isInsert", "@isAdd", "@id_user", "@shortDescription" },
+                 new DbType[12] { DbType.Int32, DbType.Int32, DbType.String, DbType.String, DbType.Int32,DbType.Decimal,DbType.Decimal, DbType.Boolean,DbType.Int32, DbType.Boolean, DbType.Int32, DbType.String }, ap);
 
             return dtResult;
         }
 
-        public async Task<DataTable> delDicGoods(int id, bool isActive, int result)
+        public async Task<DataTable> delDicGoods(int id, bool isActive, int result, bool? isChangePrice = null)
         {
             ap.Clear();
             ap.Add(id);
@@ -234,10 +235,10 @@ namespace OnlineStore
             ap.Add(false);
             ap.Add(result);
             ap.Add(UserSettings.User.Id);
-
+            ap.Add(isChangePrice==null ? false : isChangePrice);
             DataTable dtResult = executeProcedure("[OnlineStore].[setDicGoods]",
-                 new string[5] { "@id", "@isActive", "@isAdd", "@result", "@id_user" },
-                 new DbType[5] { DbType.Int32, DbType.Boolean, DbType.Boolean, DbType.Int32, DbType.Int32 }, ap);
+                 new string[6] { "@id", "@isActive", "@isAdd", "@result", "@id_user", "@isChangePrice" },
+                 new DbType[6] { DbType.Int32, DbType.Boolean, DbType.Boolean, DbType.Int32, DbType.Int32, DbType.Boolean }, ap);
 
             return dtResult;
         }
@@ -526,5 +527,64 @@ namespace OnlineStore
         }
 
         #endregion
+
+
+        #region "Настройки"
+        public async Task<DataTable> getSettings(string id_value)
+        {
+            ap.Clear();
+            ap.Add(ConnectionSettings.GetIdProgram());
+            ap.Add(id_value);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getSettings]",
+                 new string[2] { "@id_prog", "@id_value" },
+                 new DbType[2] { DbType.Int32, DbType.String }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> setSettings(string id_value, string value)
+        {
+            ap.Clear();
+            ap.Add(ConnectionSettings.GetIdProgram());
+            ap.Add(id_value);
+            ap.Add(value);
+
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setSettings]",
+                 new string[3] { "@id_prog", "@id_value", "@value" },
+                 new DbType[3] { DbType.Int32, DbType.String, DbType.String }, ap);
+
+            return dtResult;
+        }
+
+        #endregion
+
+        public async Task<DataTable> getValidateGoods()
+        {
+            ap.Clear();
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getValidateGoods]",
+                 new string[0] { },
+                 new DbType[0] { }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> UpdateGoodsName(int id, string ShortName,string ShortDescription, string FullName)
+        {
+            ap.Clear();
+
+            ap.Add(id);
+            ap.Add(ShortName);
+            ap.Add(ShortDescription);
+            ap.Add(FullName);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[UpdateGoodsName]",
+                 new string[4] {"@id", "@ShortName", "@ShortDescription", "@FullName" },
+                 new DbType[4] {DbType.Int32,DbType.String,DbType.String,DbType.String }, ap);
+
+            return dtResult;
+        }
     }
 }

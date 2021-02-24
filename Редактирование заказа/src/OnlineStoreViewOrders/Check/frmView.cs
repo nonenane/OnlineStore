@@ -20,6 +20,8 @@ namespace OnlineStoreViewOrders.Check
         public int doc_id { get; set; }
         public DateTime date { get; set; }
         public int terminal { get; set; }
+
+        public int id_tOrder { get; set; }
         
         DataTable dtCheckInfo;
         public frmView()
@@ -179,9 +181,28 @@ namespace OnlineStoreViewOrders.Check
             rep.Show();
             #endregion
 
+
             #region LOG
+
+          
+            DataTable dtInfo = Config.connect.getOrderInfo(id_tOrder);
+            if (dtInfo == null || dtInfo.Rows.Count == 0)
+                return;
+            Logging.StartFirstLevel(834);
+            string status = "";
+
+            string oldStatus = "";                           
+            Logging.StopFirstLevel();
             Logging.StartFirstLevel(79);
             Logging.Comment("Начало выгрузки чека");
+            Logging.Comment($"id заказа: {id_tOrder}");
+            Logging.Comment($"Номер заказа: {dtInfo.Rows[0]["OrderNumber"].ToString()}");
+            Logging.Comment($"Дата и время заказа: {dtInfo.Rows[0]["DateOrder"].ToString()}");
+            Logging.Comment($"ФИО покупателя: {dtInfo.Rows[0]["FIO"].ToString()}");
+            Logging.Comment($"Сумма заказа: {dtInfo.Rows[0]["sumOrder"].ToString()}");
+            Logging.Comment($"Сумма доставки: {dtInfo.Rows[0]["SummaDelivery"].ToString()}");
+            Logging.Comment($"Тип оплаты: {dtInfo.Rows[0]["namePayment"].ToString()}");
+            Logging.Comment("Параметры просматриваемого чека");
             Logging.Comment("Чек номер " + doc_id.ToString() + " от " + date.ToShortDateString() + " касса " + terminal.ToString());
             Logging.Comment("Окончание выгрузки отчета");
             Logging.StopFirstLevel();

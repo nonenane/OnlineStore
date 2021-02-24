@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,7 +42,7 @@ namespace OnlineStoreViewOrders
             ttButton.SetToolTip(btnDelCheck, "Удалить чек");
             ttButton.SetToolTip(btnViewCheck, "Просмотр чека");
             this.Text = "Чеки по заказу № " + num_Order.ToString();
-            btnAdd.Visible = btnDelCheck.Visible = !new List<int>(new int[] { 3, 4 }).Contains(id_status);
+            btnAdd.Visible = btnDelCheck.Visible = !new List<int>(new int[] { 4 }).Contains(id_status);
             dgvCheck_Init();
 
         }
@@ -165,12 +166,31 @@ namespace OnlineStoreViewOrders
             {
                 int idCheck = int.Parse(dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["id"].ToString());
                 Config.connect.DelCheckOrder(idCheck);
+                setLog(710);
                 MessageBox.Show("Чек номер " + dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["CheckNumber"].ToString() + " удален из заказа",
                     "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dgvCheck_Init();
             }
         }
-
+        private void setLog(int id_log)
+        {
+            DataTable dtInfo = Config.connect.getOrderInfo(id_tOrder);
+            if (dtInfo == null && dtInfo.Rows.Count == 0)
+                return;
+            Logging.StartFirstLevel(id_log);
+            Logging.Comment("Удаление чека");
+            Logging.Comment($"id заказа: {id_tOrder}");
+            Logging.Comment($"Номер заказа: {dtInfo.Rows[0]["OrderNumber"].ToString()}");
+            Logging.Comment($"Дата и время заказа: {dtInfo.Rows[0]["DateOrder"].ToString()}");
+            Logging.Comment($"ФИО покупателя: {dtInfo.Rows[0]["FIO"].ToString()}");
+            Logging.Comment($"Сумма заказа: {dtInfo.Rows[0]["sumOrder"].ToString()}");
+            Logging.Comment($"Сумма доставки: {dtInfo.Rows[0]["SummaDelivery"].ToString()}");
+            Logging.Comment($"Тип оплаты: {dtInfo.Rows[0]["namePayment"].ToString()}");
+            Logging.Comment($"Параметры удаленного чека - id: {dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["id"].ToString()}, Дата: {dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["DateCheck"].ToString()}," +
+                $" Номер чека: {dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["CheckNumber"].ToString()}, Номер кассы: {dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["KassNumber"].ToString()}," +
+                $" Пакет: {dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["isPackage"].ToString()}");
+            Logging.StopFirstLevel();
+        }
         private void btnViewCheck_Click(object sender, EventArgs e)
         {
             Check.frmView frm = new Check.frmView()
@@ -178,6 +198,7 @@ namespace OnlineStoreViewOrders
                 doc_id = int.Parse(dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["CheckNumber"].ToString()),
                 date = DateTime.Parse(dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["DateCheck"].ToString()),
                 terminal = int.Parse(dtCheck.DefaultView[dgvCheck.CurrentRow.Index]["KassNumber"].ToString())
+                , id_tOrder = this.id_tOrder
             };
             frm.ShowDialog();
         }

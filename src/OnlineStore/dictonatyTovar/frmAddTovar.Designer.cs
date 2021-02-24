@@ -57,13 +57,15 @@
             this.tbQuantitySuffix = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbPricePercent = new System.Windows.Forms.TextBox();
+            this.tbShortDescription = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btSave
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btSave.Image = global::OnlineStore.Properties.Resources.filesave_2175;
-            this.btSave.Location = new System.Drawing.Point(375, 264);
+            this.btSave.Location = new System.Drawing.Point(375, 356);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 6;
@@ -74,7 +76,7 @@
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btClose.Image = global::OnlineStore.Properties.Resources.exit_8633;
-            this.btClose.Location = new System.Drawing.Point(413, 264);
+            this.btClose.Location = new System.Drawing.Point(413, 356);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 7;
@@ -104,7 +106,7 @@
             // tbShotName
             // 
             this.tbShotName.Location = new System.Drawing.Point(183, 38);
-            this.tbShotName.MaxLength = 50;
+            this.tbShotName.MaxLength = 150;
             this.tbShotName.Multiline = true;
             this.tbShotName.Name = "tbShotName";
             this.tbShotName.Size = new System.Drawing.Size(262, 50);
@@ -143,7 +145,7 @@
             this.cmbParentCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbParentCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbParentCategory.FormattingEnabled = true;
-            this.cmbParentCategory.Location = new System.Drawing.Point(183, 185);
+            this.cmbParentCategory.Location = new System.Drawing.Point(183, 270);
             this.cmbParentCategory.Name = "cmbParentCategory";
             this.cmbParentCategory.Size = new System.Drawing.Size(262, 21);
             this.cmbParentCategory.TabIndex = 13;
@@ -152,7 +154,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(76, 188);
+            this.label4.Location = new System.Drawing.Point(76, 273);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 12;
@@ -162,7 +164,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(103, 215);
+            this.label5.Location = new System.Drawing.Point(103, 300);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 13);
             this.label5.TabIndex = 10;
@@ -172,7 +174,7 @@
             // 
             this.tbRcena.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbRcena.Enabled = false;
-            this.tbRcena.Location = new System.Drawing.Point(183, 212);
+            this.tbRcena.Location = new System.Drawing.Point(183, 297);
             this.tbRcena.MaxLength = 17;
             this.tbRcena.Name = "tbRcena";
             this.tbRcena.Size = new System.Drawing.Size(130, 20);
@@ -185,7 +187,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 267);
+            this.label6.Location = new System.Drawing.Point(18, 352);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(159, 13);
             this.label6.TabIndex = 10;
@@ -194,7 +196,7 @@
             // tbActionPrice
             // 
             this.tbActionPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbActionPrice.Location = new System.Drawing.Point(183, 264);
+            this.tbActionPrice.Location = new System.Drawing.Point(183, 349);
             this.tbActionPrice.MaxLength = 17;
             this.tbActionPrice.Name = "tbActionPrice";
             this.tbActionPrice.Size = new System.Drawing.Size(130, 20);
@@ -209,7 +211,7 @@
             this.chbActive.AutoSize = true;
             this.chbActive.Checked = true;
             this.chbActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbActive.Location = new System.Drawing.Point(183, 290);
+            this.chbActive.Location = new System.Drawing.Point(183, 379);
             this.chbActive.Name = "chbActive";
             this.chbActive.Size = new System.Drawing.Size(130, 17);
             this.chbActive.TabIndex = 14;
@@ -311,7 +313,7 @@
             // tbPriceSuffix
             // 
             this.tbPriceSuffix.Location = new System.Drawing.Point(665, 143);
-            this.tbPriceSuffix.MaxLength = 50;
+            this.tbPriceSuffix.MaxLength = 500;
             this.tbPriceSuffix.Multiline = true;
             this.tbPriceSuffix.Name = "tbPriceSuffix";
             this.tbPriceSuffix.Size = new System.Drawing.Size(187, 55);
@@ -331,7 +333,7 @@
             // tbQuantitySuffix
             // 
             this.tbQuantitySuffix.Location = new System.Drawing.Point(665, 205);
-            this.tbQuantitySuffix.MaxLength = 50;
+            this.tbQuantitySuffix.MaxLength = 500;
             this.tbQuantitySuffix.Multiline = true;
             this.tbQuantitySuffix.Name = "tbQuantitySuffix";
             this.tbQuantitySuffix.Size = new System.Drawing.Size(187, 72);
@@ -343,7 +345,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(55, 241);
+            this.label7.Location = new System.Drawing.Point(55, 326);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(122, 13);
             this.label7.TabIndex = 15;
@@ -352,7 +354,7 @@
             // tbPricePercent
             // 
             this.tbPricePercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbPricePercent.Location = new System.Drawing.Point(183, 238);
+            this.tbPricePercent.Location = new System.Drawing.Point(183, 323);
             this.tbPricePercent.MaxLength = 17;
             this.tbPricePercent.Name = "tbPricePercent";
             this.tbPricePercent.Size = new System.Drawing.Size(130, 20);
@@ -361,12 +363,33 @@
             this.tbPricePercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDecimal_KeyPress);
             this.tbPricePercent.Validating += new System.ComponentModel.CancelEventHandler(this.tbRcena_Validating);
             // 
+            // tbShortDescription
+            // 
+            this.tbShortDescription.Location = new System.Drawing.Point(183, 182);
+            this.tbShortDescription.MaxLength = 1000;
+            this.tbShortDescription.Multiline = true;
+            this.tbShortDescription.Name = "tbShortDescription";
+            this.tbShortDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbShortDescription.Size = new System.Drawing.Size(262, 82);
+            this.tbShortDescription.TabIndex = 17;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(30, 185);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(147, 13);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Короткое описание товара:";
+            // 
             // frmAddTovar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 313);
+            this.ClientSize = new System.Drawing.Size(868, 408);
             this.ControlBox = false;
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.tbShortDescription);
             this.Controls.Add(this.tbPricePercent);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.chbActive);
@@ -442,5 +465,7 @@
         private System.Windows.Forms.TextBox tbQuantitySuffix;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbPricePercent;
+        private System.Windows.Forms.TextBox tbShortDescription;
+        private System.Windows.Forms.Label label8;
     }
 }

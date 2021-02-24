@@ -36,7 +36,7 @@ namespace OnlineStore.dictonatyTovar
         private decimal old_defaultNetto;
         private string old_priceSuffix;
         private string old_quanSuffix;
-
+        private string old_ShortDescription;
         #endregion
 
         public frmAddTovar()
@@ -56,6 +56,7 @@ namespace OnlineStore.dictonatyTovar
 
                 tbEan.Text = old_ean = (string)row["ean"];
                 tbShotName.Text = old_ShortName = (string)row["ShortName"];
+                tbShortDescription.Text = old_ShortDescription = row["ShortDescription"].ToString();
                 tbFullName.Text = old_FullName = (string)row["FullName"];
 
                 tbRcena.Text = ((decimal)row["rcena"]).ToString("0.00");
@@ -82,6 +83,17 @@ namespace OnlineStore.dictonatyTovar
                     old_Step = (decimal)row["Step"];
                     old_defaultNetto = (decimal)row["DefaultNetto"];
                 }
+
+                //предложение по замене цены здесь и сейчас :)
+                decimal rcena = (decimal)row["rcena"];
+                decimal percent = (decimal)row["MarkUpPercent"];
+                decimal pricePercent = (decimal)row["rcenaOnline"];
+                if (Math.Round(pricePercent, 2) != Math.Truncate((rcena * (100 + percent)))/100)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Config.centralText("Цена товара изменилась.\nХотите поменять цену на сайте?\n"), "Редактирование товара", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                        tbPricePercent.Text = (Math.Truncate((rcena * (100 + percent))) / 100).ToString("0.00");
+                }
+
             }
         }
 
@@ -147,11 +159,18 @@ namespace OnlineStore.dictonatyTovar
                 clearValue();
                 return;
             }
+            if ((bool) task.Result.Rows[0]["ExistTovar"])
+            {
+                MessageBox.Show(Config.centralText("Товар уже добавлен на сайт.\n"), "Добавление товара", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                clearValue();
+                return;
+            }
 
             tbActionPrice.Clear();
             id_tovar = (int)task.Result.Rows[0]["id_tovar"];
-            tbShotName.Text = (string)task.Result.Rows[0]["cNameShort"];
+            tbShotName.Text = (string)task.Result.Rows[0]["cNameShort"];            
             tbFullName.Text = (string)task.Result.Rows[0]["cNameFull"];
+            tbShortDescription.Text = (string)task.Result.Rows[0]["cNameFull"];
             tbRcena.Text = ((decimal)task.Result.Rows[0]["rcena"]).ToString("0.00");
             
             
@@ -188,6 +207,7 @@ namespace OnlineStore.dictonatyTovar
 
             string shortname = tbShotName.Text.Trim();
             string fullName = tbFullName.Text.Trim();
+            string shortDescription = tbShortDescription.Text.Trim();
             int id_category = (int)cmbParentCategory.SelectedValue;
             decimal rcena = decimal.Parse(tbPricePercent.Text);
             decimal? actionPrice = null;
@@ -211,7 +231,7 @@ namespace OnlineStore.dictonatyTovar
             }
 
 
-            task = Config.hCntMain.setDicGoods(id, id_tovar, shortname, fullName, id_category, rcena, actionPrice, isActive);
+            task = Config.hCntMain.setDicGoods(id, id_tovar, shortname, fullName, id_category, rcena, actionPrice, isActive, shortDescription);
             task.Wait();
 
             if (task.Result == null)
@@ -264,11 +284,16 @@ namespace OnlineStore.dictonatyTovar
                 Logging.Comment("EAN: " + tbEan.Text);
                 Logging.Comment("Короткое наименование товара: " + shortname);
                 Logging.Comment("Полное наименование товара: " + fullName);
+                Logging.Comment($"Короткое описание товара: {shortDescription}");
                 Logging.Comment("Категория товара: " + cmbParentCategory.Text);
                 Logging.Comment("ID категории товара: " + id_category);
                 Logging.Comment("Базовая цена товара: " + rcena);
                 Logging.Comment("Акционная цена товара: " + actionPrice);
                 Logging.Comment("Действующий товар: " + chbActive.Checked);
+                if (cmbParentCategory.SelectedValue!=null)
+                {
+                    Logging.Comment($"Категория id: {cmbParentCategory.SelectedValue.ToString()}, Наименование: {cmbParentCategory.Text}");
+                }
                 if (tbEan.Text.Trim().Length==4)
                 {
                     Logging.Comment("Минимальное количество заказа: " + MinOrder);
@@ -294,6 +319,7 @@ namespace OnlineStore.dictonatyTovar
                     Logging.Comment("EAN товара: " + tbEan.Text);
                     Logging.VariableChange("Короткое наименование товара", shortname, old_ShortName);
                     Logging.VariableChange("Полное наименование товара", fullName, old_FullName);
+                    Logging.VariableChange("Короткое описание товара", shortDescription, old_ShortDescription);
                     Logging.VariableChange("Категория товара", id_category, old_category);
                     Logging.VariableChange("Базовая цена товара", rcena, old_rcenaOnline);
                     Logging.VariableChange("Акционная цена товара", (actionPrice == null ? 0 : actionPrice), old_actionPrice);
@@ -328,6 +354,7 @@ namespace OnlineStore.dictonatyTovar
             if (id_tovar == 0) { MessageBox.Show(Config.centralText("Необходимо заполнить поле \"EAN\"\n товара для заполнения данных на форме!\n"), "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbEan.Focus(); return false; }
             if (tbShotName.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Короткое наименование товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbShotName.Focus(); return false; }
             if (tbFullName.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Полное наименование товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbFullName.Focus(); return false; }
+            if (tbShortDescription.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Короткое описание товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbShortDescription.Focus(); return false; }
             if (cmbParentCategory.SelectedIndex == -1 || cmbParentCategory.SelectedValue == null) { MessageBox.Show("Необходимо выбрать \"Категорию товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); cmbParentCategory.Focus(); return false; }
         
             /*if (tbActionPrice.Text.Trim().Length ==0)

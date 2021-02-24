@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +14,7 @@ namespace OnlineStore
     public partial class frmAddPercent : Form
     {
         private int id = 0;
-        private bool isEditData = false;
-        
+        private bool isEditData = false;      
         public DataRowView row { set; private get; }
         public bool isGroup { set; private get; }
         
@@ -131,6 +131,27 @@ namespace OnlineStore
 
             isEditData = false;
             MessageBox.Show("Данные сохранены.", "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            #region log
+            Logging.StartFirstLevel(1590);
+            Logging.Comment($"Изменение процентов наценки/распродажи {(isGroup ? "группы" : "товара")}");
+            Logging.Comment($"id: {row["id"].ToString()}, наименование {row["cName"].ToString()}");
+            decimal oldMarkUpPercent = 0;
+            decimal oldSalePercent = 0;
+            if (row["MarkUpPercent"] != DBNull.Value)
+                oldMarkUpPercent = (decimal)row["MarkUpPercent"];
+            if (row["SalePercent"] != DBNull.Value)
+                oldSalePercent = (decimal)row["SalePercent"];
+            if (MarkUpPercent == null) MarkUpPercent = 0;
+            if (salePercent == null) salePercent = 0;
+            if (!isGroup)
+                Logging.Comment($"ean: {row["ean"].ToString()}");
+            Logging.VariableChange("Процент наценки", MarkUpPercent, oldMarkUpPercent);
+            Logging.VariableChange("Процент распродажи", salePercent, oldSalePercent);
+            Logging.Comment($"Завершение редактирования процента наценки/распродажи {(isGroup ? "группы" : "товара")}");
+            Logging.StopFirstLevel();
+            #endregion
+
             this.DialogResult = DialogResult.OK;
         }
 

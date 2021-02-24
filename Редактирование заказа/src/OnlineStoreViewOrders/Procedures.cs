@@ -21,7 +21,7 @@ namespace OnlineStoreViewOrders
         }
         ArrayList ap = new ArrayList();
 
-        public DataTable Get_tOrders(DateTime start, DateTime end)
+        public DataTable Get_tOrders(DateTime start, DateTime end,int type)
         {
             ap.Clear();
             ap.Add(start);
@@ -29,9 +29,10 @@ namespace OnlineStoreViewOrders
             if (UserSettings.User.StatusCode == "РКВ")
                 ap.Add(UserSettings.User.IdDepartment);
             else ap.Add(0);
+            ap.Add(type);
             return executeProcedure("[OnlineStore].[get_tOrders]",
-                    new string[] { "@startdate", "@enddate","@id_dep" },
-                    new DbType[] { DbType.DateTime, DbType.DateTime, DbType.Int16 }, ap);
+                    new string[4] { "@startdate", "@enddate", "@id_dep", "@type" },
+                    new DbType[4] { DbType.DateTime, DbType.DateTime, DbType.Int16, DbType.Int32 }, ap);
 
         }
 
@@ -54,7 +55,7 @@ namespace OnlineStoreViewOrders
         }
 
         public DataTable Set_tOrder(int orderNum, DateTime dateOrder, string lastname, string name,
-           string email, string phone, string address, decimal summa, string commentOrder, string typePay)
+           string email, string phone, string address, decimal summa, string commentOrder, string typePay, string deliveryType)
         {
             ap.Clear();
             ap.Add(orderNum);
@@ -68,14 +69,14 @@ namespace OnlineStoreViewOrders
             ap.Add(commentOrder);
             ap.Add(Nwuram.Framework.Settings.User.UserSettings.User.Id);
             ap.Add(typePay);
-
+            ap.Add(deliveryType);
             return executeProcedure("OnlineStore.set_tOrder",
                 new string[]    { "@orderNum", "@dateOrder", "@lastname", "@name",
                                 "@email", "@phone","@address","@summaDelivery",
-                                "@commentOrder","@id_person","@typePay"},
+                                "@commentOrder","@id_person","@typePay", "@deliveryType"},
                 new DbType[] {  DbType.Int32, DbType.DateTime, DbType.String, DbType.String,
                                 DbType.String, DbType.String, DbType.String, DbType.Decimal,
-                                DbType.String, DbType.Int32,DbType.String}, ap);
+                                DbType.String, DbType.Int32,DbType.String, DbType.String}, ap);
 
         }
 
@@ -213,6 +214,14 @@ namespace OnlineStoreViewOrders
                 new DbType[] { DbType.Int32, DbType.DateTime, DbType.Int32 }, ap);
         }
 
+        public DataTable getOrderInfo(int id_tOrder)
+        {
+            ap.Clear();
+            ap.Add(id_tOrder);
+            return executeProcedure("[OnlineStore].[getInfoTOrder]",
+                new string[] { "@id_tOrder" },
+                new DbType[] { DbType.Int32 }, ap);
+        }
         #region "Работа со статусами"
 
         public DataTable getDeps(bool isAll)
@@ -285,15 +294,18 @@ namespace OnlineStoreViewOrders
                 new DbType[6] { DbType.Int32, DbType.Decimal,DbType.Date,DbType.Int32,DbType.String, DbType.Int32 }, ap);
         }
 
-        public DataTable updateSummaDelivery(int id_tOrder, decimal summaDelivery)
+        public DataTable updateSummaDelivery(int id_tOrder, decimal summaDelivery,DateTime PlanDeliveryDate,string address,string deliveryType)
         {
             ap.Clear();
             ap.Add(id_tOrder);
             ap.Add(summaDelivery);
             ap.Add(UserSettings.User.Id);
+            ap.Add(PlanDeliveryDate);
+            ap.Add(address);
+            ap.Add(deliveryType);
             return executeProcedure("OnlineStore.set_tOrder",
-                new string[3] { "@idOrder", "@summaDelivery", "@id_person" },
-                new DbType[3] { DbType.Int32, DbType.Decimal, DbType.Int32 }, ap);
+                new string[6] { "@idOrder", "@summaDelivery", "@id_person", "@PlanDeliveryDate","@address","@deliveryType" },
+                new DbType[6] { DbType.Int32, DbType.Decimal, DbType.Int32, DbType.DateTime,DbType.String,DbType.String }, ap);
         }
 
         public DataTable getListStatus(bool isAll)
@@ -389,6 +401,54 @@ namespace OnlineStoreViewOrders
             return executeProcedure("OnlineStore.getSumNotesOrderWithRCena",
                 new string[3] { "@StartDate", "@EndDate", "@id_period" },
                 new DbType[3] { DbType.Date, DbType.Date, DbType.Int32 }, ap);
+        }
+
+        #endregion
+
+        #region "Настройки"
+        public async Task<DataTable> getSettings(string id_value)
+        {
+            ap.Clear();
+            ap.Add(ConnectionSettings.GetIdProgram());
+            ap.Add(id_value);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getSettings]",
+                 new string[2] { "@id_prog", "@id_value" },
+                 new DbType[2] { DbType.Int32, DbType.String }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> setSettings(string id_value, string value)
+        {
+            ap.Clear();
+            ap.Add(ConnectionSettings.GetIdProgram());
+            ap.Add(id_value);
+            ap.Add(value);
+
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setSettings]",
+                 new string[3] { "@id_prog", "@id_value", "@value" },
+                 new DbType[3] { DbType.Int32, DbType.String, DbType.String }, ap);
+
+            return dtResult;
+        }
+
+        public bool GetPropertyList(string id_value)
+        {
+            ap.Clear();
+            ap.Add(ConnectionSettings.GetIdProgram());
+            ap.Add(UserSettings.User.Id);
+            ap.Add(id_value);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[GetPropertyList]",
+                 new string[3] { "@id_prog", "@id_user", "@id_val" },
+                 new DbType[3] { DbType.Int32, DbType.Int32, DbType.String }, ap);
+
+            if (dtResult == null || dtResult.Rows.Count == 0) return false;
+
+
+            return dtResult.Rows[0]["val"].ToString().Equals("1");
         }
 
         #endregion

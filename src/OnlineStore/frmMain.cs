@@ -57,7 +57,7 @@ namespace OnlineStore
             // Default to the My Documents folder.
             this.folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
 
-            if (UserSettings.User.StatusCode == "РКВ") настройкиПроцентовToolStripMenuItem.Visible = false;
+            if (UserSettings.User.StatusCode == "РКВ") настройкаВремениДатыДоставкиToolStripMenuItem.Visible = настройкиПроцентовToolStripMenuItem.Visible = false;
             if (UserSettings.User.StatusCode.ToLower() == "пр")
                 setEnabledPR();
             Task.Run(() => { init_combobox(true); get_data(); });
@@ -487,6 +487,25 @@ namespace OnlineStore
 
         private void btDel_Click(object sender, EventArgs e)
         {
+            if (dtData == null || dtData.Rows.Count == 0 || dtData.DefaultView.Count == 0) return;
+
+            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
+                .Where(r => r.Field<bool>("isSelect"));
+            if (rowCollect.Count()!=0)
+            {
+                if (MessageBox.Show(Config.centralText("Выбранные товары станут недействующими.\nВы хотите продолжить?\n"), "Неактивные товары", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    return;
+                foreach (DataRow dr in rowCollect)
+                {
+                    Task<DataTable> t = 
+                    Config.hCntMain.delDicGoods((int)dr["id"], false, -2);
+                    t.Wait();
+                    setLog(1586, dr);
+                }
+                Task.Run(() => get_data());
+                return;
+            }
+
             if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
             {
                 int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
@@ -515,7 +534,7 @@ namespace OnlineStore
                 {
                     if (DialogResult.Yes == MessageBox.Show(Config.centralText("Выбранная для удаления запись\nиспользуется в программе.\nСделать запись недействующей?\n"), "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     {
-                        //setLog(id, 1520);
+                        setLog(1585, dtData.DefaultView[dgvData.CurrentRow.Index].Row);
                         task = Config.hCntMain.delDicGoods(id, !isActive, result);
                         task.Wait();
                         if (task.Result == null)
@@ -547,8 +566,18 @@ namespace OnlineStore
                 {
                     if (DialogResult.Yes == MessageBox.Show("Сделать выбранную запись действующей?", "Восстановление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     {
-                        //setLog(id, 1521);
-                        task = Config.hCntMain.delDicGoods(id, !isActive, result);
+                        decimal rcena = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["rcena"];
+                        decimal percent = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["MarkUpPercent"];
+                        decimal pricePercent = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["rcenaOnline"];
+                        bool? changePrice = null;
+                        if (Math.Round(pricePercent, 2) != Math.Truncate((rcena * (100 + percent))) / 100)
+                        {
+                            if (DialogResult.Yes == MessageBox.Show(Config.centralText("Цена товара изменилась.\nХотите поменять цену на сайте?\n"), "Редактирование товара", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                                changePrice = true;
+                            else changePrice = false;
+                        }
+                        setLog(1586, dtData.DefaultView[dgvData.CurrentRow.Index].Row, changePrice);
+                        task = Config.hCntMain.delDicGoods(id, !isActive, result, changePrice);
                         task.Wait();
                         if (task.Result == null)
                         {
@@ -560,6 +589,47 @@ namespace OnlineStore
                     }
                 }
             }
+        }
+
+        private void setLog(int id_log, DataRow dr, bool? isChangePrice = null)
+        {
+            Logging.StartFirstLevel(id_log);
+            string end = "";
+            switch (id_log)
+            {
+                case 1585: Logging.Comment("Перевод товара в недействующие"); end = "недействующие"; break;
+                case 1586: Logging.Comment("Перевод товара в действующие"); end = "действующие"; break;
+            }
+          
+            int id_tovar = (int)dr["id_tovar"];
+            string fullname = dr["FullName"].ToString();
+            string shortname = dr["ShortName"].ToString();
+            string id_category = dr["id_Category"].ToString();
+            string name_category = dr["nameCategory"].ToString();
+            decimal rcena = (decimal)dr["rcena"];
+            decimal rcenaOnline = (decimal) dr["rcenaOnline"];
+            string rcenaOld = dr["rcenaPromo"].ToString();
+            string minOrder = dr["MinOrder"].ToString();
+            string maxOrder = dr["MaxOrder"].ToString();
+            string step = dr["Step"].ToString();
+            string defaulNetto = dr["DefaultNetto"].ToString();
+            string priceSuffix = dr["PriceSuffix"].ToString();
+            string quantitySuffix = dr["QuantitySuffix"].ToString();
+            Logging.Comment($"id_tovar: {id_tovar}, EAN: {dr["ean"].ToString()}");
+            Logging.Comment($"Полное наименование: {fullname}");
+            Logging.Comment($"Короткое наименование: {shortname}");
+            Logging.Comment($"id_категории: {id_category}, Наименование: {name_category}");
+            Logging.Comment($"Цена продажи: {rcena}, Цена на сайте: {rcenaOnline}, Старая цена распродажи: {rcenaOld}");
+            if (isChangePrice != null)
+                Logging.Comment($"Изменение цены товара: {((bool)isChangePrice ? "ДА" : "НЕТ")}");
+            if (dr["ean"].ToString().Length == 4)
+            {
+                Logging.Comment($"Мин. кол-во заказа: {minOrder}, макс. кол-во заказа: {maxOrder}, шаг: {step}");
+                Logging.Comment($"Значение товара по умолчанию: {defaulNetto}");
+                Logging.Comment($"Суффикс к цене товара: {priceSuffix}, суффикс к кол-ву товара: {quantitySuffix}");
+            }
+            Logging.Comment($"Завершение перевода товара в {end}");
+            Logging.StopFirstLevel();
         }
 
         private void btUpdate_Click(object sender, EventArgs e)
@@ -673,11 +743,35 @@ namespace OnlineStore
                 {
                     tableToCsv.insertData(dtLoad.DefaultView.ToTable().Copy(), folderName, true);
                     MessageBox.Show("Выгрузка завершена!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
                 catch
                 {
                     MessageBox.Show("Ошибка записи файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                #region Логирование
+                Logging.StartFirstLevel(981);
+                Logging.Comment("Выгрузка в файл CSV товаров с формы");
+                Logging.Comment($"Значения фильтров: ean: {tbEan.Text}");
+                string strTovars = "Наименования: ";
+                foreach (DataRowView dr in dtLoad.DefaultView)
+                {
+                    strTovars += dr["FullName"].ToString();
+                }
+                Logging.Comment(strTovars);
+                strTovars = "Короткое описание: ";
+                foreach (DataRowView dr in dtLoad.DefaultView)
+                    strTovars += dr["ShortDescription"].ToString();
+                Logging.Comment(strTovars);
+                if (Config.ImageTovar)
+                    Logging.Comment("С картинкой по товару");            
+                else
+                    Logging.Comment("Без картинки");
+                Logging.Comment($"Размер файла: {Config.sizeCSV}");
+                Logging.Comment($"Завершение выгрузки товаров с формы");
+                Logging.StopFirstLevel();
+                #endregion
+
             }
         }
 
@@ -708,12 +802,34 @@ namespace OnlineStore
                         {
                             MessageBox.Show("Ошибка записи файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
+                        #region логирование
+                        Logging.StartFirstLevel(981);
+                        Logging.Comment("Выгрузка в файл CSV измененных товаров");
+                        Logging.Comment($"Дата начала выборки: {dateSelect.ToShortDateString()}");
+                        string strTovars = "Короткое описание: ";
+                        foreach (DataRow dr in rowCollect)
+                            strTovars += dr["ShortDescription"].ToString();
+                        Logging.Comment(strTovars);
+                        if (Config.ImageTovar)
+                            Logging.Comment("С картинкой по товару");                      
+                        else
+                            Logging.Comment("Без картинки");
+                        Logging.Comment($"Размер файла: {Config.sizeCSV}");
+                        Logging.Comment($"Завершение выгрузки товаров с формы");
+                        Logging.StopFirstLevel();
+                        #endregion
+
+
                     }
                 }
                 else
                 {
                     MessageBox.Show("Нет данных для отчета", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+
+
             }
 
         }
@@ -737,14 +853,32 @@ namespace OnlineStore
                     {
                         tableToCsv.insertData(rowCollect.CopyToDataTable(), folderName, true);
                         MessageBox.Show("Выгрузка завершена!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        foreach (DataRow dr in dtData.Rows)
-                            dr["isSelect"] = false;
                     }
                     catch
                     {
                         MessageBox.Show("Ошибка записи файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
+                    #region логирование
+                    Logging.StartFirstLevel(981);
+                    Logging.Comment("Выгрузка в файл CSV выбранных товаров");
+                    string strTovars = "Товары: ";
+                    foreach (DataRow dr in rowCollect)
+                    {
+                        strTovars += $"id товара: {dr["id_Tovar"].ToString()}, ean: {dr["ean"].ToString()}, Наименование: {dr["FullName"].ToString()}, Короткое описание: " +
+                            $"{dr["ShortDescription"].ToString()};";
+                        dr["isSelect"] = false;
+                    }
+                    
+                    Logging.Comment(strTovars);
+                    if (Config.ImageTovar)
+                        Logging.Comment("С картинкой по товару");                 
+                    else
+                        Logging.Comment("Без картинки");
+                    Logging.Comment($"Размер файла: {Config.sizeCSV}");
+                    Logging.Comment($"Завершение выгрузки товаров с формы");
+                    Logging.StopFirstLevel();
+                    #endregion
                 }
             }
             else
@@ -776,6 +910,22 @@ namespace OnlineStore
                     {
                         MessageBox.Show("Ошибка записи файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    #region логирование
+                    Logging.StartFirstLevel(981);
+                    Logging.Comment("Выгрузка в файл CSV всех доступных товаров");
+                    string strTovars = "Короткое описание: ";
+                    foreach (DataRowView dr in dtLoad.DefaultView)
+                        strTovars += dr["ShortDescription"].ToString();
+                    Logging.Comment(strTovars);
+                    if (Config.ImageTovar)
+                        Logging.Comment("С картинкой по товару");                  
+                    else
+                        Logging.Comment("Без картинки");
+                    Logging.Comment($"Размер файла: {Config.sizeCSV}");
+                    Logging.Comment($"Завершение выгрузки товаров с формы");
+                    Logging.StopFirstLevel();
+                    #endregion
+
                 }
             }
             else
@@ -884,24 +1034,11 @@ namespace OnlineStore
 
 
             Logging.StartFirstLevel(1528);
-            Logging.Comment("Начало обновления цен товаров");
+            Logging.Comment($"Начало обновления цен товаров отдела {cmbDeps.Text}");
             Logging.Comment("Обновление цен для распродажи: " + Config.isSale.ToString());
-            if (id_dep != 0)
+            foreach (DataRow row in dtData.Rows)
             {
-                Logging.Comment("Обновление цен товаров отдела: " + cmbDeps.Text+  ". Процент наценки: " + drPrec.Rows[0]["MarkUpPercent"].ToString()
-                    + "% Процент распродажи: " + drPrec.Rows[0]["salePercent"].ToString());
-            }
-            else
-            {
-                DataTable dtTempDep = (DataTable) cmbDeps.DataSource;
-                foreach (DataRow s in dtTempDep.Rows)
-                {
-                    drPrec = Config.dtPercents.AsEnumerable().Where(r => r.Field<Int16>("id_Department") == (int)s["id"] && r.Field<Int16>("id_Department") > 0)
-                        .Count() > 0 ? Config.dtPercents.AsEnumerable().Where(r => r.Field<Int16>("id_Department") == (int)s["id"] && r.Field<Int16>("id_Department") > 0).CopyToDataTable() : null;
-                    if ((int)s["id"]!=0)
-                    Logging.Comment("Обновление цен товаров отдела: " + s["cName"] + ". Процент наценки: " + drPrec.Rows[0]["MarkUpPercent"].ToString()
-                    + "% Процент распродажи: " + drPrec.Rows[0]["salePercent"].ToString() + "%");
-                }
+                Logging.Comment("ID: " + row["id_tovar"].ToString() + "; ean: " + row["ean"].ToString() + $", процент наценки: {row["MarkUpPercent"].ToString()}, процент распродажи: {row["SalePercent"].ToString()}");
             }
             Logging.Comment("Окончание обновления цен товаров");
             Logging.StopFirstLevel();
@@ -925,17 +1062,17 @@ namespace OnlineStore
             #region Логирование
             Logging.StartFirstLevel(1528);
             Logging.Comment("Начало обновления цен товаров");
+            if (rbAll.Checked)
+                Logging.Comment("Обновление всех товаров");
+            if (rbSelected.Checked)
+                Logging.Comment("Обновление выбранных товаров");
+            if (rbView.Checked)
+                Logging.Comment("Обновление видимых товаров");
             Logging.Comment("Обновление цен для распродажи: " + Config.isSale.ToString());
-            foreach (DataRow dr in Config.dtPercents.Rows)
-            {
-                Logging.Comment("Обновление цен товаров отдела: " + dr["id_Department"] + ". Процент наценки: " + dr["MarkUpPercent"].ToString()
-                    + "% Процент распродажи: " + dr["salePercent"].ToString() + "%");
-            }
-
       
             foreach (DataRow row in dtGoods.Rows)
             {
-                Logging.Comment("ID: " + row["id_tovar"].ToString() + "; ean: " + row["ean"].ToString());
+                Logging.Comment("ID: " + row["id_tovar"].ToString() + "; ean: " + row["ean"].ToString() + $", процент наценки: {row["MarkUpPercent"].ToString()}, процент распродажи: {row["SalePercent"].ToString()}");
             }
             Logging.Comment("Окончание обновления цен товаров");
             Logging.StopFirstLevel();
@@ -1012,6 +1149,21 @@ namespace OnlineStore
         {
             dictonatyTovar.frmEditAttribute frm = new dictonatyTovar.frmEditAttribute();
             frm.ShowDialog();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private  void настройкаВремениДатыДоставкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmSettingsTimeDelivery().ShowDialog();
+        }
+
+        private void сравнениеНаименованийТоваровToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new validateGoods.frmView() { dtGoods = dtData.Copy() }.ShowDialog();
         }
     }
 }

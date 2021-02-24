@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -323,6 +324,16 @@ namespace OnlineStoreViewOrders
             {
                 MessageBox.Show("Нет данных для отчёта", "Выгрузка отчёта", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+            #region логирование
+            Logging.StartFirstLevel(79);
+            Logging.Comment("Произведена выгрузка в Excel отчета по работе онлайн-магазина");
+            Logging.Comment($"Период с: {dtpStart.Value.ToShortDateString()} по: {dtpEnd.Value.ToShortDateString()}");
+            Logging.Comment($"Отчет о выполненых заказах: {(chbComplete.Checked ? "Да" : "Нет")}");
+            Logging.Comment($"Отчет об отмененных заказах: {(chbCancel.Checked ? "Да" : "Нет")}");
+            Logging.Comment("Завершение выгрузки отчета по работе онлайн магазина");
+            Logging.StopFirstLevel();
+            #endregion
         }
 
 

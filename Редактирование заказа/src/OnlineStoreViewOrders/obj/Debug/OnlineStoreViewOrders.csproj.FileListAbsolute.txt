@@ -120,3 +120,56 @@ C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин
 D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCreateReport.resources
 D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmListPeriod.resources
 D:\Работа\OnlineStore\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmStatistic.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.dll.config
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.dll
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.pdb
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\bin\Debug\Interop.Excel.dll
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\bin\Debug\stdole.dll
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Check.frmAddCheck.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Check.frmView.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmAddTovar.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCheck.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeStatus.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeSummaDelivery.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCreateReport.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmPackage.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmViewContentOrder.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmViewOrders.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Properties.Resources.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmListPeriod.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmStatistic.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.workWithStatus.frmJournalStatusOrder.resources
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.CopyComplete
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.dll
+C:\Users\user\Desktop\Онлайн магазин- логирование\Заказы\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.pdb
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.pdb
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\bin\Debug\Interop.Excel.dll
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\bin\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\bin\Debug\stdole.dll
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csprojAssemblyReference.cache
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Check.frmAddCheck.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Check.frmView.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmAddTovar.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCheck.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeStatus.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmChangeSummaDelivery.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmCreateReport.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmPackage.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmViewContentOrder.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.frmViewOrders.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.Properties.Resources.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmListPeriod.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.statisticOrder.frmStatistic.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.workWithStatus.frmJournalStatusOrder.resources
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.GenerateResource.cache
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.CopyComplete
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.pdb
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\bin\Debug\EPPlus.dll
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.dll.config
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\bin\Debug\OnlineStoreViewOrders.dll
+C:\Users\user\Desktop\декабрь 2020\Онлайн магазин(second)\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\EPPlus.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\bin\Debug\Newtonsoft.Json.dll

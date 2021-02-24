@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.rbImgTovar = new System.Windows.Forms.RadioButton();
-            this.rbImgCat = new System.Windows.Forms.RadioButton();
             this.rbWithoutImage = new System.Windows.Forms.RadioButton();
             this.tbSizeFile = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,24 +38,13 @@
             // rbImgTovar
             // 
             this.rbImgTovar.AutoSize = true;
-            this.rbImgTovar.Location = new System.Drawing.Point(12, 58);
+            this.rbImgTovar.Location = new System.Drawing.Point(12, 35);
             this.rbImgTovar.Name = "rbImgTovar";
             this.rbImgTovar.Size = new System.Drawing.Size(139, 17);
             this.rbImgTovar.TabIndex = 4;
             this.rbImgTovar.Text = "с картинкой по товару";
             this.rbImgTovar.UseVisualStyleBackColor = true;
             this.rbImgTovar.CheckedChanged += new System.EventHandler(this.rbImgTovar_CheckedChanged);
-            // 
-            // rbImgCat
-            // 
-            this.rbImgCat.AutoSize = true;
-            this.rbImgCat.Location = new System.Drawing.Point(12, 35);
-            this.rbImgCat.Name = "rbImgCat";
-            this.rbImgCat.Size = new System.Drawing.Size(123, 17);
-            this.rbImgCat.TabIndex = 5;
-            this.rbImgCat.Text = "с общей картинкой";
-            this.rbImgCat.UseVisualStyleBackColor = true;
-            this.rbImgCat.CheckedChanged += new System.EventHandler(this.rbImgCat_CheckedChanged);
             // 
             // rbWithoutImage
             // 
@@ -73,7 +61,7 @@
             // 
             // tbSizeFile
             // 
-            this.tbSizeFile.Location = new System.Drawing.Point(12, 82);
+            this.tbSizeFile.Location = new System.Drawing.Point(12, 58);
             this.tbSizeFile.Name = "tbSizeFile";
             this.tbSizeFile.Size = new System.Drawing.Size(44, 20);
             this.tbSizeFile.TabIndex = 7;
@@ -81,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 88);
+            this.label1.Location = new System.Drawing.Point(63, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 13);
             this.label1.TabIndex = 8;
@@ -91,7 +79,7 @@
             // 
             this.btExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btExit.Image = global::OnlineStore.Properties.Resources.pngExit;
-            this.btExit.Location = new System.Drawing.Point(185, 99);
+            this.btExit.Location = new System.Drawing.Point(185, 74);
             this.btExit.Name = "btExit";
             this.btExit.Size = new System.Drawing.Size(32, 32);
             this.btExit.TabIndex = 1;
@@ -102,12 +90,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(229, 143);
+            this.ClientSize = new System.Drawing.Size(229, 118);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbSizeFile);
             this.Controls.Add(this.rbWithoutImage);
-            this.Controls.Add(this.rbImgCat);
             this.Controls.Add(this.rbImgTovar);
             this.Controls.Add(this.btExit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -123,7 +110,6 @@
         #endregion
         private System.Windows.Forms.Button btExit;
         private System.Windows.Forms.RadioButton rbImgTovar;
-        private System.Windows.Forms.RadioButton rbImgCat;
         private System.Windows.Forms.RadioButton rbWithoutImage;
         private System.Windows.Forms.TextBox tbSizeFile;
         private System.Windows.Forms.Label label1;

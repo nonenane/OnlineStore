@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using Nwuram.Framework.Settings.User;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,12 +30,17 @@ namespace OnlineStore.dictonaryCategory
             
             Task<DataTable> task = Config.hCntMain.getDeps();
             task.Wait();
-            dtDeps = task.Result;
-         
-                cbDeps.DataSource = dtDeps;
-                cbDeps.DisplayMember = "cName";
-                cbDeps.ValueMember = "id";
-                cbDeps.SelectedIndex = 0;               
+            dtDeps = task.Result;  
+            cbDeps.DataSource = dtDeps;
+            cbDeps.DisplayMember = "cName";
+            cbDeps.ValueMember = "id";
+            if (task.Result!=null && UserSettings.User.StatusCode !="РКВ")
+                cbDeps.SelectedIndex = 0;
+            if (task.Result!=null && UserSettings.User.StatusCode == "РКВ")
+            {
+                cbDeps.SelectedValue = UserSettings.User.IdDepartment;
+                cbDeps.Enabled = false;
+            }
         }
 
         private void cmbCategory_Init()
@@ -167,6 +174,12 @@ namespace OnlineStore.dictonaryCategory
                                                                       int.Parse(dtData.DefaultView[dgvData.CurrentRow.Index]["idgrp"].ToString()));
             task.Wait();
             MessageBox.Show("Связь удалена", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Logging.StartFirstLevel(1584);
+            Logging.Comment("Удаление связи группы и категории");
+            Logging.Comment($"id категории: {dtData.DefaultView[dgvData.CurrentRow.Index]["id"].ToString()}, Наименование: {dtData.DefaultView[dgvData.CurrentRow.Index]["NameCategory"].ToString()}");
+            Logging.Comment($"id группы: {dtData.DefaultView[dgvData.CurrentRow.Index]["idgrp"].ToString()}, Наименование: {dtData.DefaultView[dgvData.CurrentRow.Index]["NameGrp"].ToString()}");
+            Logging.Comment("Завершение удаления связи группы и категории");
+            Logging.StopFirstLevel();
             dgvData_Init();
         }
 

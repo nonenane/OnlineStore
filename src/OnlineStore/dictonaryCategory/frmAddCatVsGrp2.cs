@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nwuram.Framework.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -71,6 +72,13 @@ namespace OnlineStore.dictonaryCategory
            
             if (int.Parse(dt.Rows[0][0].ToString())>0)
             {
+                Logging.StartFirstLevel(1583);
+                Logging.Comment("Добавлении связи группы и категории");
+              
+                Logging.Comment($"id Категории: {id_cat}, Наименование: {cat}");
+                Logging.Comment($"id группы: {id_grp}, Наименование: {dtData.DefaultView[dgvGroups.CurrentRow.Index]["cname"].ToString()}");
+                Logging.Comment($"Завершение добавления связи группы и категории");
+                Logging.StopFirstLevel();
                 MessageBox.Show("Связь добавлена", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);            
                 dgvData_Init();
                 if (dgvGroups.Rows.Count > selectedIndex)
@@ -143,6 +151,13 @@ namespace OnlineStore.dictonaryCategory
 
                 if (int.Parse(dt.Rows[0][0].ToString()) > 0)
                 {
+                    Logging.StartFirstLevel(1583);
+                    Logging.Comment("Добавлении связи группы и категории");
+                   
+                    Logging.Comment($"id Категории: {id_cat}, Наименование: {cat}");
+                    Logging.Comment($"id группы: {id_grp}, Наименование: {dtData.DefaultView[dgvGroups.CurrentRow.Index]["cname"].ToString()}");
+                    Logging.Comment($"Завершение добавления связи группы и категории");
+                    Logging.StopFirstLevel();
                     MessageBox.Show("Связь добавлена", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     int selectedIndex = e.RowIndex;
                     dgvData_Init();

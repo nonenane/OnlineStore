@@ -307,8 +307,8 @@ namespace OnlineStore.dictonatyTovar
            // dgvGroups_Init();
             
             //CloseForm();
-            #region LOG
-            Logging.StartFirstLevel(5);
+          /*  #region LOG
+            Logging.StartFirstLevel(1587);
             Logging.Comment("Начало добавление новых товаров");
             Logging.Comment("Дата реализации: " + dtpRealiz.Value.ToString() + ", " +
                 "Отдел id: " + cbDeps.SelectedValue.ToString() + ", наименование: " + cbDeps.Text);
@@ -317,11 +317,15 @@ namespace OnlineStore.dictonatyTovar
                 if (dr["selected"].ToString() == "True")
                     Logging.Comment("id инв. группы: " + dr["id"].ToString() + ", наименование группы: " + dr["cname"].ToString());
             }
-            Logging.StopFirstLevel();
-            #endregion
+            if (dtAddedRows!=null && dtAddedRows.Rows.Count >0)
+            {
+                foreach (DataRow dr in dtAddedRows.Rows)
+                    Logging.Comment($"id_tovar: {dr["id_tovar"]}, ean: {dr["ean"]}, Наименование: {dr["cname"]}");
+            }
+            Logging.StopFirstLevel();*/
 
         }
-       
+        DataTable dtAddedRows;
         private  void setData(object selectedGroups)
         {
             Thread.CurrentThread.Name = "Проца";
@@ -334,6 +338,7 @@ namespace OnlineStore.dictonatyTovar
             string pSuf = "";
             string qSuf = "";
             int dep = 0;
+            string depName = "";
           //  DoOnUIThread(delegate ()
          //   {
                 dateRealiz = dtpRealiz.Value;
@@ -346,6 +351,7 @@ namespace OnlineStore.dictonatyTovar
             DoOnUIThread(delegate ()
             {
                 dep = int.Parse(cbDeps.SelectedValue.ToString());
+                depName = cbDeps.Text;
             });
                 
          //   });
@@ -353,10 +359,32 @@ namespace OnlineStore.dictonatyTovar
             task = Config.hCntMain.SetTovarByGroup(selectedGroups.ToString(), dateRealiz,
               min, max, step, tDefault,
                pSuf, qSuf, dep);
+
            // Task<DataTable> task = Config.hCntMain.SetTovarByGroup(selectedGroups.ToString(), dateRealiz,
             //  min, max, step, tDefault,
             //   pSuf, qSuf, dep);
-            task.Wait();          
+            task.Wait();
+            dtAddedRows = task.Result;
+
+            #region LOG
+            Logging.StartFirstLevel(1587);
+            Logging.Comment("Начало добавление новых товаров");
+            Logging.Comment("Дата реализации: " + dateRealiz.ToString() + ", " +
+                "Отдел id: " + dep + ", наименование: " + depName);
+            foreach (DataRow dr in dtGroups.Rows)
+            {
+                if (dr["selected"].ToString() == "True")
+                    Logging.Comment("id инв. группы: " + dr["id"].ToString() + ", наименование группы: " + dr["cname"].ToString());
+            }
+            if (dtAddedRows != null && dtAddedRows.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dtAddedRows.Rows)
+                    Logging.Comment($"id_tovar: {dr["id_tovar"]}, ean: {dr["ean"]}, Наименование: {dr["cname"]}");
+            }
+            Logging.StopFirstLevel();
+            #endregion
+
+
             if (!form.IsDisposed)
                 DoOnUIThread(delegate ()
                 {
@@ -365,6 +393,7 @@ namespace OnlineStore.dictonatyTovar
                 });
 
             MessageBox.Show("Товары добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+           
         }
 
         frmWait form;

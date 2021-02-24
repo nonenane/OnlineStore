@@ -303,7 +303,7 @@ namespace OnlineStore.dictonaryCategory
                 {
                     if (DialogResult.Yes == MessageBox.Show(Config.centralText("Выбранная для удаления запись используется в программе.\nСделать запись недействующей?\n"), "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     {
-                        setLog(id, 1520);
+                        setLog(id, 1581);
                         task = Config.hCntMain.delDicCategory(id, !isActive, result);
                         task.Wait();
                         if (task.Result == null)
@@ -321,7 +321,7 @@ namespace OnlineStore.dictonaryCategory
                 {
                     if (DialogResult.Yes == MessageBox.Show("Удалить выбранную запись?", "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     {
-                        setLog(id, 1519);
+                        setLog(id, 45);
                         task = Config.hCntMain.delDicCategory(id, !isActive, result);
                         task.Wait();
                         if (task.Result == null)
@@ -338,7 +338,7 @@ namespace OnlineStore.dictonaryCategory
                 {
                     if (DialogResult.Yes == MessageBox.Show("Сделать выбранную запись действующей?", "Восстановление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                     {
-                        setLog(id, 1521);
+                        setLog(id, 1582);
                         task = Config.hCntMain.delDicCategory(id, !isActive, result);
                         task.Wait();
                         if (task.Result == null)
@@ -366,16 +366,17 @@ namespace OnlineStore.dictonaryCategory
                 Logging.StartFirstLevel(id_log);
                 switch (id_log)
                 {
-                    case 1519: Logging.Comment("Удаление категории"); break;
-                    case 1520: Logging.Comment("Категория переведена в недействующие в справочнике категорий"); break;
-                    case 1521: Logging.Comment("Категория переведена в действующие в справочнике категорий"); break;
+                    case 45: Logging.Comment("Удаление категории"); break;
+                    case 1581: Logging.Comment("Перевод категории в недействующие"); break;
+                    case 1582: Logging.Comment("Перевод категории в действующие"); break;
                     default: break;
                 }
 
                 Logging.Comment($"ID:{id}");
                 Logging.Comment($"Наименование категории: {dtTemp.Rows[0]["cName"]}");
                 Logging.Comment($"Отдел категории id:{dtTemp.Rows[0]["id_Departments"].ToString()}; Наименование:{dtTemp.Rows[0]["nameDep"]}");
-
+                Logging.Comment($"Путь к картинке: {dtTemp.Rows[0]["PathImage"].ToString()}");
+                Logging.Comment($"Выгружать на сайт: {((bool)dtTemp.Rows[0]["isUnLoad"] ? "Да" : "Нет")}");
                 if (dtTemp.Rows[0]["nameDep"] != DBNull.Value)
                     Logging.Comment($"Родительская категория id:{dtTemp.Rows[0]["id_ParentCategory"].ToString()}; Наименование:{dtTemp.Rows[0]["cNameParent"].ToString()}");
              

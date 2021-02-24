@@ -142,7 +142,7 @@
             // tbQuantitySuffix
             // 
             this.tbQuantitySuffix.Location = new System.Drawing.Point(539, 189);
-            this.tbQuantitySuffix.MaxLength = 50;
+            this.tbQuantitySuffix.MaxLength = 500;
             this.tbQuantitySuffix.Multiline = true;
             this.tbQuantitySuffix.Name = "tbQuantitySuffix";
             this.tbQuantitySuffix.Size = new System.Drawing.Size(114, 59);
@@ -152,7 +152,7 @@
             // tbPriceSuffix
             // 
             this.tbPriceSuffix.Location = new System.Drawing.Point(539, 125);
-            this.tbPriceSuffix.MaxLength = 50;
+            this.tbPriceSuffix.MaxLength = 500;
             this.tbPriceSuffix.Multiline = true;
             this.tbPriceSuffix.Name = "tbPriceSuffix";
             this.tbPriceSuffix.Size = new System.Drawing.Size(114, 55);

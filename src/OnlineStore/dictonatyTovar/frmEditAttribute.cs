@@ -105,6 +105,7 @@ namespace OnlineStore.dictonatyTovar
                 tbQuantitySuffix.Text.Trim().Length ==0 ? null: tbQuantitySuffix.Text);
             task.Wait();
             MessageBox.Show("Атрибуты товаров для выбранных групп обновлены");
+            setLog();
             Clear();
         }
 
@@ -117,7 +118,30 @@ namespace OnlineStore.dictonatyTovar
             }
             dtGroups.AcceptChanges();
         }
-
+        private void setLog()
+        {
+            Logging.StartFirstLevel(1588);
+            Logging.Comment("Добавление атрибутов группам");
+            Logging.Comment($"id отдела: {cbDeps.SelectedValue.ToString()}, Наименование: {cbDeps.Text}");
+            string strGroups = "Группы: ";
+            foreach (DataRow dr in dtGroups.DefaultView.ToTable().Rows)
+            {
+                if ((bool)dr["selectedAtt"])
+                {
+                    strGroups += $"id: {dr["id"]}, Наименование: {dr["cname"]};";
+                }
+            }
+            Logging.Comment(strGroups);
+            Logging.Comment("Значения атрибутов");
+            Logging.Comment($"Минимальное кол-во заказа: {tbMin.Text}");
+            Logging.Comment($"Максимальное кол-во заказа: {tbMax.Text}");
+            Logging.Comment($"Шаг кол-ва заказа: {tbStep.Text}");
+            Logging.Comment($"Кол-во товара по умолчанию: {tbDefault.Text}");
+            Logging.Comment($"Суффикс к цене товара: {tbPriceSuffix.Text}");
+            Logging.Comment($"Суффикс к кол-ву товара: {tbQuantitySuffix.Text}");
+            Logging.Comment("Завершение добавления атрибутов группам");
+            Logging.StopFirstLevel();
+        }
         private void dgvGroups_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 1 && e.RowIndex > -1)

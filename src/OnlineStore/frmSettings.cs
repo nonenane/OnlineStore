@@ -19,11 +19,8 @@ namespace OnlineStore
         private decimal old_Margin;
         private void frmSettings_Load(object sender, EventArgs e)
         {
-            if (Config.needImage)
-            {
-                if (Config.ImageTovar) rbImgTovar.Checked = true;
-                else rbImgCat.Checked = true;
-            }
+          
+            if (Config.ImageTovar) rbImgTovar.Checked = true;              
             else rbWithoutImage.Checked = true;
             ToolTip tt = new ToolTip();
             tt.SetToolTip(btExit, "Выход");
@@ -88,17 +85,12 @@ namespace OnlineStore
 
         private void rbImgTovar_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbImgTovar.Checked) { Config.ImageTovar = true; Config.needImage = true; }
-        }
-
-        private void rbImgCat_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbImgCat.Checked) { Config.ImageTovar = false; Config.needImage = true; }
+            if (rbImgTovar.Checked) { Config.ImageTovar = true; }
         }
 
         private void rbWithoutImage_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbWithoutImage.Checked) { Config.needImage = false; Config.ImageTovar = false; }
+            if (rbWithoutImage.Checked) { Config.ImageTovar = false; }
         }
 
         private void lblMargin_Click(object sender, EventArgs e)

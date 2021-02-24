@@ -29,13 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewOrders));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.OrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cPlanDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDateSend = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Buyer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDelivery = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDeliveryType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Payment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmsPackage = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.историяСтатусовЗаказаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +90,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btSendFileToTerminal = new System.Windows.Forms.Button();
             this.btStatistic = new System.Windows.Forms.Button();
             this.btCreateReport = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -87,19 +102,14 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.OrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Buyer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDelivery = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Payment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbDateDelivery = new System.Windows.Forms.RadioButton();
+            this.rbDateSend = new System.Windows.Forms.RadioButton();
+            this.rbDate = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.cmsPackage.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvOrders
@@ -112,33 +122,36 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderNumber,
             this.id,
             this.DateOrder,
+            this.cPlanDeliveryDate,
+            this.cDateSend,
             this.Buyer,
             this.Email,
             this.Phone,
             this.Address,
             this.Column2,
             this.cDelivery,
+            this.cDeliveryType,
             this.Payment});
-            this.dgvOrders.Location = new System.Drawing.Point(12, 69);
+            this.dgvOrders.Location = new System.Drawing.Point(12, 91);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.RowHeadersVisible = false;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(961, 287);
+            this.dgvOrders.Size = new System.Drawing.Size(1018, 265);
             this.dgvOrders.TabIndex = 0;
             this.dgvOrders.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellEnter);
             this.dgvOrders.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOrders_CellMouseDoubleClick);
@@ -146,6 +159,125 @@
             this.dgvOrders.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvOrders_ColumnWidthChanged);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvOrders_RowPostPaint);
             this.dgvOrders.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvOrders_RowPrePaint);
+            // 
+            // OrderNumber
+            // 
+            this.OrderNumber.DataPropertyName = "OrderNumber";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderNumber.DefaultCellStyle = dataGridViewCellStyle8;
+            this.OrderNumber.FillWeight = 63.05103F;
+            this.OrderNumber.HeaderText = "Номер заказа";
+            this.OrderNumber.Name = "OrderNumber";
+            this.OrderNumber.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // DateOrder
+            // 
+            this.DateOrder.DataPropertyName = "DateOrder";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DateOrder.DefaultCellStyle = dataGridViewCellStyle9;
+            this.DateOrder.FillWeight = 109.2885F;
+            this.DateOrder.HeaderText = "Дата заказа";
+            this.DateOrder.Name = "DateOrder";
+            this.DateOrder.ReadOnly = true;
+            // 
+            // cPlanDeliveryDate
+            // 
+            this.cPlanDeliveryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cPlanDeliveryDate.DataPropertyName = "PlanDeliveryDate";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Format = "d";
+            dataGridViewCellStyle10.NullValue = null;
+            this.cPlanDeliveryDate.DefaultCellStyle = dataGridViewCellStyle10;
+            this.cPlanDeliveryDate.HeaderText = "Предп. дата доставки";
+            this.cPlanDeliveryDate.MinimumWidth = 100;
+            this.cPlanDeliveryDate.Name = "cPlanDeliveryDate";
+            this.cPlanDeliveryDate.ReadOnly = true;
+            // 
+            // cDateSend
+            // 
+            this.cDateSend.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cDateSend.DataPropertyName = "DeliveryDate";
+            this.cDateSend.HeaderText = "Дата доставки";
+            this.cDateSend.MinimumWidth = 70;
+            this.cDateSend.Name = "cDateSend";
+            this.cDateSend.ReadOnly = true;
+            this.cDateSend.Width = 70;
+            // 
+            // Buyer
+            // 
+            this.Buyer.DataPropertyName = "FIO";
+            this.Buyer.FillWeight = 109.2885F;
+            this.Buyer.HeaderText = "ФИО покупателя";
+            this.Buyer.Name = "Buyer";
+            this.Buyer.ReadOnly = true;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.FillWeight = 109.2885F;
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Phone
+            // 
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.FillWeight = 109.2885F;
+            this.Phone.HeaderText = "Телефон";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.FillWeight = 109.2885F;
+            this.Address.HeaderText = "Адрес";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "sumOrder";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Column2.FillWeight = 81.21827F;
+            this.Column2.HeaderText = "Стоимость доставки";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // cDelivery
+            // 
+            this.cDelivery.DataPropertyName = "SummaDelivery";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            this.cDelivery.DefaultCellStyle = dataGridViewCellStyle12;
+            this.cDelivery.HeaderText = "Сумма доставки";
+            this.cDelivery.Name = "cDelivery";
+            this.cDelivery.ReadOnly = true;
+            // 
+            // cDeliveryType
+            // 
+            this.cDeliveryType.DataPropertyName = "DeliveryType";
+            this.cDeliveryType.HeaderText = "Тип доставки";
+            this.cDeliveryType.Name = "cDeliveryType";
+            this.cDeliveryType.ReadOnly = true;
+            // 
+            // Payment
+            // 
+            this.Payment.DataPropertyName = "paymentType";
+            this.Payment.FillWeight = 109.2885F;
+            this.Payment.HeaderText = "Способ оплаты";
+            this.Payment.Name = "Payment";
+            this.Payment.ReadOnly = true;
             // 
             // cmsPackage
             // 
@@ -157,13 +289,13 @@
             this.заказВыполненToolStripMenuItem,
             this.заказОтменёнToolStripMenuItem});
             this.cmsPackage.Name = "cmsPackage";
-            this.cmsPackage.Size = new System.Drawing.Size(242, 136);
+            this.cmsPackage.Size = new System.Drawing.Size(280, 158);
             this.cmsPackage.Opening += new System.ComponentModel.CancelEventHandler(this.cmsPackage_Opening);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(241, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(279, 22);
             this.toolStripMenuItem1.Text = "Указать количество пакетов";
             this.toolStripMenuItem1.Visible = false;
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
@@ -171,35 +303,35 @@
             // историяСтатусовЗаказаToolStripMenuItem
             // 
             this.историяСтатусовЗаказаToolStripMenuItem.Name = "историяСтатусовЗаказаToolStripMenuItem";
-            this.историяСтатусовЗаказаToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.историяСтатусовЗаказаToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.историяСтатусовЗаказаToolStripMenuItem.Text = "Журнал статусов заказа";
             this.историяСтатусовЗаказаToolStripMenuItem.Click += new System.EventHandler(this.историяСтатусовЗаказаToolStripMenuItem_Click);
             // 
             // изменитьСтоимостьДоставкиToolStripMenuItem
             // 
             this.изменитьСтоимостьДоставкиToolStripMenuItem.Name = "изменитьСтоимостьДоставкиToolStripMenuItem";
-            this.изменитьСтоимостьДоставкиToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.изменитьСтоимостьДоставкиToolStripMenuItem.Text = "Изменить стоимость доставки";
+            this.изменитьСтоимостьДоставкиToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
+            this.изменитьСтоимостьДоставкиToolStripMenuItem.Text = "Изменение параметров доставки заказа";
             this.изменитьСтоимостьДоставкиToolStripMenuItem.Click += new System.EventHandler(this.изменитьСтоимостьДоставкиToolStripMenuItem_Click);
             // 
             // заказВОбработкеToolStripMenuItem
             // 
             this.заказВОбработкеToolStripMenuItem.Name = "заказВОбработкеToolStripMenuItem";
-            this.заказВОбработкеToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.заказВОбработкеToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.заказВОбработкеToolStripMenuItem.Text = "Заказ в обработке";
             this.заказВОбработкеToolStripMenuItem.Click += new System.EventHandler(this.заказВОбработкеToolStripMenuItem_Click);
             // 
             // заказВыполненToolStripMenuItem
             // 
             this.заказВыполненToolStripMenuItem.Name = "заказВыполненToolStripMenuItem";
-            this.заказВыполненToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.заказВыполненToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.заказВыполненToolStripMenuItem.Text = "Заказ выполнен";
             this.заказВыполненToolStripMenuItem.Click += new System.EventHandler(this.заказВыполненToolStripMenuItem_Click);
             // 
             // заказОтменёнToolStripMenuItem
             // 
             this.заказОтменёнToolStripMenuItem.Name = "заказОтменёнToolStripMenuItem";
-            this.заказОтменёнToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.заказОтменёнToolStripMenuItem.Size = new System.Drawing.Size(279, 22);
             this.заказОтменёнToolStripMenuItem.Text = "Заказ отменён";
             this.заказОтменёнToolStripMenuItem.Click += new System.EventHandler(this.заказОтменёнToolStripMenuItem_Click);
             // 
@@ -211,6 +343,7 @@
             this.dtpStart.Size = new System.Drawing.Size(96, 20);
             this.dtpStart.TabIndex = 1;
             this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
+            this.dtpStart.Leave += new System.EventHandler(this.dtpStart_Leave);
             // 
             // dtpEnd
             // 
@@ -220,6 +353,7 @@
             this.dtpEnd.Size = new System.Drawing.Size(92, 20);
             this.dtpEnd.TabIndex = 2;
             this.dtpEnd.ValueChanged += new System.EventHandler(this.dtpEnd_ValueChanged);
+            this.dtpEnd.Leave += new System.EventHandler(this.dtpEnd_Leave);
             // 
             // lblDateStart
             // 
@@ -247,7 +381,7 @@
             this.tbCommentOrder.Multiline = true;
             this.tbCommentOrder.Name = "tbCommentOrder";
             this.tbCommentOrder.ReadOnly = true;
-            this.tbCommentOrder.Size = new System.Drawing.Size(492, 49);
+            this.tbCommentOrder.Size = new System.Drawing.Size(549, 49);
             this.tbCommentOrder.TabIndex = 5;
             // 
             // lblCommentOrder
@@ -269,7 +403,7 @@
             this.tbComment.Multiline = true;
             this.tbComment.Name = "tbComment";
             this.tbComment.ReadOnly = true;
-            this.tbComment.Size = new System.Drawing.Size(459, 49);
+            this.tbComment.Size = new System.Drawing.Size(516, 49);
             this.tbComment.TabIndex = 7;
             // 
             // lblComment
@@ -285,7 +419,7 @@
             // 
             // tbNumber
             // 
-            this.tbNumber.Location = new System.Drawing.Point(12, 43);
+            this.tbNumber.Location = new System.Drawing.Point(12, 65);
             this.tbNumber.Name = "tbNumber";
             this.tbNumber.Size = new System.Drawing.Size(75, 20);
             this.tbNumber.TabIndex = 11;
@@ -293,7 +427,7 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(207, 43);
+            this.tbName.Location = new System.Drawing.Point(207, 65);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(109, 20);
             this.tbName.TabIndex = 12;
@@ -301,7 +435,7 @@
             // 
             // tbMail
             // 
-            this.tbMail.Location = new System.Drawing.Point(363, 43);
+            this.tbMail.Location = new System.Drawing.Point(363, 65);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(120, 20);
             this.tbMail.TabIndex = 13;
@@ -309,7 +443,7 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(489, 43);
+            this.tbPhone.Location = new System.Drawing.Point(489, 65);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(108, 20);
             this.tbPhone.TabIndex = 14;
@@ -317,7 +451,7 @@
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(603, 43);
+            this.tbAddress.Location = new System.Drawing.Point(603, 65);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(120, 20);
             this.tbAddress.TabIndex = 15;
@@ -329,21 +463,21 @@
             this.tsConnect});
             this.statusStrip1.Location = new System.Drawing.Point(0, 505);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(993, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1050, 22);
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // tsConnect
             // 
             this.tsConnect.Name = "tsConnect";
-            this.tsConnect.Size = new System.Drawing.Size(61, 17);
+            this.tsConnect.Size = new System.Drawing.Size(56, 17);
             this.tsConnect.Text = "tsConnect";
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(535, 14);
+            this.label1.Location = new System.Drawing.Point(707, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(176, 13);
             this.label1.TabIndex = 20;
@@ -374,7 +508,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(566, 366);
+            this.label3.Location = new System.Drawing.Point(623, 367);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 25;
@@ -384,7 +518,7 @@
             // 
             this.tbSumOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSumOrders.Enabled = false;
-            this.tbSumOrders.Location = new System.Drawing.Point(650, 362);
+            this.tbSumOrders.Location = new System.Drawing.Point(707, 363);
             this.tbSumOrders.Name = "tbSumOrders";
             this.tbSumOrders.Size = new System.Drawing.Size(85, 20);
             this.tbSumOrders.TabIndex = 26;
@@ -450,27 +584,29 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(766, 366);
+            this.label7.Location = new System.Drawing.Point(618, 389);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 13);
             this.label7.TabIndex = 25;
             this.label7.Text = "Дата доставки";
+            this.label7.Visible = false;
             // 
             // tbDeliveryDate
             // 
             this.tbDeliveryDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDeliveryDate.Enabled = false;
-            this.tbDeliveryDate.Location = new System.Drawing.Point(855, 362);
+            this.tbDeliveryDate.Location = new System.Drawing.Point(707, 385);
             this.tbDeliveryDate.Name = "tbDeliveryDate";
             this.tbDeliveryDate.Size = new System.Drawing.Size(85, 20);
             this.tbDeliveryDate.TabIndex = 26;
             this.tbDeliveryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbDeliveryDate.Visible = false;
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(735, 390);
+            this.label8.Location = new System.Drawing.Point(796, 367);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(114, 13);
             this.label8.TabIndex = 25;
@@ -480,7 +616,7 @@
             // 
             this.tbDeliveryCost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDeliveryCost.Enabled = false;
-            this.tbDeliveryCost.Location = new System.Drawing.Point(855, 386);
+            this.tbDeliveryCost.Location = new System.Drawing.Point(916, 363);
             this.tbDeliveryCost.Name = "tbDeliveryCost";
             this.tbDeliveryCost.Size = new System.Drawing.Size(85, 20);
             this.tbDeliveryCost.TabIndex = 26;
@@ -490,7 +626,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(946, 390);
+            this.label9.Location = new System.Drawing.Point(1007, 367);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(27, 13);
             this.label9.TabIndex = 25;
@@ -500,7 +636,7 @@
             // 
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(376, 10);
+            this.cmbStatus.Location = new System.Drawing.Point(114, 38);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(141, 21);
             this.cmbStatus.TabIndex = 31;
@@ -509,18 +645,30 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(279, 14);
+            this.label10.Location = new System.Drawing.Point(17, 42);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(91, 13);
             this.label10.TabIndex = 4;
             this.label10.Text = "Статусы заказа:";
+            // 
+            // btSendFileToTerminal
+            // 
+            this.btSendFileToTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSendFileToTerminal.BackColor = System.Drawing.Color.White;
+            this.btSendFileToTerminal.Image = global::OnlineStoreViewOrders.Properties.Resources.SendToTerminal1;
+            this.btSendFileToTerminal.Location = new System.Drawing.Point(783, 5);
+            this.btSendFileToTerminal.Name = "btSendFileToTerminal";
+            this.btSendFileToTerminal.Size = new System.Drawing.Size(32, 32);
+            this.btSendFileToTerminal.TabIndex = 33;
+            this.btSendFileToTerminal.UseVisualStyleBackColor = false;
+            this.btSendFileToTerminal.Click += new System.EventHandler(this.btSendFileToTerminal_Click);
             // 
             // btStatistic
             // 
             this.btStatistic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btStatistic.BackColor = System.Drawing.SystemColors.Control;
             this.btStatistic.Image = global::OnlineStoreViewOrders.Properties.Resources.Статистика;
-            this.btStatistic.Location = new System.Drawing.Point(738, 415);
+            this.btStatistic.Location = new System.Drawing.Point(795, 415);
             this.btStatistic.Name = "btStatistic";
             this.btStatistic.Size = new System.Drawing.Size(32, 32);
             this.btStatistic.TabIndex = 32;
@@ -532,7 +680,7 @@
             this.btCreateReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btCreateReport.BackColor = System.Drawing.SystemColors.Control;
             this.btCreateReport.Image = global::OnlineStoreViewOrders.Properties.Resources.reportImg;
-            this.btCreateReport.Location = new System.Drawing.Point(912, 4);
+            this.btCreateReport.Location = new System.Drawing.Point(969, 4);
             this.btCreateReport.Name = "btCreateReport";
             this.btCreateReport.Size = new System.Drawing.Size(32, 32);
             this.btCreateReport.TabIndex = 30;
@@ -544,7 +692,7 @@
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.Image = global::OnlineStoreViewOrders.Properties.Resources.documentediting_editdocuments_text_documentedi_2820;
-            this.btnEdit.Location = new System.Drawing.Point(864, 415);
+            this.btnEdit.Location = new System.Drawing.Point(921, 415);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(32, 32);
             this.btnEdit.TabIndex = 29;
@@ -556,7 +704,7 @@
             this.btnView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnView.BackColor = System.Drawing.Color.White;
             this.btnView.Image = global::OnlineStoreViewOrders.Properties.Resources.Zoomview_6277;
-            this.btnView.Location = new System.Drawing.Point(902, 415);
+            this.btnView.Location = new System.Drawing.Point(959, 415);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(32, 32);
             this.btnView.TabIndex = 28;
@@ -568,7 +716,7 @@
             this.btnAllReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAllReport.BackColor = System.Drawing.Color.White;
             this.btnAllReport.Image = ((System.Drawing.Image)(resources.GetObject("btnAllReport.Image")));
-            this.btnAllReport.Location = new System.Drawing.Point(940, 415);
+            this.btnAllReport.Location = new System.Drawing.Point(997, 415);
             this.btnAllReport.Name = "btnAllReport";
             this.btnAllReport.Size = new System.Drawing.Size(32, 32);
             this.btnAllReport.TabIndex = 27;
@@ -580,7 +728,7 @@
             this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheck.BackColor = System.Drawing.Color.White;
             this.btnCheck.Image = global::OnlineStoreViewOrders.Properties.Resources._4213403_bill_check_ecommerce_invoice_payment_receipt_shopping_115368;
-            this.btnCheck.Location = new System.Drawing.Point(764, 4);
+            this.btnCheck.Location = new System.Drawing.Point(821, 4);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(32, 32);
             this.btnCheck.TabIndex = 24;
@@ -592,7 +740,7 @@
             this.btnAddFromSite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddFromSite.BackColor = System.Drawing.Color.White;
             this.btnAddFromSite.Image = global::OnlineStoreViewOrders.Properties.Resources.iconfinder_download_4341287_120571;
-            this.btnAddFromSite.Location = new System.Drawing.Point(727, 4);
+            this.btnAddFromSite.Location = new System.Drawing.Point(707, 5);
             this.btnAddFromSite.Name = "btnAddFromSite";
             this.btnAddFromSite.Size = new System.Drawing.Size(32, 32);
             this.btnAddFromSite.TabIndex = 19;
@@ -604,7 +752,7 @@
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.BackColor = System.Drawing.Color.White;
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(801, 4);
+            this.btnPrint.Location = new System.Drawing.Point(858, 4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(32, 32);
             this.btnPrint.TabIndex = 17;
@@ -616,7 +764,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackColor = System.Drawing.Color.White;
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(949, 4);
+            this.btnExit.Location = new System.Drawing.Point(1006, 4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(32, 32);
             this.btnExit.TabIndex = 16;
@@ -628,7 +776,7 @@
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdate.BackColor = System.Drawing.Color.White;
             this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
-            this.btnUpdate.Location = new System.Drawing.Point(838, 4);
+            this.btnUpdate.Location = new System.Drawing.Point(895, 4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(32, 32);
             this.btnUpdate.TabIndex = 10;
@@ -640,108 +788,67 @@
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.BackColor = System.Drawing.Color.White;
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
-            this.btnAdd.Location = new System.Drawing.Point(875, 4);
+            this.btnAdd.Location = new System.Drawing.Point(932, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(32, 32);
             this.btnAdd.TabIndex = 9;
             this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Visible = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // OrderNumber
+            // groupBox1
             // 
-            this.OrderNumber.DataPropertyName = "OrderNumber";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderNumber.DefaultCellStyle = dataGridViewCellStyle2;
-            this.OrderNumber.FillWeight = 63.05103F;
-            this.OrderNumber.HeaderText = "Номер заказа";
-            this.OrderNumber.Name = "OrderNumber";
-            this.OrderNumber.ReadOnly = true;
+            this.groupBox1.Controls.Add(this.rbDateDelivery);
+            this.groupBox1.Controls.Add(this.rbDateSend);
+            this.groupBox1.Controls.Add(this.rbDate);
+            this.groupBox1.Location = new System.Drawing.Point(261, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(440, 51);
+            this.groupBox1.TabIndex = 34;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Фильтр по типу даты";
             // 
-            // id
+            // rbDateDelivery
             // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
+            this.rbDateDelivery.AutoSize = true;
+            this.rbDateDelivery.Location = new System.Drawing.Point(221, 19);
+            this.rbDateDelivery.Name = "rbDateDelivery";
+            this.rbDateDelivery.Size = new System.Drawing.Size(188, 17);
+            this.rbDateDelivery.TabIndex = 0;
+            this.rbDateDelivery.Text = "Предполагаемая дата доставки";
+            this.rbDateDelivery.UseVisualStyleBackColor = true;
+            this.rbDateDelivery.Click += new System.EventHandler(this.radioButton3_Click);
             // 
-            // DateOrder
+            // rbDateSend
             // 
-            this.DateOrder.DataPropertyName = "DateOrder";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DateOrder.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DateOrder.FillWeight = 109.2885F;
-            this.DateOrder.HeaderText = "Дата заказа";
-            this.DateOrder.Name = "DateOrder";
-            this.DateOrder.ReadOnly = true;
+            this.rbDateSend.AutoSize = true;
+            this.rbDateSend.Location = new System.Drawing.Point(108, 19);
+            this.rbDateSend.Name = "rbDateSend";
+            this.rbDateSend.Size = new System.Drawing.Size(101, 17);
+            this.rbDateSend.TabIndex = 0;
+            this.rbDateSend.Text = "Дата доставки";
+            this.rbDateSend.UseVisualStyleBackColor = true;
+            this.rbDateSend.Click += new System.EventHandler(this.radioButton3_Click);
             // 
-            // Buyer
+            // rbDate
             // 
-            this.Buyer.DataPropertyName = "FIO";
-            this.Buyer.FillWeight = 109.2885F;
-            this.Buyer.HeaderText = "ФИО покупателя";
-            this.Buyer.Name = "Buyer";
-            this.Buyer.ReadOnly = true;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.FillWeight = 109.2885F;
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // Phone
-            // 
-            this.Phone.DataPropertyName = "Phone";
-            this.Phone.FillWeight = 109.2885F;
-            this.Phone.HeaderText = "Телефон";
-            this.Phone.Name = "Phone";
-            this.Phone.ReadOnly = true;
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.FillWeight = 109.2885F;
-            this.Address.HeaderText = "Адрес";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "sumOrder";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column2.FillWeight = 81.21827F;
-            this.Column2.HeaderText = "Сумма заказа";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // cDelivery
-            // 
-            this.cDelivery.DataPropertyName = "SummaDelivery";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.cDelivery.DefaultCellStyle = dataGridViewCellStyle5;
-            this.cDelivery.HeaderText = "Сумма доставки";
-            this.cDelivery.Name = "cDelivery";
-            this.cDelivery.ReadOnly = true;
-            // 
-            // Payment
-            // 
-            this.Payment.DataPropertyName = "paymentType";
-            this.Payment.FillWeight = 109.2885F;
-            this.Payment.HeaderText = "Способ оплаты";
-            this.Payment.Name = "Payment";
-            this.Payment.ReadOnly = true;
+            this.rbDate.AutoSize = true;
+            this.rbDate.Checked = true;
+            this.rbDate.Location = new System.Drawing.Point(6, 19);
+            this.rbDate.Name = "rbDate";
+            this.rbDate.Size = new System.Drawing.Size(90, 17);
+            this.rbDate.TabIndex = 0;
+            this.rbDate.TabStop = true;
+            this.rbDate.Text = "Дата заказа";
+            this.rbDate.UseVisualStyleBackColor = true;
+            this.rbDate.Click += new System.EventHandler(this.radioButton3_Click);
             // 
             // frmViewOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(993, 527);
+            this.ClientSize = new System.Drawing.Size(1050, 527);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btSendFileToTerminal);
             this.Controls.Add(this.btStatistic);
             this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.btCreateReport);
@@ -797,6 +904,8 @@
             this.cmsPackage.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -837,7 +946,6 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.ToolStripMenuItem историяСтатусовЗаказаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem изменитьСтоимостьДоставкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem заказВОбработкеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem заказВыполненToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem заказОтменёнToolStripMenuItem;
@@ -856,16 +964,25 @@
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btStatistic;
+        private System.Windows.Forms.Button btSendFileToTerminal;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cPlanDeliveryDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cDateSend;
         private System.Windows.Forms.DataGridViewTextBoxColumn Buyer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDelivery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cDeliveryType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Payment;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbDate;
+        private System.Windows.Forms.RadioButton rbDateDelivery;
+        private System.Windows.Forms.RadioButton rbDateSend;
+        private System.Windows.Forms.ToolStripMenuItem изменитьСтоимостьДоставкиToolStripMenuItem;
     }
 }
 

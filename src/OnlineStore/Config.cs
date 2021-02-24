@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace OnlineStore
 {
@@ -12,7 +13,7 @@ namespace OnlineStore
     {
         public static Procedures hCntMain { get; set; } //осн. коннект
         public static bool ImageTovar  { get; set; } //из настроек - надо ли подгружать в csv фото
-        public static bool needImage { get; set; }
+     
       //  public static decimal Margin { get; set; } //наценка
 
         public static DataTable dtPercents { get; set; } //все проценты((((((
@@ -74,6 +75,11 @@ namespace OnlineStore
             }
 
             return newString;
+        }
+
+        public static void DoOnUIThread(MethodInvoker d, Form _this)
+        {
+            if (_this.InvokeRequired) { _this.Invoke(d); } else { d(); }
         }
     }
 }

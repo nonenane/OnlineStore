@@ -17,6 +17,8 @@ namespace OnlineStoreViewOrders
         public int nextStatus { set; private get; }
         public DateTime dateOrder { set; private get; }
         public int idtOrder { set; private get; }
+
+        public string commentOrder = "";
         public frmChangeStatus()
         {
             InitializeComponent();
@@ -101,7 +103,7 @@ namespace OnlineStoreViewOrders
 
             int id_status = nextStatus;
             string commentOrder = tbComment.Text.Trim();
-
+            this.commentOrder = commentOrder;
             DataTable dtResult = Config.connect.setStatusOrder(idtOrder, DeliveriCost, DeliveryDate, id_status, commentOrder);
 
             if (id_status == 3)

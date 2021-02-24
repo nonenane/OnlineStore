@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Nwuram.Framework.Logging;
 using Nwuram.Framework.Settings.User;
 
 namespace OnlineStoreViewOrders
@@ -304,11 +305,18 @@ namespace OnlineStoreViewOrders
 
         private void SaveData()
         {
+            Logging.StartFirstLevel(832);
+            Logging.Comment("Редактирование заказа");
+            Logging.Comment($"id заказа: {idTOrder}, номер заказа: {numOrder}");
             int n = dtGoodsOld.Rows.Count;
             for (int i = 0;i<n;i++)
             {
                 if (dtGoodsOld.Rows[i]["Netto"].ToString() != dtGoods.Rows[i]["Netto"].ToString())
                 {
+                    Logging.Comment($"id товара: {dtGoods.Rows[i]["id_tovar"].ToString()}, ean: {dtGoods.Rows[0]["ean"].ToString()}, " +
+                        $"Наименование: {dtGoods.Rows[i]["nameTovar"].ToString()}, Цена: {dtGoods.Rows[i]["Price"].ToString()}");
+                    Logging.VariableChange($"Количество:", dtGoods.Rows[i]["Netto"], dtGoodsOld.Rows[i]["Netto"]);
+                    Logging.VariableChange("Сумма", dtGoods.Rows[i]["sumTovar"], dtGoodsOld.Rows[i]["sumTovar"]);
                     Config.connect.Set_Order(int.Parse(dtGoods.Rows[i]["id_tOrders"].ToString()), int.Parse(dtGoods.Rows[i]["id_Tovar"].ToString()),
                         "", int.Parse(dtGoods.Rows[i]["Position"].ToString()), (dtGoods.Rows[i]["Netto"].ToString().Trim().Length>0 ? decimal.Parse(dtGoods.Rows[i]["Netto"].ToString().Replace('.',',')) : 0.000M), decimal.Parse(dtGoods.Rows[i]["Price"].ToString().Replace('.',',')));
                     isEdit = true;
@@ -319,11 +327,16 @@ namespace OnlineStoreViewOrders
                 int newNumber = dtGoods.Rows.Count;
                 for (int i = n;i<newNumber;i++)
                 {
+                    Logging.Comment($"Новый товар: id: {dtGoods.Rows[i]["id_tovar"].ToString()}, ean: {dtGoods.Rows[0]["ean"].ToString()}, " +
+                        $"Наименование: {dtGoods.Rows[i]["nameTovar"].ToString()}, Цена: {dtGoods.Rows[i]["Price"].ToString()}, Количество: {dtGoods.Rows[i]["Netto"].ToString()}," +
+                        $"Сумма: {dtGoods.Rows[i]["sumTovar"].ToString()}");
                     Config.connect.Set_Order(int.Parse(dtGoods.Rows[i]["id_tOrders"].ToString()), int.Parse(dtGoods.Rows[i]["id_Tovar"].ToString()),
                                             "", int.Parse(dtGoods.Rows[i]["Position"].ToString()), decimal.Parse(dtGoods.Rows[i]["Netto"].ToString().Replace('.', ',')), decimal.Parse(dtGoods.Rows[i]["Price"].ToString().Replace('.', ',')));
                     isEdit = true;
                 }
             }
+            Logging.Comment("Завершение редактирования заказа");
+            Logging.StopFirstLevel();
         }
         private void btnSave_Click(object sender, EventArgs e)
         {

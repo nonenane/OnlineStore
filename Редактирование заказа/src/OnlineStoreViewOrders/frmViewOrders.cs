@@ -15,7 +15,11 @@ using WooCommerceNET.WooCommerce.v3;
 using WooCommerceNET;
 using Nwuram.Framework.Logging;
 using System.Diagnostics;
-
+using Nwuram.Framework.ToExcelNew;
+using System.Net.Sockets;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace OnlineStoreViewOrders
 {
@@ -35,6 +39,22 @@ namespace OnlineStoreViewOrders
               ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
             Config._LASTLOADDATE = Convert.ToDateTime(Config.connect.GetDateLastUpdate().Rows[0]["value"].ToString());
             Logging.Init(ConnectionSettings.GetServer(), ConnectionSettings.GetDatabase(), ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
+
+
+            initSettings();
+        }
+
+        private void initSettings()
+        {
+            try
+            {
+                Config.setting = new Settings();
+                string jsonString = File.ReadAllText(Directory.GetCurrentDirectory() + @"\settings.json");
+                Config.setting = JsonConvert.DeserializeObject<Settings>(jsonString);
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void KillExcel()
@@ -59,10 +79,15 @@ namespace OnlineStoreViewOrders
             ttButton.SetToolTip(btnEdit, "Редактирование заказа");
             ttButton.SetToolTip(btStatistic, "Статистика");
             ttButton.SetToolTip(btCreateReport, "Отчет о выполненных и отмененных заказах");
+            ttButton.SetToolTip(btSendFileToTerminal, "Отправка цен на кассу");
             tsConnect.Text = Nwuram.Framework.Settings.Connection.ConnectionSettings.GetServer() + " " +
                 Nwuram.Framework.Settings.Connection.ConnectionSettings.GetDatabase();
             if (UserSettings.User.StatusCode.ToLower() == "пр")
                 setEnabledPR();
+
+
+            btSendFileToTerminal.Visible = UserSettings.User.StatusCode.ToLower() == "кд" && Config.connect.GetPropertyList("bvso");
+
             this.Text = ConnectionSettings.ProgramName + " " + UserSettings.User.FullUsername;
 
             dtpStart.MaxDate = DateTime.Now.AddDays(-1);
@@ -83,7 +108,12 @@ namespace OnlineStoreViewOrders
 
         private void GetOrders()
         {
-            dtOrders = Config.connect.Get_tOrders(dtpStart.Value.Date, dtpEnd.Value.Date.AddDays(1));
+            int type = 1;
+
+            if (rbDateSend.Checked) type = 2;
+            if (rbDateDelivery.Checked) type = 3;
+
+            dtOrders = Config.connect.Get_tOrders(dtpStart.Value.Date, dtpEnd.Value.Date.AddDays(1), type);
             dgvOrders.AutoGenerateColumns = false;
             dgvOrders.DataSource = dtOrders;
             EnabledControls();
@@ -261,7 +291,8 @@ namespace OnlineStoreViewOrders
             dgv.Rows[e.RowIndex].DefaultCellStyle.BackColor =
                      dgv.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = rowcolor;
 
-            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1")
+
+            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1" && new List<int>() { 1, 2}.Contains((int)dtOrders.DefaultView[e.RowIndex]["id_Status"]))
             {
                 //Column2
                 dgv.Rows[e.RowIndex].Cells["Column2"].Style.BackColor =
@@ -271,6 +302,44 @@ namespace OnlineStoreViewOrders
 
         private void dgvOrders_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
+            int width = dgvOrders.Location.X;
+
+            foreach (DataGridViewColumn col in dgvOrders.Columns)
+            {
+                if (!col.Visible) continue;
+                if (col.Name.Equals(OrderNumber.Name))
+                {
+                    tbNumber.Location = new Point(width + 1, tbNumber.Location.Y);
+                    tbNumber.Size = new Size(col.Width, tbNumber.Size.Height);
+                }
+
+                if (col.Name.Equals(Buyer.Name))
+                {
+                    tbName.Location = new Point(width + 1, tbNumber.Location.Y);
+                    tbName.Size = new Size(col.Width, tbNumber.Size.Height);
+                }
+
+                if (col.Name.Equals(Email.Name))
+                {
+                    tbMail.Location = new Point(width + 1, tbNumber.Location.Y);
+                    tbMail.Size = new Size(col.Width, tbNumber.Size.Height);
+                }
+
+                if (col.Name.Equals(Phone.Name))
+                {
+                    tbPhone.Location = new Point(width + 1, tbNumber.Location.Y);
+                    tbPhone.Size = new Size(col.Width, tbNumber.Size.Height);
+                }
+
+                if (col.Name.Equals(Address.Name))
+                {
+                    tbAddress.Location = new Point(width + 1, tbNumber.Location.Y);
+                    tbAddress.Size = new Size(col.Width, tbNumber.Size.Height);
+                }
+
+                width += col.Width;
+            }
+            /*
             tbNumber.Size = new Size(OrderNumber.Width - 3, 20);
             tbNumber.Location = new Point(dgvOrders.Location.X,43);
 
@@ -285,6 +354,7 @@ namespace OnlineStoreViewOrders
 
             tbAddress.Size = new Size(Address.Width - 3, 20);
             tbAddress.Location = new Point(tbPhone.Location.X + tbPhone.Size.Width+3, 43);
+            */
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -307,7 +377,7 @@ namespace OnlineStoreViewOrders
 
             dtContentOrder = dtContentOrder.Select("Netto > 0").OrderBy(r=>r.Field<int>("Position")).CopyToDataTable();
           
-            HandmadeReport rep = new HandmadeReport();
+            ExcelUnLoad rep = new ExcelUnLoad();
             int rowStart = (code == "КД") ? 10 : 4;
             
             //шапочка
@@ -386,8 +456,8 @@ namespace OnlineStoreViewOrders
                         rep.AddSingleValue(dr["Netto"].ToString().Replace(',','.'), crow, 5);
                         rep.AddSingleValue(dr["Price"].ToString().Replace(',','.'), crow, 6);
                         rep.AddSingleValue(dr["sumTovar"].ToString().Replace(',','.'), crow, 7);
-                        if (dr["badPrice"].ToString() == "1")
-                            rep.SetCellColor(crow, 1, crow, 7, 46);
+                        if (dr["badPrice"].ToString() == "1")//            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1" && new List<int>() { 1, 2}.Contains((int)dtOrders.DefaultView[e.RowIndex]["id_Status"]))
+                            rep.SetCellColor(crow, 1, crow, 7, Color.FromArgb(255, 128, 0));
                       
                         crow++;
                     }
@@ -398,7 +468,7 @@ namespace OnlineStoreViewOrders
                     rep.AddMultiValue(dtClear, rowStart, 8);
                     rep.AddMultiValue(dtClear, rowStart, 9);
                     //и делаем ему беленький цвет ))))
-                    rep.SetCellColor(rowStart, 8, rowStart + dtContentOrder.Rows.Count, 9, 0);
+                    rep.SetCellColor(rowStart, 8, rowStart + dtContentOrder.Rows.Count, 9, Color.White);
 
                     rep.SetBorders(rowStart-1, 1, rowStart-1 + dtContentOrder.Rows.Count, 7);
                     rep.SetFormat(rowStart, 5, rowStart + dtContentOrder.Rows.Count, 5, "0.000");
@@ -411,7 +481,7 @@ namespace OnlineStoreViewOrders
 
                     rowStart = rowStart + dtContentOrder.Rows.Count;
                     rowStart += 2;
-                    rep.SetCellColor(rowStart, 1, rowStart, 1, 46);
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
                     rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
                     rep.Show();
                     break;
@@ -459,8 +529,9 @@ namespace OnlineStoreViewOrders
                         rep.AddSingleValue(dr["Netto"].ToString().Replace(',', '.'), crow, 5);
                         rep.AddSingleValue(dr["Price"].ToString().Replace(',', '.'), crow, 6);
                         rep.AddSingleValue(dr["sumTovar"].ToString().Replace(',', '.'), crow, 7);
-                        if (dr["badPrice"].ToString() == "1")
-                            rep.SetCellColor(crow, 1, crow, 7, 46);
+                        if (dr["badPrice"].ToString() == "1") //            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1" && new List<int>() { 1, 2}.Contains((int)dtOrders.DefaultView[e.RowIndex]["id_Status"]))
+
+                            rep.SetCellColor(crow, 1, crow, 7, Color.FromArgb(255, 128, 0));
                         string zero = "";
                         for (int i = 0; i < dr["ean"].ToString().Length; i++)
                             zero += "0";
@@ -473,7 +544,7 @@ namespace OnlineStoreViewOrders
                     rep.AddMultiValue(dtClearR, rowStart, 8);
                     rep.AddMultiValue(dtClearR, rowStart, 9);
                     //и делаем ему беленький цвет ))))
-                    rep.SetCellColor(rowStart, 8, rowStart + dtOrder.Rows.Count, 9, 0);
+                    rep.SetCellColor(rowStart, 8, rowStart + dtOrder.Rows.Count, 9, Color.White);
 
                     rep.SetBorders(rowStart-1, 1, rowStart-1 + dtOrder.Rows.Count, 7);
                     rep.SetBorders(rowStart - 1, 1, rowStart - 1 + dtOrder.Rows.Count, 7);
@@ -485,13 +556,40 @@ namespace OnlineStoreViewOrders
 
                     rowStart = rowStart + dtOrder.Rows.Count;
                     rowStart += 2;
-                    rep.SetCellColor(rowStart, 1, rowStart, 1, 46);
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
                     rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
+                    rowStart++;
+
 
                     rep.Show();
                     break;               
             }
+            #region Логирование
+            DataRow drow = dtOrders.DefaultView[dgvOrders.CurrentRow.Index].Row;
+            string numOrder = drow["OrderNumber"].ToString();
+            string dateOrder = drow["DateOrder"].ToString();
+            string sumOrder = drow["sumOrder"].ToString();
+            string sumDeliv = drow["SummaDelivery"].ToString();
+            string typePayment = drow["paymentType"].ToString();
+            string FIO = drow["FIO"].ToString();
+            string email = drow["Email"].ToString();
+            string phone = drow["Phone"].ToString();
+            string address = drow["Address"].ToString();
+            Logging.StartFirstLevel(79);
+            Logging.Comment("Печать отчета по заказу");
+            Logging.Comment($"id заказа: {idtOrder}, Номер заказа: {numOrder}");
+            Logging.Comment($"Дата заказа: {dateOrder}, Сумма заказа: {sumOrder}, Сумма доставки: {sumDeliv}, Способ оплаты: {typePayment}");
+            Logging.Comment($"Информация о покупателе: ФИО: {FIO}, Email: {email}, Телефон: {phone}, Адрес: {address}");
+            Logging.Comment($"Информация о товаре в заказе");
+            foreach (DataRow r in dtContentOrder.Rows)
+            {
+                Logging.Comment($"Отдел: {r["name"].ToString()}, ean: {r["ean"].ToString()}," +
+                    $"Наименование: {r["nameTovar"].ToString()}, Количество: {r["Netto"].ToString()}, Цена: {r["Price"].ToString()}, Сумма: {r["sumTovar"].ToString()}");
+            }
+            Logging.Comment("Завершение выгрузки отчета");
+            Logging.StopFirstLevel();
 
+            #endregion
         }
 
         private async void btnAddFromSite_Click(object sender, EventArgs e)
@@ -509,7 +607,7 @@ namespace OnlineStoreViewOrders
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("consumer_key", "ck_c0c3f4d52c11dcb2854bfb010a6ff8586b5ad87d");
             dict.Add("consumer_secret", "cs_741fa4eb736404308353053f36a0a78e6f9a70fb");
-            dict.Add("per_page", "100");
+            dict.Add("per_page", "50");
             dict.Add("page", "1");
            
             //результаты запроса к базе сайта
@@ -518,7 +616,7 @@ namespace OnlineStoreViewOrders
             int page = 1;
             DateTime dateNow = DateTime.Now;
             //запуливаем пока дата сейчас меньше, чем дата последнего обновления
-            while (dateNow>Config._LASTLOADDATE && (result.Count==100 || result.Count==0))
+            while (dateNow>Config._LASTLOADDATE && (result.Count==50 || result.Count==0))
             {
                 dict["page"] = page.ToString();
                 result = await wc.Order.GetAll(dict);
@@ -542,8 +640,9 @@ namespace OnlineStoreViewOrders
                 string commentOrder = ord.customer_note;
                 string typePay = ord.payment_method_title;
                 string commentOrder_2 = ord.billing.address_2;
-                string fullComment = commentOrder_2 + "; " + commentOrder; 
-                dtTorder = Config.connect.Set_tOrder(orderNumber, orderDate, lastname, firstname, email, phone, address, summaDel, fullComment, typePay);    
+                string fullComment = commentOrder_2 + "; " + commentOrder;
+                string typeDelivery = ord.shipping_lines[0].method_title;
+                dtTorder = Config.connect.Set_tOrder(orderNumber, orderDate, lastname, firstname, email, phone, address, summaDel, fullComment, typePay, typeDelivery);    
                 
                 //если добавили заказ
                 if (dtTorder.Rows[0][0].ToString()!="")
@@ -559,7 +658,8 @@ namespace OnlineStoreViewOrders
                         ". Адрес: " + address +
                         ". Стоимость доставки: " + summaDel +
                         ". Описание доставки: " + fullComment +
-                        ". Способ оплаты: " + typePay);
+                        ". Способ оплаты: " + typePay +
+                        $". Способ доставки: {typeDelivery}");
                     Logging.Comment("Завершение добавления заказа");
                     Logging.StopFirstLevel();
                     #endregion
@@ -614,20 +714,20 @@ namespace OnlineStoreViewOrders
 
         private void dtpStart_ValueChanged(object sender, EventArgs e)
         {
-            if (isLoadData) return;
+            //if (isLoadData) return;
 
-            if (dtpEnd.Value < dtpStart.Value)
+           /* if (dtpEnd.Value < dtpStart.Value)
                 dtpEnd.Value = dtpStart.Value;
-            GetOrders();           
+            GetOrders();         */  
         }
 
         private void dtpEnd_ValueChanged(object sender, EventArgs e)
         {
-            if (isLoadData) return;
+           /* if (isLoadData) return;
 
             if (dtpStart.Value > dtpEnd.Value)
                 dtpStart.Value = dtpEnd.Value;
-            GetOrders();
+            GetOrders();*/
         }
 
         private void cmsPackage_Opening(object sender, CancelEventArgs e)
@@ -761,6 +861,14 @@ namespace OnlineStoreViewOrders
             rep.SetBorders(startRow, 1, row, 11);
             rep.Show();
 
+            #region логирование
+            Logging.StartFirstLevel(79);
+            Logging.Comment("Печать отчета с формы");
+            Logging.Comment($"Фильтры - Номер заказа: {tbNumber.Text}, ФИО покупателя: {tbName.Text}, Email: {tbMail.Text}, Телефон: {tbPhone.Text}, Адрес: {tbAddress.Text}");
+            Logging.Comment("Завершение выгрузки отчета с формы");
+            Logging.StopFirstLevel();
+            #endregion
+
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -814,8 +922,9 @@ namespace OnlineStoreViewOrders
         {
             int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
             if (DialogResult.No == MessageBox.Show("Сменить статус заказа?", "Запрос на действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
-
+            
             DataTable dtResult = Config.connect.setStatusOrder(idtOrder, null, null, 2, null);
+            setLog(2);
             dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 2;
             dtOrders.AcceptChanges();
         }
@@ -824,6 +933,7 @@ namespace OnlineStoreViewOrders
         {
             int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
             DateTime _DateOrder = (DateTime)dgvOrders.CurrentRow.Cells["DateOrder"].Value;
+            DateTime _PlanDeliveryDate = (DateTime)dgvOrders.CurrentRow.Cells["cPlanDeliveryDate"].Value;
             DataTable dtCheck = Config.connect.GetCheckvsOrder(idtOrder);
             if (dtCheck == null || dtCheck.Rows.Count == 0)
             {
@@ -841,8 +951,9 @@ namespace OnlineStoreViewOrders
             if (DialogResult.No == MessageBox.Show("Статус \"Выполнен\" нельзя сменить\nпосле присвоения.\nПродолжить?\n", "Запрос на действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
 
 
-            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 3,dateOrder = _DateOrder, idtOrder = idtOrder }.ShowDialog())
+            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 3,dateOrder = _PlanDeliveryDate, idtOrder = idtOrder }.ShowDialog())
             {
+                setLog(3);
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 3;
                 dtOrders.AcceptChanges();
             }
@@ -855,12 +966,56 @@ namespace OnlineStoreViewOrders
             DateTime _DateOrder = (DateTime)dgvOrders.CurrentRow.Cells["DateOrder"].Value;
 
             if (DialogResult.No == MessageBox.Show("Сменить статус заказа?", "Запрос на действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
+            frmChangeStatus frm = new frmChangeStatus() { Text = "Смена статуса", nextStatus = 4, dateOrder = _DateOrder, idtOrder = idtOrder };
 
-            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 4, dateOrder = _DateOrder, idtOrder = idtOrder }.ShowDialog())
+            if (DialogResult.OK == frm.ShowDialog())
             {
+                int idPre = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+                setLog(4, idPre, frm.commentOrder);
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 4;
                 dtOrders.AcceptChanges();
             }
+
+
+        }
+
+        private void setLog(int newStatus, int oldIdStatus = 1, string comment = "")
+        {
+            int id_tOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
+            DataTable dtInfo = Config.connect.getOrderInfo(id_tOrder);
+            if (dtInfo == null || dtInfo.Rows.Count == 0)
+                return;
+            Logging.StartFirstLevel(834);
+            string status = "";
+            
+            string oldStatus = "";
+
+            status = getStatus(newStatus);
+            oldStatus = getStatus(oldIdStatus);
+            Logging.Comment($"Произведена смена статуса с \"{oldStatus}\" на статус \"{status}\"");
+            if (comment.Length > 0)
+                Logging.Comment($"Комментарий: {comment}");
+            Logging.Comment($"id заказа: {id_tOrder}");
+            Logging.Comment($"Номер заказа: {dtInfo.Rows[0]["OrderNumber"].ToString()}");
+            Logging.Comment($"Дата и время заказа: {dtInfo.Rows[0]["DateOrder"].ToString()}");
+            Logging.Comment($"ФИО покупателя: {dtInfo.Rows[0]["FIO"].ToString()}");
+            Logging.Comment($"Сумма заказа: {dtInfo.Rows[0]["sumOrder"].ToString()}");
+            Logging.Comment($"Сумма доставки: {dtInfo.Rows[0]["SummaDelivery"].ToString()}");         
+            Logging.Comment($"Тип оплаты: {dtInfo.Rows[0]["namePayment"].ToString()}");         
+            Logging.Comment($"Завершение изменения статуса");
+            Logging.StopFirstLevel();
+        }
+        private string getStatus(int id)
+        {
+            string status = "";
+            switch (id)
+            {
+                case 1: status = "Новый заказ"; break;
+                case 2: status = "Заказ в обработке"; break;
+                case 3: status = "Заказ выполнен"; break;
+                case 4: status = "Заказ отменен";  break;
+            }
+            return status;
         }
 
         private void изменитьСтоимостьДоставкиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -868,10 +1023,23 @@ namespace OnlineStoreViewOrders
             int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
             decimal SummaDelivery = (decimal)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["SummaDelivery"];
-            frmChangeSummaDelivery frmCSD = new frmChangeSummaDelivery() { idtOrder = idtOrder, Text = $"Стоимость доставки заказа №{numOrder}", SummaDelivery = SummaDelivery };
+            DateTime PlanDeliveryDate = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["PlanDeliveryDate"] == DBNull.Value ? DateTime.Now.Date : (DateTime)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["PlanDeliveryDate"];
+            string DeliveryType = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["DeliveryType"];
+            string Address = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"];
+
+            frmChangeSummaDelivery frmCSD = new frmChangeSummaDelivery() { idtOrder = idtOrder,
+                Text = $"Стоимость доставки заказа №{numOrder}",
+                SummaDelivery = SummaDelivery,
+                PlanDeliveryDate = PlanDeliveryDate,
+                DeliveryType = DeliveryType,
+                Address = Address
+            };
             if (DialogResult.OK == frmCSD.ShowDialog())
             {
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["SummaDelivery"] = frmCSD.SummaDelivery;
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["PlanDeliveryDate"] = frmCSD.PlanDeliveryDate;
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["DeliveryType"] = frmCSD.DeliveryType;
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"] = frmCSD.Address;
                 dtOrders.AcceptChanges();
             }
         }
@@ -897,6 +1065,69 @@ namespace OnlineStoreViewOrders
         private void btStatistic_Click(object sender, EventArgs e)
         {
             new statisticOrder.frmStatistic().ShowDialog();
+        }
+
+        private void dtpEnd_Leave(object sender, EventArgs e)
+        {
+            if (dtpStart.Value > dtpEnd.Value)
+                dtpStart.Value = dtpEnd.Value;
+            GetOrders();
+        }
+
+        private void dtpStart_Leave(object sender, EventArgs e)
+        {
+            if (dtpEnd.Value < dtpStart.Value)
+                dtpEnd.Value = dtpStart.Value;
+            GetOrders();
+        }
+
+        private void btSendFileToTerminal_Click(object sender, EventArgs e)
+        {
+            int port = Config.setting.PORT; // порт сервера
+            string address = Config.setting.IP; // адрес сервера
+
+            try
+            {
+                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                // подключаемся к удаленному хосту
+                socket.Connect(ipPoint);
+                Console.Write("Введите сообщение:");
+                string message = "GetData";
+                byte[] data = Encoding.Unicode.GetBytes(message);
+                socket.Send(data);
+
+                // получаем ответ
+                data = new byte[256]; // буфер для ответа
+                StringBuilder builder = new StringBuilder();
+                int bytes = 0; // количество полученных байт
+
+                do
+                {
+                    bytes = socket.Receive(data, data.Length, 0);
+                    builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                }
+                while (socket.Available > 0);
+                // закрываем сокет
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
+
+                Console.WriteLine("ответ сервера: " + builder.ToString());
+                MessageBox.Show(builder.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void radioButton3_Click(object sender, EventArgs e)
+        {
+            GetOrders();
         }
     }
 }

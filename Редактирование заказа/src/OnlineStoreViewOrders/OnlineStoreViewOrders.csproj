@@ -45,6 +45,9 @@
       <HintPath>bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\Ведение накладных UPD\InvoiceUPD\dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="OnlineShopOrders, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\OnlineShopOrders.dll</HintPath>
@@ -212,6 +215,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SendToTerminal1.png" />
+    <None Include="Resources\SendToTerminal.png" />
     <None Include="Resources\reportImg.png" />
     <None Include="Resources\Статистика.png" />
     <None Include="Resources\reload_8055.png" />

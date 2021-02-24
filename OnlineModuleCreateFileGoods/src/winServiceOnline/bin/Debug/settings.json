@@ -1,0 +1,9 @@
+{	
+	"IdProg":"440",
+	"Login":"SuperUser",
+	"Password":"fate",
+	"ServerK21":"192.168.5.85\\K21",
+	"DataBaseK21":"dbase1",	
+	"ServerKassRealiz":"192.168.5.85\\K21",
+	"DataBaseKassRealiz":"KassRealiz",	
+}
