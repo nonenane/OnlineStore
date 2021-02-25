@@ -24,7 +24,8 @@ namespace OnlineStore
                 {
                     Logging.Init(ConnectionSettings.GetServer(), ConnectionSettings.GetDatabase(), ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
                     Config.hCntMain = new Procedures(ConnectionSettings.GetServer(), ConnectionSettings.GetDatabase(), ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
-                   
+                   Config.hCntKassRealiz = new Procedures(ConnectionSettings.GetServer("2"), ConnectionSettings.GetDatabase("2"), ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
+
                     Config.ImageTovar = false; //по умолчанию картинки не будет
                    // Config.Margin = decimal.Parse(Config.hCntMain.getProgConfig().Rows[0]["value"].ToString());
                     Config.dtPercents =  Config.hCntMain.GetPercents();

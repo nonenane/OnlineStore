@@ -37,6 +37,10 @@ namespace OnlineStoreViewOrders
             InitializeComponent();
             Config.connect = new Procedures(ConnectionSettings.GetServer(), ConnectionSettings.GetDatabase(),
               ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
+
+            Config.connect2 = new Procedures(ConnectionSettings.GetServer("2"), ConnectionSettings.GetDatabase("2"),
+  ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
+
             Config._LASTLOADDATE = Convert.ToDateTime(Config.connect.GetDateLastUpdate().Rows[0]["value"].ToString());
             Logging.Init(ConnectionSettings.GetServer(), ConnectionSettings.GetDatabase(), ConnectionSettings.GetUsername(), ConnectionSettings.GetPassword(), ConnectionSettings.ProgramName);
 
@@ -375,8 +379,77 @@ namespace OnlineStoreViewOrders
             int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
             dtContentOrder = Config.connect.Get_Goods(idtOrder);
 
-            dtContentOrder = dtContentOrder.Select("Netto > 0").OrderBy(r=>r.Field<int>("Position")).CopyToDataTable();
-          
+           IOrderedEnumerable<DataRow> rowCollect = dtContentOrder.Select("Netto > 0").OrderBy(r => r.Field<int>("Position"));
+
+            if (rowCollect.Count() == 0) return;
+
+            //dtContentOrder = dtContentOrder.Select("Netto > 0").OrderBy(r=>r.Field<int>("Position")).CopyToDataTable();
+            dtContentOrder = rowCollect.CopyToDataTable();
+
+            string ean = "";
+            foreach (DataRow row in dtContentOrder.Rows)
+                ean += (ean.Length == 0 ? "" : ",") + row["ean"].ToString().Trim();
+
+            DataTable dtOst = Config.connect.GetOstOrderNow(idtOrder);
+            DataTable dtSell = Config.connect2.GetRealizTovarForEan(ean);
+
+            #region "Соединение новых полей"
+            dtContentOrder.Columns.Add("nowOst", typeof(decimal));
+            dtContentOrder.Columns.Add("allSell", typeof(decimal));
+            dtContentOrder.Columns.Add("PriceShop", typeof(decimal));
+            dtContentOrder.Columns.Add("nowPriceOnline", typeof(decimal));
+            dtContentOrder.Columns.Add("midRealiz", typeof(decimal));
+            dtContentOrder.AcceptChanges();
+            DataTable dtTmp = dtContentOrder.Clone();
+
+            var query = from g in dtContentOrder.AsEnumerable()
+                        
+                        join k in dtOst.AsEnumerable() on new { Q = g.Field<string>("ean").Trim()} equals new { Q = k.Field<string>("ean").Trim()} into tempJoin
+
+                        join z in dtSell.AsEnumerable() on new { Q = g.Field<string>("ean").Trim() } equals new { Q = z.Field<string>("ean").Trim() } into tempJoinB
+
+                        from leftJoin in tempJoin.DefaultIfEmpty()
+                        from leftJoinB in tempJoinB.DefaultIfEmpty()
+                        select dtTmp.LoadDataRow(new object[]
+                                                       {
+                                                           g.Field<int>("id"),
+                                                           g.Field<int>("Position"),
+                                                           g.Field<int>("id_Tovar"),
+                                                           g.Field<Int16>("id_Departments"),
+                                                           g.Field<string>("name"),
+                                                           g.Field<string>("ean"),
+                                                           g.Field<string>("nameTovar"),
+                                                           g.Field<decimal>("Netto"),
+                                                           g.Field<decimal>("Price"),
+                                                           g.Field<decimal>("sumTovar"),
+                                                           g.Field<decimal>("BasicPrice"),
+                                                           g.Field<decimal>("brutto"),
+                                                           g.Field<int>("id_tOrders"),                                                           
+                                                           (leftJoin==null?decimal.Parse("0"):leftJoin.Field<decimal>("nettiDvig")) - (leftJoinB==null?decimal.Parse("0"):leftJoinB.Field<decimal>("netto")),
+                                                           leftJoin==null?decimal.Parse("0"):leftJoin.Field<decimal>("nettoOrder"),
+                                                           leftJoin==null?decimal.Parse("0"):leftJoin.Field<decimal>("price"),
+                                                           leftJoin==null?
+                                                           (decimal.Parse("0"))
+                                                           :
+                                                           (
+                                                           leftJoin.Field<bool>("isPromo")
+                                                           ?
+                                                           (
+                                                            leftJoinB==null?
+                                                            decimal.Parse("0")
+                                                            :
+                                                            Math.Round(((leftJoinB.Field<decimal>("price")*leftJoin.Field<decimal>("upperPrice"))/100),2)
+                                                            )
+                                                           :
+                                                           Math.Round(((leftJoin.Field<decimal>("price")*leftJoin.Field<decimal>("upperPrice"))/100),2)
+                                                           ),
+                                                           leftJoin==null?decimal.Parse("0"):leftJoin.Field<decimal>("midRealiz"),
+                                                        }, false);
+            //dtDataToAlarm.Merge(query.CopyToDataTable());
+            dtContentOrder = query.CopyToDataTable();
+
+            #endregion
+
             ExcelUnLoad rep = new ExcelUnLoad();
             int rowStart = (code == "КД") ? 10 : 4;
             
@@ -391,12 +464,25 @@ namespace OnlineStoreViewOrders
             rep.AddSingleValue("Количество", rowStart, 5);
             rep.AddSingleValue("Цена", rowStart, 6);
             rep.AddSingleValue("Итого", rowStart, 7);
+            rep.AddSingleValue("Текущий остаток товара", rowStart, 8);
+            rep.AddSingleValue("Общее количество заказанного", rowStart, 9);
+            rep.AddSingleValue("Цена магазина", rowStart, 10);
+            rep.AddSingleValue("Текущая цена магазина онлайн", rowStart, 11);
+
             rep.SetColumnWidth(1, 1, 1, 1, 4);
             rep.SetColumnWidth(1, 2, 1, 2, 15);
             rep.SetColumnWidth(1, 4, 1, 4, 60);
             rep.SetColumnWidth(1, 5, 1, 5, 12);
-            rep.SetFontBold(rowStart, 1, rowStart, 7);
-            rep.SetCellAlignmentToCenter(rowStart, 1, rowStart, 7);
+
+            rep.SetColumnWidth(1, 8, 1, 8, 17);
+            rep.SetColumnWidth(1, 9, 1, 9, 17);
+            rep.SetColumnWidth(1, 10, 1, 10, 14);
+            rep.SetColumnWidth(1, 11, 1, 11, 18);
+
+            rep.SetFontBold(rowStart, 1, rowStart, 11);
+            rep.SetCellAlignmentToCenter(rowStart, 1, rowStart, 11);
+            rep.SetWrapText(rowStart, 1, rowStart, 11);
+            rep.SetCellAlignmentToJustify(rowStart, 1, rowStart, 11);
             rowStart++;
             decimal brutto = 0;
             switch (code)
@@ -413,17 +499,10 @@ namespace OnlineStoreViewOrders
                     rep.AddSingleValue("Комментарий покупателя: " + tbCommentOrder.Text,9,1);
                     rep.SetFontBold(4, 1, 8, 1);
 
-
-
-
-
                     dtContentOrder.Columns.Remove("id");
                     dtContentOrder.Columns.Remove("id_Tovar");
                     dtContentOrder.Columns.Remove("id_Departments");
-                    dtContentOrder.Columns["ean"].DataType = Type.GetType("System.String");
-                   // dtContentOrder.Columns["Netto"].DataType = dtContentOrder.Columns["Price"].DataType = 
-                     //   dtContentOrder.Columns["sumTovar"].DataType = Type.GetType("System.Decimal");
-                    
+                    dtContentOrder.Columns["ean"].DataType = Type.GetType("System.String");                    
                     dtContentOrder.Columns.Add("badPrice", typeof(int));
 
                     DataTable dtClear = new DataTable();
@@ -456,33 +535,62 @@ namespace OnlineStoreViewOrders
                         rep.AddSingleValue(dr["Netto"].ToString().Replace(',','.'), crow, 5);
                         rep.AddSingleValue(dr["Price"].ToString().Replace(',','.'), crow, 6);
                         rep.AddSingleValue(dr["sumTovar"].ToString().Replace(',','.'), crow, 7);
-                        if (dr["badPrice"].ToString() == "1")//            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1" && new List<int>() { 1, 2}.Contains((int)dtOrders.DefaultView[e.RowIndex]["id_Status"]))
-                            rep.SetCellColor(crow, 1, crow, 7, Color.FromArgb(255, 128, 0));
+
+                        rep.AddSingleValue(dr["nowOst"].ToString().Replace(',', '.'), crow, 8);
+                        rep.AddSingleValue(dr["allSell"].ToString().Replace(',', '.'), crow, 9);
+                        rep.AddSingleValue(dr["PriceShop"].ToString().Replace(',', '.'), crow, 10);
+                        rep.AddSingleValue(dr["nowPriceOnline"].ToString().Replace(',', '.'), crow, 11);
+
+                        if (dr["badPrice"].ToString() == "1")          
+                            rep.SetCellColor(crow, 1, crow, 11, Color.FromArgb(255, 128, 0));
                       
+                        if((decimal)dr["Netto"]>(decimal)dr["nowOst"])
+                            rep.SetCellColor(crow, 8, crow, 8, Color.FromArgb(0, 128, 0));
+
+                        if ((decimal)dr["PriceShop"] > (decimal)dr["Price"])
+                            rep.SetCellColor(crow, 10, crow, 10, Color.FromArgb(255, 54, 255));
+
+                        if((decimal)dr["midRealiz"]> (decimal)dr["nowOst"]- (decimal)dr["allSell"])
+                            rep.SetCellColor(crow, 5, crow, 5, Color.FromArgb(0, 255, 255));
+
                         crow++;
                     }
 
+                    Decimal itogSum = dtContentOrder.AsEnumerable().Sum(r => r.Field<decimal>("sumTovar"));
+                    rep.AddSingleValue("Итого", crow, 6);
+                    rep.AddSingleValue(itogSum.ToString("0.000").Replace(',', '.'), crow, 7);
+                    rep.SetBorders(crow, 7, crow, 7);
 
-                    //rep.AddMultiValue(dtContentOrder, rowStart, 1, 46,"badPrice","1");
-                    //обнуляем столбец badPrice )
-                    rep.AddMultiValue(dtClear, rowStart, 8);
-                    rep.AddMultiValue(dtClear, rowStart, 9);
-                    //и делаем ему беленький цвет ))))
-                    rep.SetCellColor(rowStart, 8, rowStart + dtContentOrder.Rows.Count, 9, Color.White);
-
-                    rep.SetBorders(rowStart-1, 1, rowStart-1 + dtContentOrder.Rows.Count, 7);
+                    rep.SetBorders(rowStart-1, 1, rowStart-1 + dtContentOrder.Rows.Count, 11);
                     rep.SetFormat(rowStart, 5, rowStart + dtContentOrder.Rows.Count, 5, "0.000");
-                    rep.SetFormat(rowStart, 6, rowStart + dtContentOrder.Rows.Count, 7, "0.000");
+                    rep.SetFormat(rowStart, 6, rowStart + dtContentOrder.Rows.Count, 9, "0.000");
+                    rep.SetFormat(rowStart, 10, rowStart + dtContentOrder.Rows.Count, 11, "0.00");
+
                     rep.SetWrapText(rowStart, 4, rowStart + dtContentOrder.Rows.Count, 4);
 
                     rep.SetFormat(rowStart, 3, rowStart+dtContentOrder.Rows.Count, 3, "0");
-
+                    rep.SetCellAlignmentToRight(rowStart, 5, rowStart + dtContentOrder.Rows.Count + 1, 11);
 
 
                     rowStart = rowStart + dtContentOrder.Rows.Count;
                     rowStart += 2;
+
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(0, 128, 0));
+                    rep.AddSingleValue("=\"-текущий остаток меньше количества товара в заказе\"", rowStart, 2);
+                    rowStart++;
+
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 54, 255));
+                    rep.AddSingleValue("=\"-цена в заказе меньше цены в магазине\"", rowStart, 2);
+                    rowStart++;
+
                     rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
                     rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
+                    rowStart++;
+
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(0, 255, 255));
+                    rep.AddSingleValue("=\"-остаток меньше средне-дневной реализации\"", rowStart, 2);
+                    rowStart++;
+
                     rep.Show();
                     break;
                 case "РКВ":
@@ -529,37 +637,75 @@ namespace OnlineStoreViewOrders
                         rep.AddSingleValue(dr["Netto"].ToString().Replace(',', '.'), crow, 5);
                         rep.AddSingleValue(dr["Price"].ToString().Replace(',', '.'), crow, 6);
                         rep.AddSingleValue(dr["sumTovar"].ToString().Replace(',', '.'), crow, 7);
-                        if (dr["badPrice"].ToString() == "1") //            if (dtOrders.DefaultView[e.RowIndex]["havingBadPrice"].ToString() == "1" && new List<int>() { 1, 2}.Contains((int)dtOrders.DefaultView[e.RowIndex]["id_Status"]))
 
-                            rep.SetCellColor(crow, 1, crow, 7, Color.FromArgb(255, 128, 0));
+                        rep.AddSingleValue(dr["nowOst"].ToString().Replace(',', '.'), crow, 8);
+                        rep.AddSingleValue(dr["allSell"].ToString().Replace(',', '.'), crow, 9);
+                        rep.AddSingleValue(dr["PriceShop"].ToString().Replace(',', '.'), crow, 10);
+                        rep.AddSingleValue(dr["nowPriceOnline"].ToString().Replace(',', '.'), crow, 11);
+
+                        if (dr["badPrice"].ToString() == "1")  
+                            rep.SetCellColor(crow, 1, crow, 11, Color.FromArgb(255, 128, 0));
+
+                        if ((decimal)dr["Netto"] > (decimal)dr["nowOst"])
+                            rep.SetCellColor(crow, 8, crow, 8, Color.FromArgb(0, 128, 0));
+
+                        if ((decimal)dr["PriceShop"] > (decimal)dr["Price"])
+                            rep.SetCellColor(crow, 10, crow, 10, Color.FromArgb(255, 54, 255));
+
+                        if ((decimal)dr["midRealiz"] > (decimal)dr["nowOst"] - (decimal)dr["allSell"])
+                            rep.SetCellColor(crow, 5, crow, 5, Color.FromArgb(0, 255, 255));
+
+
                         string zero = "";
                         for (int i = 0; i < dr["ean"].ToString().Length; i++)
                             zero += "0";
                         rep.SetFormat(crow, 3, crow, 3, zero);
                         crow++;
                     }
-                    //rep.AddMultiValue(dtOrder, rowStart, 1, 46, "badPrice","1");
-                    rep.SetFormat(rowStart, 3, rowStart + dtOrder.Rows.Count, 3, "0");
-                    //обнуляем столбец badPrice
-                    rep.AddMultiValue(dtClearR, rowStart, 8);
-                    rep.AddMultiValue(dtClearR, rowStart, 9);
-                    //и делаем ему беленький цвет ))))
-                    rep.SetCellColor(rowStart, 8, rowStart + dtOrder.Rows.Count, 9, Color.White);
 
+                    Decimal itogSumR = dtContentOrder.AsEnumerable().Sum(r => r.Field<decimal>("sumTovar"));
+                    rep.AddSingleValue("Итого", crow, 6);
+                    rep.AddSingleValue(itogSumR.ToString("0.000").Replace(',', '.'), crow, 7);
+                    rep.SetBorders(crow, 7, crow, 7);
+
+                    rep.SetBorders(rowStart - 1, 1, rowStart - 1 + dtOrder.Rows.Count, 11);
+                    rep.SetFormat(rowStart, 5, rowStart + dtOrder.Rows.Count, 5, "0.000");
+                    rep.SetFormat(rowStart, 6, rowStart + dtOrder.Rows.Count, 9, "0.000");
+                    rep.SetFormat(rowStart, 10, rowStart + dtOrder.Rows.Count, 11, "0.00");
+
+                    rep.SetWrapText(rowStart, 4, rowStart + dtOrder.Rows.Count, 4);
+
+                    rep.SetFormat(rowStart, 3, rowStart + dtOrder.Rows.Count, 3, "0");
+                    rep.SetCellAlignmentToRight(rowStart, 5, rowStart + dtOrder.Rows.Count + 1, 11);
+
+                    /*
+                    rep.SetFormat(rowStart, 3, rowStart + dtOrder.Rows.Count, 3, "0");
+                    
                     rep.SetBorders(rowStart-1, 1, rowStart-1 + dtOrder.Rows.Count, 7);
                     rep.SetBorders(rowStart - 1, 1, rowStart - 1 + dtOrder.Rows.Count, 7);
                     rep.SetFormat(rowStart, 3, rowStart + dtOrder.Rows.Count, 3, "0");
                     rep.SetFormat(rowStart, 5, rowStart + dtOrder.Rows.Count, 5, "0.000");
                     rep.SetFormat(rowStart, 6, rowStart + dtContentOrder.Rows.Count, 7, "0.000");
                     rep.SetWrapText(rowStart, 4, rowStart + dtOrder.Rows.Count, 4);
-                   
+                   */
 
                     rowStart = rowStart + dtOrder.Rows.Count;
                     rowStart += 2;
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(0, 128, 0));
+                    rep.AddSingleValue("=\"-текущий остаток меньше количества товара в заказе\"", rowStart, 2);
+                    rowStart++;
+
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 54, 255));
+                    rep.AddSingleValue("=\"-цена в заказе меньше цены в магазине\"", rowStart, 2);
+                    rowStart++;
+
                     rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
                     rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
                     rowStart++;
 
+                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(0, 255, 255));
+                    rep.AddSingleValue("=\"-остаток меньше средне-дневной реализации\"", rowStart, 2);
+                    rowStart++;
 
                     rep.Show();
                     break;               

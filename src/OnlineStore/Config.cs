@@ -12,6 +12,8 @@ namespace OnlineStore
     class Config
     {
         public static Procedures hCntMain { get; set; } //осн. коннект
+        public static Procedures hCntKassRealiz { get; set; } //доп. коннект
+
         public static bool ImageTovar  { get; set; } //из настроек - надо ли подгружать в csv фото
      
       //  public static decimal Margin { get; set; } //наценка

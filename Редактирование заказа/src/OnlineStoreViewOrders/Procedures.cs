@@ -452,5 +452,29 @@ namespace OnlineStoreViewOrders
         }
 
         #endregion
+
+        #region "Получение остатков и продаж по заказу за текущий день"
+
+        public DataTable GetOstOrderNow(int id_tOrders)
+        {
+            ap.Clear();
+            ap.Add(id_tOrders);
+
+            return executeProcedure("[OnlineStore].[GetOstOrderNow]",
+                new string[1] { "@id_tOrders" },
+                new DbType[1] { DbType.Int32 }, ap);
+        }
+
+        public DataTable GetRealizTovarForEan(string listEAN)
+        {
+            ap.Clear();
+            ap.Add(listEAN);
+
+            return executeProcedure("[OnlineStore].[GetRealizTovarForEan]",
+                new string[1] { "@listEAN" },
+                new DbType[1] { DbType.String }, ap);
+        }
+
+        #endregion
     }
 }
