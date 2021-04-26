@@ -21,11 +21,15 @@ BEGIN
 
 
 	DECLARE @resultSum numeric(38,2) = 0
-	DECLARE @tableStatus table (id_tOrders int ,id_Status int,Comment varchar(max))
-	DECLARE @tableResult table (id_tOrders int ,resultSum numeric(38,2))
-	DECLARE @Table table (ean varchar(13), cnt numeric(15,3))
+	--DECLARE @tableStatus table (id_tOrders int ,id_Status int,Comment varchar(max))
+	--DECLARE @tableResult table (id_tOrders int ,resultSum numeric(38,2))
+	--DECLARE @Table table (ean varchar(13), cnt numeric(15,3))
 
-	insert into @tableStatus
+	CREATE TABLE #tableStatus  (id_tOrders int ,id_Status int,Comment varchar(max))
+	CREATE TABLE #tableResult  (id_tOrders int ,resultSum numeric(38,2))
+	CREATE TABLE #Table  (ean varchar(13), cnt numeric(15,3))
+
+	insert into #tableStatus
 	select distinct
 		s.id_tOrders,
 		s.id_Status,
@@ -42,7 +46,7 @@ BEGIN
 	DECLARE @DateCheck datetime, @CheckNumber int, @KassNumber int, @id_tOrders int
 
 	DECLARE notes_cursor CURSOR LOCAL FOR
-		select c.DateCheck,c.CheckNumber,c.KassNumber,t.id_tOrders from @tableStatus t inner join OnlineStore.j_tOrders o on o.id = t.id_tOrders inner join OnlineStore.Check_vs_Order c on c.id_tOrder = t.id_tOrders
+		select c.DateCheck,c.CheckNumber,c.KassNumber,t.id_tOrders from #tableStatus t inner join OnlineStore.j_tOrders o on o.id = t.id_tOrders inner join OnlineStore.Check_vs_Order c on c.id_tOrder = t.id_tOrders
 		--where @StartDate<=cast(o.DateOrder as date) and cast(o.DateOrder as date)<=@EndDate and c.isPackage = 0
 		where @StartDate<=cast(o.DeliveryDate as date) and cast(o.DeliveryDate as date)<=@EndDate and c.isPackage = 0
 	OPEN notes_cursor
@@ -85,15 +89,15 @@ BEGIN
 								+' where convert(datetime, j.time) >= convert(datetime, ''' + convert(varchar,@dateStart,120) + ''') and convert(datetime, j.time) <= convert(datetime, ''' + convert(varchar,@dateEnd,120) + ''')'
 								+'and op_code in (505,507) and dpt_no not in (select value from dbo.prog_config where id_prog = '+cast(@id_prog as varchar(10))+' and id_value =''nudo'')'					
 
-			delete from @Table
+			delete from #Table
 
 			--print @SQL
 
-			INSERT INTO @Table 
+			INSERT INTO #Table 
 			exec (@SQL)
 			
-			insert into @tableResult
-			select @id_tOrders,sum(k.cnt*isnull(r.rcena,0)) from @Table k inner join dbo.s_tovar t on ltrim(rtrim(t.ean)) = k.ean inner join @rCena r on r.id_tovar = t.id
+			insert into #tableResult
+			select @id_tOrders,sum(k.cnt*isnull(r.rcena,0)) from #Table k inner join dbo.s_tovar t on ltrim(rtrim(t.ean)) = k.ean inner join @rCena r on r.id_tovar = t.id
 
 
 	FETCH NEXT FROM notes_cursor 
@@ -102,6 +106,8 @@ BEGIN
 	CLOSE notes_cursor
 	DEALLOCATE notes_cursor
 
-	select id_tOrders,sum(resultSum) as resultSum from @tableResult group by id_tOrders
+	select id_tOrders,sum(resultSum) as resultSum from #tableResult group by id_tOrders
+
+	DROP TABLE #Table,#tableResult,#tableStatus
 
 END

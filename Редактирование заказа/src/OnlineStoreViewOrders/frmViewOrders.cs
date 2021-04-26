@@ -31,7 +31,8 @@ namespace OnlineStoreViewOrders
         public DataTable dtContentOrder;
 
         private bool isLoadData=false;
-
+        string consumer_key = "ck_87b10542511578f5dfd4c3396e55c90bde9d6bb7";
+        string consumer_secret = "cs_2b6ca5498718b16a7872f2c2b6e3e7ee1b01e87e";
         public frmViewOrders()
         {
             InitializeComponent();
@@ -94,8 +95,8 @@ namespace OnlineStoreViewOrders
 
             this.Text = ConnectionSettings.ProgramName + " " + UserSettings.User.FullUsername;
 
-            dtpStart.MaxDate = DateTime.Now.AddDays(-1);
-            dtpEnd.MaxDate = DateTime.Now;
+            //dtpStart.MaxDate = DateTime.Now;//.AddDays(-1);
+            //dtpEnd.MaxDate = DateTime.Now;
 
             dtpStart.Value = DateTime.Now.Date.AddDays(-1); ;
             dtpEnd.Value = DateTime.Now.Date;
@@ -184,13 +185,15 @@ namespace OnlineStoreViewOrders
                 bool needConnect2 = dtOrders.AsEnumerable().Where(x => x.Field<int>("id") == idtOrder).First()["dep6"].ToString() == "1" ? true : false;
                 DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
                 int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
+                int id_Status = (int)dtOrders.DefaultView[e.RowIndex]["id_Status"];
                 frmViewContentOrder viewContent = new frmViewContentOrder()
                 {
                     idTOrder = idtOrder,
                     needConnect2 = needConnect2,
                     dateOrder = dateOrder,
                     numOrder = numOrder,
-                    callType = 0
+                    callType = 0,
+                    id_Status = id_Status
                 };
                 viewContent.ShowDialog();
                 if (viewContent.isEdit)
@@ -446,7 +449,7 @@ namespace OnlineStoreViewOrders
                                                            leftJoin==null?decimal.Parse("0"):leftJoin.Field<decimal>("midRealiz"),
                                                         }, false);
             //dtDataToAlarm.Merge(query.CopyToDataTable());
-            dtContentOrder = query.CopyToDataTable();
+            dtContentOrder = query.OrderBy(r => r.Field<Int16>("id_Departments")).ThenBy(r=>r.Field<int>("Position")).CopyToDataTable();
 
             #endregion
 
@@ -466,11 +469,12 @@ namespace OnlineStoreViewOrders
             rep.AddSingleValue("Итого", rowStart, 7);
             rep.AddSingleValue("Текущий остаток товара", rowStart, 8);
             rep.AddSingleValue("Общее количество заказанного", rowStart, 9);
-            rep.AddSingleValue("Цена магазина", rowStart, 10);
-            rep.AddSingleValue("Текущая цена магазина онлайн", rowStart, 11);
+            //rep.AddSingleValue("Цена магазина", rowStart, 10);
+            //rep.AddSingleValue("Текущая цена магазина онлайн", rowStart, 11);
 
             rep.SetColumnWidth(1, 1, 1, 1, 4);
             rep.SetColumnWidth(1, 2, 1, 2, 15);
+            rep.SetColumnWidth(1, 3, 1, 3, 15);
             rep.SetColumnWidth(1, 4, 1, 4, 60);
             rep.SetColumnWidth(1, 5, 1, 5, 12);
 
@@ -479,7 +483,7 @@ namespace OnlineStoreViewOrders
             rep.SetColumnWidth(1, 10, 1, 10, 14);
             rep.SetColumnWidth(1, 11, 1, 11, 18);
 
-            rep.SetFontBold(rowStart, 1, rowStart, 11);
+            rep.SetFontBold(rowStart, 1, rowStart, 9);
             rep.SetCellAlignmentToCenter(rowStart, 1, rowStart, 11);
             rep.SetWrapText(rowStart, 1, rowStart, 11);
             rep.SetCellAlignmentToJustify(rowStart, 1, rowStart, 11);
@@ -526,34 +530,38 @@ namespace OnlineStoreViewOrders
                     rep.SetFontBold(7, 5, 7, 5);
                     //
                     int crow = rowStart;
-                    foreach (DataRow dr in dtContentOrder.Rows)
+                    
+                    int iterator = 1;
+                    foreach (DataRow dr in dtContentOrder.AsEnumerable().OrderBy(r => r.Field<string>("name")))
                     {
-                        rep.AddSingleValue(dr["Position"].ToString(), crow, 1);
+                        rep.AddSingleValue(iterator.ToString(), crow, 1);
                         rep.AddSingleValue(dr["name"].ToString(), crow, 2);
                         rep.AddSingleValue(dr["ean"].ToString().Trim(), crow, 3);
                         rep.AddSingleValue(dr["nameTovar"].ToString(), crow, 4);
-                        rep.AddSingleValue(dr["Netto"].ToString().Replace(',','.'), crow, 5);
-                        rep.AddSingleValue(dr["Price"].ToString().Replace(',','.'), crow, 6);
-                        rep.AddSingleValue(dr["sumTovar"].ToString().Replace(',','.'), crow, 7);
+                        rep.AddSingleValueObject(dr["Netto"], crow, 5);
+                        rep.AddSingleValueObject(dr["Price"], crow, 6);
+                        rep.AddSingleValueObject(dr["sumTovar"], crow, 7);
 
-                        rep.AddSingleValue(dr["nowOst"].ToString().Replace(',', '.'), crow, 8);
-                        rep.AddSingleValue(dr["allSell"].ToString().Replace(',', '.'), crow, 9);
-                        rep.AddSingleValue(dr["PriceShop"].ToString().Replace(',', '.'), crow, 10);
-                        rep.AddSingleValue(dr["nowPriceOnline"].ToString().Replace(',', '.'), crow, 11);
+                        rep.AddSingleValueObject(dr["nowOst"], crow, 8);
+                        rep.AddSingleValueObject(dr["allSell"], crow, 9);
+                        //rep.AddSingleValueObject(dr["PriceShop"], crow, 10);
+                        //rep.AddSingleValueObject(dr["nowPriceOnline"], crow, 11);
 
-                        if (dr["badPrice"].ToString() == "1")          
-                            rep.SetCellColor(crow, 1, crow, 11, Color.FromArgb(255, 128, 0));
-                      
-                        if((decimal)dr["Netto"]>(decimal)dr["nowOst"])
+                        //if (dr["badPrice"].ToString() == "1")          
+                        //  rep.SetCellColor(crow, 1, crow, 11, Color.FromArgb(255, 128, 0));
+
+                        //if((decimal)dr["Netto"]>(decimal)dr["nowOst"])
+                        if ((decimal)dr["allSell"] > (decimal)dr["nowOst"])
                             rep.SetCellColor(crow, 8, crow, 8, Color.FromArgb(0, 128, 0));
 
-                        if ((decimal)dr["PriceShop"] > (decimal)dr["Price"])
-                            rep.SetCellColor(crow, 10, crow, 10, Color.FromArgb(255, 54, 255));
+                        //if ((decimal)dr["PriceShop"] > (decimal)dr["Price"])
+                          //  rep.SetCellColor(crow, 10, crow, 10, Color.FromArgb(255, 54, 255));
 
                         if((decimal)dr["midRealiz"]> (decimal)dr["nowOst"]- (decimal)dr["allSell"])
                             rep.SetCellColor(crow, 5, crow, 5, Color.FromArgb(0, 255, 255));
 
                         crow++;
+                        iterator++;
                     }
 
                     Decimal itogSum = dtContentOrder.AsEnumerable().Sum(r => r.Field<decimal>("sumTovar"));
@@ -561,7 +569,7 @@ namespace OnlineStoreViewOrders
                     rep.AddSingleValue(itogSum.ToString("0.000").Replace(',', '.'), crow, 7);
                     rep.SetBorders(crow, 7, crow, 7);
 
-                    rep.SetBorders(rowStart-1, 1, rowStart-1 + dtContentOrder.Rows.Count, 11);
+                    rep.SetBorders(rowStart-1, 1, rowStart-1 + dtContentOrder.Rows.Count, 9);
                     rep.SetFormat(rowStart, 5, rowStart + dtContentOrder.Rows.Count, 5, "0.000");
                     rep.SetFormat(rowStart, 6, rowStart + dtContentOrder.Rows.Count, 9, "0.000");
                     rep.SetFormat(rowStart, 10, rowStart + dtContentOrder.Rows.Count, 11, "0.00");
@@ -579,13 +587,13 @@ namespace OnlineStoreViewOrders
                     rep.AddSingleValue("=\"-текущий остаток меньше количества товара в заказе\"", rowStart, 2);
                     rowStart++;
 
-                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 54, 255));
-                    rep.AddSingleValue("=\"-цена в заказе меньше цены в магазине\"", rowStart, 2);
-                    rowStart++;
+                    //rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 54, 255));
+                    //rep.AddSingleValue("=\"-цена в заказе меньше цены в магазине\"", rowStart, 2);
+                    //rowStart++;
 
-                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
-                    rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
-                    rowStart++;
+                    //rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
+                    //rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
+                    //rowStart++;
 
                     rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(0, 255, 255));
                     rep.AddSingleValue("=\"-остаток меньше средне-дневной реализации\"", rowStart, 2);
@@ -628,9 +636,10 @@ namespace OnlineStoreViewOrders
                   
 
                     crow = rowStart;
-                    foreach (DataRow dr in dtOrder.Rows)
+                    iterator = 1;
+                    foreach (DataRow dr in dtOrder.AsEnumerable().OrderBy(r=>r.Field<string>("name")))
                     {
-                        rep.AddSingleValue(dr["Position"].ToString(), crow, 1);
+                        rep.AddSingleValue(iterator.ToString(), crow, 1);
                         rep.AddSingleValue(dr["name"].ToString(), crow, 2);
                         rep.AddSingleValue(dr["ean"].ToString().Trim(), crow, 3);
                         rep.AddSingleValue(dr["nameTovar"].ToString(), crow, 4);
@@ -640,17 +649,17 @@ namespace OnlineStoreViewOrders
 
                         rep.AddSingleValue(dr["nowOst"].ToString().Replace(',', '.'), crow, 8);
                         rep.AddSingleValue(dr["allSell"].ToString().Replace(',', '.'), crow, 9);
-                        rep.AddSingleValue(dr["PriceShop"].ToString().Replace(',', '.'), crow, 10);
-                        rep.AddSingleValue(dr["nowPriceOnline"].ToString().Replace(',', '.'), crow, 11);
+                        //rep.AddSingleValue(dr["PriceShop"].ToString().Replace(',', '.'), crow, 10);
+                        //rep.AddSingleValue(dr["nowPriceOnline"].ToString().Replace(',', '.'), crow, 11);
 
-                        if (dr["badPrice"].ToString() == "1")  
-                            rep.SetCellColor(crow, 1, crow, 11, Color.FromArgb(255, 128, 0));
+                       // if (dr["badPrice"].ToString() == "1")  
+                        //    rep.SetCellColor(crow, 1, crow, 11, Color.FromArgb(255, 128, 0));
 
-                        if ((decimal)dr["Netto"] > (decimal)dr["nowOst"])
+                        if ((decimal)dr["allSell"] > (decimal)dr["nowOst"])
                             rep.SetCellColor(crow, 8, crow, 8, Color.FromArgb(0, 128, 0));
 
-                        if ((decimal)dr["PriceShop"] > (decimal)dr["Price"])
-                            rep.SetCellColor(crow, 10, crow, 10, Color.FromArgb(255, 54, 255));
+                       // if ((decimal)dr["PriceShop"] > (decimal)dr["Price"])
+                       //     rep.SetCellColor(crow, 10, crow, 10, Color.FromArgb(255, 54, 255));
 
                         if ((decimal)dr["midRealiz"] > (decimal)dr["nowOst"] - (decimal)dr["allSell"])
                             rep.SetCellColor(crow, 5, crow, 5, Color.FromArgb(0, 255, 255));
@@ -661,6 +670,7 @@ namespace OnlineStoreViewOrders
                             zero += "0";
                         rep.SetFormat(crow, 3, crow, 3, zero);
                         crow++;
+                        iterator++;
                     }
 
                     Decimal itogSumR = dtContentOrder.AsEnumerable().Sum(r => r.Field<decimal>("sumTovar"));
@@ -668,7 +678,7 @@ namespace OnlineStoreViewOrders
                     rep.AddSingleValue(itogSumR.ToString("0.000").Replace(',', '.'), crow, 7);
                     rep.SetBorders(crow, 7, crow, 7);
 
-                    rep.SetBorders(rowStart - 1, 1, rowStart - 1 + dtOrder.Rows.Count, 11);
+                    rep.SetBorders(rowStart - 1, 1, rowStart - 1 + dtOrder.Rows.Count, 9);
                     rep.SetFormat(rowStart, 5, rowStart + dtOrder.Rows.Count, 5, "0.000");
                     rep.SetFormat(rowStart, 6, rowStart + dtOrder.Rows.Count, 9, "0.000");
                     rep.SetFormat(rowStart, 10, rowStart + dtOrder.Rows.Count, 11, "0.00");
@@ -695,13 +705,13 @@ namespace OnlineStoreViewOrders
                     rep.AddSingleValue("=\"-текущий остаток меньше количества товара в заказе\"", rowStart, 2);
                     rowStart++;
 
-                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 54, 255));
-                    rep.AddSingleValue("=\"-цена в заказе меньше цены в магазине\"", rowStart, 2);
-                    rowStart++;
+                    //rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 54, 255));
+                    //rep.AddSingleValue("=\"-цена в заказе меньше цены в магазине\"", rowStart, 2);
+                    //rowStart++;
 
-                    rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
-                    rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
-                    rowStart++;
+                    //rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(255, 128, 0));
+                    //rep.AddSingleValue("=\"-Цена отличается от базовой цены\"", rowStart, 2);
+                    //rowStart++;
 
                     rep.SetCellColor(rowStart, 1, rowStart, 1, Color.FromArgb(0, 255, 255));
                     rep.AddSingleValue("=\"-остаток меньше средне-дневной реализации\"", rowStart, 2);
@@ -740,19 +750,39 @@ namespace OnlineStoreViewOrders
 
         private async void btnAddFromSite_Click(object sender, EventArgs e)
         {
+            //берем ключи
+            Task<DataTable> task = Config.connect.getSettings("kkey");
+            task.Wait();
+            if (task.Result == null || task.Result.Rows.Count == 0)
+            {
+                MessageBox.Show("Ошибка получения настроек подключения");
+                return;
+            }
+            consumer_key = task.Result.Rows[0]["value"].ToString();
+            task = Config.connect.getSettings("skey");
+            task.Wait();
+            if (task.Result == null || task.Result.Rows.Count == 0)
+            {
+                MessageBox.Show("Ошибка получения настроек подключения");
+                return;
+            }
+            consumer_secret = task.Result.Rows[0]["value"].ToString();
+
+
             label1.Visible = true;
             btnAddFromSite.Enabled = false;
             // обновляем дату в конфиге
             DateTime newdate = DateTime.Now;
             Config.connect.SetDateLastUpdate();
 
-            RestAPI rest = new RestAPI("https://narodniy.spb.ru/wp-json/wc/v3/", "ck_c0c3f4d52c11dcb2854bfb010a6ff8586b5ad87d",
-            "cs_741fa4eb736404308353053f36a0a78e6f9a70fb");
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            RestAPI rest = new RestAPI("https://narodniy.spb.ru/wp-json/wc/v3/", consumer_key,
+            consumer_secret);
             WCObject wc = new WCObject(rest);
             DataTable dtTorder;
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("consumer_key", "ck_c0c3f4d52c11dcb2854bfb010a6ff8586b5ad87d");
-            dict.Add("consumer_secret", "cs_741fa4eb736404308353053f36a0a78e6f9a70fb");
+            dict.Add("consumer_key", consumer_key);
+            dict.Add("consumer_secret", consumer_secret);
             dict.Add("per_page", "50");
             dict.Add("page", "1");
            
@@ -822,8 +852,8 @@ namespace OnlineStoreViewOrders
 
                     }
                 }
-
-                else
+                //пытаемся грузануть все заказы, мало ли с пробелами загружалось
+               /* else
                 {
                     //обновляем дату
                     Config._LASTLOADDATE = newdate;
@@ -832,7 +862,7 @@ namespace OnlineStoreViewOrders
                     btnAddFromSite.Enabled = true;
                     btnUpdate_Click(null, null);
                     return;
-                }
+                }*/
 
             }
             //обновляем дату
@@ -934,7 +964,7 @@ namespace OnlineStoreViewOrders
             DataTable dtBuf;
             //KillExcel();
 
-            HandmadeReport rep = new HandmadeReport();
+            ExcelUnLoad rep = new ExcelUnLoad();
 
             rep.SetColumnWidth(1, 1, 1, 1, 7);
             rep.SetPageOrientationToLandscape();
@@ -1019,10 +1049,14 @@ namespace OnlineStoreViewOrders
 
         private void btnView_Click(object sender, EventArgs e)
         {
+            if (dgvOrders.SelectedRows.Count > 1) { MessageBox.Show("Выберите одну запись!", "Инфрмирование", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
+
             int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
             bool needConnect2 = dtOrders.AsEnumerable().Where(x => x.Field<int>("id") == idtOrder).First()["dep6"].ToString() == "1" ? true : false;
             DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
+            int id_Status = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+
             frmViewContentOrder viewContent = new frmViewContentOrder()
             {
                 idTOrder = idtOrder,
@@ -1030,6 +1064,7 @@ namespace OnlineStoreViewOrders
                 dateOrder = dateOrder,
                 numOrder = numOrder
                 , callType = 0
+                ,id_Status = id_Status
             };
             viewContent.ShowDialog();
             if (viewContent.isEdit)
@@ -1038,10 +1073,14 @@ namespace OnlineStoreViewOrders
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (dgvOrders.SelectedRows.Count > 1) { MessageBox.Show("Выберите одну запись!","Инфрмирование",MessageBoxButtons.OK,MessageBoxIcon.Information); return; }
+
             int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());
             bool needConnect2 = dtOrders.AsEnumerable().Where(x => x.Field<int>("id") == idtOrder).First()["dep6"].ToString() == "1" ? true : false;
             DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
+            int id_Status = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+
             frmViewContentOrder viewContent = new frmViewContentOrder()
             {
                 idTOrder = idtOrder,
@@ -1049,7 +1088,8 @@ namespace OnlineStoreViewOrders
                 dateOrder = dateOrder,
                 numOrder = numOrder
                 ,
-                callType = 1
+                callType = 1,
+                id_Status= id_Status
             };
             viewContent.ShowDialog();
             if (viewContent.isEdit)
@@ -1170,7 +1210,8 @@ namespace OnlineStoreViewOrders
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
             decimal SummaDelivery = (decimal)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["SummaDelivery"];
             DateTime PlanDeliveryDate = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["PlanDeliveryDate"] == DBNull.Value ? DateTime.Now.Date : (DateTime)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["PlanDeliveryDate"];
-            string DeliveryType = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["DeliveryType"];
+            DateTime DateOrder = (DateTime)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["DateOrder"];
+            string DeliveryType = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["DeliveryType"]==DBNull.Value?"Доставка":(string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["DeliveryType"];
             string Address = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"];
 
             frmChangeSummaDelivery frmCSD = new frmChangeSummaDelivery() { idtOrder = idtOrder,
@@ -1178,6 +1219,7 @@ namespace OnlineStoreViewOrders
                 SummaDelivery = SummaDelivery,
                 PlanDeliveryDate = PlanDeliveryDate,
                 DeliveryType = DeliveryType,
+                DateOrder = DateOrder,
                 Address = Address
             };
             if (DialogResult.OK == frmCSD.ShowDialog())
@@ -1186,6 +1228,10 @@ namespace OnlineStoreViewOrders
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["PlanDeliveryDate"] = frmCSD.PlanDeliveryDate;
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["DeliveryType"] = frmCSD.DeliveryType;
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"] = frmCSD.Address;
+
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Phone"] = frmCSD.Phone;
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Email"] = frmCSD.Email;
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["FIO"] = frmCSD.FIO;                
                 dtOrders.AcceptChanges();
             }
         }
@@ -1274,6 +1320,55 @@ namespace OnlineStoreViewOrders
         private void radioButton3_Click(object sender, EventArgs e)
         {
             GetOrders();
+        }
+
+        private void ОВыполненыхИОтменённыхЗаказахToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmCreateReport().ShowDialog();
+        }
+
+        private void ОНовыхПокупателяхToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new reportForNewUsersBuys.frmReport().ShowDialog();
+        }
+
+
+        private Nwuram.Framework.UI.Service.EnableControlsServiceInProg blockers = new Nwuram.Framework.UI.Service.EnableControlsServiceInProg();
+        private Nwuram.Framework.UI.Forms.frmLoad fLoad;
+        private async void ДляСборщикаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvOrders.SelectedRows.Count == 0) {MessageBox.Show("Необходимо выбрать хотя бы 1 запись!","Информирование",MessageBoxButtons.OK,MessageBoxIcon.Information); return; }
+            string listOrder = "";
+
+            foreach (DataGridViewRow row in dgvOrders.SelectedRows)
+            {
+                listOrder += (listOrder.Length == 0 ? "" : ",") + dtOrders.DefaultView[row.Index]["id"].ToString();
+            }
+
+            //new reportForNewUsersBuys.reportWarhouse("");
+            var outer = Task.Factory.StartNew(() =>      // внешняя задача
+            {
+                Config.DoOnUIThread(() =>
+                {
+                    blockers.SaveControlsEnabledState(this);
+                    blockers.SetControlsEnabled(this, false);
+                    //progressBar1.Visible = progressBar1.Enabled = true;
+                    fLoad = new Nwuram.Framework.UI.Forms.frmLoad();
+                    fLoad.TopMost = false;
+                    fLoad.Owner = this;
+                    fLoad.TextWait = "Идёт формирование отчёта.\r\nОжидайте...";
+                    fLoad.Show();
+                }, this);
+
+                reportForNewUsersBuys.reportWarhouse.creatReport(listOrder);
+
+                Config.DoOnUIThread(() =>
+                {
+                    blockers.RestoreControlEnabledState(this);
+                    fLoad.Dispose();
+                }, this);
+            });
+            //outer.Wait();
         }
     }
 }

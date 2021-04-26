@@ -294,7 +294,7 @@ namespace OnlineStoreViewOrders
                 new DbType[6] { DbType.Int32, DbType.Decimal,DbType.Date,DbType.Int32,DbType.String, DbType.Int32 }, ap);
         }
 
-        public DataTable updateSummaDelivery(int id_tOrder, decimal summaDelivery,DateTime PlanDeliveryDate,string address,string deliveryType)
+        public DataTable updateSummaDelivery(int id_tOrder, decimal summaDelivery,DateTime PlanDeliveryDate,string address,string deliveryType,string lastname,string name,string phone,string email) 
         {
             ap.Clear();
             ap.Add(id_tOrder);
@@ -303,9 +303,13 @@ namespace OnlineStoreViewOrders
             ap.Add(PlanDeliveryDate);
             ap.Add(address);
             ap.Add(deliveryType);
+            ap.Add(lastname);
+            ap.Add(name);
+            ap.Add(phone);
+            ap.Add(email);
             return executeProcedure("OnlineStore.set_tOrder",
-                new string[6] { "@idOrder", "@summaDelivery", "@id_person", "@PlanDeliveryDate","@address","@deliveryType" },
-                new DbType[6] { DbType.Int32, DbType.Decimal, DbType.Int32, DbType.DateTime,DbType.String,DbType.String }, ap);
+                new string[10] { "@idOrder", "@summaDelivery", "@id_person", "@PlanDeliveryDate","@address","@deliveryType", "@lastname","@name","@phone", "@email" },
+                new DbType[10] { DbType.Int32, DbType.Decimal, DbType.Int32, DbType.DateTime,DbType.String,DbType.String, DbType.String, DbType.String, DbType.String, DbType.String }, ap);
         }
 
         public DataTable getListStatus(bool isAll)

@@ -234,5 +234,11 @@
     <Content Include="Resources\pngPrint.png" />
     <Content Include="Resources\pngUpdate.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\reportForNewUsersBuys\src\reportForNewUsersBuys\reportForNewUsersBuys.csproj">
+      <Project>{1a80455a-d845-4926-9868-9124c37d80ec}</Project>
+      <Name>reportForNewUsersBuys</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

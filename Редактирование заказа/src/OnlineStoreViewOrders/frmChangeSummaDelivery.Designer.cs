@@ -36,28 +36,37 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtpPlanDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbDelivery = new System.Windows.Forms.RadioButton();
             this.rbUserDelivery = new System.Windows.Forms.RadioButton();
+            this.rbDelivery = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.tbAddress = new System.Windows.Forms.TextBox();
+            this.lLastName = new System.Windows.Forms.Label();
+            this.tbLastName = new System.Windows.Forms.TextBox();
+            this.lFirstName = new System.Windows.Forms.Label();
+            this.tbFirstName = new System.Windows.Forms.TextBox();
+            this.lEmail = new System.Windows.Forms.Label();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.lPhone = new System.Windows.Forms.Label();
+            this.tbPhone = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbSumma
             // 
-            this.tbSumma.Location = new System.Drawing.Point(188, 91);
+            this.tbSumma.Location = new System.Drawing.Point(188, 192);
             this.tbSumma.MaxLength = 8;
             this.tbSumma.Name = "tbSumma";
             this.tbSumma.Size = new System.Drawing.Size(71, 20);
             this.tbSumma.TabIndex = 17;
             this.tbSumma.Text = "0.00";
             this.tbSumma.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbSumma.TextChanged += new System.EventHandler(this.TbSumma_TextChanged);
             this.tbSumma.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSumma_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(265, 95);
+            this.label4.Location = new System.Drawing.Point(265, 196);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 15;
@@ -66,7 +75,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 95);
+            this.label3.Location = new System.Drawing.Point(11, 196);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 13);
             this.label3.TabIndex = 16;
@@ -76,7 +85,7 @@
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btClose.Image = global::OnlineStoreViewOrders.Properties.Resources.pngExit;
-            this.btClose.Location = new System.Drawing.Point(260, 271);
+            this.btClose.Location = new System.Drawing.Point(257, 372);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 18;
@@ -87,7 +96,7 @@
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.Image = global::OnlineStoreViewOrders.Properties.Resources.pngGALOCHKA;
-            this.btSave.Location = new System.Drawing.Point(222, 271);
+            this.btSave.Location = new System.Drawing.Point(219, 372);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 14;
@@ -97,7 +106,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 16);
+            this.label1.Location = new System.Drawing.Point(12, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(170, 13);
             this.label1.TabIndex = 16;
@@ -106,21 +115,33 @@
             // dtpPlanDeliveryDate
             // 
             this.dtpPlanDeliveryDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpPlanDeliveryDate.Location = new System.Drawing.Point(188, 12);
+            this.dtpPlanDeliveryDate.Location = new System.Drawing.Point(188, 113);
             this.dtpPlanDeliveryDate.Name = "dtpPlanDeliveryDate";
             this.dtpPlanDeliveryDate.Size = new System.Drawing.Size(104, 20);
             this.dtpPlanDeliveryDate.TabIndex = 19;
+            this.dtpPlanDeliveryDate.ValueChanged += new System.EventHandler(this.DtpPlanDeliveryDate_ValueChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbUserDelivery);
             this.groupBox1.Controls.Add(this.rbDelivery);
-            this.groupBox1.Location = new System.Drawing.Point(14, 38);
+            this.groupBox1.Location = new System.Drawing.Point(14, 139);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(278, 47);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Тип доставки";
+            // 
+            // rbUserDelivery
+            // 
+            this.rbUserDelivery.AutoSize = true;
+            this.rbUserDelivery.Location = new System.Drawing.Point(132, 19);
+            this.rbUserDelivery.Name = "rbUserDelivery";
+            this.rbUserDelivery.Size = new System.Drawing.Size(84, 17);
+            this.rbUserDelivery.TabIndex = 0;
+            this.rbUserDelivery.Text = "Самовывоз";
+            this.rbUserDelivery.UseVisualStyleBackColor = true;
+            this.rbUserDelivery.Click += new System.EventHandler(this.RbUserDelivery_Click);
             // 
             // rbDelivery
             // 
@@ -133,21 +154,12 @@
             this.rbDelivery.TabStop = true;
             this.rbDelivery.Text = "Доставка ";
             this.rbDelivery.UseVisualStyleBackColor = true;
-            // 
-            // rbUserDelivery
-            // 
-            this.rbUserDelivery.AutoSize = true;
-            this.rbUserDelivery.Location = new System.Drawing.Point(132, 19);
-            this.rbUserDelivery.Name = "rbUserDelivery";
-            this.rbUserDelivery.Size = new System.Drawing.Size(84, 17);
-            this.rbUserDelivery.TabIndex = 0;
-            this.rbUserDelivery.Text = "Самовывоз";
-            this.rbUserDelivery.UseVisualStyleBackColor = true;
+            this.rbDelivery.CheckedChanged += new System.EventHandler(this.RbDelivery_CheckedChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 121);
+            this.label2.Location = new System.Drawing.Point(12, 222);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 21;
@@ -155,18 +167,95 @@
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(12, 137);
+            this.tbAddress.Location = new System.Drawing.Point(12, 238);
             this.tbAddress.Multiline = true;
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(277, 126);
             this.tbAddress.TabIndex = 22;
+            this.tbAddress.TextChanged += new System.EventHandler(this.TbAddress_TextChanged);
+            // 
+            // lLastName
+            // 
+            this.lLastName.AutoSize = true;
+            this.lLastName.Location = new System.Drawing.Point(12, 10);
+            this.lLastName.Name = "lLastName";
+            this.lLastName.Size = new System.Drawing.Size(56, 13);
+            this.lLastName.TabIndex = 23;
+            this.lLastName.Text = "Фамилия";
+            this.lLastName.Click += new System.EventHandler(this.Label5_Click);
+            // 
+            // tbLastName
+            // 
+            this.tbLastName.Location = new System.Drawing.Point(82, 7);
+            this.tbLastName.Name = "tbLastName";
+            this.tbLastName.Size = new System.Drawing.Size(210, 20);
+            this.tbLastName.TabIndex = 24;
+            // 
+            // lFirstName
+            // 
+            this.lFirstName.AutoSize = true;
+            this.lFirstName.Location = new System.Drawing.Point(12, 36);
+            this.lFirstName.Name = "lFirstName";
+            this.lFirstName.Size = new System.Drawing.Size(29, 13);
+            this.lFirstName.TabIndex = 23;
+            this.lFirstName.Text = "Имя";
+            this.lFirstName.Click += new System.EventHandler(this.Label5_Click);
+            // 
+            // tbFirstName
+            // 
+            this.tbFirstName.Location = new System.Drawing.Point(82, 33);
+            this.tbFirstName.Name = "tbFirstName";
+            this.tbFirstName.Size = new System.Drawing.Size(210, 20);
+            this.tbFirstName.TabIndex = 24;
+            // 
+            // lEmail
+            // 
+            this.lEmail.AutoSize = true;
+            this.lEmail.Location = new System.Drawing.Point(12, 62);
+            this.lEmail.Name = "lEmail";
+            this.lEmail.Size = new System.Drawing.Size(35, 13);
+            this.lEmail.TabIndex = 23;
+            this.lEmail.Text = "E-mail";
+            this.lEmail.Click += new System.EventHandler(this.Label5_Click);
+            // 
+            // tbEmail
+            // 
+            this.tbEmail.Location = new System.Drawing.Point(82, 59);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(210, 20);
+            this.tbEmail.TabIndex = 24;
+            // 
+            // lPhone
+            // 
+            this.lPhone.AutoSize = true;
+            this.lPhone.Location = new System.Drawing.Point(12, 88);
+            this.lPhone.Name = "lPhone";
+            this.lPhone.Size = new System.Drawing.Size(52, 13);
+            this.lPhone.TabIndex = 23;
+            this.lPhone.Text = "Телефон";
+            this.lPhone.Click += new System.EventHandler(this.Label5_Click);
+            // 
+            // tbPhone
+            // 
+            this.tbPhone.Location = new System.Drawing.Point(82, 85);
+            this.tbPhone.Name = "tbPhone";
+            this.tbPhone.Size = new System.Drawing.Size(210, 20);
+            this.tbPhone.TabIndex = 24;
             // 
             // frmChangeSummaDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 315);
+            this.ClientSize = new System.Drawing.Size(301, 416);
             this.ControlBox = false;
+            this.Controls.Add(this.tbPhone);
+            this.Controls.Add(this.lPhone);
+            this.Controls.Add(this.tbEmail);
+            this.Controls.Add(this.lEmail);
+            this.Controls.Add(this.tbFirstName);
+            this.Controls.Add(this.lFirstName);
+            this.Controls.Add(this.tbLastName);
+            this.Controls.Add(this.lLastName);
             this.Controls.Add(this.tbAddress);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
@@ -185,6 +274,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmChangeSummaDelivery";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmChangeSummaDelivery_FormClosing);
             this.Load += new System.EventHandler(this.frmChangeSummaDelivery_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -207,5 +297,13 @@
         private System.Windows.Forms.RadioButton rbDelivery;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbAddress;
+        private System.Windows.Forms.Label lLastName;
+        private System.Windows.Forms.TextBox tbLastName;
+        private System.Windows.Forms.Label lFirstName;
+        private System.Windows.Forms.TextBox tbFirstName;
+        private System.Windows.Forms.Label lEmail;
+        private System.Windows.Forms.TextBox tbEmail;
+        private System.Windows.Forms.Label lPhone;
+        private System.Windows.Forms.TextBox tbPhone;
     }
 }

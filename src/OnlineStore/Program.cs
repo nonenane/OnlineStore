@@ -36,9 +36,9 @@ namespace OnlineStore
                     Logging.Comment("Вход в программу");
                     Logging.StopFirstLevel();
 
-                    if (new List<string>(new string[] { "ркв", "кд", "пр" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode.ToLower()))
+                    if (new List<string>(new string[] { "ркв", "кд", "пр","дз" }).Contains(Nwuram.Framework.Settings.User.UserSettings.User.StatusCode.ToLower()))
                     {
-
+                        //Application.Run(new dictonatyTovar.frmAddCategory() { nameTovar = "Test", id_tovar = 123,id_deps= 3 });
                         //Application.Run(new OnlineStoreViewOrders.statisticOrder.frmStatistic());
                         Application.Run(new frmMain());
                         //Application.Run(new dictonaryCategory.frmListCategory());

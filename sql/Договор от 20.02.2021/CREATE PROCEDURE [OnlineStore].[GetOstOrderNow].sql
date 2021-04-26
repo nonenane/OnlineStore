@@ -65,6 +65,8 @@ where r.tdate_n<=@dateEnd group by t.id_tovar) as a inner join dbo.s_rcena r on 
 DECLARE @dttost date
 select TOP(1) @dttost = dttost from dbo.j_ttost where dttost<=@dateEnd and promeg = 0 order by dttost desc
 
+SET @dttost = DATEADD(day,1,@dttost)
+
 CREATE table #tableDvigTovar (id_Tovar int,netto numeric(16,3))
 
 INSERT INTO #tableDvigTovar

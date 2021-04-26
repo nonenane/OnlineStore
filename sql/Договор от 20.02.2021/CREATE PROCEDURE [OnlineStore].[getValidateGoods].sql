@@ -20,7 +20,7 @@ select
 	cast(0 as bit) as isSelect,
 	t.id_tovar,
 	trim(t.ean) as ean,
-	trim(t.cname) as nameTovarTerminal,
+	trim(tt.cName+' '+trim(t.cname)) as nameTovarTerminal,
 	trim(g.ShortName) as nameTovarOnlineStore,
 	t.id_otdel,
 	t.id_grp1,
@@ -28,7 +28,8 @@ select
 	g.id
 from 
 	dbo.v_tovar t 
-		left join OnlineStore.s_Goods g on g.id_Tovar = t.id_tovar and trim(g.ShortName) not like trim(t.cname)
+		left join dbo.s_TypeTovar tt  on tt.id = t.ntypetovar
+		left join OnlineStore.s_Goods g on g.id_Tovar = t.id_tovar and trim(g.ShortName) <> trim(t.cname)
 where g.id is not null and g.isActive = 1
 
 END

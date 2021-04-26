@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OnlineStoreViewOrders;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace OnlineStore
 {
@@ -60,6 +61,14 @@ namespace OnlineStore
             if (UserSettings.User.StatusCode == "РКВ") настройкаВремениДатыДоставкиToolStripMenuItem.Visible = настройкиПроцентовToolStripMenuItem.Visible = false;
             if (UserSettings.User.StatusCode.ToLower() == "пр")
                 setEnabledPR();
+
+            if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
+            {
+                справочникToolStripMenuItem.Visible =
+                    формированиеCSVToolStripMenuItem.Visible =
+                    сравнениеНаименованийТоваровToolStripMenuItem.Visible =
+                    Settings.Visible = false;
+            }
             Task.Run(() => { init_combobox(true); get_data(); });
 
         }
@@ -128,6 +137,31 @@ namespace OnlineStore
             });
 
             init_combo_category();
+
+            DoOnUIThread(delegate ()
+            {
+                DataTable dtTypePage = new DataTable();
+                dtTypePage.Columns.Add("id", typeof(int));
+                dtTypePage.Columns.Add("cName", typeof(string));
+                dtTypePage.Rows.Add(0, "Все");
+                dtTypePage.Rows.Add(1, "Новые");
+                dtTypePage.Rows.Add(2, "На сайте");
+                cmbGoodOnPage.DataSource = dtTypePage;
+                cmbGoodOnPage.ValueMember = "id";
+                cmbGoodOnPage.DisplayMember = "cName";
+
+
+                DataTable dtTypeImage = new DataTable();
+                dtTypeImage.Columns.Add("id", typeof(int));
+                dtTypeImage.Columns.Add("cName", typeof(string));
+                dtTypeImage.Rows.Add(0, "Все");
+                dtTypeImage.Rows.Add(1, "С картинками");
+                dtTypeImage.Rows.Add(2, "Без картинок");
+                cmbImageOnPage.DataSource = dtTypeImage;
+                cmbImageOnPage.ValueMember = "id";
+                cmbImageOnPage.DisplayMember = "cName";
+
+            });
 
             //task = Config.hCntMain.getDicCategoryWithDep(id_otdel);
             //task.Wait();
@@ -257,8 +291,77 @@ namespace OnlineStore
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            if (new dictonatyTovar.frmAddTovar() { Text = "Добавление товара", id = 0 }.ShowDialog() == DialogResult.OK)
-                Task.Run(() => get_data());
+            if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
+            {
+                if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
+                {
+                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                    dialog.Filters.Add(new CommonFileDialogFilter("PNG Files", "*.png"));
+
+                    //dialog.InitialDirectory = "C:\\Users";
+                    dialog.IsFolderPicker = false;
+                    dialog.EnsureFileExists = true;
+                    dialog.Multiselect = false;
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                    {
+                        //if (!validateFileAndFolder(dialog.FileName)) return;
+
+                        //btSave.Enabled = true;
+                        //tbPath.Text = dialog.FileName;
+                        string folderName = dialog.FileName;
+                        List<string> fileHead = new List<string>();
+
+                        List<string> jpg = new List<string> { "FF", "D8" };
+                        List<string> bmp = new List<string> { "42", "4D" };
+                        List<string> gif = new List<string> { "47", "49", "46" };
+                        List<string> png = new List<string> { "89", "50", "4E", "47", "0D", "0A", "1A", "0A" };
+
+                        using (FileStream stream = File.OpenRead(folderName))
+                        {
+                            for (int i = 0; i < 8; i++)
+                            {
+                                string bit = stream.ReadByte().ToString("X2");
+                                fileHead.Add(bit);
+                            }
+                        }
+
+
+                        int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
+                        string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
+
+                        if (!ean.Equals(Path.GetFileNameWithoutExtension(folderName)))
+                        {
+                            Console.WriteLine(Path.GetFileNameWithoutExtension(folderName));
+                            return;
+                        }
+
+                        if (png.Except(fileHead).Any())
+                        {                            
+                            Console.WriteLine("Это не png");
+                            return;
+                        }
+
+
+                        Image image1 = Image.FromFile(folderName);
+                        int width = 800;
+                        int height = 800;
+
+                        if (image1.Width != width && image1.Height != height)
+                        {
+                            Console.WriteLine("Размерчик не тот");
+                            return;
+                        }
+
+                    }
+                    return;
+                }
+
+            }
+            else
+            {
+                if (new dictonatyTovar.frmAddTovar() { Text = "Добавление товара", id = 0 }.ShowDialog() == DialogResult.OK)
+                    Task.Run(() => get_data());
+            }
         }
 
         private void dgvData_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -275,7 +378,9 @@ namespace OnlineStore
                 if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"])
                       rColor = Color.FromArgb(153, 217, 234);
 
-                    dgvData.Rows[e.RowIndex].DefaultCellStyle.BackColor = rColor;
+               
+
+                dgvData.Rows[e.RowIndex].DefaultCellStyle.BackColor = rColor;
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = rColor;
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -295,6 +400,19 @@ namespace OnlineStore
                     dgvData.Rows[e.RowIndex].Cells["cRcenaOnlineAction"].Style.BackColor =
                         dgvData.Rows[e.RowIndex].Cells["cRcenaOnlineAction"].Style.SelectionBackColor = panel4.BackColor;
                 }
+                if (dtData.Columns.Contains("isPicture"))
+                    if (dtData.DefaultView[e.RowIndex]["isPicture"] != DBNull.Value)
+                        if (!(bool)dtData.DefaultView[e.RowIndex]["isPicture"])
+                        {
+                            dgvData.Rows[e.RowIndex].Cells["cEan"].Style.BackColor =
+                       dgvData.Rows[e.RowIndex].Cells["cEan"].Style.SelectionBackColor = panel5.BackColor;
+                        }
+                        else
+                        {
+                            dgvData.Rows[e.RowIndex].Cells["cEan"].Style.BackColor =
+                       dgvData.Rows[e.RowIndex].Cells["cEan"].Style.SelectionBackColor = rColor;
+                        }
+
 
                 //if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"])
                 //    dgvData.Rows[e.RowIndex].Cells[cId_tovar.Index].Style.BackColor =
@@ -351,7 +469,12 @@ namespace OnlineStore
             if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
             {
                 int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
-                if (DialogResult.OK == new dictonatyTovar.frmAddTovar() { id = id, row = dtData.DefaultView[dgvData.SelectedRows[0].Index], Text = "Редактирование товара" }.ShowDialog())
+
+                if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
+                {
+                    return;
+                }
+                else if (DialogResult.OK == new dictonatyTovar.frmAddTovar() { id = id, row = dtData.DefaultView[dgvData.SelectedRows[0].Index], Text = "Редактирование товара" }.ShowDialog())
                     get_data();
             }
         }
@@ -431,7 +554,8 @@ namespace OnlineStore
                         filter += (filter.Length == 0 ? "" : " and ") + $"id_grp2 = {cmbInv.SelectedValue}";
 
                     if (cmbParentCategory.SelectedValue != null && (int)cmbParentCategory.SelectedValue != 0)
-                        filter += (filter.Length == 0 ? "" : " and ") + $"id_Category = {cmbParentCategory.SelectedValue}";
+                        //filter += (filter.Length == 0 ? "" : " and ") + $"id_Category = {cmbParentCategory.SelectedValue}";
+                        filter += (filter.Length == 0 ? "" : " and ") + $"id_Category like '%,{cmbParentCategory.SelectedValue},%'";
 
                     if (cmbDeps.SelectedValue != null && (int)cmbDeps.SelectedValue != 0)
                         filter += (filter.Length == 0 ? "" : " and ") + $"id_otdel = {cmbDeps.SelectedValue}";
@@ -451,10 +575,10 @@ namespace OnlineStore
                     {
                         filter += (filter.Length == 0 ? "" : " and ") + $"basicPricePrecent <> rcenaOnline";
                     }
-                    if (chckUnloaded.Checked)
-                    {
-                        filter += (filter.Length == 0 ? "" : " and ") + $"isInsert = 0";
-                    }
+
+                    if ((int)cmbGoodOnPage.SelectedValue != 0) filter += (filter.Length == 0 ? "" : " and ") + $"isInsert = {((int)cmbGoodOnPage.SelectedValue == 1 ? 0 : 1)}";
+                    if ((int)cmbImageOnPage.SelectedValue != 0) filter += (filter.Length == 0 ? "" : " and ") + $"isPicture = {((int)cmbImageOnPage.SelectedValue == 1 ? 1 : 0)}";
+
                     if (chckSale.Checked)
                         filter += (filter.Length == 0 ? "" : " and ") + $"rcenaPromo>0";
                     dtData.DefaultView.RowFilter = filter;
@@ -489,103 +613,115 @@ namespace OnlineStore
         {
             if (dtData == null || dtData.Rows.Count == 0 || dtData.DefaultView.Count == 0) return;
 
-            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
-                .Where(r => r.Field<bool>("isSelect"));
-            if (rowCollect.Count()!=0)
+            if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
             {
-                if (MessageBox.Show(Config.centralText("Выбранные товары станут недействующими.\nВы хотите продолжить?\n"), "Неактивные товары", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                    return;
-                foreach (DataRow dr in rowCollect)
+                if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
                 {
-                    Task<DataTable> t = 
-                    Config.hCntMain.delDicGoods((int)dr["id"], false, -2);
-                    t.Wait();
-                    setLog(1586, dr);
+                    int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
+
                 }
-                Task.Run(() => get_data());
-                return;
+                return; 
             }
-
-            if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
+            else
             {
-                int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
-                bool isActive = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isActive"];
-
-                Task<DataTable> task = Config.hCntMain.validateDicGoods(id);
-                task.Wait();
-
-                if (task.Result == null)
+                EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
+                .Where(r => r.Field<bool>("isSelect"));
+                if (rowCollect.Count() != 0)
                 {
-                    MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                int result = (int)task.Result.Rows[0]["id"];
-
-                if (result == -1)
-                {
-                    MessageBox.Show(Config.centralText("Запись уже удалена другим пользователем\n"), "Удаление записи", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    get_data();
-                    return;
-                }
-                result = -2;
-
-                if (result == -2 && isActive)
-                {
-                    if (DialogResult.Yes == MessageBox.Show(Config.centralText("Выбранная для удаления запись\nиспользуется в программе.\nСделать запись недействующей?\n"), "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                    if (MessageBox.Show(Config.centralText("Выбранные товары станут недействующими.\nВы хотите продолжить?\n"), "Неактивные товары", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        return;
+                    foreach (DataRow dr in rowCollect)
                     {
-                        setLog(1585, dtData.DefaultView[dgvData.CurrentRow.Index].Row);
-                        task = Config.hCntMain.delDicGoods(id, !isActive, result);
-                        task.Wait();
-                        if (task.Result == null)
-                        {
-                            MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        Task.Run(() => get_data());
+                        Task<DataTable> t =
+                        Config.hCntMain.delDicGoods((int)dr["id"], false, -2);
+                        t.Wait();
+                        setLog(1586, dr);
+                    }
+                    Task.Run(() => get_data());
+                    return;
+                }
+
+                if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
+                {
+                    int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
+                    bool isActive = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isActive"];
+
+                    Task<DataTable> task = Config.hCntMain.validateDicGoods(id);
+                    task.Wait();
+
+                    if (task.Result == null)
+                    {
+                        MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                }
-                //else if (result == 0 && isActive)
-                //{
-                //    if (DialogResult.Yes == MessageBox.Show("Удалить выбранную запись?", "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
-                //    {
-                //        //setLog(id, 1519);
-                //        task = Config.hCntMain.delDicGoods(id, !isActive, result);
-                //        task.Wait();
-                //        if (task.Result == null)
-                //        {
-                //            MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //            return;
-                //        }
-                //        get_data();
-                //        return;
-                //    }
-                //}
-                else if (!isActive)
-                {
-                    if (DialogResult.Yes == MessageBox.Show("Сделать выбранную запись действующей?", "Восстановление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+
+                    int result = (int)task.Result.Rows[0]["id"];
+
+                    if (result == -1)
                     {
-                        decimal rcena = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["rcena"];
-                        decimal percent = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["MarkUpPercent"];
-                        decimal pricePercent = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["rcenaOnline"];
-                        bool? changePrice = null;
-                        if (Math.Round(pricePercent, 2) != Math.Truncate((rcena * (100 + percent))) / 100)
+                        MessageBox.Show(Config.centralText("Запись уже удалена другим пользователем\n"), "Удаление записи", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        get_data();
+                        return;
+                    }
+                    result = -2;
+
+                    if (result == -2 && isActive)
+                    {
+                        if (DialogResult.Yes == MessageBox.Show(Config.centralText("Выбранная для удаления запись\nиспользуется в программе.\nСделать запись недействующей?\n"), "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                         {
-                            if (DialogResult.Yes == MessageBox.Show(Config.centralText("Цена товара изменилась.\nХотите поменять цену на сайте?\n"), "Редактирование товара", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                                changePrice = true;
-                            else changePrice = false;
-                        }
-                        setLog(1586, dtData.DefaultView[dgvData.CurrentRow.Index].Row, changePrice);
-                        task = Config.hCntMain.delDicGoods(id, !isActive, result, changePrice);
-                        task.Wait();
-                        if (task.Result == null)
-                        {
-                            MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            setLog(1585, dtData.DefaultView[dgvData.CurrentRow.Index].Row);
+                            task = Config.hCntMain.delDicGoods(id, !isActive, result);
+                            task.Wait();
+                            if (task.Result == null)
+                            {
+                                MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            Task.Run(() => get_data());
                             return;
                         }
-                        Task.Run(() => get_data());
-                        return;
+                    }
+                    //else if (result == 0 && isActive)
+                    //{
+                    //    if (DialogResult.Yes == MessageBox.Show("Удалить выбранную запись?", "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                    //    {
+                    //        //setLog(id, 1519);
+                    //        task = Config.hCntMain.delDicGoods(id, !isActive, result);
+                    //        task.Wait();
+                    //        if (task.Result == null)
+                    //        {
+                    //            MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //            return;
+                    //        }
+                    //        get_data();
+                    //        return;
+                    //    }
+                    //}
+                    else if (!isActive)
+                    {
+                        if (DialogResult.Yes == MessageBox.Show("Сделать выбранную запись действующей?", "Восстановление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                        {
+                            decimal rcena = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["rcena"];
+                            decimal percent = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["MarkUpPercent"];
+                            decimal pricePercent = (decimal)dtData.DefaultView[dgvData.CurrentRow.Index]["rcenaOnline"];
+                            bool? changePrice = null;
+                            if (Math.Round(pricePercent, 2) != Math.Truncate((rcena * (100 + percent))) / 100)
+                            {
+                                if (DialogResult.Yes == MessageBox.Show(Config.centralText("Цена товара изменилась.\nХотите поменять цену на сайте?\n"), "Редактирование товара", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                                    changePrice = true;
+                                else changePrice = false;
+                            }
+                            setLog(1586, dtData.DefaultView[dgvData.CurrentRow.Index].Row, changePrice);
+                            task = Config.hCntMain.delDicGoods(id, !isActive, result, changePrice);
+                            task.Wait();
+                            if (task.Result == null)
+                            {
+                                MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            Task.Run(() => get_data());
+                            return;
+                        }
                     }
                 }
             }
@@ -1164,6 +1300,11 @@ namespace OnlineStore
         private void сравнениеНаименованийТоваровToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new validateGoods.frmView() { dtGoods = dtData.Copy() }.ShowDialog();
+        }
+
+        private void CmbGoodOnPage_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            setFilter();
         }
     }
 }

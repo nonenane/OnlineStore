@@ -59,13 +59,15 @@
             this.tbPricePercent = new System.Windows.Forms.TextBox();
             this.tbShortDescription = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.tbNameCategory = new System.Windows.Forms.TextBox();
+            this.btAddCategory = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btSave
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btSave.Image = global::OnlineStore.Properties.Resources.filesave_2175;
-            this.btSave.Location = new System.Drawing.Point(375, 356);
+            this.btSave.Location = new System.Drawing.Point(375, 419);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 6;
@@ -76,7 +78,7 @@
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btClose.Image = global::OnlineStore.Properties.Resources.exit_8633;
-            this.btClose.Location = new System.Drawing.Point(413, 356);
+            this.btClose.Location = new System.Drawing.Point(413, 419);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 7;
@@ -145,16 +147,17 @@
             this.cmbParentCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbParentCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbParentCategory.FormattingEnabled = true;
-            this.cmbParentCategory.Location = new System.Drawing.Point(183, 270);
+            this.cmbParentCategory.Location = new System.Drawing.Point(590, 426);
             this.cmbParentCategory.Name = "cmbParentCategory";
             this.cmbParentCategory.Size = new System.Drawing.Size(262, 21);
             this.cmbParentCategory.TabIndex = 13;
+            this.cmbParentCategory.Visible = false;
             // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(76, 273);
+            this.label4.Location = new System.Drawing.Point(79, 273);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 12;
@@ -164,7 +167,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(103, 300);
+            this.label5.Location = new System.Drawing.Point(103, 363);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 13);
             this.label5.TabIndex = 10;
@@ -174,7 +177,7 @@
             // 
             this.tbRcena.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbRcena.Enabled = false;
-            this.tbRcena.Location = new System.Drawing.Point(183, 297);
+            this.tbRcena.Location = new System.Drawing.Point(183, 360);
             this.tbRcena.MaxLength = 17;
             this.tbRcena.Name = "tbRcena";
             this.tbRcena.Size = new System.Drawing.Size(130, 20);
@@ -187,7 +190,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 352);
+            this.label6.Location = new System.Drawing.Point(18, 415);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(159, 13);
             this.label6.TabIndex = 10;
@@ -196,7 +199,7 @@
             // tbActionPrice
             // 
             this.tbActionPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbActionPrice.Location = new System.Drawing.Point(183, 349);
+            this.tbActionPrice.Location = new System.Drawing.Point(183, 412);
             this.tbActionPrice.MaxLength = 17;
             this.tbActionPrice.Name = "tbActionPrice";
             this.tbActionPrice.Size = new System.Drawing.Size(130, 20);
@@ -211,7 +214,7 @@
             this.chbActive.AutoSize = true;
             this.chbActive.Checked = true;
             this.chbActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbActive.Location = new System.Drawing.Point(183, 379);
+            this.chbActive.Location = new System.Drawing.Point(183, 442);
             this.chbActive.Name = "chbActive";
             this.chbActive.Size = new System.Drawing.Size(130, 17);
             this.chbActive.TabIndex = 14;
@@ -345,7 +348,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(55, 326);
+            this.label7.Location = new System.Drawing.Point(55, 389);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(122, 13);
             this.label7.TabIndex = 15;
@@ -354,7 +357,7 @@
             // tbPricePercent
             // 
             this.tbPricePercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbPricePercent.Location = new System.Drawing.Point(183, 323);
+            this.tbPricePercent.Location = new System.Drawing.Point(183, 386);
             this.tbPricePercent.MaxLength = 17;
             this.tbPricePercent.Name = "tbPricePercent";
             this.tbPricePercent.Size = new System.Drawing.Size(130, 20);
@@ -382,12 +385,35 @@
             this.label8.TabIndex = 18;
             this.label8.Text = "Короткое описание товара:";
             // 
+            // tbNameCategory
+            // 
+            this.tbNameCategory.Location = new System.Drawing.Point(183, 270);
+            this.tbNameCategory.MaxLength = 253451;
+            this.tbNameCategory.Multiline = true;
+            this.tbNameCategory.Name = "tbNameCategory";
+            this.tbNameCategory.ReadOnly = true;
+            this.tbNameCategory.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbNameCategory.Size = new System.Drawing.Size(262, 80);
+            this.tbNameCategory.TabIndex = 19;
+            // 
+            // btAddCategory
+            // 
+            this.btAddCategory.Image = global::OnlineStore.Properties.Resources.edit_1761;
+            this.btAddCategory.Location = new System.Drawing.Point(148, 318);
+            this.btAddCategory.Name = "btAddCategory";
+            this.btAddCategory.Size = new System.Drawing.Size(32, 32);
+            this.btAddCategory.TabIndex = 20;
+            this.btAddCategory.UseVisualStyleBackColor = true;
+            this.btAddCategory.Click += new System.EventHandler(this.BtAddCategory_Click);
+            // 
             // frmAddTovar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 408);
+            this.ClientSize = new System.Drawing.Size(864, 467);
             this.ControlBox = false;
+            this.Controls.Add(this.btAddCategory);
+            this.Controls.Add(this.tbNameCategory);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbShortDescription);
             this.Controls.Add(this.tbPricePercent);
@@ -467,5 +493,7 @@
         private System.Windows.Forms.TextBox tbPricePercent;
         private System.Windows.Forms.TextBox tbShortDescription;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbNameCategory;
+        private System.Windows.Forms.Button btAddCategory;
     }
 }

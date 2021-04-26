@@ -1,0 +1,25 @@
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\reportForNewUsersBuys.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\EPPlus.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\Framework.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\stdole.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.csprojAssemblyReference.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.frmReport.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.Properties.Resources.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.csproj.GenerateResource.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.csproj.CoreCompileInputs.cache
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.csproj.CopyComplete
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\reportForNewUsersBuys.dll.config
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\reportForNewUsersBuys.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.dll
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\reportForNewUsersBuys.dll.config
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\reportForNewUsersBuys.dll
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\reportForNewUsersBuys.pdb
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\bin\Debug\stdole.dll
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.csprojAssemblyReference.cache
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.frmReport.resources
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.Properties.Resources.resources
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.csproj.GenerateResource.cache
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.csproj.CopyComplete
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.dll
+C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\reportForNewUsersBuys\src\reportForNewUsersBuys\obj\Debug\reportForNewUsersBuys.pdb

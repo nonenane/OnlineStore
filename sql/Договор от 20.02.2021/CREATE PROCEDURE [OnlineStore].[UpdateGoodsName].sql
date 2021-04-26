@@ -10,7 +10,7 @@ GO
 -- Create date: 2021-02-19
 -- Description:	Обновление наименования товаров
 -- =============================================
-CREATE PROCEDURE [OnlineStore].[UpdateGoodsName]	
+ALTER PROCEDURE [OnlineStore].[UpdateGoodsName]	
 	@id int,
 	@ShortName varchar(150),
 	@ShortDescription varchar(1500),
@@ -22,9 +22,9 @@ BEGIN
 	UPDATE 
 		OnlineStore.s_Goods
 	SET 
-		ShortName  = ShortName,
-		ShortDescription = ShortDescription,
-		FullName = FullName
+		ShortName  = @ShortName,
+		ShortDescription = @ShortDescription,
+		FullName = @FullName
 	WHERE
 		id = @id
 	

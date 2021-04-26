@@ -47,6 +47,7 @@
             this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отображаемыеНаФормеТоварыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выгрузитьИзмененныеТоварыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сравнениеНаименованийТоваровToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Settings = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиПроцентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,6 @@
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.chckPrice = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.chckUnloaded = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.chckSale = new System.Windows.Forms.CheckBox();
             this.btnEditAttribute = new System.Windows.Forms.Button();
@@ -99,7 +99,13 @@
             this.btPrint = new System.Windows.Forms.Button();
             this.btDel = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.сравнениеНаименованийТоваровToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbImageOnPage = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbGoodOnPage = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -126,20 +132,20 @@
             this.категорийToolStripMenuItem,
             this.категорийИГруппToolStripMenuItem});
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
-            this.справочникToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
             // 
             // категорийToolStripMenuItem
             // 
             this.категорийToolStripMenuItem.Name = "категорийToolStripMenuItem";
-            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.категорийToolStripMenuItem.Text = "Категорий";
             this.категорийToolStripMenuItem.Click += new System.EventHandler(this.категорийToolStripMenuItem_Click);
             // 
             // категорийИГруппToolStripMenuItem
             // 
             this.категорийИГруппToolStripMenuItem.Name = "категорийИГруппToolStripMenuItem";
-            this.категорийИГруппToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.категорийИГруппToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.категорийИГруппToolStripMenuItem.Text = "Категорий и групп";
             this.категорийИГруппToolStripMenuItem.Click += new System.EventHandler(this.категорийИГруппToolStripMenuItem_Click);
             // 
@@ -151,36 +157,43 @@
             this.отображаемыеНаФормеТоварыToolStripMenuItem,
             this.выгрузитьИзмененныеТоварыToolStripMenuItem});
             this.формированиеCSVToolStripMenuItem.Name = "формированиеCSVToolStripMenuItem";
-            this.формированиеCSVToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
+            this.формированиеCSVToolStripMenuItem.Size = new System.Drawing.Size(128, 20);
             this.формированиеCSVToolStripMenuItem.Text = "Формирование CSV";
             // 
             // выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem
             // 
             this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Name = "выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem";
-            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Text = "Выгрузить все доступные товары в файл";
             this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem.Click += new System.EventHandler(this.выгрузитьВсеДоступныеТоварыВФайлToolStripMenuItem_Click);
             // 
             // выгрузитьВыбранныеТоварыВФайлToolStripMenuItem
             // 
             this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Name = "выгрузитьВыбранныеТоварыВФайлToolStripMenuItem";
-            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Text = "Выгрузить выбранные товары в файл ";
             this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem.Click += new System.EventHandler(this.выгрузитьВыбранныеТоварыВФайлToolStripMenuItem_Click);
             // 
             // отображаемыеНаФормеТоварыToolStripMenuItem
             // 
             this.отображаемыеНаФормеТоварыToolStripMenuItem.Name = "отображаемыеНаФормеТоварыToolStripMenuItem";
-            this.отображаемыеНаФормеТоварыToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.отображаемыеНаФормеТоварыToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.отображаемыеНаФормеТоварыToolStripMenuItem.Text = "Отображаемые на форме товары";
             this.отображаемыеНаФормеТоварыToolStripMenuItem.Click += new System.EventHandler(this.отображаемыеНаФормеТоварыToolStripMenuItem_Click);
             // 
             // выгрузитьИзмененныеТоварыToolStripMenuItem
             // 
             this.выгрузитьИзмененныеТоварыToolStripMenuItem.Name = "выгрузитьИзмененныеТоварыToolStripMenuItem";
-            this.выгрузитьИзмененныеТоварыToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.выгрузитьИзмененныеТоварыToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.выгрузитьИзмененныеТоварыToolStripMenuItem.Text = "Выгрузить измененные товары";
             this.выгрузитьИзмененныеТоварыToolStripMenuItem.Click += new System.EventHandler(this.выгрузитьИзмененныеТоварыToolStripMenuItem_Click);
+            // 
+            // сравнениеНаименованийТоваровToolStripMenuItem
+            // 
+            this.сравнениеНаименованийТоваровToolStripMenuItem.Name = "сравнениеНаименованийТоваровToolStripMenuItem";
+            this.сравнениеНаименованийТоваровToolStripMenuItem.Size = new System.Drawing.Size(211, 20);
+            this.сравнениеНаименованийТоваровToolStripMenuItem.Text = "Сравнение наименований товаров";
+            this.сравнениеНаименованийТоваровToolStripMenuItem.Click += new System.EventHandler(this.сравнениеНаименованийТоваровToolStripMenuItem_Click);
             // 
             // Settings
             // 
@@ -189,35 +202,35 @@
             this.настройкиПроцентовToolStripMenuItem,
             this.настройкаВремениДатыДоставкиToolStripMenuItem});
             this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(73, 20);
+            this.Settings.Size = new System.Drawing.Size(79, 20);
             this.Settings.Text = "Настройки";
             this.Settings.Click += new System.EventHandler(this.Settings_Click);
             // 
             // настройкиCSVToolStripMenuItem
             // 
             this.настройкиCSVToolStripMenuItem.Name = "настройкиCSVToolStripMenuItem";
-            this.настройкиCSVToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.настройкиCSVToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.настройкиCSVToolStripMenuItem.Text = "Настройки CSV";
             this.настройкиCSVToolStripMenuItem.Click += new System.EventHandler(this.настройкиCSVToolStripMenuItem_Click);
             // 
             // настройкиПроцентовToolStripMenuItem
             // 
             this.настройкиПроцентовToolStripMenuItem.Name = "настройкиПроцентовToolStripMenuItem";
-            this.настройкиПроцентовToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.настройкиПроцентовToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.настройкиПроцентовToolStripMenuItem.Text = "Настройки процентов";
             this.настройкиПроцентовToolStripMenuItem.Click += new System.EventHandler(this.настройкиПроцентовToolStripMenuItem_Click);
             // 
             // настройкаВремениДатыДоставкиToolStripMenuItem
             // 
             this.настройкаВремениДатыДоставкиToolStripMenuItem.Name = "настройкаВремениДатыДоставкиToolStripMenuItem";
-            this.настройкаВремениДатыДоставкиToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.настройкаВремениДатыДоставкиToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.настройкаВремениДатыДоставкиToolStripMenuItem.Text = "Настройка времени даты доставки";
             this.настройкаВремениДатыДоставкиToolStripMenuItem.Click += new System.EventHandler(this.настройкаВремениДатыДоставкиToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -458,7 +471,7 @@
             // 
             this.chbUnable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chbUnable.AutoSize = true;
-            this.chbUnable.Location = new System.Drawing.Point(35, 511);
+            this.chbUnable.Location = new System.Drawing.Point(35, 510);
             this.chbUnable.Name = "chbUnable";
             this.chbUnable.Size = new System.Drawing.Size(107, 17);
             this.chbUnable.TabIndex = 28;
@@ -506,7 +519,7 @@
             // tsLabel
             // 
             this.tsLabel.Name = "tsLabel";
-            this.tsLabel.Size = new System.Drawing.Size(109, 17);
+            this.tsLabel.Size = new System.Drawing.Size(118, 17);
             this.tsLabel.Text = "toolStripStatusLabel1";
             // 
             // tbEan
@@ -585,7 +598,7 @@
             // 
             this.chckPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chckPrice.AutoSize = true;
-            this.chckPrice.Location = new System.Drawing.Point(173, 511);
+            this.chckPrice.Location = new System.Drawing.Point(173, 510);
             this.chckPrice.Name = "chckPrice";
             this.chckPrice.Size = new System.Drawing.Size(187, 17);
             this.chckPrice.TabIndex = 42;
@@ -598,29 +611,17 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(238)))), ((int)(((byte)(189)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(418, 509);
+            this.panel3.Location = new System.Drawing.Point(366, 509);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(19, 19);
             this.panel3.TabIndex = 38;
-            // 
-            // chckUnloaded
-            // 
-            this.chckUnloaded.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chckUnloaded.AutoSize = true;
-            this.chckUnloaded.Location = new System.Drawing.Point(441, 511);
-            this.chckUnloaded.Name = "chckUnloaded";
-            this.chckUnloaded.Size = new System.Drawing.Size(142, 17);
-            this.chckUnloaded.TabIndex = 43;
-            this.chckUnloaded.Text = "Не выгружены на сайт";
-            this.chckUnloaded.UseVisualStyleBackColor = true;
-            this.chckUnloaded.CheckedChanged += new System.EventHandler(this.chckUnloaded_CheckedChanged);
             // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(230)))), ((int)(((byte)(115)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(585, 509);
+            this.panel4.Location = new System.Drawing.Point(533, 509);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(19, 19);
             this.panel4.TabIndex = 39;
@@ -629,7 +630,7 @@
             // 
             this.chckSale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chckSale.AutoSize = true;
-            this.chckSale.Location = new System.Drawing.Point(609, 511);
+            this.chckSale.Location = new System.Drawing.Point(557, 510);
             this.chckSale.Name = "chckSale";
             this.chckSale.Size = new System.Drawing.Size(89, 17);
             this.chckSale.TabIndex = 44;
@@ -735,25 +736,94 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // сравнениеНаименованийТоваровToolStripMenuItem
+            // label5
             // 
-            this.сравнениеНаименованийТоваровToolStripMenuItem.Name = "сравнениеНаименованийТоваровToolStripMenuItem";
-            this.сравнениеНаименованийТоваровToolStripMenuItem.Size = new System.Drawing.Size(194, 20);
-            this.сравнениеНаименованийТоваровToolStripMenuItem.Text = "Сравнение наименований товаров";
-            this.сравнениеНаименованийТоваровToolStripMenuItem.Click += new System.EventHandler(this.сравнениеНаименованийТоваровToolStripMenuItem_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(393, 512);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(123, 13);
+            this.label5.TabIndex = 48;
+            this.label5.Text = "Не выгружены на сайт";
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Location = new System.Drawing.Point(13, 534);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(19, 19);
+            this.panel5.TabIndex = 38;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(40, 537);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(74, 13);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "нет картинки";
+            // 
+            // cmbImageOnPage
+            // 
+            this.cmbImageOnPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbImageOnPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbImageOnPage.FormattingEnabled = true;
+            this.cmbImageOnPage.Location = new System.Drawing.Point(818, 54);
+            this.cmbImageOnPage.Name = "cmbImageOnPage";
+            this.cmbImageOnPage.Size = new System.Drawing.Size(169, 21);
+            this.cmbImageOnPage.TabIndex = 50;
+            this.cmbImageOnPage.SelectionChangeCommitted += new System.EventHandler(this.CmbGoodOnPage_SelectionChangeCommitted);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(710, 58);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(102, 13);
+            this.label7.TabIndex = 49;
+            this.label7.Text = "Картинки на сайте";
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(719, 35);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.TabIndex = 49;
+            this.label8.Text = "Товары на сайте";
+            // 
+            // cmbGoodOnPage
+            // 
+            this.cmbGoodOnPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbGoodOnPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGoodOnPage.FormattingEnabled = true;
+            this.cmbGoodOnPage.Location = new System.Drawing.Point(818, 31);
+            this.cmbGoodOnPage.Name = "cmbGoodOnPage";
+            this.cmbGoodOnPage.Size = new System.Drawing.Size(169, 21);
+            this.cmbGoodOnPage.TabIndex = 50;
+            this.cmbGoodOnPage.SelectionChangeCommitted += new System.EventHandler(this.CmbGoodOnPage_SelectionChangeCommitted);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 577);
+            this.Controls.Add(this.cmbGoodOnPage);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cmbImageOnPage);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnEditAttribute);
             this.Controls.Add(this.btnAddTovars);
             this.Controls.Add(this.chckSale);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.chckUnloaded);
             this.Controls.Add(this.chckPrice);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.gbPriceChange);
             this.Controls.Add(this.btnViewOrders);
@@ -843,7 +913,6 @@
         private System.Windows.Forms.Button btChangePrice;
         private System.Windows.Forms.CheckBox chckPrice;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.CheckBox chckUnloaded;
         private System.Windows.Forms.DataGridViewTextBoxColumn cId_tovar;
         private System.Windows.Forms.DataGridViewTextBoxColumn cEan;
         private System.Windows.Forms.DataGridViewTextBoxColumn cName;
@@ -864,6 +933,13 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.ToolStripMenuItem настройкаВремениДатыДоставкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сравнениеНаименованийТоваровToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbImageOnPage;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbGoodOnPage;
     }
 }
 

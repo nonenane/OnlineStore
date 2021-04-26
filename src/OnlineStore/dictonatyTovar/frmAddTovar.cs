@@ -16,9 +16,10 @@ namespace OnlineStore.dictonatyTovar
     public partial class frmAddTovar : Form
     {
         public int id { set; private get; }
+        public bool isDopLogging { set; private get; }
         public DataRowView row { set; private get; }
         private bool isEdit = false;
-        private DataTable dtTemp;
+        private DataTable dtTemp, dtUseCategory, dtUseCategoryOld;
 
         private int id_tovar, id_otdel;
 
@@ -49,6 +50,7 @@ namespace OnlineStore.dictonatyTovar
 
         private void frmAddTovar_Load(object sender, EventArgs e)
         {
+            getUserCategory();
             if (id != 0)
             {
                 id_tovar = (int)row["id_Tovar"];
@@ -67,7 +69,7 @@ namespace OnlineStore.dictonatyTovar
                 old_actionPrice = (decimal)row["rcenaPromo"];
                 chbActive.Checked = old_isActive = (bool)row["isActive"];
                 init_combobox();
-                cmbParentCategory.SelectedValue = old_category = (int)row["id_Category"];
+                //cmbParentCategory.SelectedValue = old_category = (int)row["id_Category"];
                 tbEan.Enabled = false;
                 addTovarData();
                 if (tbEan.Text.Trim().Length == 4)
@@ -100,6 +102,20 @@ namespace OnlineStore.dictonatyTovar
         private void frmAddTovar_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = isEdit && MessageBox.Show(Config.centralText("На форме есть несохранёные данные.\nЗакрыть форму без сохранения данных?\n"), "Закрытие формы", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No;
+        }
+
+        private void getUserCategory()
+        {
+            dtUseCategory = Config.hCntMain.getGoodsVsCategory(id).Result;
+            dtUseCategoryOld = dtUseCategory.Copy();
+
+            if (dtUseCategory != null && dtUseCategory.Rows.Count > 0)
+            {
+                tbNameCategory.Text = "";
+                int npp = 1;
+                foreach (DataRow row in dtUseCategory.Rows)
+                    tbNameCategory.Text += $"{((npp++).ToString() + ".").PadLeft(4, ' ')} {row["cName"]}" + Environment.NewLine;
+            }
         }
 
         private void tbInt_KeyPress(object sender, KeyPressEventArgs e)
@@ -208,7 +224,7 @@ namespace OnlineStore.dictonatyTovar
             string shortname = tbShotName.Text.Trim();
             string fullName = tbFullName.Text.Trim();
             string shortDescription = tbShortDescription.Text.Trim();
-            int id_category = (int)cmbParentCategory.SelectedValue;
+            int id_category = 0;// (int)cmbParentCategory.SelectedValue;
             decimal rcena = decimal.Parse(tbPricePercent.Text);
             decimal? actionPrice = null;
             if (tbActionPrice.Text.Trim().Length > 0)
@@ -242,6 +258,19 @@ namespace OnlineStore.dictonatyTovar
 
             id = (int)task.Result.Rows[0]["id"];
 
+            if (dtUseCategoryOld.Rows.Count > 0)
+            {
+                var groupers = dtUseCategoryOld.AsEnumerable().Except(dtUseCategory.AsEnumerable(), DataRowComparer.Default);
+                foreach (DataRow row in groupers)
+                {
+                    DataTable dt = Config.hCntMain.setGoodsVsCategory((int)row["id"], id, (int)row["id_Category"]).Result;
+                }
+            }
+
+            foreach (DataRow row in dtUseCategory.Rows)
+            {
+                DataTable dt = Config.hCntMain.setGoodsVsCategory(null, id, (int)row["id_Category"]).Result;
+            }
 
             decimal MinOrder = 0;
             decimal MaxOrder = -1;
@@ -315,6 +344,9 @@ namespace OnlineStore.dictonatyTovar
                     && actionPrice == old_actionPrice && chbActive.Checked == old_isActive))
                 {
                     Logging.StartFirstLevel(36);
+                    if (isDopLogging)
+                        Logging.Comment("Произведено изменение наименований товаров с формы \"Сравнение наименований товаров\"");
+
                     Logging.Comment("Редактирование товара артикул: " + id_tovar);
                     Logging.Comment("EAN товара: " + tbEan.Text);
                     Logging.VariableChange("Короткое наименование товара", shortname, old_ShortName);
@@ -355,7 +387,8 @@ namespace OnlineStore.dictonatyTovar
             if (tbShotName.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Короткое наименование товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbShotName.Focus(); return false; }
             if (tbFullName.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Полное наименование товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbFullName.Focus(); return false; }
             if (tbShortDescription.Text.Trim().Length == 0) { MessageBox.Show("Необходимо заполнить \"Короткое описание товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); tbShortDescription.Focus(); return false; }
-            if (cmbParentCategory.SelectedIndex == -1 || cmbParentCategory.SelectedValue == null) { MessageBox.Show("Необходимо выбрать \"Категорию товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); cmbParentCategory.Focus(); return false; }
+            //if (cmbParentCategory.SelectedIndex == -1 || cmbParentCategory.SelectedValue == null)
+            if(dtUseCategory.Rows.Count==0){ MessageBox.Show("Необходимо выбрать \"Категорию товара\"!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Warning); cmbParentCategory.Focus(); return false; }
         
             /*if (tbActionPrice.Text.Trim().Length ==0)
             {
@@ -569,6 +602,19 @@ namespace OnlineStore.dictonatyTovar
         private void tbMinOrder_Leave(object sender, EventArgs e)
         {
            
+        }
+
+        private void BtAddCategory_Click(object sender, EventArgs e)
+        {
+            frmAddCategory fCat = new frmAddCategory() { id_tovar = id, id_deps = id_otdel, nameTovar = tbShotName.Text, dtUseCategory = dtUseCategory };
+            if (DialogResult.OK == fCat.ShowDialog())
+            {
+                dtUseCategory = fCat.dtUseCategory.Copy();
+                tbNameCategory.Text = "";
+                int npp = 1;
+                foreach (DataRow row in dtUseCategory.Rows)
+                    tbNameCategory.Text += $"{((npp++).ToString()+".").PadLeft(4, ' ')} {row["cName"]}" + Environment.NewLine;
+            }else dtUseCategory = fCat.dtUseCategory.Copy();
         }
 
         private void tbMinOrder_Validated(object sender, EventArgs e)

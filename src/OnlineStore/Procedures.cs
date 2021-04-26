@@ -54,7 +54,7 @@ namespace OnlineStore
             DataTable dtResult = executeProcedure("[OnlineStore].[getDicCategory]",
                  new string[1] { "@id_deps" },
                  new DbType[1] { DbType.Int32 }, ap);
-            dtResult.DefaultView.RowFilter = " isParent = 1";
+            //dtResult.DefaultView.RowFilter = " isParent = 1";
             return dtResult.DefaultView.ToTable();
         }
 
@@ -111,19 +111,20 @@ namespace OnlineStore
             return dtResult;
         }
 
-        public async Task<DataTable> getCategory(int id_deps)
+        public async Task<DataTable> getCategory(int id_deps,bool isAll = false)
         {
             ap.Clear();
             ap.Add(true);
             ap.Add(id_deps);
+            ap.Add(isAll);
 
             //if (UserSettings.User.StatusCode.ToLower().Equals("ркв"))
             //    ap.Add(UserSettings.User.IdDepartment);
             //else ap.Add(0);
 
             DataTable dtResult = executeProcedure("[OnlineStore].[getDataComboForCategory]",
-                 new string[2] { "@isCategory","@id_deps" },
-                 new DbType[2] { DbType.Boolean,DbType.Int32 }, ap);
+                 new string[3] { "@isCategory","@id_deps","@isAll" },
+                 new DbType[3] { DbType.Boolean,DbType.Int32,DbType.Boolean }, ap);
 
             return dtResult;
         }
@@ -583,6 +584,34 @@ namespace OnlineStore
             DataTable dtResult = executeProcedure("[OnlineStore].[UpdateGoodsName]",
                  new string[4] {"@id", "@ShortName", "@ShortDescription", "@FullName" },
                  new DbType[4] {DbType.Int32,DbType.String,DbType.String,DbType.String }, ap);
+
+            return dtResult;
+        }
+
+
+        public async Task<DataTable> getGoodsVsCategory(int id_goods)
+        {
+            ap.Clear();
+            ap.Add(id_goods);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getGoodsVsCategory]",
+                 new string[1] { "@id_goods" },
+                 new DbType[1] { DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> setGoodsVsCategory(int? id, int id_Goods,int id_Category)
+        {
+            ap.Clear();
+            ap.Add(id);
+            ap.Add(id_Goods);
+            ap.Add(id_Category);
+            ap.Add(UserSettings.User.Id);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setGoodsVsCategory]",
+                 new string[4] {"@id", "@id_Goods","@id_Category", "@idUser" },
+                 new DbType[4] { DbType.Int32, DbType.Int32 , DbType.Int32 , DbType.Int32 }, ap);
 
             return dtResult;
         }

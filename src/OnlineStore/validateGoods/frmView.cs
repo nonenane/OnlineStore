@@ -1,4 +1,5 @@
-﻿using Nwuram.Framework.Settings.User;
+﻿using Nwuram.Framework.Logging;
+using Nwuram.Framework.Settings.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -114,6 +115,10 @@ namespace OnlineStore.validateGoods
 
             Config.DoOnUIThread(delegate ()
             {
+                Logging.StartFirstLevel(1642);
+                Logging.Comment($"Количество записей товаров на форме:{(dtData == null ? 0 : dtData.Rows.Count)}");
+                Logging.StopFirstLevel();
+
                 dgvData.DataSource = dtData;
                 if (!this.Enabled)
                     this.Enabled = true;
@@ -289,6 +294,22 @@ namespace OnlineStore.validateGoods
                     blockers.SaveControlsEnabledState(this);
                     blockers.SetControlsEnabled(this, false);
                     progressBar1.Visible = true;
+
+                    Logging.StartFirstLevel(79);
+                    Logging.Comment("Произведена выгрузка отчета из формы \"Сравнение наименований товаров\" со следующими фильтрами:");
+                    Logging.Comment($"Отдел ID:{cmbDeps.SelectedValue}; Наименование:{cmbDeps.Text}");
+                    Logging.Comment($"Т/У группа ID:{cmbTU.SelectedValue}; Наименование:{cmbTU.Text}");
+                    Logging.Comment($"Инв. группа ID:{cmbInv.SelectedValue}; Наименование:{cmbInv.Text}");
+                    Logging.Comment($"Тип товара:{(rbAll.Checked ? rbAll.Text : rbSingle.Checked ? rbSingle.Text : rbMass.Text)}");
+                    if (tbEan.Text.Trim().Length > 0)
+                        Logging.Comment($"EAN:{tbEan.Text}");
+                    if (tbNameTerminal.Text.Trim().Length > 0)
+                        Logging.Comment($"Наименование товара на кассе:{tbNameTerminal.Text}");
+                    if (tbName.Text.Trim().Length > 0)
+                        Logging.Comment($"Короткое наименование товар на сайте:{tbName.Text}");
+
+                    Logging.StopFirstLevel();
+
                 }, this);
 
                 foreach (DataGridViewColumn col in dgvData.Columns)
@@ -377,6 +398,7 @@ namespace OnlineStore.validateGoods
                     report.SetBorders(indexRow, 1, indexRow, maxColumns);
                     report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
                     report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+                    report.SetWrapText(indexRow, 1, indexRow, maxColumns);
                     indexRow++;
                 }
                                    
@@ -387,7 +409,7 @@ namespace OnlineStore.validateGoods
                 }, this);
 
                 report.SetPageSetup(1, 9999, true);
-                report.Show();
+                report.ShowPreview();
                 return true;
             });
         }
@@ -436,7 +458,7 @@ namespace OnlineStore.validateGoods
                 row["ShortName"] = (string)task.Result.Rows[0]["cNameShort"];
                 row["ShortDescription"] = (string)task.Result.Rows[0]["cNameFull"];
                 row["FullName"] = (string)task.Result.Rows[0]["cNameFull"];
-                if (DialogResult.OK == new dictonatyTovar.frmAddTovar() { id = id, row = row, Text = "Редактирование товара" }.ShowDialog())
+                if (DialogResult.OK == new dictonatyTovar.frmAddTovar() { id = id, row = row, Text = "Редактирование товара",isDopLogging = true }.ShowDialog())
                 {
                     get_data();
                     return;
@@ -444,11 +466,11 @@ namespace OnlineStore.validateGoods
             }
             else if (rowCOllect.Count() > 1)
             {
-
+                Logging.StartFirstLevel(36);
                 foreach (DataRow row in rowCOllect)
                 {
-                    int id = (int)rowCOllect.First()["id"];
-                    string ean = (string)rowCOllect.First()["ean"];
+                    int id = (int)row["id"];
+                    string ean = (string)row["ean"];
 
                     Task<DataTable> task = Config.hCntMain.getGoods(ean);
                     task.Wait();
@@ -464,8 +486,14 @@ namespace OnlineStore.validateGoods
                         continue;
                     }
 
+                    Logging.Comment($"ID:{id}");
+                    Logging.Comment($"Короткое наименование товара:\"{task.Result.Rows[0]["cNameShort"]}\"");
+                    Logging.Comment($"Полное наименование товара:\"{task.Result.Rows[0]["cNameFull"]}\"");
+                    Logging.Comment($"Описание товара:\"{task.Result.Rows[0]["cNameFull"]}\"");
+
                     Config.hCntMain.UpdateGoodsName(id, (string)task.Result.Rows[0]["cNameShort"], (string)task.Result.Rows[0]["cNameFull"], (string)task.Result.Rows[0]["cNameFull"]).Wait();
                 }
+                Logging.StopFirstLevel();
                 MessageBox.Show("Данные сохранены", "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 get_data();
                 return;

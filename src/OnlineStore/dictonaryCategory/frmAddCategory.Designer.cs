@@ -46,7 +46,7 @@
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.Image = global::OnlineStore.Properties.Resources.filesave_2175;
-            this.btSave.Location = new System.Drawing.Point(467, 108);
+            this.btSave.Location = new System.Drawing.Point(455, 109);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 4;
@@ -57,7 +57,7 @@
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btClose.Image = global::OnlineStore.Properties.Resources.exit_8633;
-            this.btClose.Location = new System.Drawing.Point(505, 108);
+            this.btClose.Location = new System.Drawing.Point(493, 109);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 5;
@@ -162,7 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 144);
+            this.ClientSize = new System.Drawing.Size(537, 150);
             this.ControlBox = false;
             this.Controls.Add(this.chckIsUnload);
             this.Controls.Add(this.chckParentCategory);

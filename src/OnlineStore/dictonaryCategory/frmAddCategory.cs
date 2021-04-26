@@ -117,7 +117,8 @@ namespace OnlineStore.dictonaryCategory
 
 
 
-            dtCategory.DefaultView.Sort = " id_Departments asc, cName asc";
+            //dtCategory.DefaultView.Sort = " id_Departments asc, cName asc";
+            dtCategory.DefaultView.Sort = "cName asc";
 
             cmbParentCategory.DataSource = dtCategory;
             cmbParentCategory.DisplayMember = "cName";
@@ -181,6 +182,12 @@ namespace OnlineStore.dictonaryCategory
                 if ((int)task.Result.Rows[0]["id"] == -2)
                 {
                     MessageBox.Show(Config.centralText("Данная категория используется как родительская\nНельзя назначить родительскую категорию!.\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if ((int)task.Result.Rows[0]["id"] == -3)
+                {
+                    MessageBox.Show(Config.centralText("У родительской категории присутствуют товары\nСохранение невозможно!.\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
