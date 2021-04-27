@@ -187,6 +187,7 @@
     <Compile Include="frmWait.Designer.cs">
       <DependentUpon>frmWait.cs</DependentUpon>
     </Compile>
+    <Compile Include="NetworkShare\NetworkShare.cs" />
     <Compile Include="Procedures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -277,6 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-store-front-100.ico" />
+    <None Include="Resources\old-edit-find.png" />
     <Content Include="Windows Logo.png" />
     <None Include="Resources\TDXV.gif" />
     <None Include="Resources\btnChangePrice.jpg" />

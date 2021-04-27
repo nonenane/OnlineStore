@@ -19,6 +19,7 @@ namespace OnlineStoreViewOrders
         public int idtOrder { set; private get; }
 
         public string commentOrder = "";
+        public string nameOrder { set; private get; }
         public frmChangeStatus()
         {
             InitializeComponent();
@@ -35,12 +36,16 @@ namespace OnlineStoreViewOrders
             dtpDate.MaxDate = Config.connect.getDate().Date;
             dtpDate.Value= dateOrder.Date;
 
+            btDeliversMan.Visible = groupBox2.Visible = nextStatus == 3;
+
             if (nextStatus == 4)
             {
                 label1.Visible = label3.Visible = label4.Visible = false;
                 dtpDate.Visible = false;
                 tbSumma.Visible = false;
-                this.Size = new Size(265, 185);
+                this.Size = new Size(345, 205);
+                label2.Location = label1.Location;
+                tbComment.Location = new Point(label2.Location.X, label2.Location.Y + 16);
             }
 
             isEditData = false;
@@ -169,6 +174,12 @@ namespace OnlineStoreViewOrders
         private void tbKass_TextChanged(object sender, EventArgs e)
         {
             isEditData = true;
+        }
+
+        private void BtDeliversMan_Click(object sender, EventArgs e)
+        {
+            new TypeЕmployesОrder.frmListTypeЕmployesОrder() { id_order = idtOrder, nameOrder = nameOrder }.ShowDialog();
+
         }
     }
 }

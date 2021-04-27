@@ -615,5 +615,18 @@ namespace OnlineStore
 
             return dtResult;
         }
+
+        public async Task<DataTable> setPictureGood(int id_good,bool isPicture)
+        {
+            ap.Clear();
+            ap.Add(id_good);
+            ap.Add(isPicture);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setPictureGood]",
+                 new string[2] { "@id_good","@isPicture" },
+                 new DbType[2] { DbType.Int32, DbType.Int32 }, ap);
+
+            return dtResult;
+        }
     }
 }

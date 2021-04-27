@@ -129,7 +129,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1155, 582);
+            this.tabControl1.Size = new System.Drawing.Size(1151, 582);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPage1
@@ -144,7 +144,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1147, 556);
+            this.tabPage1.Size = new System.Drawing.Size(1143, 556);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Статистика";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -194,7 +194,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(952, 400);
+            this.tabPage4.Size = new System.Drawing.Size(932, 400);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Таблица";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -242,7 +242,7 @@
             this.dgvStatistic.ShowCellToolTips = false;
             this.dgvStatistic.ShowEditingIcon = false;
             this.dgvStatistic.ShowRowErrors = false;
-            this.dgvStatistic.Size = new System.Drawing.Size(946, 394);
+            this.dgvStatistic.Size = new System.Drawing.Size(926, 394);
             this.dgvStatistic.TabIndex = 26;
             // 
             // dataGridViewTextBoxColumn1
@@ -351,7 +351,7 @@
             this.dgvPeriod.ShowCellToolTips = false;
             this.dgvPeriod.ShowEditingIcon = false;
             this.dgvPeriod.ShowRowErrors = false;
-            this.dgvPeriod.Size = new System.Drawing.Size(561, 87);
+            this.dgvPeriod.Size = new System.Drawing.Size(557, 87);
             this.dgvPeriod.TabIndex = 27;
             this.dgvPeriod.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPeriod_RowPostPaint);
             this.dgvPeriod.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvPeriod_RowPrePaint);
@@ -416,7 +416,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.rbPeriod);
             this.groupBox3.Controls.Add(this.rbParamet);
-            this.groupBox3.Location = new System.Drawing.Point(954, 294);
+            this.groupBox3.Location = new System.Drawing.Point(950, 294);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(185, 77);
             this.groupBox3.TabIndex = 20;
@@ -461,7 +461,7 @@
             this.gLegends.Controls.Add(this.chbPriceDelivery);
             this.gLegends.Controls.Add(this.chbSumOrder);
             this.gLegends.Controls.Add(this.chbCountOrder);
-            this.gLegends.Location = new System.Drawing.Point(954, 124);
+            this.gLegends.Location = new System.Drawing.Point(950, 124);
             this.gLegends.Name = "gLegends";
             this.gLegends.Size = new System.Drawing.Size(185, 164);
             this.gLegends.TabIndex = 20;
@@ -586,7 +586,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Location = new System.Drawing.Point(495, 6);
+            this.groupBox1.Location = new System.Drawing.Point(491, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(644, 112);
             this.groupBox1.TabIndex = 20;
@@ -824,7 +824,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackColor = System.Drawing.Color.White;
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(1119, 595);
+            this.btnExit.Location = new System.Drawing.Point(1115, 588);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(32, 32);
             this.btnExit.TabIndex = 17;
@@ -845,7 +845,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1155, 631);
+            this.ClientSize = new System.Drawing.Size(1151, 627);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.tabControl1);

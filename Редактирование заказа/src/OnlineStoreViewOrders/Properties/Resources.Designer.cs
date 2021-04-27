@@ -193,6 +193,16 @@ namespace OnlineStoreViewOrders.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap save_edit {
+            get {
+                object obj = ResourceManager.GetObject("save_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SendToTerminal {
             get {
                 object obj = ResourceManager.GetObject("SendToTerminal", resourceCulture);
@@ -216,6 +226,16 @@ namespace OnlineStoreViewOrders.Properties {
         internal static System.Drawing.Bitmap x_office_spreadsheet {
             get {
                 object obj = ResourceManager.GetObject("x-office-spreadsheet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap x_office_spreadsheet1 {
+            get {
+                object obj = ResourceManager.GetObject("x-office-spreadsheet1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

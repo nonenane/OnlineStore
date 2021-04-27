@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OnlineStoreViewOrders;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Net;
+using System.Diagnostics;
 
 namespace OnlineStore
 {
@@ -23,10 +25,10 @@ namespace OnlineStore
 
         //возврат сортировки после обновления
         private string columnFilter;
-        private Dictionary<bool,string> dSort = new Dictionary<bool, string>() { { true," asc" }, {false, " desc" } };
+        private Dictionary<bool, string> dSort = new Dictionary<bool, string>() { { true, " asc" }, { false, " desc" } };
         private bool typeSort = true;
         private Point currentRow;
-        
+
 
         public frmMain()
         {
@@ -46,6 +48,8 @@ namespace OnlineStore
             ttButton.SetToolTip(btChangePrice, "Обновить цены");
             ttButton.SetToolTip(btnAddTovars, "Добавить товары");
             ttButton.SetToolTip(btnEditAttribute, "Редактировать атрибуты");
+            ttButton.SetToolTip(btViewImage, "Просмотр картинки");
+
             tsLabel.Text = Nwuram.Framework.Settings.Connection.ConnectionSettings.GetServer() + " " +
                 Nwuram.Framework.Settings.Connection.ConnectionSettings.GetDatabase();
             this.Text = Nwuram.Framework.Settings.Connection.ConnectionSettings.ProgramName + " - " + Nwuram.Framework.Settings.User.UserSettings.User.FullUsername;
@@ -75,7 +79,7 @@ namespace OnlineStore
 
         private void setEnabledPR()
         {
-            gbPriceChange.Enabled = btDel.Enabled = btAdd.Enabled = btEdit.Enabled = btnAddTovars.Enabled = btnEditAttribute.Enabled = 
+            gbPriceChange.Enabled = btDel.Enabled = btAdd.Enabled = btEdit.Enabled = btnAddTovars.Enabled = btnEditAttribute.Enabled =
                menuStrip1.Enabled = false;
         }
 
@@ -236,7 +240,7 @@ namespace OnlineStore
                 row["cName"] = "";
                 row["isActive"] = 1;
                 row["isParent"] = 0;
-               
+
                 dtCategory.Rows.InsertAt(row, 0);
                 dtCategory.DefaultView.RowFilter = "isActive = 1 and isParent = 0";
                 //dtCategory.DefaultView.Sort = "id ASC";
@@ -285,11 +289,11 @@ namespace OnlineStore
 
             //место для ean
             tbEan.Location = new Point(dgvData.Location.X + cId_tovar.Width, tbEan.Location.Y);
-            tbEan.Size = new Size(cEan.Width-3, tbEan.Height);
+            tbEan.Size = new Size(cEan.Width - 3, tbEan.Height);
 
         }
 
-        private void btAdd_Click(object sender, EventArgs e)
+        private async void btAdd_Click(object sender, EventArgs e)
         {
             if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
             {
@@ -304,10 +308,6 @@ namespace OnlineStore
                     dialog.Multiselect = false;
                     if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
-                        //if (!validateFileAndFolder(dialog.FileName)) return;
-
-                        //btSave.Enabled = true;
-                        //tbPath.Text = dialog.FileName;
                         string folderName = dialog.FileName;
                         List<string> fileHead = new List<string>();
 
@@ -325,33 +325,51 @@ namespace OnlineStore
                             }
                         }
 
+                        NetworkShare net = new NetworkShare(true);
+
 
                         int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
                         string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
 
                         if (!ean.Equals(Path.GetFileNameWithoutExtension(folderName)))
                         {
-                            Console.WriteLine(Path.GetFileNameWithoutExtension(folderName));
+                            MessageBox.Show(Config.centralText("Имя выбранного файла не соответствует EAN товара.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
 
                         if (png.Except(fileHead).Any())
-                        {                            
-                            Console.WriteLine("Это не png");
+                        {
+                            MessageBox.Show(Config.centralText("Выбранный файл не соответствует формату PNG.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
 
-
+                        /*
                         Image image1 = Image.FromFile(folderName);
                         int width = 800;
                         int height = 800;
 
                         if (image1.Width != width && image1.Height != height)
                         {
-                            Console.WriteLine("Размерчик не тот");
+                            MessageBox.Show(Config.centralText($"Выбранный файл не соответствует разрешению {width}x{height}.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                            
                             return;
                         }
+                        */
 
+                        net.CopyFile(folderName);
+
+                        //using (var client = new WebClient())
+                        //{
+                        //    string ftpUsername = "";
+                        //    string ftpPassword = "";
+                        //    client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                        //    //client.DownloadFile()
+                        //    client.UploadFile("ftp://host//"+$"{Path.GetFileName(folderName)}", WebRequestMethods.Ftp.UploadFile, folderName);
+                        //}
+
+                        await Config.hCntMain.setPictureGood(id, true);
+                        dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"] = true;
+                        dgvData_SelectionChanged(null, null);
+                        dgvData.Refresh();
                     }
                     return;
                 }
@@ -372,30 +390,30 @@ namespace OnlineStore
                 if (!(bool)dtData.DefaultView[e.RowIndex]["isActive"])
                     rColor = panel1.BackColor;
                 //else if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"] )
-                 //   rColor = Color.FromArgb(153, 217, 234);
-                else if (dtData.DefaultView[e.RowIndex]["rcenaOnline"].ToString() != (Math.Truncate(((decimal)dtData.DefaultView[e.RowIndex]["rcena"] * (100 + (decimal) dtData.DefaultView[e.RowIndex]["MarkUpPercent"]) / 100) * 100) / 100).ToString("0.00"))
+                //   rColor = Color.FromArgb(153, 217, 234);
+                else if (dtData.DefaultView[e.RowIndex]["rcenaOnline"].ToString() != (Math.Truncate(((decimal)dtData.DefaultView[e.RowIndex]["rcena"] * (100 + (decimal)dtData.DefaultView[e.RowIndex]["MarkUpPercent"]) / 100) * 100) / 100).ToString("0.00"))
                     rColor = panel2.BackColor;
                 if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"])
-                      rColor = Color.FromArgb(153, 217, 234);
+                    rColor = Color.FromArgb(153, 217, 234);
 
-               
+
 
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.BackColor = rColor;
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = rColor;
                 dgvData.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
 
-                if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"] && dtData.DefaultView[e.RowIndex]["rcenaOnline"].ToString() != (Math.Truncate(((decimal)dtData.DefaultView[e.RowIndex]["rcena"] * (100 + (decimal) dtData.DefaultView[e.RowIndex]["MarkUpPercent"]) / 100) * 100) / 100).ToString("0.00"))
+                if ((bool)dtData.DefaultView[e.RowIndex]["isSelect"] && dtData.DefaultView[e.RowIndex]["rcenaOnline"].ToString() != (Math.Truncate(((decimal)dtData.DefaultView[e.RowIndex]["rcena"] * (100 + (decimal)dtData.DefaultView[e.RowIndex]["MarkUpPercent"]) / 100) * 100) / 100).ToString("0.00"))
                 {
 
                     dgvData.Rows[e.RowIndex].Cells["cRcenaOnline"].Style.BackColor =
                         dgvData.Rows[e.RowIndex].Cells["cRcenaOnline"].Style.SelectionBackColor = panel2.BackColor;
                 }
-                if (dtData.DefaultView[e.RowIndex]["isInsert"].ToString()=="0")
+                if (dtData.DefaultView[e.RowIndex]["isInsert"].ToString() == "0")
                 {
                     dgvData.Rows[e.RowIndex].Cells["cName"].Style.BackColor =
                         dgvData.Rows[e.RowIndex].Cells["cName"].Style.SelectionBackColor = panel3.BackColor;
                 }
-                if (dtData.DefaultView[e.RowIndex]["rcenaPromo_str"].ToString().Length>0)
+                if (dtData.DefaultView[e.RowIndex]["rcenaPromo_str"].ToString().Length > 0)
                 {
                     dgvData.Rows[e.RowIndex].Cells["cRcenaOnlineAction"].Style.BackColor =
                         dgvData.Rows[e.RowIndex].Cells["cRcenaOnlineAction"].Style.SelectionBackColor = panel4.BackColor;
@@ -444,23 +462,37 @@ namespace OnlineStore
             {
                 btDel.Enabled = false;
                 btEdit.Enabled = false;
+                btAdd.Enabled = !new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode);
+                btViewImage.Enabled = false;
                 return;
             }
 
-            btDel.Enabled = true && (UserSettings.User.StatusCode.ToLower()!="пр");
-            btEdit.Enabled = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isActive"] && (UserSettings.User.StatusCode.ToLower() != "пр");
-            if (dgvData.CurrentCellAddress!= new Point (0,0))
-                currentRow = dgvData.CurrentCellAddress;
+            if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
+            {
+
+                btDel.Enabled = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"];
+                btEdit.Enabled = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"];
+                btAdd.Enabled = !(bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"];
+                btViewImage.Enabled = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"];
+            }
+            else
+            {
+                btDel.Enabled = true && (UserSettings.User.StatusCode.ToLower() != "пр");
+                btEdit.Enabled = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isActive"] && (UserSettings.User.StatusCode.ToLower() != "пр");
+                btViewImage.Enabled = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"];
+                if (dgvData.CurrentCellAddress != new Point(0, 0))
+                    currentRow = dgvData.CurrentCellAddress;
+            }
         }
 
         private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dtData != null && dtData.Rows.Count > 0 && dtData.DefaultView.Count > 0 && e.RowIndex != -1)
             {
-              
-                    dtData.DefaultView[e.RowIndex]["isSelect"] = !(bool)dtData.DefaultView[e.RowIndex]["isSelect"];
-                   // dtData.AcceptChanges();
-                
+
+                dtData.DefaultView[e.RowIndex]["isSelect"] = !(bool)dtData.DefaultView[e.RowIndex]["isSelect"];
+                // dtData.AcceptChanges();
+
             }
         }
 
@@ -469,10 +501,67 @@ namespace OnlineStore
             if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
             {
                 int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
+                string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
 
                 if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
                 {
-                    return;
+                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                    dialog.Filters.Add(new CommonFileDialogFilter("PNG Files", "*.png"));
+
+                    dialog.IsFolderPicker = false;
+                    dialog.EnsureFileExists = true;
+                    dialog.Multiselect = false;
+                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                    {
+                        string folderName = dialog.FileName;
+                        List<string> fileHead = new List<string>();
+
+                        List<string> jpg = new List<string> { "FF", "D8" };
+                        List<string> bmp = new List<string> { "42", "4D" };
+                        List<string> gif = new List<string> { "47", "49", "46" };
+                        List<string> png = new List<string> { "89", "50", "4E", "47", "0D", "0A", "1A", "0A" };
+
+                        using (FileStream stream = File.OpenRead(folderName))
+                        {
+                            for (int i = 0; i < 8; i++)
+                            {
+                                string bit = stream.ReadByte().ToString("X2");
+                                fileHead.Add(bit);
+                            }
+                        }
+
+                        NetworkShare net = new NetworkShare(true);
+                        
+
+
+                        if (!ean.Equals(Path.GetFileNameWithoutExtension(folderName)))
+                        {
+                            MessageBox.Show(Config.centralText("Имя выбранного файла не соответствует EAN товара.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+
+                        if (png.Except(fileHead).Any())
+                        {
+                            MessageBox.Show(Config.centralText("Выбранный файл не соответствует формату PNG.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+
+                        /*
+                        Image image1 = Image.FromFile(folderName);
+                        int width = 800;
+                        int height = 800;
+
+                        if (image1.Width != width && image1.Height != height)
+                        {
+                            MessageBox.Show(Config.centralText($"Выбранный файл не соответствует разрешению {width}x{height}.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                            
+                            return;
+                        }
+                        */
+
+                        net.CopyFile(folderName);
+
+                        return;
+                    }
                 }
                 else if (DialogResult.OK == new dictonatyTovar.frmAddTovar() { id = id, row = dtData.DefaultView[dgvData.SelectedRows[0].Index], Text = "Редактирование товара" }.ShowDialog())
                     get_data();
@@ -494,16 +583,16 @@ namespace OnlineStore
             {
                 id_otdel = (int)cmbDeps.SelectedValue;
             });
-            
-            Task<DataTable> task = (UserSettings.User.StatusCode == "РКВ" ? Config.hCntMain.getListGoods(id_otdel) :  Config.hCntMain.getListGoods(0));
+
+            Task<DataTable> task = (UserSettings.User.StatusCode == "РКВ" ? Config.hCntMain.getListGoods(id_otdel) : Config.hCntMain.getListGoods(0));
             task.Wait();
             dtData = task.Result;
-            dtData.Columns.Add("BasicPricePrecent",typeof(decimal));
+            dtData.Columns.Add("BasicPricePrecent", typeof(decimal));
             foreach (DataRow dr in dtData.Rows)
             {
-                dr["BasicPricePrecent"] = (Math.Truncate(((decimal)dr["rcena"] * (100 + (decimal) dr["MarkUpPercent"]) / 100) * 100) / 100).ToString("0.00");
+                dr["BasicPricePrecent"] = (Math.Truncate(((decimal)dr["rcena"] * (100 + (decimal)dr["MarkUpPercent"]) / 100) * 100) / 100).ToString("0.00");
             }
-           
+
             setFilter();
             DoOnUIThread(delegate ()
             {
@@ -513,15 +602,15 @@ namespace OnlineStore
                     //dtData = dtData.DefaultView.ToTable();
                 }
                 dgvData.DataSource = dtData;
-                
-              /*  if (currentRow != null)
-                {
-                    if (dtData.DefaultView.Count > 0)
-                        dgvData.Rows[0].Selected = false;
-                    if (currentRow.Y < dtData.DefaultView.Count)
-                        dgvData.Rows[currentRow.Y].Selected = true;
-                    
-                }*/
+
+                /*  if (currentRow != null)
+                  {
+                      if (dtData.DefaultView.Count > 0)
+                          dgvData.Rows[0].Selected = false;
+                      if (currentRow.Y < dtData.DefaultView.Count)
+                          dgvData.Rows[currentRow.Y].Selected = true;
+
+                  }*/
             });
 
             DoOnUIThread(delegate () { this.Enabled = true; });
@@ -559,7 +648,7 @@ namespace OnlineStore
 
                     if (cmbDeps.SelectedValue != null && (int)cmbDeps.SelectedValue != 0)
                         filter += (filter.Length == 0 ? "" : " and ") + $"id_otdel = {cmbDeps.SelectedValue}";
-                     int stock;
+                    int stock;
                     if (tbStock.Text.Trim().Length > 0)
                     {
                         if (int.TryParse(tbStock.Text, out stock))
@@ -569,7 +658,7 @@ namespace OnlineStore
                     {
                         //Int64 ean;
                         //if (Int64.TryParse(tbEan.Text, out ean))
-                            filter += (filter.Length == 0 ? "" : " and ") + $"ean like '%{tbEan.Text.Trim()}%'";
+                        filter += (filter.Length == 0 ? "" : " and ") + $"ean like '%{tbEan.Text.Trim()}%'";
                     }
                     if (chckPrice.Checked)
                     {
@@ -609,7 +698,7 @@ namespace OnlineStore
             setFilter();
         }
 
-        private void btDel_Click(object sender, EventArgs e)
+        private async void btDel_Click(object sender, EventArgs e)
         {
             if (dtData == null || dtData.Rows.Count == 0 || dtData.DefaultView.Count == 0) return;
 
@@ -617,10 +706,22 @@ namespace OnlineStore
             {
                 if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
                 {
-                    int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
 
+                    if (DialogResult.No == MessageBox.Show("Удалить у выбранного товара картинку?", "Удаление картинки у товара", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
+
+                    int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
+                    string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
+
+                    NetworkShare net = new NetworkShare(true);
+                    net.RemoveFile($"{ean}.png");
+
+                    await Config.hCntMain.setPictureGood(id, false);
+
+                    dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"] = false;
+                    dgvData_SelectionChanged(null, null);
+                    dgvData.Refresh();
                 }
-                return; 
+                return;
             }
             else
             {
@@ -736,14 +837,14 @@ namespace OnlineStore
                 case 1585: Logging.Comment("Перевод товара в недействующие"); end = "недействующие"; break;
                 case 1586: Logging.Comment("Перевод товара в действующие"); end = "действующие"; break;
             }
-          
+
             int id_tovar = (int)dr["id_tovar"];
             string fullname = dr["FullName"].ToString();
             string shortname = dr["ShortName"].ToString();
             string id_category = dr["id_Category"].ToString();
             string name_category = dr["nameCategory"].ToString();
             decimal rcena = (decimal)dr["rcena"];
-            decimal rcenaOnline = (decimal) dr["rcenaOnline"];
+            decimal rcenaOnline = (decimal)dr["rcenaOnline"];
             string rcenaOld = dr["rcenaPromo"].ToString();
             string minOrder = dr["MinOrder"].ToString();
             string maxOrder = dr["MaxOrder"].ToString();
@@ -879,7 +980,7 @@ namespace OnlineStore
                 {
                     tableToCsv.insertData(dtLoad.DefaultView.ToTable().Copy(), folderName, true);
                     MessageBox.Show("Выгрузка завершена!", "Информирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                 }
                 catch
                 {
@@ -900,7 +1001,7 @@ namespace OnlineStore
                     strTovars += dr["ShortDescription"].ToString();
                 Logging.Comment(strTovars);
                 if (Config.ImageTovar)
-                    Logging.Comment("С картинкой по товару");            
+                    Logging.Comment("С картинкой по товару");
                 else
                     Logging.Comment("Без картинки");
                 Logging.Comment($"Размер файла: {Config.sizeCSV}");
@@ -919,7 +1020,7 @@ namespace OnlineStore
             {
                 DateTime dateSelect = frmSelectData.date;
                 EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
-               .Where(r => r.Field<DateTime>("DateEdit").Date >= dateSelect.Date && r.Field<bool>("isActive") && r.Field<bool>("isUnload")==true);
+               .Where(r => r.Field<DateTime>("DateEdit").Date >= dateSelect.Date && r.Field<bool>("isActive") && r.Field<bool>("isUnload") == true);
 
                 if (rowCollect.Count() > 0)
                 {
@@ -948,7 +1049,7 @@ namespace OnlineStore
                             strTovars += dr["ShortDescription"].ToString();
                         Logging.Comment(strTovars);
                         if (Config.ImageTovar)
-                            Logging.Comment("С картинкой по товару");                      
+                            Logging.Comment("С картинкой по товару");
                         else
                             Logging.Comment("Без картинки");
                         Logging.Comment($"Размер файла: {Config.sizeCSV}");
@@ -1005,10 +1106,10 @@ namespace OnlineStore
                             $"{dr["ShortDescription"].ToString()};";
                         dr["isSelect"] = false;
                     }
-                    
+
                     Logging.Comment(strTovars);
                     if (Config.ImageTovar)
-                        Logging.Comment("С картинкой по товару");                 
+                        Logging.Comment("С картинкой по товару");
                     else
                         Logging.Comment("Без картинки");
                     Logging.Comment($"Размер файла: {Config.sizeCSV}");
@@ -1054,7 +1155,7 @@ namespace OnlineStore
                         strTovars += dr["ShortDescription"].ToString();
                     Logging.Comment(strTovars);
                     if (Config.ImageTovar)
-                        Logging.Comment("С картинкой по товару");                  
+                        Logging.Comment("С картинкой по товару");
                     else
                         Logging.Comment("Без картинки");
                     Logging.Comment($"Размер файла: {Config.sizeCSV}");
@@ -1079,8 +1180,8 @@ namespace OnlineStore
 
         private void Settings_Click(object sender, EventArgs e)
         {
-           // frmSettings settings = new frmSettings();
-           // settings.ShowDialog();
+            // frmSettings settings = new frmSettings();
+            // settings.ShowDialog();
         }
 
         private void tbStock_TextChanged(object sender, EventArgs e)
@@ -1090,21 +1191,21 @@ namespace OnlineStore
 
         private void dgvData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           if (e.RowIndex==-1)
+            if (e.RowIndex == -1)
             {
                 if (columnFilter != dgvData.Columns[e.ColumnIndex].DataPropertyName)
                 {
                     columnFilter = dgvData.Columns[e.ColumnIndex].DataPropertyName;
-                    typeSort = true ;
+                    typeSort = true;
                 }
                 else
                 {
                     typeSort = false;
                 }
 
-              
+
             }
-          //  Console.WriteLine(dtData.DefaultView[dgvData.CurrentRow.Index]["BasicPricePrecent"].ToString());
+            //  Console.WriteLine(dtData.DefaultView[dgvData.CurrentRow.Index]["BasicPricePrecent"].ToString());
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -1126,7 +1227,7 @@ namespace OnlineStore
         private void btChangePrice_Click(object sender, EventArgs e)
         {
 
-            if (DialogResult.Yes==MessageBox.Show("Обновить цены?","Подтверждение",MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Обновить цены?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 if (rbAll.Checked)
                 {
@@ -1138,7 +1239,7 @@ namespace OnlineStore
                 {
                     EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable()
                         .Where(r => r.Field<bool>("isSelect"));
-                    if (rowCollect.Count()>0)
+                    if (rowCollect.Count() > 0)
                     {
                         ChangePrice(rowCollect.CopyToDataTable());
                         get_data();
@@ -1157,7 +1258,7 @@ namespace OnlineStore
 
         private void ChangePriceDepartment()
         {
-            int id_dep = (int) cmbDeps.SelectedValue;
+            int id_dep = (int)cmbDeps.SelectedValue;
             Task<DataTable> task;
             task = Config.hCntMain.UpdatePrice(id_dep);
             task.Wait();
@@ -1205,7 +1306,7 @@ namespace OnlineStore
             if (rbView.Checked)
                 Logging.Comment("Обновление видимых товаров");
             Logging.Comment("Обновление цен для распродажи: " + Config.isSale.ToString());
-      
+
             foreach (DataRow row in dtGoods.Rows)
             {
                 Logging.Comment("ID: " + row["id_tovar"].ToString() + "; ean: " + row["ean"].ToString() + $", процент наценки: {row["MarkUpPercent"].ToString()}, процент распродажи: {row["SalePercent"].ToString()}");
@@ -1260,7 +1361,7 @@ namespace OnlineStore
         {
             frmPercents frm = new frmPercents();
             frm.ShowDialog();
-            if (frm.lChanged) 
+            if (frm.lChanged)
                 get_data();
         }
 
@@ -1292,7 +1393,7 @@ namespace OnlineStore
             this.Close();
         }
 
-        private  void настройкаВремениДатыДоставкиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void настройкаВремениДатыДоставкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmSettingsTimeDelivery().ShowDialog();
         }
@@ -1305,6 +1406,70 @@ namespace OnlineStore
         private void CmbGoodOnPage_SelectionChangeCommitted(object sender, EventArgs e)
         {
             setFilter();
+        }
+
+        private void DgvData_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex != -1)
+            {
+                DataGridView dgv = (DataGridView)sender;
+                dgv.CurrentCell = dgv[e.ColumnIndex, e.RowIndex];
+                contextMenuStrip1.Show(MousePosition);
+            }
+        }
+
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (!new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode)) { e.Cancel = true; return; }
+
+            DataRowView row = dtData.DefaultView[dgvData.CurrentRow.Index];
+
+            просмотретьИзображениеТовараToolStripMenuItem.Enabled = (bool)row["isPicture"];
+        }
+
+        private void BtViewImage_Click(object sender, EventArgs e)
+        {
+            if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
+            {
+                string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
+
+                NetworkShare net = new NetworkShare(true);
+                Image img = null;
+                try
+                {
+                    byte[] byteImg = net.GetFileBytes($"{ean}.png");
+                    if (byteImg == null) return;
+
+                    using (var ms = new MemoryStream(byteImg))
+                    {
+                        img = Image.FromStream(ms);
+                        if (!Directory.Exists(Application.StartupPath + $"\\tmp"))
+                            Directory.CreateDirectory(Application.StartupPath + $"\\tmp");
+
+                        string dirFile = Application.StartupPath + $"\\tmp\\{ean}.png";
+
+                        img.Save(dirFile);
+                        try
+                        {
+                            Process.Start(dirFile);
+                        }
+                        catch
+                        {
+                            MessageBox.Show(Config.centralText("Программа не может запустить программу\nпросмотра изображения товара изза её отсутствия.\nПросмотр изображения товара невозможно.\nОбратитесь в ОЭЭС.\n"), "Просмотр изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private void ПросмотретьИзображениеТовараToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BtViewImage_Click(null, null);
         }
     }
 }

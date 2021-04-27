@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +83,6 @@
             this.tsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tbEan = new System.Windows.Forms.TextBox();
             this.gbPriceChange = new System.Windows.Forms.GroupBox();
-            this.btChangePrice = new System.Windows.Forms.Button();
             this.rbSelected = new System.Windows.Forms.RadioButton();
             this.rbView = new System.Windows.Forms.RadioButton();
             this.rbAll = new System.Windows.Forms.RadioButton();
@@ -90,15 +90,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.chckSale = new System.Windows.Forms.CheckBox();
-            this.btnEditAttribute = new System.Windows.Forms.Button();
-            this.btnAddTovars = new System.Windows.Forms.Button();
-            this.btnViewOrders = new System.Windows.Forms.Button();
-            this.btUpdate = new System.Windows.Forms.Button();
-            this.btAdd = new System.Windows.Forms.Button();
-            this.btEdit = new System.Windows.Forms.Button();
-            this.btPrint = new System.Windows.Forms.Button();
-            this.btDel = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -106,10 +97,24 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbGoodOnPage = new System.Windows.Forms.ComboBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.просмотретьИзображениеТовараToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btViewImage = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnEditAttribute = new System.Windows.Forms.Button();
+            this.btnAddTovars = new System.Windows.Forms.Button();
+            this.btChangePrice = new System.Windows.Forms.Button();
+            this.btnViewOrders = new System.Windows.Forms.Button();
+            this.btUpdate = new System.Windows.Forms.Button();
+            this.btAdd = new System.Windows.Forms.Button();
+            this.btEdit = new System.Windows.Forms.Button();
+            this.btPrint = new System.Windows.Forms.Button();
+            this.btDel = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.gbPriceChange.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -138,14 +143,14 @@
             // категорийToolStripMenuItem
             // 
             this.категорийToolStripMenuItem.Name = "категорийToolStripMenuItem";
-            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.категорийToolStripMenuItem.Text = "Категорий";
             this.категорийToolStripMenuItem.Click += new System.EventHandler(this.категорийToolStripMenuItem_Click);
             // 
             // категорийИГруппToolStripMenuItem
             // 
             this.категорийИГруппToolStripMenuItem.Name = "категорийИГруппToolStripMenuItem";
-            this.категорийИГруппToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.категорийИГруппToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.категорийИГруппToolStripMenuItem.Text = "Категорий и групп";
             this.категорийИГруппToolStripMenuItem.Click += new System.EventHandler(this.категорийИГруппToolStripMenuItem_Click);
             // 
@@ -320,14 +325,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cId_tovar,
@@ -348,6 +353,7 @@
             this.dgvData.TabIndex = 27;
             this.dgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellClick);
             this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
+            this.dgvData.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvData_CellMouseClick);
             this.dgvData.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvData_RowPostPaint);
             this.dgvData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvData_RowPrePaint);
             this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
@@ -356,8 +362,8 @@
             // cId_tovar
             // 
             this.cId_tovar.DataPropertyName = "id_Tovar";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cId_tovar.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cId_tovar.DefaultCellStyle = dataGridViewCellStyle11;
             this.cId_tovar.FillWeight = 50.04749F;
             this.cId_tovar.HeaderText = "Артикул товара ";
             this.cId_tovar.Name = "cId_tovar";
@@ -366,8 +372,8 @@
             // cEan
             // 
             this.cEan.DataPropertyName = "ean";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cEan.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cEan.DefaultCellStyle = dataGridViewCellStyle12;
             this.cEan.FillWeight = 73.74648F;
             this.cEan.HeaderText = "EAN";
             this.cEan.Name = "cEan";
@@ -392,8 +398,8 @@
             // cCountOnline
             // 
             this.cCountOnline.DataPropertyName = "countOnlineSell";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cCountOnline.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cCountOnline.DefaultCellStyle = dataGridViewCellStyle13;
             this.cCountOnline.FillWeight = 105.5929F;
             this.cCountOnline.HeaderText = "Он-лайн продажи товара";
             this.cCountOnline.Name = "cCountOnline";
@@ -402,8 +408,8 @@
             // сMoveNow
             // 
             this.сMoveNow.DataPropertyName = "moveNow";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.сMoveNow.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.сMoveNow.DefaultCellStyle = dataGridViewCellStyle14;
             this.сMoveNow.FillWeight = 105.5929F;
             this.сMoveNow.HeaderText = "Движение товара за сегодня";
             this.сMoveNow.Name = "сMoveNow";
@@ -412,8 +418,8 @@
             // cOstNow
             // 
             this.cOstNow.DataPropertyName = "ostNow";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cOstNow.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cOstNow.DefaultCellStyle = dataGridViewCellStyle15;
             this.cOstNow.FillWeight = 105.5929F;
             this.cOstNow.HeaderText = "Остаток товара в магазине на К21";
             this.cOstNow.Name = "cOstNow";
@@ -422,8 +428,8 @@
             // cRcena
             // 
             this.cRcena.DataPropertyName = "rcena";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cRcena.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cRcena.DefaultCellStyle = dataGridViewCellStyle16;
             this.cRcena.FillWeight = 105.5929F;
             this.cRcena.HeaderText = "Цена продажи";
             this.cRcena.Name = "cRcena";
@@ -432,8 +438,8 @@
             // cRcenaOnline
             // 
             this.cRcenaOnline.DataPropertyName = "rcenaOnline";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cRcenaOnline.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cRcenaOnline.DefaultCellStyle = dataGridViewCellStyle17;
             this.cRcenaOnline.FillWeight = 105.5929F;
             this.cRcenaOnline.HeaderText = "Цена продажи он-лайн";
             this.cRcenaOnline.Name = "cRcenaOnline";
@@ -442,8 +448,8 @@
             // cRcenaOnlineAction
             // 
             this.cRcenaOnlineAction.DataPropertyName = "rcenaPromo";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cRcenaOnlineAction.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cRcenaOnlineAction.DefaultCellStyle = dataGridViewCellStyle18;
             this.cRcenaOnlineAction.FillWeight = 105.5929F;
             this.cRcenaOnlineAction.HeaderText = "Старая цена для распродажи";
             this.cRcenaOnlineAction.Name = "cRcenaOnlineAction";
@@ -546,18 +552,6 @@
             this.gbPriceChange.Text = "Обновление цены";
             this.gbPriceChange.Enter += new System.EventHandler(this.gbPriceChange_Enter);
             // 
-            // btChangePrice
-            // 
-            this.btChangePrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btChangePrice.Enabled = false;
-            this.btChangePrice.Image = global::OnlineStore.Properties.Resources.btnChangePrice;
-            this.btChangePrice.Location = new System.Drawing.Point(191, 44);
-            this.btChangePrice.Name = "btChangePrice";
-            this.btChangePrice.Size = new System.Drawing.Size(32, 32);
-            this.btChangePrice.TabIndex = 42;
-            this.btChangePrice.UseVisualStyleBackColor = true;
-            this.btChangePrice.Click += new System.EventHandler(this.btChangePrice_Click);
-            // 
             // rbSelected
             // 
             this.rbSelected.AutoSize = true;
@@ -638,104 +632,6 @@
             this.chckSale.UseVisualStyleBackColor = true;
             this.chckSale.CheckedChanged += new System.EventHandler(this.chckSale_CheckedChanged);
             // 
-            // btnEditAttribute
-            // 
-            this.btnEditAttribute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditAttribute.Image = global::OnlineStore.Properties.Resources.editdocument_105148;
-            this.btnEditAttribute.Location = new System.Drawing.Point(917, 508);
-            this.btnEditAttribute.Name = "btnEditAttribute";
-            this.btnEditAttribute.Size = new System.Drawing.Size(32, 32);
-            this.btnEditAttribute.TabIndex = 46;
-            this.btnEditAttribute.UseVisualStyleBackColor = true;
-            this.btnEditAttribute.Click += new System.EventHandler(this.btnEditAttribute_Click);
-            // 
-            // btnAddTovars
-            // 
-            this.btnAddTovars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddTovars.Image = global::OnlineStore.Properties.Resources.add_book_icon_icons_com_71795;
-            this.btnAddTovars.Location = new System.Drawing.Point(955, 508);
-            this.btnAddTovars.Name = "btnAddTovars";
-            this.btnAddTovars.Size = new System.Drawing.Size(32, 32);
-            this.btnAddTovars.TabIndex = 45;
-            this.btnAddTovars.UseVisualStyleBackColor = true;
-            this.btnAddTovars.Click += new System.EventHandler(this.btnAddTovars_Click);
-            // 
-            // btnViewOrders
-            // 
-            this.btnViewOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewOrders.Image = global::OnlineStore.Properties.Resources.viewOrder;
-            this.btnViewOrders.Location = new System.Drawing.Point(815, 508);
-            this.btnViewOrders.Name = "btnViewOrders";
-            this.btnViewOrders.Size = new System.Drawing.Size(32, 32);
-            this.btnViewOrders.TabIndex = 40;
-            this.btnViewOrders.UseVisualStyleBackColor = true;
-            this.btnViewOrders.Click += new System.EventHandler(this.btnViewOrders_Click);
-            // 
-            // btUpdate
-            // 
-            this.btUpdate.Image = global::OnlineStore.Properties.Resources.button_refresh_15001__1_1;
-            this.btUpdate.Location = new System.Drawing.Point(519, 27);
-            this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(49, 48);
-            this.btUpdate.TabIndex = 34;
-            this.btUpdate.UseVisualStyleBackColor = true;
-            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
-            // 
-            // btAdd
-            // 
-            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAdd.Image = global::OnlineStore.Properties.Resources.compfile_1551;
-            this.btAdd.Location = new System.Drawing.Point(993, 508);
-            this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(32, 32);
-            this.btAdd.TabIndex = 32;
-            this.btAdd.UseVisualStyleBackColor = true;
-            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
-            // 
-            // btEdit
-            // 
-            this.btEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btEdit.Image = global::OnlineStore.Properties.Resources.edit_1761;
-            this.btEdit.Location = new System.Drawing.Point(1031, 508);
-            this.btEdit.Name = "btEdit";
-            this.btEdit.Size = new System.Drawing.Size(32, 32);
-            this.btEdit.TabIndex = 33;
-            this.btEdit.UseVisualStyleBackColor = true;
-            this.btEdit.Click += new System.EventHandler(this.btEdit_Click);
-            // 
-            // btPrint
-            // 
-            this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btPrint.Image = global::OnlineStore.Properties.Resources.klpq_2511;
-            this.btPrint.Location = new System.Drawing.Point(853, 508);
-            this.btPrint.Name = "btPrint";
-            this.btPrint.Size = new System.Drawing.Size(32, 32);
-            this.btPrint.TabIndex = 30;
-            this.btPrint.UseVisualStyleBackColor = true;
-            this.btPrint.Click += new System.EventHandler(this.btPrint_Click);
-            // 
-            // btDel
-            // 
-            this.btDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDel.Image = global::OnlineStore.Properties.Resources.editdelete_3805;
-            this.btDel.Location = new System.Drawing.Point(1069, 508);
-            this.btDel.Name = "btDel";
-            this.btDel.Size = new System.Drawing.Size(32, 32);
-            this.btDel.TabIndex = 31;
-            this.btDel.UseVisualStyleBackColor = true;
-            this.btDel.Click += new System.EventHandler(this.btDel_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Image = global::OnlineStore.Properties.Resources.exit_8633;
-            this.btnExit.Location = new System.Drawing.Point(1199, 508);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(32, 32);
-            this.btnExit.TabIndex = 47;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -806,11 +702,148 @@
             this.cmbGoodOnPage.TabIndex = 50;
             this.cmbGoodOnPage.SelectionChangeCommitted += new System.EventHandler(this.CmbGoodOnPage_SelectionChangeCommitted);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.просмотретьИзображениеТовараToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(266, 48);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
+            // 
+            // просмотретьИзображениеТовараToolStripMenuItem
+            // 
+            this.просмотретьИзображениеТовараToolStripMenuItem.Name = "просмотретьИзображениеТовараToolStripMenuItem";
+            this.просмотретьИзображениеТовараToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.просмотретьИзображениеТовараToolStripMenuItem.Text = "Просмотреть изображение товара";
+            this.просмотретьИзображениеТовараToolStripMenuItem.Click += new System.EventHandler(this.ПросмотретьИзображениеТовараToolStripMenuItem_Click);
+            // 
+            // btViewImage
+            // 
+            this.btViewImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btViewImage.Image = global::OnlineStore.Properties.Resources.old_edit_find;
+            this.btViewImage.Location = new System.Drawing.Point(955, 509);
+            this.btViewImage.Name = "btViewImage";
+            this.btViewImage.Size = new System.Drawing.Size(32, 32);
+            this.btViewImage.TabIndex = 52;
+            this.btViewImage.UseVisualStyleBackColor = true;
+            this.btViewImage.Click += new System.EventHandler(this.BtViewImage_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Image = global::OnlineStore.Properties.Resources.exit_8633;
+            this.btnExit.Location = new System.Drawing.Point(1199, 509);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(32, 32);
+            this.btnExit.TabIndex = 47;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnEditAttribute
+            // 
+            this.btnEditAttribute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditAttribute.Image = global::OnlineStore.Properties.Resources.editdocument_105148;
+            this.btnEditAttribute.Location = new System.Drawing.Point(860, 509);
+            this.btnEditAttribute.Name = "btnEditAttribute";
+            this.btnEditAttribute.Size = new System.Drawing.Size(32, 32);
+            this.btnEditAttribute.TabIndex = 46;
+            this.btnEditAttribute.UseVisualStyleBackColor = true;
+            this.btnEditAttribute.Click += new System.EventHandler(this.btnEditAttribute_Click);
+            // 
+            // btnAddTovars
+            // 
+            this.btnAddTovars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddTovars.Image = global::OnlineStore.Properties.Resources.add_book_icon_icons_com_71795;
+            this.btnAddTovars.Location = new System.Drawing.Point(898, 509);
+            this.btnAddTovars.Name = "btnAddTovars";
+            this.btnAddTovars.Size = new System.Drawing.Size(32, 32);
+            this.btnAddTovars.TabIndex = 45;
+            this.btnAddTovars.UseVisualStyleBackColor = true;
+            this.btnAddTovars.Click += new System.EventHandler(this.btnAddTovars_Click);
+            // 
+            // btChangePrice
+            // 
+            this.btChangePrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btChangePrice.Enabled = false;
+            this.btChangePrice.Image = global::OnlineStore.Properties.Resources.btnChangePrice;
+            this.btChangePrice.Location = new System.Drawing.Point(191, 44);
+            this.btChangePrice.Name = "btChangePrice";
+            this.btChangePrice.Size = new System.Drawing.Size(32, 32);
+            this.btChangePrice.TabIndex = 42;
+            this.btChangePrice.UseVisualStyleBackColor = true;
+            this.btChangePrice.Click += new System.EventHandler(this.btChangePrice_Click);
+            // 
+            // btnViewOrders
+            // 
+            this.btnViewOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewOrders.Image = global::OnlineStore.Properties.Resources.viewOrder;
+            this.btnViewOrders.Location = new System.Drawing.Point(758, 509);
+            this.btnViewOrders.Name = "btnViewOrders";
+            this.btnViewOrders.Size = new System.Drawing.Size(32, 32);
+            this.btnViewOrders.TabIndex = 40;
+            this.btnViewOrders.UseVisualStyleBackColor = true;
+            this.btnViewOrders.Click += new System.EventHandler(this.btnViewOrders_Click);
+            // 
+            // btUpdate
+            // 
+            this.btUpdate.Image = global::OnlineStore.Properties.Resources.button_refresh_15001__1_1;
+            this.btUpdate.Location = new System.Drawing.Point(519, 27);
+            this.btUpdate.Name = "btUpdate";
+            this.btUpdate.Size = new System.Drawing.Size(49, 48);
+            this.btUpdate.TabIndex = 34;
+            this.btUpdate.UseVisualStyleBackColor = true;
+            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
+            // 
+            // btAdd
+            // 
+            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAdd.Image = global::OnlineStore.Properties.Resources.compfile_1551;
+            this.btAdd.Location = new System.Drawing.Point(993, 509);
+            this.btAdd.Name = "btAdd";
+            this.btAdd.Size = new System.Drawing.Size(32, 32);
+            this.btAdd.TabIndex = 32;
+            this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
+            // 
+            // btEdit
+            // 
+            this.btEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btEdit.Image = global::OnlineStore.Properties.Resources.edit_1761;
+            this.btEdit.Location = new System.Drawing.Point(1031, 509);
+            this.btEdit.Name = "btEdit";
+            this.btEdit.Size = new System.Drawing.Size(32, 32);
+            this.btEdit.TabIndex = 33;
+            this.btEdit.UseVisualStyleBackColor = true;
+            this.btEdit.Click += new System.EventHandler(this.btEdit_Click);
+            // 
+            // btPrint
+            // 
+            this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btPrint.Image = global::OnlineStore.Properties.Resources.klpq_2511;
+            this.btPrint.Location = new System.Drawing.Point(796, 509);
+            this.btPrint.Name = "btPrint";
+            this.btPrint.Size = new System.Drawing.Size(32, 32);
+            this.btPrint.TabIndex = 30;
+            this.btPrint.UseVisualStyleBackColor = true;
+            this.btPrint.Click += new System.EventHandler(this.btPrint_Click);
+            // 
+            // btDel
+            // 
+            this.btDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btDel.Image = global::OnlineStore.Properties.Resources.editdelete_3805;
+            this.btDel.Location = new System.Drawing.Point(1069, 509);
+            this.btDel.Name = "btDel";
+            this.btDel.Size = new System.Drawing.Size(32, 32);
+            this.btDel.TabIndex = 31;
+            this.btDel.UseVisualStyleBackColor = true;
+            this.btDel.Click += new System.EventHandler(this.btDel_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 577);
+            this.Controls.Add(this.btViewImage);
             this.Controls.Add(this.cmbGoodOnPage);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbImageOnPage);
@@ -865,6 +898,7 @@
             this.statusStrip1.PerformLayout();
             this.gbPriceChange.ResumeLayout(false);
             this.gbPriceChange.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -940,6 +974,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbGoodOnPage;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem просмотретьИзображениеТовараToolStripMenuItem;
+        private System.Windows.Forms.Button btViewImage;
     }
 }
 

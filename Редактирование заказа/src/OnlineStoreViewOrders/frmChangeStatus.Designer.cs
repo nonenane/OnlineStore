@@ -37,6 +37,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btClose = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
+            this.btDeliversMan = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbNameDelivery = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbNameKassCheck = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbNameCollector = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbSumma
@@ -80,9 +89,8 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 67);
+            this.label2.Location = new System.Drawing.Point(15, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 11;
@@ -90,12 +98,11 @@
             // 
             // tbComment
             // 
-            this.tbComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbComment.Location = new System.Drawing.Point(12, 83);
+            this.tbComment.Location = new System.Drawing.Point(15, 87);
             this.tbComment.MaxLength = 1054;
             this.tbComment.Multiline = true;
             this.tbComment.Name = "tbComment";
-            this.tbComment.Size = new System.Drawing.Size(224, 72);
+            this.tbComment.Size = new System.Drawing.Size(305, 72);
             this.tbComment.TabIndex = 12;
             this.tbComment.TextChanged += new System.EventHandler(this.tbKass_TextChanged);
             // 
@@ -112,7 +119,7 @@
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btClose.Image = global::OnlineStoreViewOrders.Properties.Resources.pngExit;
-            this.btClose.Location = new System.Drawing.Point(204, 163);
+            this.btClose.Location = new System.Drawing.Point(288, 282);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 13;
@@ -123,19 +130,104 @@
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.Image = global::OnlineStoreViewOrders.Properties.Resources.pngGALOCHKA;
-            this.btSave.Location = new System.Drawing.Point(166, 163);
+            this.btSave.Location = new System.Drawing.Point(250, 282);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 8;
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // btDeliversMan
+            // 
+            this.btDeliversMan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btDeliversMan.BackColor = System.Drawing.SystemColors.Control;
+            this.btDeliversMan.Image = global::OnlineStoreViewOrders.Properties.Resources.x_office_spreadsheet1;
+            this.btDeliversMan.Location = new System.Drawing.Point(12, 282);
+            this.btDeliversMan.Name = "btDeliversMan";
+            this.btDeliversMan.Size = new System.Drawing.Size(32, 32);
+            this.btDeliversMan.TabIndex = 39;
+            this.btDeliversMan.UseVisualStyleBackColor = false;
+            this.btDeliversMan.Click += new System.EventHandler(this.BtDeliversMan_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tbNameDelivery);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.tbNameKassCheck);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.tbNameCollector);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Location = new System.Drawing.Point(15, 165);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(309, 110);
+            this.groupBox2.TabIndex = 38;
+            this.groupBox2.TabStop = false;
+            // 
+            // tbNameDelivery
+            // 
+            this.tbNameDelivery.Location = new System.Drawing.Point(78, 71);
+            this.tbNameDelivery.Name = "tbNameDelivery";
+            this.tbNameDelivery.ReadOnly = true;
+            this.tbNameDelivery.Size = new System.Drawing.Size(212, 20);
+            this.tbNameDelivery.TabIndex = 38;
+            this.tbNameDelivery.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 75);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(66, 13);
+            this.label13.TabIndex = 37;
+            this.label13.Text = "Доставщик";
+            this.label13.Visible = false;
+            // 
+            // tbNameKassCheck
+            // 
+            this.tbNameKassCheck.Location = new System.Drawing.Point(78, 45);
+            this.tbNameKassCheck.Name = "tbNameKassCheck";
+            this.tbNameKassCheck.ReadOnly = true;
+            this.tbNameKassCheck.Size = new System.Drawing.Size(212, 20);
+            this.tbNameKassCheck.TabIndex = 38;
+            this.tbNameKassCheck.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 49);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(56, 13);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Пробитие";
+            this.label12.Visible = false;
+            // 
+            // tbNameCollector
+            // 
+            this.tbNameCollector.Location = new System.Drawing.Point(78, 20);
+            this.tbNameCollector.Name = "tbNameCollector";
+            this.tbNameCollector.ReadOnly = true;
+            this.tbNameCollector.Size = new System.Drawing.Size(212, 20);
+            this.tbNameCollector.TabIndex = 38;
+            this.tbNameCollector.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 24);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 13);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "Сборщик";
+            this.label11.Visible = false;
+            // 
             // frmChangeStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 204);
+            this.ClientSize = new System.Drawing.Size(329, 319);
             this.ControlBox = false;
+            this.Controls.Add(this.btDeliversMan);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.tbComment);
             this.Controls.Add(this.label2);
@@ -155,6 +247,8 @@
             this.Text = "frmChangeStatus";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChangeStatus_FormClosing);
             this.Load += new System.EventHandler(this.frmChangeStatus_Load);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,5 +265,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbComment;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btDeliversMan;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox tbNameDelivery;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tbNameKassCheck;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbNameCollector;
+        private System.Windows.Forms.Label label11;
     }
 }

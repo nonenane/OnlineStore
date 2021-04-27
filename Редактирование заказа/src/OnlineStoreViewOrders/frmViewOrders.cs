@@ -164,6 +164,14 @@ namespace OnlineStoreViewOrders
             tbComment.Text = dr["Comment"].ToString();
             tbCommentOrder.Text = dr["CommentOrder"].ToString();
 
+            btDeliversMan.Enabled = new List<int>() { 1, 2 }.Contains((int)dr["id_Status"]);
+
+            tbNameCollector.Text = tbNameKassCheck.Text = tbNameDelivery.Text = "";
+
+            if (dtOrders.Columns.Contains("listNameCollector")) tbNameCollector.Text = dr["listNameCollector"].ToString();
+            if (dtOrders.Columns.Contains("listNameKassCheck")) tbNameKassCheck.Text = dr["listNameKassCheck"].ToString();
+            if (dtOrders.Columns.Contains("listNameDelivery")) tbNameDelivery.Text = dr["listNameDelivery"].ToString();
+
             if ((int)dr["id_Status"] == 3)
             {
                 tbDeliveryDate.Text = dr["DeliveryDate"] != DBNull.Value ? ((DateTime)dr["DeliveryDate"]).ToShortDateString() : "";
@@ -1137,7 +1145,11 @@ namespace OnlineStoreViewOrders
             if (DialogResult.No == MessageBox.Show("Статус \"Выполнен\" нельзя сменить\nпосле присвоения.\nПродолжить?\n", "Запрос на действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
 
 
-            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 3,dateOrder = _PlanDeliveryDate, idtOrder = idtOrder }.ShowDialog())
+            DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
+            int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
+            string Address = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"];
+
+            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 3,dateOrder = _PlanDeliveryDate, idtOrder = idtOrder, nameOrder = $"№{numOrder} от {dateOrder.ToShortDateString()} на адрес  {Address}" }.ShowDialog())
             {
                 setLog(3);
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 3;
@@ -1369,6 +1381,17 @@ namespace OnlineStoreViewOrders
                 }, this);
             });
             //outer.Wait();
+        }
+
+        private void BtDeliversMan_Click(object sender, EventArgs e)
+        {
+            int idtOrder = int.Parse(dgvOrders.CurrentRow.Cells["id"].Value.ToString());       
+            
+            DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
+            int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());            
+            string Address = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"];
+
+            new TypeЕmployesОrder.frmListTypeЕmployesОrder() { id_order = idtOrder ,nameOrder = $"№{numOrder} от {dateOrder.ToShortDateString()} на адрес  {Address}"}.ShowDialog();
         }
     }
 }

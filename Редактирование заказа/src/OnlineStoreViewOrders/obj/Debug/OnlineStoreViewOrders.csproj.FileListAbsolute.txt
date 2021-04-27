@@ -234,3 +234,5 @@ C:\Users\user\Desktop\исходники\март 2021\онлайн магази
 C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.csproj.CopyComplete
 C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.dll
 C:\Users\user\Desktop\исходники\март 2021\онлайн магазин фильтр заказа\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.pdb
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.TypeЕmployesОrder.frmListTypeЕmployesОrder.resources
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\Редактирование заказа\src\OnlineStoreViewOrders\obj\Debug\OnlineStoreViewOrders.TypeЕmployesОrder.frmAddDeliver.resources

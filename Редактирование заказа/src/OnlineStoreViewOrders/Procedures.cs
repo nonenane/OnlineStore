@@ -480,5 +480,50 @@ namespace OnlineStoreViewOrders
         }
 
         #endregion
+
+        public async Task<DataTable> getDeliverKadr(bool isDeps)
+        {
+            ap.Clear();
+            ap.Add(ConnectionSettings.GetIdProgram());
+            ap.Add(isDeps);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getDeliverKadr]",
+                 new string[2] { "@id_prog", "@isDeps" },
+                 new DbType[2] { DbType.String, DbType.Boolean }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> getTypeЕmployesОrder(int id_tOrders)
+        {
+            ap.Clear();
+            ap.Add(id_tOrders);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getTypeЕmployesОrder]",
+                 new string[1] { "@id_tOrders" },
+                 new DbType[1] { DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> setTypeЕmployesОrder(int idTypeЕmployesОrder, int id_tOrders, int idKadr, bool Collector, bool KassCheck, bool Delivery, bool isDel)
+        {
+            ap.Clear();
+            ap.Add(idTypeЕmployesОrder);
+            ap.Add(id_tOrders);
+            ap.Add(idKadr);
+            ap.Add(Collector);
+            ap.Add(KassCheck);
+            ap.Add(Delivery);
+            ap.Add(UserSettings.User.Id);
+            ap.Add(isDel);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setTypeЕmployesОrder]",
+                 new string[8] { "@idTypeЕmployesОrder", "@id_tOrders", "@idKadr", "@Collector", "@KassCheck", "@Delivery", "@id_user", "@isDel" },
+                 new DbType[8] { DbType.Int32, DbType.Int32, DbType.Int32, DbType.Boolean, DbType.Boolean, DbType.Boolean, DbType.Int32, DbType.Boolean }, ap);
+
+            return dtResult;
+        }
+
     }
 }

@@ -146,6 +146,18 @@
     <Compile Include="statisticOrder\frmStatistic.Designer.cs">
       <DependentUpon>frmStatistic.cs</DependentUpon>
     </Compile>
+    <Compile Include="TypeЕmployesОrder\frmAddDeliver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TypeЕmployesОrder\frmAddDeliver.Designer.cs">
+      <DependentUpon>frmAddDeliver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypeЕmployesОrder\frmListTypeЕmployesОrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TypeЕmployesОrder\frmListTypeЕmployesОrder.Designer.cs">
+      <DependentUpon>frmListTypeЕmployesОrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="workWithStatus\frmJournalStatusOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +210,12 @@
     <EmbeddedResource Include="statisticOrder\frmStatistic.resx">
       <DependentUpon>frmStatistic.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TypeЕmployesОrder\frmAddDeliver.resx">
+      <DependentUpon>frmAddDeliver.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TypeЕmployesОrder\frmListTypeЕmployesОrder.resx">
+      <DependentUpon>frmListTypeЕmployesОrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="workWithStatus\frmJournalStatusOrder.resx">
       <DependentUpon>frmJournalStatusOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +233,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\save_edit.png" />
+    <None Include="Resources\x-office-spreadsheet1.png" />
     <None Include="Resources\SendToTerminal1.png" />
     <None Include="Resources\SendToTerminal.png" />
     <None Include="Resources\reportImg.png" />
