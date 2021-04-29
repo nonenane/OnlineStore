@@ -72,6 +72,16 @@ namespace OnlineStore
                     формированиеCSVToolStripMenuItem.Visible =
                     сравнениеНаименованийТоваровToolStripMenuItem.Visible =
                     Settings.Visible = false;
+
+                gbPriceChange.Visible = false;
+                btnViewOrders.Visible =
+                    btnEditAttribute.Visible =
+                    btnAddTovars.Visible = false;
+                   // btAdd.Visible =
+                    //btEdit.Visible =
+                   // btDel.Visible = false;
+
+
             }
             Task.Run(() => { init_combobox(true); get_data(); });
 
@@ -357,14 +367,49 @@ namespace OnlineStore
 
                         net.CopyFile(folderName);
 
-                        //using (var client = new WebClient())
-                        //{
-                        //    string ftpUsername = "";
-                        //    string ftpPassword = "";
-                        //    client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-                        //    //client.DownloadFile()
-                        //    client.UploadFile("ftp://host//"+$"{Path.GetFileName(folderName)}", WebRequestMethods.Ftp.UploadFile, folderName);
-                        //}
+                        using (var client = new WebClient())
+                        {
+                            string ftpUsername = "u1302788_OPr_SGU";
+                            string ftpPassword = "L8txP9q";
+                            client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                            //client.DownloadFile()
+                            client.UploadFile("ftp://31.31.198.170//" + $"{Path.GetFileName(folderName)}", WebRequestMethods.Ftp.UploadFile, folderName);
+                        }
+
+
+                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://31.31.198.170/");
+
+                        request.Method = WebRequestMethods.Ftp.ListDirectory;
+                        request.Credentials = new NetworkCredential("u1302788_OPr_SGU", "L8txP9q");
+
+                        FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                        Console.WriteLine("Содержимое сервера:");
+                        Console.WriteLine();
+
+                        Stream responseStream = response.GetResponseStream();
+                        StreamReader reader = new StreamReader(responseStream,true);
+
+                        while (!reader.EndOfStream)
+                        {
+                            Console.WriteLine(reader.ReadLine());
+                        }
+
+                        //string InputString = reader.ReadToEnd();
+
+                        //Console.WriteLine(reader.ReadToEnd());
+
+                        reader.Close();
+                        responseStream.Close();
+                        response.Close();
+
+                        request = (FtpWebRequest)WebRequest.Create("ftp://31.31.198.170//" + $"{Path.GetFileName(folderName)}");
+                        request.Credentials = new NetworkCredential("u1302788_OPr_SGU", "L8txP9q");
+                        request.Method = WebRequestMethods.Ftp.DeleteFile;
+
+                        response = (FtpWebResponse)request.GetResponse();
+                        Console.WriteLine("Delete status: {0}", response.StatusDescription);
+                        response.Close();
+
 
                         await Config.hCntMain.setPictureGood(id, true);
                         dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"] = true;
@@ -1470,6 +1515,11 @@ namespace OnlineStore
         private void ПросмотретьИзображениеТовараToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BtViewImage_Click(null, null);
+        }
+
+        private void СправочникСвязиТоваровСКатегориямиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new dictonaryCategory.frmMultyGoodCategory().ShowDialog();
         }
     }
 }

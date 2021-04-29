@@ -29,14 +29,21 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewContentOrder));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewContentOrder));
             this.dgvOrder = new System.Windows.Forms.DataGridView();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Netto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SummTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbEan = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.lblSum = new System.Windows.Forms.Label();
@@ -48,13 +55,7 @@
             this.btnAddTovar = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Netto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SummTovar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbComment = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,114 +105,6 @@
             this.dgvOrder.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvOrder_RowPostPaint);
             this.dgvOrder.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvOrder_RowPrePaint);
             this.dgvOrder.Validating += new System.ComponentModel.CancelEventHandler(this.dgvOrder_Validating);
-            // 
-            // tbEan
-            // 
-            this.tbEan.Location = new System.Drawing.Point(48, 12);
-            this.tbEan.Name = "tbEan";
-            this.tbEan.Size = new System.Drawing.Size(100, 20);
-            this.tbEan.TabIndex = 2;
-            this.tbEan.TextChanged += new System.EventHandler(this.tbEan_TextChanged);
-            // 
-            // tbName
-            // 
-            this.tbName.Location = new System.Drawing.Point(154, 12);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(331, 20);
-            this.tbName.TabIndex = 3;
-            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
-            // 
-            // lblSum
-            // 
-            this.lblSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSum.AutoSize = true;
-            this.lblSum.Location = new System.Drawing.Point(565, 15);
-            this.lblSum.Name = "lblSum";
-            this.lblSum.Size = new System.Drawing.Size(40, 13);
-            this.lblSum.TabIndex = 4;
-            this.lblSum.Text = "сумма";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.panel1.Location = new System.Drawing.Point(12, 291);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(16, 16);
-            this.panel1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 294);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(181, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Цена отличается от базовой цены";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(254, 294);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Вес заказа";
-            // 
-            // chckDeleted
-            // 
-            this.chckDeleted.AutoSize = true;
-            this.chckDeleted.Location = new System.Drawing.Point(37, 313);
-            this.chckDeleted.Name = "chckDeleted";
-            this.chckDeleted.Size = new System.Drawing.Size(124, 17);
-            this.chckDeleted.TabIndex = 9;
-            this.chckDeleted.Text = "Удаленные товары";
-            this.chckDeleted.UseVisualStyleBackColor = true;
-            this.chckDeleted.CheckedChanged += new System.EventHandler(this.chckDeleted_CheckedChanged);
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.panel2.Location = new System.Drawing.Point(12, 313);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(16, 16);
-            this.panel2.TabIndex = 6;
-            // 
-            // btnAddTovar
-            // 
-            this.btnAddTovar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddTovar.Image = global::OnlineStoreViewOrders.Properties.Resources.ic_add_circle_outline_128_28123;
-            this.btnAddTovar.Location = new System.Drawing.Point(658, 284);
-            this.btnAddTovar.Name = "btnAddTovar";
-            this.btnAddTovar.Size = new System.Drawing.Size(32, 32);
-            this.btnAddTovar.TabIndex = 10;
-            this.btnAddTovar.UseVisualStyleBackColor = true;
-            this.btnAddTovar.Click += new System.EventHandler(this.btnAddTovar_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Image = global::OnlineStoreViewOrders.Properties.Resources.pngGALOCHKA;
-            this.btnSave.Location = new System.Drawing.Point(696, 284);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(32, 32);
-            this.btnSave.TabIndex = 8;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(734, 284);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(32, 32);
-            this.btnExit.TabIndex = 1;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Position
             // 
@@ -280,12 +173,130 @@
             this.SummTovar.Name = "SummTovar";
             this.SummTovar.ReadOnly = true;
             // 
+            // tbEan
+            // 
+            this.tbEan.Location = new System.Drawing.Point(48, 12);
+            this.tbEan.Name = "tbEan";
+            this.tbEan.Size = new System.Drawing.Size(100, 20);
+            this.tbEan.TabIndex = 2;
+            this.tbEan.TextChanged += new System.EventHandler(this.tbEan_TextChanged);
+            // 
+            // tbName
+            // 
+            this.tbName.Location = new System.Drawing.Point(154, 12);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(331, 20);
+            this.tbName.TabIndex = 3;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
+            // 
+            // lblSum
+            // 
+            this.lblSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSum.AutoSize = true;
+            this.lblSum.Location = new System.Drawing.Point(565, 15);
+            this.lblSum.Name = "lblSum";
+            this.lblSum.Size = new System.Drawing.Size(40, 13);
+            this.lblSum.TabIndex = 4;
+            this.lblSum.Text = "сумма";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.panel1.Location = new System.Drawing.Point(12, 291);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(16, 16);
+            this.panel1.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 294);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(181, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Цена отличается от базовой цены";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(536, 294);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Вес заказа";
+            // 
+            // chckDeleted
+            // 
+            this.chckDeleted.AutoSize = true;
+            this.chckDeleted.Location = new System.Drawing.Point(37, 313);
+            this.chckDeleted.Name = "chckDeleted";
+            this.chckDeleted.Size = new System.Drawing.Size(124, 17);
+            this.chckDeleted.TabIndex = 9;
+            this.chckDeleted.Text = "Удаленные товары";
+            this.chckDeleted.UseVisualStyleBackColor = true;
+            this.chckDeleted.CheckedChanged += new System.EventHandler(this.chckDeleted_CheckedChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.panel2.Location = new System.Drawing.Point(12, 313);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(16, 16);
+            this.panel2.TabIndex = 6;
+            // 
+            // btnAddTovar
+            // 
+            this.btnAddTovar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddTovar.Image = global::OnlineStoreViewOrders.Properties.Resources.ic_add_circle_outline_128_28123;
+            this.btnAddTovar.Location = new System.Drawing.Point(658, 284);
+            this.btnAddTovar.Name = "btnAddTovar";
+            this.btnAddTovar.Size = new System.Drawing.Size(32, 32);
+            this.btnAddTovar.TabIndex = 10;
+            this.btnAddTovar.UseVisualStyleBackColor = true;
+            this.btnAddTovar.Click += new System.EventHandler(this.btnAddTovar_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Image = global::OnlineStoreViewOrders.Properties.Resources.pngGALOCHKA;
+            this.btnSave.Location = new System.Drawing.Point(696, 284);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(32, 32);
+            this.btnSave.TabIndex = 8;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Location = new System.Drawing.Point(734, 284);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(32, 32);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // tbComment
+            // 
+            this.tbComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbComment.Location = new System.Drawing.Point(221, 284);
+            this.tbComment.Multiline = true;
+            this.tbComment.Name = "tbComment";
+            this.tbComment.Size = new System.Drawing.Size(309, 53);
+            this.tbComment.TabIndex = 11;
+            // 
             // frmViewContentOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 342);
             this.ControlBox = false;
+            this.Controls.Add(this.tbComment);
             this.Controls.Add(this.btnAddTovar);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.chckDeleted);
@@ -334,5 +345,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Netto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn SummTovar;
+        private System.Windows.Forms.TextBox tbComment;
     }
 }

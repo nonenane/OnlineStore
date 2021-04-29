@@ -628,5 +628,29 @@ namespace OnlineStore
 
             return dtResult;
         }
+
+        public async Task<DataTable> getGoodsToMultyCategory(int id_deps)
+        {
+            ap.Clear();
+            ap.Add(id_deps);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getGoodsToMultyCategory]",
+                 new string[1] { "@id_deps" },
+                 new DbType[1] { DbType.Int32 }, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> getUseGoodsCategoryToMultyCategory(int id_Category)
+        {
+            ap.Clear();
+            ap.Add(id_Category);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[getUseGoodsCategoryToMultyCategory]",
+                 new string[1] { "@id_Category" },
+                 new DbType[1] { DbType.Int32 }, ap);
+
+            return dtResult;
+        }
     }
 }

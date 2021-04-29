@@ -20,6 +20,11 @@ namespace OnlineStoreViewOrders
 
         public string commentOrder = "";
         public string nameOrder { set; private get; }
+
+        public string listNameCollector { set; private get; }
+        public string listNameKassCheck { set; private get; }
+        public string listNameDelivery { set; private get; }
+
         public frmChangeStatus()
         {
             InitializeComponent();
@@ -47,6 +52,10 @@ namespace OnlineStoreViewOrders
                 label2.Location = label1.Location;
                 tbComment.Location = new Point(label2.Location.X, label2.Location.Y + 16);
             }
+
+            tbNameCollector.Text = listNameCollector;
+            tbNameKassCheck.Text = listNameKassCheck;
+            tbNameDelivery.Text = listNameDelivery;
 
             isEditData = false;
         }
@@ -101,7 +110,19 @@ namespace OnlineStoreViewOrders
                     return;
                 }*/
             }
-            
+            DataTable dtResult;
+
+            if (nextStatus == 3)
+            {
+                dtResult = Config.connect.validateypeЕmployesОrder(idtOrder).Result;
+
+                if (dtResult == null || dtResult.Rows.Count == 0 || (int)dtResult.Rows[0]["id"] == -1)
+                {
+                    MessageBox.Show(Config.centralText("Не все поля с типами сотрудников\n(Сборщик,Пробитие или Доставщик) заполенны.\nСмена статуса невозможна.\n"),"",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
 
             DateTime? DeliveryDate = null;
             if (dtpDate.Visible) DeliveryDate = dtpDate.Value.Date;
@@ -109,7 +130,7 @@ namespace OnlineStoreViewOrders
             int id_status = nextStatus;
             string commentOrder = tbComment.Text.Trim();
             this.commentOrder = commentOrder;
-            DataTable dtResult = Config.connect.setStatusOrder(idtOrder, DeliveriCost, DeliveryDate, id_status, commentOrder);
+            dtResult = Config.connect.setStatusOrder(idtOrder, DeliveriCost, DeliveryDate, id_status, commentOrder);
 
             if (id_status == 3)
             {
@@ -178,7 +199,13 @@ namespace OnlineStoreViewOrders
 
         private void BtDeliversMan_Click(object sender, EventArgs e)
         {
-            new TypeЕmployesОrder.frmListTypeЕmployesОrder() { id_order = idtOrder, nameOrder = nameOrder }.ShowDialog();
+            TypeЕmployesОrder.frmListTypeЕmployesОrder frmTypeDelivers = new TypeЕmployesОrder.frmListTypeЕmployesОrder() { id_order = idtOrder, nameOrder = nameOrder };
+            if (DialogResult.OK == frmTypeDelivers.ShowDialog())
+            {
+                tbNameCollector.Text = frmTypeDelivers.listNameCollector;
+                tbNameKassCheck.Text= frmTypeDelivers.listNameKassCheck;
+                tbNameDelivery.Text = frmTypeDelivers.listNameDelivery;
+            }
 
         }
     }

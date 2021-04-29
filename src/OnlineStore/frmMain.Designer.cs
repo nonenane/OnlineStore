@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,6 +110,7 @@
             this.btEdit = new System.Windows.Forms.Button();
             this.btPrint = new System.Windows.Forms.Button();
             this.btDel = new System.Windows.Forms.Button();
+            this.справочникСвязиТоваровСКатегориямиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -135,7 +136,8 @@
             // 
             this.справочникToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.категорийToolStripMenuItem,
-            this.категорийИГруппToolStripMenuItem});
+            this.категорийИГруппToolStripMenuItem,
+            this.справочникСвязиТоваровСКатегориямиToolStripMenuItem});
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
@@ -143,14 +145,14 @@
             // категорийToolStripMenuItem
             // 
             this.категорийToolStripMenuItem.Name = "категорийToolStripMenuItem";
-            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.категорийToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.категорийToolStripMenuItem.Text = "Категорий";
             this.категорийToolStripMenuItem.Click += new System.EventHandler(this.категорийToolStripMenuItem_Click);
             // 
             // категорийИГруппToolStripMenuItem
             // 
             this.категорийИГруппToolStripMenuItem.Name = "категорийИГруппToolStripMenuItem";
-            this.категорийИГруппToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.категорийИГруппToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.категорийИГруппToolStripMenuItem.Text = "Категорий и групп";
             this.категорийИГруппToolStripMenuItem.Click += new System.EventHandler(this.категорийИГруппToolStripMenuItem_Click);
             // 
@@ -325,14 +327,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cId_tovar,
@@ -362,8 +364,8 @@
             // cId_tovar
             // 
             this.cId_tovar.DataPropertyName = "id_Tovar";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cId_tovar.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cId_tovar.DefaultCellStyle = dataGridViewCellStyle2;
             this.cId_tovar.FillWeight = 50.04749F;
             this.cId_tovar.HeaderText = "Артикул товара ";
             this.cId_tovar.Name = "cId_tovar";
@@ -372,8 +374,8 @@
             // cEan
             // 
             this.cEan.DataPropertyName = "ean";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cEan.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cEan.DefaultCellStyle = dataGridViewCellStyle3;
             this.cEan.FillWeight = 73.74648F;
             this.cEan.HeaderText = "EAN";
             this.cEan.Name = "cEan";
@@ -398,8 +400,8 @@
             // cCountOnline
             // 
             this.cCountOnline.DataPropertyName = "countOnlineSell";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cCountOnline.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cCountOnline.DefaultCellStyle = dataGridViewCellStyle4;
             this.cCountOnline.FillWeight = 105.5929F;
             this.cCountOnline.HeaderText = "Он-лайн продажи товара";
             this.cCountOnline.Name = "cCountOnline";
@@ -408,8 +410,8 @@
             // сMoveNow
             // 
             this.сMoveNow.DataPropertyName = "moveNow";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.сMoveNow.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.сMoveNow.DefaultCellStyle = dataGridViewCellStyle5;
             this.сMoveNow.FillWeight = 105.5929F;
             this.сMoveNow.HeaderText = "Движение товара за сегодня";
             this.сMoveNow.Name = "сMoveNow";
@@ -418,8 +420,8 @@
             // cOstNow
             // 
             this.cOstNow.DataPropertyName = "ostNow";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cOstNow.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cOstNow.DefaultCellStyle = dataGridViewCellStyle6;
             this.cOstNow.FillWeight = 105.5929F;
             this.cOstNow.HeaderText = "Остаток товара в магазине на К21";
             this.cOstNow.Name = "cOstNow";
@@ -428,8 +430,8 @@
             // cRcena
             // 
             this.cRcena.DataPropertyName = "rcena";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cRcena.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cRcena.DefaultCellStyle = dataGridViewCellStyle7;
             this.cRcena.FillWeight = 105.5929F;
             this.cRcena.HeaderText = "Цена продажи";
             this.cRcena.Name = "cRcena";
@@ -438,8 +440,8 @@
             // cRcenaOnline
             // 
             this.cRcenaOnline.DataPropertyName = "rcenaOnline";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cRcenaOnline.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cRcenaOnline.DefaultCellStyle = dataGridViewCellStyle8;
             this.cRcenaOnline.FillWeight = 105.5929F;
             this.cRcenaOnline.HeaderText = "Цена продажи он-лайн";
             this.cRcenaOnline.Name = "cRcenaOnline";
@@ -448,8 +450,8 @@
             // cRcenaOnlineAction
             // 
             this.cRcenaOnlineAction.DataPropertyName = "rcenaPromo";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cRcenaOnlineAction.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cRcenaOnlineAction.DefaultCellStyle = dataGridViewCellStyle9;
             this.cRcenaOnlineAction.FillWeight = 105.5929F;
             this.cRcenaOnlineAction.HeaderText = "Старая цена для распродажи";
             this.cRcenaOnlineAction.Name = "cRcenaOnlineAction";
@@ -707,7 +709,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.просмотретьИзображениеТовараToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(266, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(266, 26);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
             // просмотретьИзображениеТовараToolStripMenuItem
@@ -837,6 +839,13 @@
             this.btDel.TabIndex = 31;
             this.btDel.UseVisualStyleBackColor = true;
             this.btDel.Click += new System.EventHandler(this.btDel_Click);
+            // 
+            // справочникСвязиТоваровСКатегориямиToolStripMenuItem
+            // 
+            this.справочникСвязиТоваровСКатегориямиToolStripMenuItem.Name = "справочникСвязиТоваровСКатегориямиToolStripMenuItem";
+            this.справочникСвязиТоваровСКатегориямиToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
+            this.справочникСвязиТоваровСКатегориямиToolStripMenuItem.Text = "Справочник связи товаров с категориями ";
+            this.справочникСвязиТоваровСКатегориямиToolStripMenuItem.Click += new System.EventHandler(this.СправочникСвязиТоваровСКатегориямиToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -977,6 +986,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem просмотретьИзображениеТовараToolStripMenuItem;
         private System.Windows.Forms.Button btViewImage;
+        private System.Windows.Forms.ToolStripMenuItem справочникСвязиТоваровСКатегориямиToolStripMenuItem;
     }
 }
 

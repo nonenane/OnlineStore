@@ -525,5 +525,40 @@ namespace OnlineStoreViewOrders
             return dtResult;
         }
 
+        public async Task<DataTable> validateypeЕmployesОrder(int id_tOrders)
+        {
+            ap.Clear();
+            ap.Add(id_tOrders);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[validateypeЕmployesОrder]",
+                 new string[1] {  "@id_tOrders"},
+                 new DbType[1] { DbType.Int32}, ap);
+
+            return dtResult;
+        }
+
+        public async Task<DataTable> setCommenttOrder(int id_tOrders,string comment)
+        {
+            ap.Clear();
+            ap.Add(id_tOrders);
+            ap.Add(comment);
+
+            DataTable dtResult = executeProcedure("[OnlineStore].[setCommenttOrder]",
+                 new string[2] { "@id_tOrders", "@comment" },
+                 new DbType[2] { DbType.Int32, DbType.String }, ap);
+
+            return dtResult;
+        }
+
+        public DataTable reportЕmployesОrder(DateTime dateStart, DateTime dateEnd)
+        {
+            ap.Clear();
+            ap.Add(dateStart.Date);
+            ap.Add(dateEnd.Date);
+            
+            return executeProcedure("OnlineStore.reportЕmployesОrder",
+                new string[2] { "@dateStart", "@dateEnd" },
+                new DbType[2] { DbType.Date, DbType.Date}, ap);
+        }
     }
 }

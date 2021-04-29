@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewOrders));
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.OrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,12 +100,12 @@
             this.оНовыхПокупателяхToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дляСборщикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbNameDelivery = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbNameKassCheck = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.tbNameCollector = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbNameKassCheck = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbNameDelivery = new System.Windows.Forms.TextBox();
             this.btDeliversMan = new System.Windows.Forms.Button();
             this.btSendFileToTerminal = new System.Windows.Forms.Button();
             this.btStatistic = new System.Windows.Forms.Button();
@@ -137,14 +137,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderNumber,
@@ -177,8 +177,8 @@
             // OrderNumber
             // 
             this.OrderNumber.DataPropertyName = "OrderNumber";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderNumber.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderNumber.DefaultCellStyle = dataGridViewCellStyle2;
             this.OrderNumber.FillWeight = 63.05103F;
             this.OrderNumber.HeaderText = "Номер заказа";
             this.OrderNumber.Name = "OrderNumber";
@@ -195,8 +195,8 @@
             // DateOrder
             // 
             this.DateOrder.DataPropertyName = "DateOrder";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DateOrder.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DateOrder.DefaultCellStyle = dataGridViewCellStyle3;
             this.DateOrder.FillWeight = 109.2885F;
             this.DateOrder.HeaderText = "Дата заказа";
             this.DateOrder.Name = "DateOrder";
@@ -206,10 +206,10 @@
             // 
             this.cPlanDeliveryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.cPlanDeliveryDate.DataPropertyName = "PlanDeliveryDate";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.Format = "d";
-            dataGridViewCellStyle10.NullValue = null;
-            this.cPlanDeliveryDate.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.cPlanDeliveryDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.cPlanDeliveryDate.HeaderText = "Предп. дата доставки";
             this.cPlanDeliveryDate.MinimumWidth = 100;
             this.cPlanDeliveryDate.Name = "cPlanDeliveryDate";
@@ -260,9 +260,9 @@
             // Column2
             // 
             this.Column2.DataPropertyName = "sumOrder";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column2.FillWeight = 81.21827F;
             this.Column2.HeaderText = "Стоимость заказа";
             this.Column2.Name = "Column2";
@@ -271,9 +271,9 @@
             // cDelivery
             // 
             this.cDelivery.DataPropertyName = "SummaDelivery";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            this.cDelivery.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.cDelivery.DefaultCellStyle = dataGridViewCellStyle6;
             this.cDelivery.HeaderText = "Стоимость доставки";
             this.cDelivery.Name = "cDelivery";
             this.cDelivery.ReadOnly = true;
@@ -766,10 +766,51 @@
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
             // 
+            // tbNameDelivery
+            // 
+            this.tbNameDelivery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbNameDelivery.Location = new System.Drawing.Point(79, 71);
+            this.tbNameDelivery.Name = "tbNameDelivery";
+            this.tbNameDelivery.ReadOnly = true;
+            this.tbNameDelivery.Size = new System.Drawing.Size(283, 20);
+            this.tbNameDelivery.TabIndex = 38;
+            this.tbNameDelivery.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 75);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(66, 13);
+            this.label13.TabIndex = 37;
+            this.label13.Text = "Доставщик";
+            this.label13.Visible = false;
+            // 
+            // tbNameKassCheck
+            // 
+            this.tbNameKassCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbNameKassCheck.Location = new System.Drawing.Point(79, 45);
+            this.tbNameKassCheck.Name = "tbNameKassCheck";
+            this.tbNameKassCheck.ReadOnly = true;
+            this.tbNameKassCheck.Size = new System.Drawing.Size(283, 20);
+            this.tbNameKassCheck.TabIndex = 38;
+            this.tbNameKassCheck.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 49);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(56, 13);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Пробитие";
+            this.label12.Visible = false;
+            // 
             // tbNameCollector
             // 
             this.tbNameCollector.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbNameCollector.Enabled = false;
             this.tbNameCollector.Location = new System.Drawing.Point(79, 19);
             this.tbNameCollector.Name = "tbNameCollector";
             this.tbNameCollector.ReadOnly = true;
@@ -787,50 +828,6 @@
             this.label11.TabIndex = 37;
             this.label11.Text = "Сборщик";
             this.label11.Visible = false;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(7, 49);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(56, 13);
-            this.label12.TabIndex = 37;
-            this.label12.Text = "Пробитие";
-            this.label12.Visible = false;
-            // 
-            // tbNameKassCheck
-            // 
-            this.tbNameKassCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbNameKassCheck.Enabled = false;
-            this.tbNameKassCheck.Location = new System.Drawing.Point(79, 45);
-            this.tbNameKassCheck.Name = "tbNameKassCheck";
-            this.tbNameKassCheck.ReadOnly = true;
-            this.tbNameKassCheck.Size = new System.Drawing.Size(283, 20);
-            this.tbNameKassCheck.TabIndex = 38;
-            this.tbNameKassCheck.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 75);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(66, 13);
-            this.label13.TabIndex = 37;
-            this.label13.Text = "Доставщик";
-            this.label13.Visible = false;
-            // 
-            // tbNameDelivery
-            // 
-            this.tbNameDelivery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbNameDelivery.Enabled = false;
-            this.tbNameDelivery.Location = new System.Drawing.Point(79, 71);
-            this.tbNameDelivery.Name = "tbNameDelivery";
-            this.tbNameDelivery.ReadOnly = true;
-            this.tbNameDelivery.Size = new System.Drawing.Size(283, 20);
-            this.tbNameDelivery.TabIndex = 38;
-            this.tbNameDelivery.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btDeliversMan
             // 

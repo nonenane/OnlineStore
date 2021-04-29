@@ -119,7 +119,7 @@
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btClose.Image = global::OnlineStoreViewOrders.Properties.Resources.pngExit;
-            this.btClose.Location = new System.Drawing.Point(288, 282);
+            this.btClose.Location = new System.Drawing.Point(292, 281);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(32, 32);
             this.btClose.TabIndex = 13;
@@ -130,7 +130,7 @@
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.Image = global::OnlineStoreViewOrders.Properties.Resources.pngGALOCHKA;
-            this.btSave.Location = new System.Drawing.Point(250, 282);
+            this.btSave.Location = new System.Drawing.Point(254, 281);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(32, 32);
             this.btSave.TabIndex = 8;
@@ -142,7 +142,7 @@
             this.btDeliversMan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btDeliversMan.BackColor = System.Drawing.SystemColors.Control;
             this.btDeliversMan.Image = global::OnlineStoreViewOrders.Properties.Resources.x_office_spreadsheet1;
-            this.btDeliversMan.Location = new System.Drawing.Point(12, 282);
+            this.btDeliversMan.Location = new System.Drawing.Point(12, 281);
             this.btDeliversMan.Name = "btDeliversMan";
             this.btDeliversMan.Size = new System.Drawing.Size(32, 32);
             this.btDeliversMan.TabIndex = 39;
@@ -159,7 +159,7 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Location = new System.Drawing.Point(15, 165);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(309, 110);
+            this.groupBox2.Size = new System.Drawing.Size(305, 110);
             this.groupBox2.TabIndex = 38;
             this.groupBox2.TabStop = false;
             // 
@@ -180,7 +180,6 @@
             this.label13.Size = new System.Drawing.Size(66, 13);
             this.label13.TabIndex = 37;
             this.label13.Text = "Доставщик";
-            this.label13.Visible = false;
             // 
             // tbNameKassCheck
             // 
@@ -199,7 +198,6 @@
             this.label12.Size = new System.Drawing.Size(56, 13);
             this.label12.TabIndex = 37;
             this.label12.Text = "Пробитие";
-            this.label12.Visible = false;
             // 
             // tbNameCollector
             // 
@@ -218,13 +216,12 @@
             this.label11.Size = new System.Drawing.Size(53, 13);
             this.label11.TabIndex = 37;
             this.label11.Text = "Сборщик";
-            this.label11.Visible = false;
             // 
             // frmChangeStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 319);
+            this.ClientSize = new System.Drawing.Size(329, 315);
             this.ControlBox = false;
             this.Controls.Add(this.btDeliversMan);
             this.Controls.Add(this.groupBox2);

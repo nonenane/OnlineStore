@@ -38,6 +38,7 @@
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.chbComplete = new System.Windows.Forms.CheckBox();
             this.chbCancel = new System.Windows.Forms.CheckBox();
+            this.chbЕmployesОrder = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.BackColor = System.Drawing.Color.White;
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(147, 147);
+            this.btnPrint.Location = new System.Drawing.Point(147, 166);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(32, 32);
             this.btnPrint.TabIndex = 19;
@@ -58,7 +59,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackColor = System.Drawing.Color.White;
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(185, 147);
+            this.btnExit.Location = new System.Drawing.Point(185, 166);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(32, 32);
             this.btnExit.TabIndex = 18;
@@ -71,7 +72,7 @@
             this.groupBox1.Controls.Add(this.lblDateStart);
             this.groupBox1.Controls.Add(this.dtpEnd);
             this.groupBox1.Controls.Add(this.dtpStart);
-            this.groupBox1.Location = new System.Drawing.Point(12, 58);
+            this.groupBox1.Location = new System.Drawing.Point(11, 81);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(202, 76);
             this.groupBox1.TabIndex = 20;
@@ -134,12 +135,23 @@
             this.chbCancel.Text = "Отчёт об отменённых заказах";
             this.chbCancel.UseVisualStyleBackColor = true;
             // 
+            // chbЕmployesОrder
+            // 
+            this.chbЕmployesОrder.AutoSize = true;
+            this.chbЕmployesОrder.Location = new System.Drawing.Point(12, 58);
+            this.chbЕmployesОrder.Name = "chbЕmployesОrder";
+            this.chbЕmployesОrder.Size = new System.Drawing.Size(139, 17);
+            this.chbЕmployesОrder.TabIndex = 21;
+            this.chbЕmployesОrder.Text = "Отчет по сотрудникам";
+            this.chbЕmployesОrder.UseVisualStyleBackColor = true;
+            // 
             // frmCreateReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(229, 189);
+            this.ClientSize = new System.Drawing.Size(225, 204);
             this.ControlBox = false;
+            this.Controls.Add(this.chbЕmployesОrder);
             this.Controls.Add(this.chbCancel);
             this.Controls.Add(this.chbComplete);
             this.Controls.Add(this.groupBox1);
@@ -171,5 +183,6 @@
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.CheckBox chbComplete;
         private System.Windows.Forms.CheckBox chbCancel;
+        private System.Windows.Forms.CheckBox chbЕmployesОrder;
     }
 }

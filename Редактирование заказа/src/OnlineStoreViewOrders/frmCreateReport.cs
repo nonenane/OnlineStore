@@ -34,7 +34,7 @@ namespace OnlineStoreViewOrders
 
         private async void btnPrint_Click(object sender, EventArgs e)
         {
-            if (!chbCancel.Checked && !chbComplete.Checked) return;
+            if (!chbCancel.Checked && !chbComplete.Checked && !chbЕmployesОrder.Checked) return;
 
             var outer = Task.Factory.StartNew(() =>      // внешняя задача
             {
@@ -326,6 +326,150 @@ namespace OnlineStoreViewOrders
                     }
                 }
 
+                if (chbЕmployesОrder.Checked)
+                {
+                    DataTable dtData = Config.connect.reportЕmployesОrder(dtpStart.Value, dtpEnd.Value);
+                    if (dtData != null && dtData.Rows.Count > 0)
+                    {
+                        if (!isShow)
+                        {
+                            isShow = true;
+                            report.changeNameTab("Отчет по сотрудникам");
+                        }
+                        else
+                        {
+                            report.GoToNextSheet("Отчет по сотрудникам");
+                        }
+
+
+                        int indexRow = 1;
+                        int maxColumns = 8;
+                        decimal sumOrder = 0;
+
+                        setWidthColumn(indexRow, 1, 9, report);
+                        setWidthColumn(indexRow, 2, 25, report);
+                        setWidthColumn(indexRow, 3, 16, report);
+                        setWidthColumn(indexRow, 4, 16, report);
+                        setWidthColumn(indexRow, 5, 16, report);
+                        setWidthColumn(indexRow, 6, 12, report);
+                        setWidthColumn(indexRow, 7, 12, report);
+                        setWidthColumn(indexRow, 8, 12, report);
+
+                        #region "Head"
+                        report.Merge(indexRow, 1, indexRow, maxColumns);
+                        report.AddSingleValue($"Отчет по сотрудникам с {dtpStart.Value.ToShortDateString()} по {dtpEnd.Value.ToShortDateString()}", indexRow, 1);
+                        report.SetFontBold(indexRow, 1, indexRow, 1);
+                        report.SetFontSize(indexRow, 1, indexRow, 1, 16);
+                        report.SetCellAlignmentToCenter(indexRow, 1, indexRow, 1);
+                        indexRow++;
+                        indexRow++;
+
+                        report.Merge(indexRow, 1, indexRow, maxColumns);
+                        report.AddSingleValue("Выгрузил: " + Nwuram.Framework.Settings.User.UserSettings.User.FullUsername, indexRow, 1);
+                        indexRow++;
+
+                        report.Merge(indexRow, 1, indexRow, maxColumns);
+                        report.AddSingleValue("Дата выгрузки: " + DateTime.Now.ToString(), indexRow, 1);
+                        indexRow++;
+                        indexRow++;
+                        #endregion
+
+                        report.AddSingleValue("№ п/п", indexRow, 1);
+                        report.AddSingleValue("ФИО сотрудника", indexRow, 2);
+                        report.AddSingleValue("Дата заказа", indexRow, 3);
+                        report.AddSingleValue("Номер заказа", indexRow, 4);
+                        report.AddSingleValue("Позиций в заказе", indexRow, 5);
+                        report.AddSingleValue("Сборщик", indexRow, 6);
+                        report.AddSingleValue("Пробитие", indexRow, 7);
+                        report.AddSingleValue("Доставщик", indexRow, 8);
+
+                        report.SetFontBold(indexRow, 1, indexRow, maxColumns);
+                        report.SetBorders(indexRow, 1, indexRow, maxColumns);
+                        report.SetWrapText(indexRow, 1, indexRow, maxColumns);
+                        report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+                        report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+                        indexRow++;
+
+
+                        var groupCountCollector = dtData.AsEnumerable()
+                        .Where(r => r.Field<bool>("Collector"))
+                        .GroupBy(g => new { OrderNumber = g.Field<int>("OrderNumber") })
+                        .Select(s => new { s.Key.OrderNumber, countCollector = s.Count() });
+
+                        var groupKadr = dtData.AsEnumerable().GroupBy(r => new { id_Kadr = r.Field<int>("id_Kadr"), FIO = r.Field<string>("FIO") }).Select(s => new { s.Key.id_Kadr, s.Key.FIO });
+
+
+                        int npp = 1;
+
+                        foreach (var gKadr in groupKadr)
+                        {
+                            EnumerableRowCollection<DataRow> rowCollect = dtData.AsEnumerable().Where(r => r.Field<int>("id_Kadr") == gKadr.id_Kadr).OrderBy(r => r.Field<int>("OrderNumber"));
+                            report.Merge(indexRow, 2, indexRow + rowCollect.Count() - 1, 2);
+                            setValueToCell(indexRow, 2, gKadr.FIO, report);
+                            var groupDate = rowCollect.AsEnumerable().GroupBy(g => new { DeliveryDate = g.Field<DateTime>("DeliveryDate") }).Select(s => new { s.Key.DeliveryDate });
+
+                            decimal countCollector = 0;
+                            int countKassCheck = 0;
+                            int countDelivery = 0;
+
+                            foreach (var gDate in groupDate)
+                            {
+                                EnumerableRowCollection<DataRow> rowCollectDate = rowCollect.Where(r => r.Field<DateTime>("DeliveryDate") == gDate.DeliveryDate);
+
+                                report.Merge(indexRow, 3, indexRow + rowCollectDate.Count() - 1, 3);
+                                setValueToCell(indexRow, 3, gDate.DeliveryDate, report);
+
+                                foreach (DataRow row in rowCollectDate)
+                                {
+                                    report.SetWrapText(indexRow, 1, indexRow, maxColumns);
+
+                                    setValueToCell(indexRow, 1, npp, report);
+                                    setValueToCell(indexRow, 4, row["OrderNumber"], report);
+                                    setValueToCell(indexRow, 5, row["countRow"], report);
+                                    if ((bool)row["Collector"])
+                                    {
+                                        decimal valResult = Convert.ToDecimal((int)row["countRow"]) / Convert.ToDecimal(groupCountCollector.Where(r => r.OrderNumber == (int)row["OrderNumber"]).First().countCollector);
+                                        countCollector += valResult;
+                                        setValueToCell(indexRow, 6, valResult, report);
+                                    }
+                                    if ((bool)row["KassCheck"])
+                                    {
+                                        setValueToCell(indexRow, 7, row["KassCheck"], report);
+                                        countKassCheck++;
+                                    }
+                                    if ((bool)row["Delivery"])
+                                    {
+                                        setValueToCell(indexRow, 8, row["Delivery"], report);
+                                        countDelivery++;
+                                    }
+
+                                    report.SetBorders(indexRow, 1, indexRow, maxColumns);
+                                    report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+                                    report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+                                    indexRow++;
+                                    npp++;
+                                }
+                            }
+
+
+                            report.Merge(indexRow, 1, indexRow, 5);
+                            setValueToCell(indexRow, 1, $"Итого:", report);
+                            setValueToCell(indexRow, 6, countCollector, report);
+                            setValueToCell(indexRow, 7, countKassCheck, report);
+                            setValueToCell(indexRow, 8, countDelivery, report);
+
+                            report.SetBorders(indexRow, 1, indexRow, maxColumns);
+                            report.SetFontBold(indexRow, 1, indexRow, maxColumns);
+                            report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+                            report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+                            report.SetCellAlignmentToRight(indexRow, 1, indexRow, 1);
+                            //report.SetCellAlignmentToRight(indexRow, 6, indexRow, maxColumns);
+
+                            indexRow++;                            
+                        }
+                    }
+                }
+
                 Config.DoOnUIThread(() =>
                 {
                     blockers.RestoreControlEnabledState(this);
@@ -366,6 +510,29 @@ namespace OnlineStoreViewOrders
         {
             if (dtpStart.Value > dtpEnd.Value)
                 dtpStart.Value = dtpEnd.Value;
+        }
+
+        private static void setValueToCell(int indexRow, int indexCol, object value,Nwuram.Framework.ToExcelNew.ExcelUnLoad report)
+        {
+            if (value is DateTime)
+                report.AddSingleValue(((DateTime)value).ToShortDateString(), indexRow, indexCol);
+            else
+               if (value is decimal || value is double)
+            {
+                report.AddSingleValueObject(value, indexRow, indexCol);
+                report.SetFormat(indexRow, indexCol, indexRow, indexCol, "0.00");
+            }
+            else if (value is int)
+            {
+                report.AddSingleValueObject(value, indexRow, indexCol);
+                report.SetFormat(indexRow, indexCol, indexRow, indexCol, "0");
+            }
+            else if (value is bool)
+            {
+                report.AddSingleValue((bool)value ? "+" : "", indexRow, indexCol);
+            }
+            else
+                report.AddSingleValue(value.ToString(), indexRow, indexCol);
         }
     }
 }

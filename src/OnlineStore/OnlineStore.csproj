@@ -115,6 +115,12 @@
     <Compile Include="dictonaryCategory\frmListCatVsGrp2.Designer.cs">
       <DependentUpon>frmListCatVsGrp2.cs</DependentUpon>
     </Compile>
+    <Compile Include="dictonaryCategory\frmMultyGoodCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dictonaryCategory\frmMultyGoodCategory.Designer.cs">
+      <DependentUpon>frmMultyGoodCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="dictonaryCategory\frmNeedCatGrp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dictonaryCategory\frmListCatVsGrp2.resx">
       <DependentUpon>frmListCatVsGrp2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dictonaryCategory\frmMultyGoodCategory.resx">
+      <DependentUpon>frmMultyGoodCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dictonaryCategory\frmNeedCatGrp.resx">
       <DependentUpon>frmNeedCatGrp.cs</DependentUpon>

@@ -194,6 +194,8 @@ namespace OnlineStoreViewOrders
                 DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
                 int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
                 int id_Status = (int)dtOrders.DefaultView[e.RowIndex]["id_Status"];
+                string Comment = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Comment"];
+
                 frmViewContentOrder viewContent = new frmViewContentOrder()
                 {
                     idTOrder = idtOrder,
@@ -201,7 +203,8 @@ namespace OnlineStoreViewOrders
                     dateOrder = dateOrder,
                     numOrder = numOrder,
                     callType = 0,
-                    id_Status = id_Status
+                    id_Status = id_Status,
+                    Comment = Comment
                 };
                 viewContent.ShowDialog();
                 if (viewContent.isEdit)
@@ -1064,6 +1067,7 @@ namespace OnlineStoreViewOrders
             DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
             int id_Status = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+            string Comment = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Comment"];
 
             frmViewContentOrder viewContent = new frmViewContentOrder()
             {
@@ -1073,6 +1077,7 @@ namespace OnlineStoreViewOrders
                 numOrder = numOrder
                 , callType = 0
                 ,id_Status = id_Status
+                ,Comment = Comment
             };
             viewContent.ShowDialog();
             if (viewContent.isEdit)
@@ -1088,6 +1093,8 @@ namespace OnlineStoreViewOrders
             DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
             int id_Status = (int)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"];
+            string Comment = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Comment"];
+
 
             frmViewContentOrder viewContent = new frmViewContentOrder()
             {
@@ -1097,7 +1104,8 @@ namespace OnlineStoreViewOrders
                 numOrder = numOrder
                 ,
                 callType = 1,
-                id_Status= id_Status
+                id_Status= id_Status,
+                Comment = Comment
             };
             viewContent.ShowDialog();
             if (viewContent.isEdit)
@@ -1148,8 +1156,15 @@ namespace OnlineStoreViewOrders
             DateTime dateOrder = Convert.ToDateTime(dgvOrders.CurrentRow.Cells["DateOrder"].Value.ToString());
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());
             string Address = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"];
+            string listNameCollector = "";
+            string listNameKassCheck = "";
+            string listNameDelivery = "";
+            if (dtOrders.Columns.Contains("listNameCollector")) listNameCollector = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameCollector"].ToString();
+            if (dtOrders.Columns.Contains("listNameKassCheck")) listNameKassCheck = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameKassCheck"].ToString();
+            if (dtOrders.Columns.Contains("listNameDelivery")) listNameDelivery = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameDelivery"].ToString();
 
-            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 3,dateOrder = _PlanDeliveryDate, idtOrder = idtOrder, nameOrder = $"№{numOrder} от {dateOrder.ToShortDateString()} на адрес  {Address}" }.ShowDialog())
+
+            if (DialogResult.OK == new frmChangeStatus() { Text = "Смена статуса", nextStatus = 3,dateOrder = _PlanDeliveryDate, idtOrder = idtOrder, nameOrder = $"№{numOrder} от {dateOrder.ToShortDateString()} на адрес  {Address}", listNameCollector = listNameCollector, listNameKassCheck = listNameKassCheck, listNameDelivery = listNameDelivery }.ShowDialog())
             {
                 setLog(3);
                 dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["id_Status"] = 3;
@@ -1391,7 +1406,23 @@ namespace OnlineStoreViewOrders
             int numOrder = int.Parse(dgvOrders.CurrentRow.Cells["OrderNumber"].Value.ToString());            
             string Address = (string)dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["Address"];
 
-            new TypeЕmployesОrder.frmListTypeЕmployesОrder() { id_order = idtOrder ,nameOrder = $"№{numOrder} от {dateOrder.ToShortDateString()} на адрес  {Address}"}.ShowDialog();
+            string listNameCollector = "";
+            string listNameKassCheck = "";
+            string listNameDelivery = "";
+            if (dtOrders.Columns.Contains("listNameCollector")) listNameCollector = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameCollector"].ToString();
+            if (dtOrders.Columns.Contains("listNameKassCheck")) listNameKassCheck = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameKassCheck"].ToString();
+            if (dtOrders.Columns.Contains("listNameDelivery")) listNameDelivery = dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameDelivery"].ToString();
+
+            TypeЕmployesОrder.frmListTypeЕmployesОrder frmTypeDelivers = new TypeЕmployesОrder.frmListTypeЕmployesОrder() { id_order = idtOrder, nameOrder = $"№{numOrder} от {dateOrder.ToShortDateString()} на адрес  {Address}" };
+            if (DialogResult.OK == frmTypeDelivers.ShowDialog())
+            {
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameCollector"] = frmTypeDelivers.listNameCollector;
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameKassCheck"] = frmTypeDelivers.listNameKassCheck;
+                dtOrders.DefaultView[dgvOrders.CurrentRow.Index]["listNameDelivery"] = frmTypeDelivers.listNameDelivery;
+
+                dgvOrders.Refresh();
+                dgvOrders_CellEnter(null, null);
+            }
         }
     }
 }

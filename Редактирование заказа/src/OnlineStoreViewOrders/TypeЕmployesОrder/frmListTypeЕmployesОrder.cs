@@ -19,6 +19,11 @@ namespace OnlineStoreViewOrders.TypeЕmployesОrder
         private List<int> listDelKadr = new List<int>();
         private DataTable dtDeliverOld;
         private bool isEditData = false;
+
+        public string listNameCollector { private set;  get; }
+        public string listNameKassCheck { private set;  get; }
+        public string listNameDelivery { private set; get; }
+
         public frmListTypeЕmployesОrder()
         {
             InitializeComponent();
@@ -46,11 +51,14 @@ namespace OnlineStoreViewOrders.TypeЕmployesОrder
 
         private void BtAdd_Click(object sender, EventArgs e)
         {
-            frmAddDeliver frmAdd = new frmAddDeliver();
+            DataRowView selectRow = (dgvUsers.DataSource as DataTable).DefaultView[dgvUsers.CurrentRow.Index];
 
+            if ((dgvDeliversMan.DataSource as DataTable).AsEnumerable().Where(r => r.Field<int>("id") == (int)selectRow["id"]).Count() > 0) return;
+
+            frmAddDeliver frmAdd = new frmAddDeliver();
             if (frmAdd.ShowDialog() == DialogResult.OK)
             {
-                DataRowView selectRow = (dgvUsers.DataSource as DataTable).DefaultView[dgvUsers.CurrentRow.Index];
+               
                 DataRow row = (dgvDeliversMan.DataSource as DataTable).NewRow();
 
                 row["id"] = selectRow["id"];
@@ -93,6 +101,10 @@ namespace OnlineStoreViewOrders.TypeЕmployesОrder
                 }
             }
 
+            listNameCollector = "";
+            listNameKassCheck = "";
+            listNameDelivery = "";
+
             foreach (DataRow row in (dgvDeliversMan.DataSource as DataTable).Rows)
             {
                 int idTypeЕmployesОrder = 0;
@@ -102,6 +114,10 @@ namespace OnlineStoreViewOrders.TypeЕmployesОrder
                 bool KassCheck = (bool)row["KassCheck"];
                 bool Delivery = (bool)row["Delivery"];
                 bool isDel = false;
+
+                if(Collector) listNameCollector+= (listNameCollector.Length==0?"":";")+$"{row["FIO"]}";
+                if (KassCheck) listNameKassCheck += (listNameKassCheck.Length == 0 ? "" : ";") + $"{row["FIO"]}";
+                if (Delivery) listNameDelivery += (listNameDelivery.Length == 0 ? "" : ";") + $"{row["FIO"]}";
 
                 await Config.connect.setTypeЕmployesОrder(idTypeЕmployesОrder, id_tOrders, idKadr, Collector, KassCheck, Delivery, isDel);
             }

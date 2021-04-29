@@ -23,6 +23,7 @@ namespace OnlineStoreViewOrders
         public DateTime dateOrder { get; set; }
         public int numOrder { get; set; }
         public int id_Status { set; private get; }
+        public string Comment { set; private get; }
 
         public bool isEdit { get; private set; } = false;
         /// <summary>
@@ -49,6 +50,8 @@ namespace OnlineStoreViewOrders
             if (UserSettings.User.StatusCode.ToLower() == "пр")
                 setEnabledPR();
 
+            tbComment.Text = Comment;
+
             if (callType == 0)
             {
                 setEnabledPR();
@@ -59,6 +62,7 @@ namespace OnlineStoreViewOrders
         {
             dgvOrder.ReadOnly = true;
             btnAddTovar.Enabled = btnSave.Enabled = false;
+            tbComment.ReadOnly = true;
         }
 
         private void GetBrutto()
@@ -307,8 +311,11 @@ namespace OnlineStoreViewOrders
                 e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
         }
 
-        private void SaveData()
+        private async void SaveData()
         {
+
+            await Config.connect.setCommenttOrder(idTOrder, tbComment.Text);
+
             Logging.StartFirstLevel(832);
             Logging.Comment("Редактирование заказа");
             Logging.Comment($"id заказа: {idTOrder}, номер заказа: {numOrder}");

@@ -546,3 +546,4 @@ C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
 C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+C:\Old_Disk_D\spg\Проекты\договор 2733\Онлайн магазин\src\OnlineStore\obj\Debug\OnlineStore.dictonaryCategory.frmMultyGoodCategory.resources
