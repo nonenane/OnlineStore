@@ -309,113 +309,7 @@ namespace OnlineStore
             {
                 if (dgvData.CurrentRow != null && dgvData.CurrentRow.Index != -1 && dtData != null && dtData.DefaultView.Count != 0)
                 {
-                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-                    dialog.Filters.Add(new CommonFileDialogFilter("PNG Files", "*.png"));
-
-                    //dialog.InitialDirectory = "C:\\Users";
-                    dialog.IsFolderPicker = false;
-                    dialog.EnsureFileExists = true;
-                    dialog.Multiselect = false;
-                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                    {
-                        string folderName = dialog.FileName;
-                        List<string> fileHead = new List<string>();
-
-                        List<string> jpg = new List<string> { "FF", "D8" };
-                        List<string> bmp = new List<string> { "42", "4D" };
-                        List<string> gif = new List<string> { "47", "49", "46" };
-                        List<string> png = new List<string> { "89", "50", "4E", "47", "0D", "0A", "1A", "0A" };
-
-                        using (FileStream stream = File.OpenRead(folderName))
-                        {
-                            for (int i = 0; i < 8; i++)
-                            {
-                                string bit = stream.ReadByte().ToString("X2");
-                                fileHead.Add(bit);
-                            }
-                        }
-
-                        NetworkShare net = new NetworkShare(true);
-
-
-                        int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
-                        string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
-
-                        if (!ean.Equals(Path.GetFileNameWithoutExtension(folderName)))
-                        {
-                            MessageBox.Show(Config.centralText("Имя выбранного файла не соответствует EAN товара.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-
-                        if (png.Except(fileHead).Any())
-                        {
-                            MessageBox.Show(Config.centralText("Выбранный файл не соответствует формату PNG.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-
-                        /*
-                        Image image1 = Image.FromFile(folderName);
-                        int width = 800;
-                        int height = 800;
-
-                        if (image1.Width != width && image1.Height != height)
-                        {
-                            MessageBox.Show(Config.centralText($"Выбранный файл не соответствует разрешению {width}x{height}.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                            
-                            return;
-                        }
-                        */
-
-                        net.CopyFile(folderName);
-
-                        using (var client = new WebClient())
-                        {
-                            string ftpUsername = "u1302788_OPr_SGU";
-                            string ftpPassword = "L8txP9q";
-                            client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-                            //client.DownloadFile()
-                            client.UploadFile("ftp://31.31.198.170//" + $"{Path.GetFileName(folderName)}", WebRequestMethods.Ftp.UploadFile, folderName);
-                        }
-
-
-                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://31.31.198.170/");
-
-                        request.Method = WebRequestMethods.Ftp.ListDirectory;
-                        request.Credentials = new NetworkCredential("u1302788_OPr_SGU", "L8txP9q");
-
-                        FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                        Console.WriteLine("Содержимое сервера:");
-                        Console.WriteLine();
-
-                        Stream responseStream = response.GetResponseStream();
-                        StreamReader reader = new StreamReader(responseStream,true);
-
-                        while (!reader.EndOfStream)
-                        {
-                            Console.WriteLine(reader.ReadLine());
-                        }
-
-                        //string InputString = reader.ReadToEnd();
-
-                        //Console.WriteLine(reader.ReadToEnd());
-
-                        reader.Close();
-                        responseStream.Close();
-                        response.Close();
-
-                        request = (FtpWebRequest)WebRequest.Create("ftp://31.31.198.170//" + $"{Path.GetFileName(folderName)}");
-                        request.Credentials = new NetworkCredential("u1302788_OPr_SGU", "L8txP9q");
-                        request.Method = WebRequestMethods.Ftp.DeleteFile;
-
-                        response = (FtpWebResponse)request.GetResponse();
-                        Console.WriteLine("Delete status: {0}", response.StatusDescription);
-                        response.Close();
-
-
-                        await Config.hCntMain.setPictureGood(id, true);
-                        dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"] = true;
-                        dgvData_SelectionChanged(null, null);
-                        dgvData.Refresh();
-                    }
+                    selectFile();
                     return;
                 }
 
@@ -550,63 +444,8 @@ namespace OnlineStore
 
                 if (new List<string>() { "ДЗ" }.Contains(UserSettings.User.StatusCode))
                 {
-                    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-                    dialog.Filters.Add(new CommonFileDialogFilter("PNG Files", "*.png"));
-
-                    dialog.IsFolderPicker = false;
-                    dialog.EnsureFileExists = true;
-                    dialog.Multiselect = false;
-                    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                    {
-                        string folderName = dialog.FileName;
-                        List<string> fileHead = new List<string>();
-
-                        List<string> jpg = new List<string> { "FF", "D8" };
-                        List<string> bmp = new List<string> { "42", "4D" };
-                        List<string> gif = new List<string> { "47", "49", "46" };
-                        List<string> png = new List<string> { "89", "50", "4E", "47", "0D", "0A", "1A", "0A" };
-
-                        using (FileStream stream = File.OpenRead(folderName))
-                        {
-                            for (int i = 0; i < 8; i++)
-                            {
-                                string bit = stream.ReadByte().ToString("X2");
-                                fileHead.Add(bit);
-                            }
-                        }
-
-                        NetworkShare net = new NetworkShare(true);
-                        
-
-
-                        if (!ean.Equals(Path.GetFileNameWithoutExtension(folderName)))
-                        {
-                            MessageBox.Show(Config.centralText("Имя выбранного файла не соответствует EAN товара.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-
-                        if (png.Except(fileHead).Any())
-                        {
-                            MessageBox.Show(Config.centralText("Выбранный файл не соответствует формату PNG.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-
-                        /*
-                        Image image1 = Image.FromFile(folderName);
-                        int width = 800;
-                        int height = 800;
-
-                        if (image1.Width != width && image1.Height != height)
-                        {
-                            MessageBox.Show(Config.centralText($"Выбранный файл не соответствует разрешению {width}x{height}.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                            
-                            return;
-                        }
-                        */
-
-                        net.CopyFile(folderName);
-
-                        return;
-                    }
+                    selectFile();
+                    return;
                 }
                 else if (DialogResult.OK == new dictonatyTovar.frmAddTovar() { id = id, row = dtData.DefaultView[dgvData.SelectedRows[0].Index], Text = "Редактирование товара" }.ShowDialog())
                     get_data();
@@ -753,18 +592,7 @@ namespace OnlineStore
                 {
 
                     if (DialogResult.No == MessageBox.Show("Удалить у выбранного товара картинку?", "Удаление картинки у товара", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)) return;
-
-                    int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
-                    string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
-
-                    NetworkShare net = new NetworkShare(true);
-                    net.RemoveFile($"{ean}.png");
-
-                    await Config.hCntMain.setPictureGood(id, false);
-
-                    dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"] = false;
-                    dgvData_SelectionChanged(null, null);
-                    dgvData.Refresh();
+                    remoteDataFtpAndFolder();
                 }
                 return;
             }
@@ -1328,7 +1156,6 @@ namespace OnlineStore
             #endregion
         }
 
-
         private void ChangePrice(DataTable dtGoods)
         {
 
@@ -1521,5 +1348,170 @@ namespace OnlineStore
         {
             new dictonaryCategory.frmMultyGoodCategory().ShowDialog();
         }
+
+
+        private void selectFile()
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.Filters.Add(new CommonFileDialogFilter("PNG Files", "*.png"));
+
+            dialog.IsFolderPicker = false;
+            dialog.EnsureFileExists = true;
+            dialog.Multiselect = false;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                string file = dialog.FileName;
+                int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
+                string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
+
+                if (!validateFileToUpLoad(file, ean)) return;
+                if (!uploadFile(file)) return;
+                if (!insertDataToDataBase(id)) return;
+            }
+        }
+
+        private bool validateFileToUpLoad(string folderName,string ean)
+        {
+            
+            List<string> fileHead = new List<string>();
+
+            List<string> jpg = new List<string> { "FF", "D8" };
+            List<string> bmp = new List<string> { "42", "4D" };
+            List<string> gif = new List<string> { "47", "49", "46" };
+            List<string> png = new List<string> { "89", "50", "4E", "47", "0D", "0A", "1A", "0A" };
+
+            using (FileStream stream = File.OpenRead(folderName))
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    string bit = stream.ReadByte().ToString("X2");
+                    fileHead.Add(bit);
+                }
+            }
+
+            if (!ean.Equals(Path.GetFileNameWithoutExtension(folderName)))
+            {
+                MessageBox.Show(Config.centralText("Имя выбранного файла не соответствует EAN товара.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if (png.Except(fileHead).Any())
+            {
+                MessageBox.Show(Config.centralText("Выбранный файл не соответствует формату PNG.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            
+            Image image1 = Image.FromFile(folderName);
+            int width = 800;
+            int height = 800;
+
+            if (image1.Width != width && image1.Height != height)
+            {
+                MessageBox.Show(Config.centralText($"Выбранный файл не соответствует разрешению {width}x{height}.\nДобавление изображения товара невозможно.\n"), "Добавление изображения товара", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                            
+                return false;
+            }
+            
+            return true;
+        }
+
+        private bool uploadFile(string folderName)
+        {
+            DataTable dt = Config.hCntMain.getSettings("ftps").Result;
+            string ftpServer = dt.Rows[0]["value"].ToString();
+
+            dt = Config.hCntMain.getSettings("ftpl").Result;
+            string ftpUsername = dt.Rows[0]["value"].ToString();
+
+            dt = Config.hCntMain.getSettings("ftpp").Result;
+            string ftpPassword = dt.Rows[0]["value"].ToString();
+
+            using (var client = new WebClient())
+            {
+                client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                client.UploadFile($"ftp://{ftpServer}//" + $"{Path.GetFileName(folderName)}", WebRequestMethods.Ftp.UploadFile, folderName);
+            }
+
+            //FtpWebRequest request = (FtpWebRequest)WebRequest.Create($"ftp://{ftpServer}/");
+
+            //request.Method = WebRequestMethods.Ftp.ListDirectory;
+            //request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+            //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            //Console.WriteLine("Содержимое сервера:");
+            //Console.WriteLine();
+
+            //Stream responseStream = response.GetResponseStream();
+            //StreamReader reader = new StreamReader(responseStream, true);
+
+            //while (!reader.EndOfStream)
+            //{
+            //    Console.WriteLine(reader.ReadLine());
+            //}
+
+            //reader.Close();
+            //responseStream.Close();
+            //response.Close();
+
+            NetworkShare net = new NetworkShare(true);
+            net.CopyFile(folderName);
+
+            return true;                   
+        }
+
+        private bool insertDataToDataBase(int id)
+        {
+            Config.hCntMain.setPictureGood(id, true);
+            dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"] = true;
+            dgvData_SelectionChanged(null, null);
+            dgvData.Refresh();
+
+            return true;
+        }
+
+        private bool remoteDataFtpAndFolder()
+        {
+            DataTable dt = Config.hCntMain.getSettings("ftps").Result;
+            string ftpServer = dt.Rows[0]["value"].ToString();
+
+            dt = Config.hCntMain.getSettings("ftpl").Result;
+            string ftpUsername = dt.Rows[0]["value"].ToString();
+
+            dt = Config.hCntMain.getSettings("ftpp").Result;
+            string ftpPassword = dt.Rows[0]["value"].ToString();
+
+            int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
+            string ean = (string)dtData.DefaultView[dgvData.CurrentRow.Index]["ean"];
+
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create($"ftp://{ftpServer}/");
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+                //request = (FtpWebRequest)WebRequest.Create($"ftp://{ftpServer}//" + $"{Path.GetFileName(folderName)}");
+                request = (FtpWebRequest)WebRequest.Create($"ftp://{ftpServer}//" + $"{ean}.png");
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                request.Method = WebRequestMethods.Ftp.DeleteFile;
+
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Console.WriteLine("Delete status: {0}", response.StatusDescription);
+                response.Close();
+            }
+            catch
+            {
+            }
+
+            NetworkShare net = new NetworkShare(true);
+            net.RemoveFile($"{ean}.png");
+
+            Config.hCntMain.setPictureGood(id, false);
+
+            dtData.DefaultView[dgvData.CurrentRow.Index]["isPicture"] = false;
+            dgvData_SelectionChanged(null, null);
+            dgvData.Refresh();
+            return true;
+        }
+
     }
 }

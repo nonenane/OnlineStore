@@ -616,7 +616,7 @@ namespace OnlineStore
             return dtResult;
         }
 
-        public async Task<DataTable> setPictureGood(int id_good,bool isPicture)
+        public DataTable setPictureGood(int id_good,bool isPicture)
         {
             ap.Clear();
             ap.Add(id_good);
